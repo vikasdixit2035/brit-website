@@ -30,7 +30,7 @@ export default function Outcomes() {
           </div>
 
           <div className="o-roles-wrapper">
-            <h2 className="section-title" style={{ marginBottom: '24px' }}>Build the career you've always wanted.</h2>
+            <h2 className="section-title" style={{ marginBottom: '24px' }}>Career Outcomes Snapshot</h2>
             <p className="section-sub" style={{ marginBottom: '40px', maxWidth: '100%', margin: '0 0 40px 0' }}>We bring the learning platform, but we also bring the hiring network. See the roles our students land.</p>
 
             <div className="o-roles">

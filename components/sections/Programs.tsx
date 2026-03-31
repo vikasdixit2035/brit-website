@@ -79,13 +79,13 @@ export default function Programs() {
             whileInView={{ opacity: 1, y: 0 }}
             className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-blue-400 text-sm font-semibold tracking-wider mb-4 uppercase"
           >
-            Curated Excellence
+            Your Career Journey Starts Here
           </motion.span>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Start learning with our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-300">top programs</span>
+            Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-300">Path</span>
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Explore our highly rated curriculum, designed with industry partners to help you land premium roles.
+            Select the programme that matches your goals and start building a high-demand career in data and AI.
           </p>
         </header>
 
