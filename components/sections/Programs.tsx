@@ -6,52 +6,40 @@ import useReveal from "@/hooks/useReveal";
 
 const PROGRAMS = [
   {
-    id: 'gen-ai',
+    id: 'data-analytics',
     topBadge: 'IN DEMAND',
-    bottomLeftBadge: 'GENERATIVE AI',
+    bottomLeftBadge: 'DATA ANALYTICS',
     isPopular: true,
-    title: '10X AI Engineer Complete Program',
-    desc: 'Transform from Python basics to production-ready AI Engineer. Master LLMs and real-world tools.',
-    duration: '7 Months',
-    projects: '25+ AI Projects',
+    title: 'Data Analytics Course with Generative AI',
+    desc: 'Learn data analysis, dashboards and AI tools for job-ready skills.',
+    duration: '4-6 Months',
+    projects: 'Real-world use cases',
+    gradient: 'from-blue-500 to-blue-700',
+    icon: <BarChart size={56} color="white" strokeWidth={1.5} />
+  },
+  {
+    id: 'data-science',
+    topBadge: 'ADVANCED',
+    bottomLeftBadge: 'DATA SCIENCE',
+    isPopular: true,
+    title: 'Data Science & Machine Learning Course',
+    desc: 'Build predictive models and advanced data systems.',
+    duration: '6 Months',
+    projects: 'Predictive modeling',
     gradient: 'from-teal-400 to-teal-600',
     icon: <Code size={56} color="white" strokeWidth={1.5} />
   },
   {
-    id: 'ai-lead',
-    topBadge: 'AI LEADER',
-    bottomLeftBadge: 'AI ENGINEERING',
-    isPopular: true,
-    title: '10X AI Leadership for Senior Professionals',
-    desc: 'Transform from AI-curious to AI-powered leader. Master executive AI strategies and team building.',
-    duration: '4 Months',
-    projects: 'Strategic AI Leadership',
-    gradient: 'from-purple-500 to-purple-700',
-    icon: <UserPlus size={56} color="white" strokeWidth={1.5} />
-  },
-  {
-    id: 'agentic',
-    topBadge: 'MOST POPULAR',
-    bottomLeftBadge: 'AI LEADERSHIP',
-    isPopular: true,
-    title: '10x Agentic AI and Automation Mastery',
-    desc: 'Master the development of autonomous AI agents and orchestration using cutting-edge frameworks.',
-    duration: '4 Months',
-    projects: 'Advanced AI Projects',
-    gradient: 'from-violet-500 to-fuchsia-600',
-    icon: <Layers size={56} color="white" strokeWidth={1.5} />
-  },
-  {
-    id: 'data-analytics',
+    id: 'ai-automation',
     topBadge: 'FEATURED',
-    bottomLeftBadge: 'DATA ANALYTICS',
+    bottomLeftBadge: 'AI & AUTOMATION',
     isPopular: true,
-    title: 'Advanced Data Analytics & AI',
-    desc: 'Master data analysis, interactive dashboards, and business decision-making using Python and SQL.',
-    duration: '6 Months',
-    projects: '25+ Live Projects',
-    gradient: 'from-blue-500 to-blue-700',
-    icon: <BarChart size={56} color="white" strokeWidth={1.5} />
+    title: 'AI & Automation Course',
+    desc: 'Create intelligent workflows and automation solutions.',
+    duration: '4 Months',
+    projects: 'Workflow automation',
+    gradient: 'from-purple-500 to-purple-700',
+    icon: <Layers size={56} color="white" strokeWidth={1.5} />
   }
 ];
 

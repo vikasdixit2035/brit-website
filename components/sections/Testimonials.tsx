@@ -8,17 +8,13 @@ export default function Testimonials() {
   const r = useReveal();
   const data = [
     {
-      name: "Arjun Mehta", role: "AI Engineer, London", avatar: "/avatar-1.png",
-      quote: "Before this program, I had no direction. Within months, I was confidently applying to UK roles and landed an AI role in London paying £55K."
+      name: "Daniel Robertson", role: "AI Engineer, London", avatar: "/avatar-1.png",
+      quote: "The structured roadmap plus the career team's dedicated support made my transition from marketing to an AI Engineer role in London seamless and fast."
     },
     {
       name: "Priya Sharma", role: "Data Analyst, Birmingham", avatar: "/avatar-2.png",
-      quote: "The structured roadmap plus mentorship made all the difference. I transitioned from marketing to data analytics in under 5 months."
-    },
-    {
-      name: "Ravi Patel", role: "ML Engineer, Manchester", avatar: "/avatar-3.png",
-      quote: "The portfolio projects and mock interviews gave me an edge. I received 3 offers within weeks of completing the program."
-    },
+      quote: "Building real-world ML models and AI-powered dashboards gave me the practical portfolio I needed to confidently ace my technical interviews."
+    }
   ];
 
   return (

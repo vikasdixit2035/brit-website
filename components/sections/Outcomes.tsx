@@ -35,10 +35,9 @@ export default function Outcomes() {
 
             <div className="o-roles">
               {[
-                { icon: "🧠", title: "AI Automation Specialist", salary: "£45k – £70k" },
-                { icon: "📊", title: "Business Analyst", salary: "£35k – £55k" },
-                { icon: "⚙️", title: "Machine Learning Engineer", salary: "£50k – £75k" },
-                { icon: "🔍", title: "BI Developer", salary: "£40k – £60k" },
+                { icon: "📊", title: "Data Analyst", salary: "£35,000 – £55,000" },
+                { icon: "🧠", title: "Data Scientist", salary: "£45,000 – £75,000" },
+                { icon: "⚙️", title: "AI / Automation Specialist", salary: "£50,000 – £80,000" },
               ].map((r, i) => (
                 <div className="o-role" key={i} style={{ padding: '16px', background: 'var(--white)', border: '1px solid var(--gray-100)', borderRadius: '12px' }}>
                   <div className="o-role-icon">{r.icon}</div>
@@ -49,6 +48,9 @@ export default function Outcomes() {
                   <Icons.ArrowRight />
                 </div>
               ))}
+            </div>
+            <div style={{ marginTop: '24px', fontSize: '0.95rem', color: 'var(--gray-600)', fontStyle: 'italic' }}>
+              <strong>Industries:</strong> Technology, Finance, Consulting, Startups
             </div>
           </div>
         </div>

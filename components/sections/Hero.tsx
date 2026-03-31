@@ -27,16 +27,19 @@ export default function Hero() {
           </div>
 
           <h1 style={{ fontStyle: "italic", fontWeight: 900, letterSpacing: "-0.04em", fontSize: "clamp(3rem, 5vw, 4.5rem)" }}>
-            Become skilled
+            Build a High-Growth Career in Data Analytics, Data Science and AI
           </h1>
 
           <p className="hero-desc" style={{ fontSize: "1.2rem", maxWidth: "540px", color: "rgba(255,255,255,0.9)" }}>
-            <strong>Courses</strong> offer flexible, self-paced learning and industry-recognized certificates to help boost your AI & Data career in the UK.
+            Join industry-relevant programmes designed to help you transition into high-demand tech roles with real-world projects, practical skills and UK-focused career support.
           </p>
 
           <div className="hero-ctas">
             <a href="#programs" className="btn-gold lg pulse">
-              Browse all courses
+              Apply Now
+            </a>
+            <a href="#brochure" className="btn-outline lg" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)', marginLeft: '16px', padding: '12px 24px', borderRadius: '8px', textDecoration: 'none', display: 'inline-block', fontWeight: 600 }}>
+              Download Brochure
             </a>
           </div>
 
@@ -79,7 +82,7 @@ export default function Hero() {
                   </h3>
                   <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <div style={{ width: '24px', height: '1px', background: 'var(--gold-400)' }} />
-                    NexusAI online learner
+                    Brit Institute online learner
                   </div>
                 </div>
               </div>

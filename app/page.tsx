@@ -11,8 +11,11 @@ import LogoStrip from "@/components/sections/LogoStrip";
 import StatsStrip from "@/components/sections/StatsStrip";
 import Programs from "@/components/sections/Programs";
 import Outcomes from "@/components/sections/Outcomes";
+import Highlights from "@/components/sections/Highlights";
+import Projects from "@/components/sections/Projects";
 import Testimonials from "@/components/sections/Testimonials";
 import CurriculumSection from "@/components/sections/CurriculumSection";
+import HowItWorks from "@/components/sections/HowItWorks";
 import Placement from "@/components/sections/Placement";
 import Pricing from "@/components/sections/Pricing";
 import FAQ from "@/components/sections/FAQ";
@@ -29,12 +32,15 @@ export default function Home() {
       <TopBanner visible={banner} onClose={() => setBanner(false)} />
       <Navbar hasBanner={banner} />
       <Hero />
+      <StatsStrip />
       <LogoStrip />
       <Programs />
       <Outcomes />
-      <Testimonials />
+      <Highlights />
       <CurriculumSection />
-      <StatsStrip />
+      <Projects />
+      <Testimonials />
+      <HowItWorks />
       <Placement />
       <Pricing />
       <FAQ />
