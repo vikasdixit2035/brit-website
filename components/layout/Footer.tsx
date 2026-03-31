@@ -3,7 +3,10 @@ export default function Footer() {
     <footer className="footer" style={{ background: 'var(--white)', color: 'var(--gray-600)', borderTop: '1px solid var(--gray-100)' }}>
       <div className="footer-grid">
         <div className="footer-brand">
-          <div className="f-logo" style={{ color: 'var(--blue-900)' }}><span className="logo-mark" style={{ borderRadius: '4px' }}>N</span>NexusAI Academy</div>
+          <div className="f-logo" style={{ color: 'var(--blue-900)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <img src="/britinstitute.png" alt="Brit Institute Logo" style={{ height: '24px', width: 'auto', borderRadius: '4px' }} />
+            Brit Institute
+          </div>
           <p style={{ color: 'var(--gray-500)' }}>Industry-led AI & Data Analytics programs, designed for the UK job market.</p>
         </div>
         <div className="f-col">
@@ -27,7 +30,7 @@ export default function Footer() {
         <div className="f-col">
           <h4 style={{ color: 'var(--blue-900)' }}>Contact</h4>
           <ul>
-            <li><a href="#" style={{ color: 'var(--gray-500)' }}>hello@nexusai.co.uk</a></li>
+            <li><a href="#" style={{ color: 'var(--gray-500)' }}>hello@britinstitute.co.uk</a></li>
             <li><a href="#" style={{ color: 'var(--gray-500)' }}>+44 20 7123 4567</a></li>
             <li><a href="#" style={{ color: 'var(--gray-500)' }}>LinkedIn</a></li>
             <li><a href="#" style={{ color: 'var(--gray-500)' }}>Twitter</a></li>
@@ -35,7 +38,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom" style={{ borderTop: '1px solid var(--gray-100)', color: 'var(--gray-400)' }}>
-        <span>© {new Date().getFullYear()} NexusAI Academy. All rights reserved.</span>
+        <span>© {new Date().getFullYear()} Brit Institute. All rights reserved.</span>
         <div style={{ display: 'flex', gap: '24px' }}>
           <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Privacy Policy</a>
           <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Terms of Service</a>

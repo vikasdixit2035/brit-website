@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "NexusAI Academy — Break Into High-Paying AI & Data Careers in the UK",
+  title: "Brit Institute — Break Into High-Paying AI & Data Careers in the UK",
   description:
     "Industry-led Agentic AI & Data Analytics programs with structured training, real-world projects, and dedicated placement support. Average salary outcomes: £35,000 – £70,000.",
   keywords: [
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "data analyst course",
   ],
   openGraph: {
-    title: "NexusAI Academy — Break Into High-Paying AI & Data Careers in the UK",
+    title: "Brit Institute — Break Into High-Paying AI & Data Careers in the UK",
     description:
       "Industry-led programs designed to help you transition into Agentic AI & Data Analytics roles.",
     type: "website",

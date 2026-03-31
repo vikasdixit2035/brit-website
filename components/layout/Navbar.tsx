@@ -28,9 +28,8 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
     <nav className={`navbar ${scrolled ? "navbar-glass" : "navbar-transparent"}`} style={{ top: navTop }}>
       <div className="navbar-inner">
         <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
-          <a href="#" className="logo">
-            <span className="logo-mark">N</span>
-            NexusAI
+          <a href="#" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <img src="/britinstitute.png" alt="Brit Institute Logo" style={{ height: '64px', width: '124px', borderRadius: '4px' }} />
           </a>
 
           <div className="hidden-mobile" style={{ position: 'relative', width: '280px' }}>
