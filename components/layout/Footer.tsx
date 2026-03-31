@@ -30,7 +30,7 @@ export default function Footer() {
         <div className="f-col">
           <h4 style={{ color: 'var(--blue-900)' }}>Contact</h4>
           <ul>
-            <li><a href="#" style={{ color: 'var(--gray-500)' }}>hello@britinstitute.co.uk</a></li>
+            <li><a href="#" style={{ color: 'var(--gray-500)' }}>info@britinstitute.uk</a></li>
             <li><a href="#" style={{ color: 'var(--gray-500)' }}>+44 20 7123 4567</a></li>
             <li><a href="#" style={{ color: 'var(--gray-500)' }}>LinkedIn</a></li>
             <li><a href="#" style={{ color: 'var(--gray-500)' }}>Twitter</a></li>

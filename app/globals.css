@@ -2172,17 +2172,18 @@ body {
 /* Premium Mouse Glow Effect */
 .hover-glow-effect {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border-radius: inherit;
   pointer-events: none;
   z-index: 0;
   opacity: 0;
   transition: opacity 0.4s;
-  background: radial-gradient(
-    600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
-    rgba(255, 255, 255, 0.8),
-    transparent 40%
-  );
+  background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+      rgba(255, 255, 255, 0.8),
+      transparent 40%);
   mix-blend-mode: overlay;
 }
 
@@ -2194,7 +2195,10 @@ body {
 .p-card.fill-hover::before {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border-radius: inherit;
   z-index: 0;
   opacity: 0;
@@ -2215,9 +2219,9 @@ body {
 }
 
 /* Elevate Content */
-.p-card .tag-row, 
-.p-card .title-row, 
-.p-card .description, 
+.p-card .tag-row,
+.p-card .title-row,
+.p-card .description,
 .p-card .card-footer {
   z-index: 2;
   position: relative;
