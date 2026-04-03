@@ -21,7 +21,7 @@ export default function Footer() {
         <div className="f-col">
           <h4 style={{ color: 'var(--blue-900)' }}>Company</h4>
           <ul>
-            <li><a href="#" style={{ color: 'var(--gray-500)' }}>About Us</a></li>
+            <li><a href="/about" style={{ color: 'var(--gray-500)' }}>About Us</a></li>
             <li><a href="#testimonials" style={{ color: 'var(--gray-500)' }}>Success Stories</a></li>
             <li><a href="#" style={{ color: 'var(--gray-500)' }}>Blog</a></li>
             <li><a href="#" style={{ color: 'var(--gray-500)' }}>Careers</a></li>
@@ -30,6 +30,7 @@ export default function Footer() {
         <div className="f-col">
           <h4 style={{ color: 'var(--blue-900)' }}>Contact</h4>
           <ul>
+            <li><a href="/contact" style={{ color: 'var(--gray-500)' }}>Contact Us</a></li>
             <li><a href="#" style={{ color: 'var(--gray-500)' }}>info@britinstitute.uk</a></li>
             <li><a href="#" style={{ color: 'var(--gray-500)' }}>+44 20 7123 4567</a></li>
             <li><a href="#" style={{ color: 'var(--gray-500)' }}>LinkedIn</a></li>

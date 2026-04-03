@@ -271,7 +271,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
           }}
         >
           {/* ── Logo ────────────────────────────────────────────────────── */}
-          <a href="#" style={{ display: "flex", alignItems: "center", flexShrink: 0, textDecoration: "none" }}>
+          <a href="/" style={{ display: "flex", alignItems: "center", flexShrink: 0, textDecoration: "none" }}>
             <img src="/britinstitute.png" alt="Brit Institute" style={{ height: "40px", width: "auto", borderRadius: "4px" }} />
             <span style={{ marginLeft: "12px", fontSize: "1.25rem", fontWeight: 800 }}>
               <span style={{ color: BRIT_BLUE }}>Brit</span>
@@ -335,12 +335,12 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
                       courses.map((course) => {
                         const badge = badgeStyle(course.topBadge);
                         return (
-                          <a
-                            key={course._id}
-                            href={`#courses`}
-                            className="drop-item"
-                            onClick={() => setDropOpen(false)}
-                          >
+                            <a
+                              key={course._id}
+                              href={`/courses/${course.slug}`}
+                              className="drop-item"
+                              onClick={() => setDropOpen(false)}
+                            >
                             {/* Icon */}
                             <div className="drop-icon-wrap">
                               <CourseIcon name={course.iconName} />
@@ -385,7 +385,8 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
               { href: "#why", label: "Why Brit Institute" },
               { href: "#placement", label: "Placement Support" },
               { href: "#stories", label: "Success Stories" },
-              { href: "#about", label: "About Us" },
+              { href: "/about", label: "About Us" },
+              { href: "/contact", label: "Contact Us" },
             ].map(({ href, label }) => (
               <a
                 key={href}
