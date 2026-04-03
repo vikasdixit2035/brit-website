@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
+import ChatbotFloat from "@/components/layout/ChatbotFloat";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -34,7 +36,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <WhatsAppFloat />
+        <ChatbotFloat />
+      </body>
     </html>
   );
 }
