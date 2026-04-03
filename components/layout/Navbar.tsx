@@ -453,7 +453,7 @@ function ClockIcon() {
   );
 }
 
-const ICON_PATHS: Record<string, JSX.Element> = {
+const ICON_PATHS: Record<string, React.ReactElement> = {
   BarChart: <><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></>,
   Code: <><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></>,
   Layers: <><polygon points="12 2 2 7 12 12 22 7 12 2" /><polyline points="2 17 12 22 22 17" /><polyline points="2 12 12 17 22 12" /></>,
