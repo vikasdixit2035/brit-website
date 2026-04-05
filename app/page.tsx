@@ -7,7 +7,6 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 import Hero from "@/components/sections/Hero";
-import EnterpriseSolutions from "@/components/sections/EnterpriseSolutions";
 import LogoStrip from "@/components/sections/LogoStrip";
 import Programs from "@/components/sections/Programs";
 import Outcomes from "@/components/sections/Outcomes";
@@ -69,10 +68,7 @@ export default function Home() {
       {/* 1. Hero */}
       <Hero />
 
-      {/* Enterprise Solutions Section */}
-      <EnterpriseSolutions />
-
-      {/* 2. Company / Gov Bodies Strip */}
+      {/* 2. Company Strip (formerly Enterprise Solutions + Logo Strip) */}
       <LogoStrip />
 
       {/* 3. Choose Your Path */}

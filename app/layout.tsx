@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
 import ChatbotFloat from "@/components/layout/ChatbotFloat";
+import StickyBottomBar from "@/components/layout/StickyBottomBar";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -40,6 +41,7 @@ export default function RootLayout({
         {children}
         <WhatsAppFloat />
         <ChatbotFloat />
+        <StickyBottomBar />
       </body>
     </html>
   );

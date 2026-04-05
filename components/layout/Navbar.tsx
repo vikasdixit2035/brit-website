@@ -2,19 +2,22 @@
 
 import { useState, useEffect, useRef } from "react";
 
-const BRIT_BLUE = "#1D4ED8";
-const INSTITUTE_GOLD = "#D4AF37";
+const BRAND_RED = "#FF0033"; // AlmaBetter red
+const BRAND_CYAN = "#00E5FF"; // Free badge color
+const NAV_BG = "#000000";
+const NAV_LINK = "#ffffff";
+const NAV_LINK_HOVER = "#d1d5db";
 
-// Badge colour map (matches topBadge strings from DB)
+// Badge colour map
 const BADGE_COLOURS: Record<string, { bg: string; text: string }> = {
   FEATURED: { bg: "#EF4444", text: "#fff" },
   "MOST POPULAR": { bg: "#8B5CF6", text: "#fff" },
   "IN DEMAND": { bg: "#10B981", text: "#fff" },
-  "AI LEADER": { bg: INSTITUTE_GOLD, text: "#1a1a1a" },
+  "AI LEADER": { bg: "#D4AF37", text: "#1a1a1a" },
 };
 
 function badgeStyle(label: string) {
-  return BADGE_COLOURS[label?.toUpperCase()] ?? { bg: BRIT_BLUE, text: "#fff" };
+  return BADGE_COLOURS[label?.toUpperCase()] ?? { bg: "#1D4ED8", text: "#fff" };
 }
 
 interface Course {
@@ -27,6 +30,27 @@ interface Course {
   iconName: string;
 }
 
+// Nav links for desktop right side
+const NAV_RIGHT_LINKS = [
+  { href: "#placement", label: "Placements" },
+  { href: "#masterclass", label: "Masterclass", badge: "Free" },
+  { href: "#practice", label: "Practice" },
+  { href: "#hire", label: "Hire From Us" },
+  { href: "#more", label: "More" },
+];
+
+// Mobile menu links
+const MOBILE_MENU_LINKS = [
+  { href: "#placement", label: "Placements" },
+  { href: "#masterclass", label: "Masterclass", badge: "Free" },
+  { href: "#practice", label: "Practice" },
+  { href: "#hire", label: "Hire From Us" },
+  { href: "#why", label: "Why AlmaBetter" },
+  { href: "#stories", label: "Success Stories" },
+  { href: "/about", label: "About Us" },
+  { href: "/contact", label: "Contact Us" },
+];
+
 export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -34,9 +58,9 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
   const [courses, setCourses] = useState<Course[]>([]);
   const [dropOpen, setDropOpen] = useState(false);
   const dropRef = useRef<HTMLDivElement>(null);
-  let closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // ── Scroll handler ─────────────────────────────────────────────────────────
+  // Scroll handler
   useEffect(() => {
     const fn = () => {
       const sy = window.scrollY;
@@ -48,7 +72,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
     return () => window.removeEventListener("scroll", fn);
   }, [hasBanner]);
 
-  // ── Fetch courses once ─────────────────────────────────────────────────────
+  // Fetch courses
   useEffect(() => {
     fetch("http://localhost:4000/api/courses")
       .then((r) => r.ok ? r.json() : Promise.reject())
@@ -56,7 +80,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
       .catch(() => { });
   }, []);
 
-  // ── Close dropdown on outside click ────────────────────────────────────────
+  // Close dropdown on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (dropRef.current && !dropRef.current.contains(e.target as Node)) {
@@ -67,53 +91,63 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  // Close mobile menu on resize
+  useEffect(() => {
+    const handler = () => {
+      if (window.innerWidth >= 900) setMenuOpen(false);
+    };
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+
   const openDrop = () => { if (closeTimer.current) clearTimeout(closeTimer.current); setDropOpen(true); };
   const closeDrop = () => { closeTimer.current = setTimeout(() => setDropOpen(false), 180); };
 
   return (
     <>
-      {/* ── Dropdown styles ──────────────────────────────────────────────── */}
       <style>{`
+        /* ── Global nav reset ───── */
+        .alma-nav * { box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
+
+        /* ── Dropdown ───────────── */
         .courses-dropdown {
           position: absolute;
-          top: calc(100% + 12px);
-          left: 50%;
-          transform: translateX(-50%);
+          top: calc(100% + 15px);
+          left: 0;
           width: 680px;
           background: #ffffff;
-          border-radius: 20px;
-          box-shadow: 0 20px 60px rgba(29, 78, 216, 0.15), 0 4px 16px rgba(0,0,0,0.08);
-          border: 1.5px solid rgba(29, 78, 216, 0.12);
+          border-radius: 12px;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+          border: 1px solid rgba(0,0,0,0.08);
           padding: 0;
           overflow: hidden;
-          z-index: 100;
-          animation: dropFadeIn 0.22s cubic-bezier(.16,1,.3,1);
+          z-index: 200;
+          animation: dropFadeIn 0.2s cubic-bezier(.16,1,.3,1);
         }
         @keyframes dropFadeIn {
-          from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
-          to   { opacity: 1; transform: translateX(-50%) translateY(0);    }
+          from { opacity: 0; transform: translateY(-6px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
         .drop-header {
-          background: linear-gradient(135deg, ${BRIT_BLUE} 0%, #2563EB 100%);
-          padding: 18px 24px 16px;
+          background: #f8fafc;
+          padding: 16px 22px 14px;
           display: flex;
           align-items: center;
           justify-content: space-between;
+          border-bottom: 1px solid #e2e8f0;
         }
         .drop-header-title {
-          color: #fff;
-          font-size: 0.8rem;
+          color: #333;
+          font-size: 0.85rem;
           font-weight: 700;
-          letter-spacing: 0.12em;
+          letter-spacing: 0.05em;
           text-transform: uppercase;
-          opacity: 0.9;
         }
         .drop-header-link {
-          color: ${INSTITUTE_GOLD};
-          font-size: 0.78rem;
+          color: ${BRAND_RED};
+          font-size: 0.85rem;
           font-weight: 700;
           text-decoration: none;
-          letter-spacing: 0.04em;
           display: flex;
           align-items: center;
           gap: 4px;
@@ -138,15 +172,15 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
           transition: background 0.15s;
           cursor: pointer;
         }
-        .drop-item:hover { background: #EFF6FF; }
+        .drop-item:hover { background: #f1f5f9; }
         .drop-item:nth-child(even) { border-right: none; }
 
         .drop-icon-wrap {
           flex-shrink: 0;
-          width: 40px;
-          height: 40px;
-          border-radius: 10px;
-          background: linear-gradient(135deg, ${BRIT_BLUE} 0%, #3B82F6 100%);
+          width: 38px;
+          height: 38px;
+          border-radius: 8px;
+          background: #1e293b;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -156,15 +190,15 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
 
         .drop-item-body { flex: 1; min-width: 0; }
         .drop-item-name {
-          font-size: 0.88rem;
+          font-size: 0.9rem;
           font-weight: 700;
-          color: #111827;
+          color: #0f172a;
           line-height: 1.3;
           margin-bottom: 4px;
         }
         .drop-item-detail {
-          font-size: 0.76rem;
-          color: #6B7280;
+          font-size: 0.8rem;
+          color: #64748b;
           line-height: 1.4;
           white-space: nowrap;
           overflow: hidden;
@@ -172,88 +206,294 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
         }
         .drop-badge {
           display: inline-block;
-          font-size: 0.63rem;
+          font-size: 0.65rem;
           font-weight: 800;
-          letter-spacing: 0.08em;
+          letter-spacing: 0.05em;
           text-transform: uppercase;
           padding: 2px 7px;
-          border-radius: 99px;
-          margin-bottom: 5px;
+          border-radius: 4px;
+          margin-bottom: 6px;
         }
         .drop-footer {
-          background: #F8FAFF;
-          border-top: 1.5px solid rgba(29,78,216,0.08);
-          padding: 14px 24px;
+          background: #f8fafc;
+          border-top: 1px solid #e2e8f0;
+          padding: 14px 22px;
           display: flex;
           align-items: center;
           justify-content: space-between;
         }
         .drop-footer-text {
-          font-size: 0.8rem;
-          color: #6B7280;
+          font-size: 0.85rem;
+          color: #475569;
           font-weight: 500;
         }
         .drop-footer-cta {
-          background: ${BRIT_BLUE};
+          background: ${BRAND_RED};
           color: #fff;
-          font-size: 0.8rem;
+          font-size: 0.85rem;
           font-weight: 700;
           border: none;
-          border-radius: 99px;
-          padding: 8px 20px;
+          border-radius: 6px;
+          padding: 8px 18px;
           cursor: pointer;
           transition: background .2s, transform .15s;
           text-decoration: none;
         }
-        .drop-footer-cta:hover { background: #1e40af; transform: translateY(-1px); }
+        .drop-footer-cta:hover { background: #d6002b; transform: translateY(-1px); }
 
-        /* Courses trigger hover underline */
+        /* ── Courses trigger ─── */
         .nav-courses-trigger {
-          position: relative;
           display: flex;
           align-items: center;
-          gap: 5px;
-          color: #4B5563;
-          font-weight: 600;
+          gap: 6px;
+          color: ${BRAND_RED};
+          font-weight: 700;
           font-size: 0.95rem;
+          background: #ffffff;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+          padding: 10px 18px;
+          font-family: inherit;
+          transition: background .2s;
+          white-space: nowrap;
+        }
+        .nav-courses-trigger:hover,
+        .nav-courses-trigger[data-open="true"] {
+          background: #f1f5f9;
+        }
+
+        .chevron-icon { transition: transform .2s; flex-shrink: 0; stroke: ${BRAND_RED}; }
+        .chevron-icon[data-open="true"] { transform: rotate(180deg); }
+
+        /* ── Right nav links ─── */
+        .nav-right-link {
+          color: ${NAV_LINK};
+          font-size: 0.95rem;
+          font-weight: 500;
+          text-decoration: none;
+          transition: color .2s;
+          white-space: nowrap;
+          position: relative;
+        }
+        .nav-right-link:hover { color: ${NAV_LINK_HOVER}; }
+
+        /* Free badge on Masterclass */
+        .nav-free-badge {
+          position: absolute;
+          top: -12px;
+          right: -10px;
+          background: ${BRAND_CYAN};
+          color: #000;
+          font-size: 0.6rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          padding: 2px 6px;
+          border-radius: 4px;
+          line-height: 1.2;
+        }
+
+        /* ── Sign In button ─── */
+        .nav-signin-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: ${BRAND_RED};
+          color: #fff;
+          border: none;
+          border-radius: 6px;
+          padding: 10px 24px;
+          font-size: 0.95rem;
+          font-weight: 700;
+          cursor: pointer;
+          text-decoration: none;
+          transition: background .2s;
+          white-space: nowrap;
+          font-family: inherit;
+        }
+        .nav-signin-btn:hover {
+          background: #d6002b;
+        }
+
+        /* ── Hamburger ────────── */
+        .nav-hamburger {
+          display: none;
+          flex-direction: column;
+          justify-content: center;
+          gap: 5px;
           background: none;
           border: none;
           cursor: pointer;
-          padding: 0;
-          font-family: inherit;
-          transition: color .2s;
-        }
-        .nav-courses-trigger:hover, .nav-courses-trigger[data-open="true"] { color: ${BRIT_BLUE}; }
-        .nav-courses-trigger::after {
-          content: '';
-          position: absolute;
-          bottom: -2px; left: 0; right: 0;
-          height: 2px;
-          background: ${BRIT_BLUE};
-          border-radius: 2px;
-          transform: scaleX(0);
-          transition: transform .2s;
-        }
-        .nav-courses-trigger:hover::after,
-        .nav-courses-trigger[data-open="true"]::after { transform: scaleX(1); }
-
-        .chevron-icon {
-          transition: transform .2s;
+          padding: 4px;
           flex-shrink: 0;
         }
-        .chevron-icon[data-open="true"] { transform: rotate(180deg); }
+        .nav-hamburger span {
+          display: block;
+          width: 22px;
+          height: 2px;
+          background: #ffffff;
+          border-radius: 2px;
+          transition: all 0.3s;
+        }
+        .nav-hamburger[data-open="true"] span:nth-child(1) {
+          transform: translateY(7px) rotate(45deg);
+        }
+        .nav-hamburger[data-open="true"] span:nth-child(2) {
+          opacity: 0;
+        }
+        .nav-hamburger[data-open="true"] span:nth-child(3) {
+          transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* ── Mobile user icon btn ─ */
+        .nav-user-icon-btn {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          border: 2px solid rgba(255,255,255,0.3);
+          background: rgba(255,255,255,0.08);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: border-color .2s, background .2s;
+          flex-shrink: 0;
+        }
+        .nav-user-icon-btn:hover {
+          border-color: rgba(255,255,255,0.6);
+          background: rgba(255,255,255,0.15);
+        }
+
+        /* ── Mobile drawer ─────── */
+        .mobile-drawer {
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          z-index: 9999;
+          display: flex;
+        }
+        .drawer-backdrop {
+          position: absolute;
+          inset: 0;
+          background: rgba(0,0,0,0.65);
+          backdrop-filter: blur(3px);
+          animation: backdropIn 0.25s ease;
+        }
+        @keyframes backdropIn {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+        .drawer-panel {
+          position: relative;
+          width: 300px;
+          max-width: 88vw;
+          background: #111111;
+          border-right: 1px solid rgba(255,255,255,0.08);
+          height: 100%;
+          overflow-y: auto;
+          animation: slideIn 0.28s cubic-bezier(.16,1,.3,1);
+          display: flex;
+          flex-direction: column;
+        }
+        @keyframes slideIn {
+          from { transform: translateX(-100%); }
+          to   { transform: translateX(0); }
+        }
+        .drawer-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 18px 20px;
+          border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+        .drawer-close-btn {
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: #9CA3AF;
+          padding: 4px;
+          border-radius: 6px;
+          transition: color .2s, background .2s;
+        }
+        .drawer-close-btn:hover { color: #fff; background: rgba(255,255,255,0.07); }
+
+        .drawer-courses-btn {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          margin: 16px 20px 8px;
+          width: calc(100% - 40px);
+          color: #ffffff;
+          font-weight: 700;
+          font-size: 0.9rem;
+          background: rgba(255,255,255,0.07);
+          border: 1px solid rgba(255,255,255,0.12);
+          border-radius: 8px;
+          cursor: pointer;
+          padding: 12px 16px;
+          font-family: inherit;
+          transition: background .2s;
+        }
+        .drawer-courses-btn:hover { background: rgba(255,255,255,0.12); }
+
+        .drawer-nav-link {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 14px 20px;
+          color: ${NAV_LINK};
+          font-size: 0.9rem;
+          font-weight: 500;
+          text-decoration: none;
+          border-bottom: 1px solid rgba(255,255,255,0.04);
+          transition: color .2s, background .2s;
+        }
+        .drawer-nav-link:hover { color: #fff; background: rgba(255,255,255,0.04); }
+
+        .drawer-signin-btn {
+          margin: 16px 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: ${BRAND_RED};
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          padding: 13px;
+          font-size: 0.95rem;
+          font-weight: 700;
+          cursor: pointer;
+          text-decoration: none;
+          transition: background .2s;
+          font-family: inherit;
+        }
+        .drawer-signin-btn:hover { background: #d6002b; }
+
+        /* ── Responsive breakpoints ─ */
+        @media (max-width: 1024px) {
+          .nav-desktop-right { display: none !important; }
+          .nav-desktop-courses { display: none !important; }
+          .nav-hamburger { display: flex !important; }
+          .nav-mobile-right { display: flex !important; }
+        }
+        @media (min-width: 1025px) {
+          .nav-hamburger { display: none !important; }
+          .nav-mobile-right { display: none !important; }
+        }
       `}</style>
 
+      {/* ── Top Nav ──────────────────────────────────────────────────────── */}
       <nav
+        className="alma-nav"
         style={{
           top: navTop,
           width: "100%",
           position: "fixed",
           zIndex: 50,
           boxSizing: "border-box",
-          background: "#ffffff",
-          boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.07)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(0,0,0,0.06)" : "none",
+          background: NAV_BG,
+          padding: "16px 0",
+          boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.5)" : "none",
           transition: "all 0.3s ease",
         }}
       >
@@ -263,27 +503,41 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
             alignItems: "center",
             justifyContent: "space-between",
             width: "100%",
-            maxWidth: "1200px",
+            maxWidth: "1400px",
             margin: "0 auto",
-            padding: "14px 24px",
+            padding: "0 40px",
             boxSizing: "border-box",
+            height: "100%",
             position: "relative",
           }}
         >
-          {/* ── Logo ────────────────────────────────────────────────────── */}
-          <a href="/" style={{ display: "flex", alignItems: "center", flexShrink: 0, textDecoration: "none" }}>
-            <img src="/britinstitute.png" alt="Brit Institute" style={{ height: "40px", width: "auto", borderRadius: "4px" }} />
-            <span style={{ marginLeft: "12px", fontSize: "1.25rem", fontWeight: 800 }}>
-              <span style={{ color: BRIT_BLUE }}>Brit</span>
-              <span style={{ color: INSTITUTE_GOLD, marginLeft: "6px" }}>Institute</span>
-            </span>
-          </a>
+          {/* ── LEFT: Hamburger (mobile) + Logo + Courses ──────────────── */}
+          <div style={{ display: "flex", alignItems: "center", gap: "24px", flexShrink: 0 }}>
+            {/* Hamburger — mobile only */}
+            <button
+              className="nav-hamburger"
+              data-open={menuOpen ? "true" : "false"}
+              onClick={() => setMenuOpen((p) => !p)}
+              aria-label="Open menu"
+            >
+              <span />
+              <span />
+              <span />
+            </button>
 
-          {/* ── Nav Links ───────────────────────────────────────────────── */}
-          <div style={{ display: "flex", alignItems: "center", gap: "32px" }}>
+            {/* Logo */}
+            <a href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
+              <span style={{ fontSize: "1.7rem", fontWeight: 700, letterSpacing: "-0.03em", color: "#ffffff" }}>
+                Alma<span style={{ borderBottom: `3px solid ${BRAND_RED}`, paddingBottom: "2px" }}>Better</span>
+              </span>
+            </a>
 
-            {/* Courses with dropdown */}
-            <div ref={dropRef} style={{ position: "relative" }}>
+            {/* Courses trigger — desktop only */}
+            <div
+              ref={dropRef}
+              className="nav-desktop-courses"
+              style={{ position: "relative" }}
+            >
               <button
                 className="nav-courses-trigger"
                 data-open={dropOpen ? "true" : "false"}
@@ -294,35 +548,41 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
                 aria-expanded={dropOpen}
               >
                 Courses
-                {/* Chevron */}
-                <svg className="chevron-icon" data-open={dropOpen ? "true" : "false"} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  className="chevron-icon"
+                  data-open={dropOpen ? "true" : "false"}
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <polyline points="6 9 12 15 18 9" />
                 </svg>
               </button>
 
-              {/* ── Dropdown ──────────────────────────────────────────── */}
+              {/* Dropdown */}
               {dropOpen && (
                 <div
                   className="courses-dropdown"
                   onMouseEnter={openDrop}
                   onMouseLeave={closeDrop}
                 >
-                  {/* Header */}
                   <div className="drop-header">
-                    <span className="drop-header-title">Popular Courses</span>
+                    <span className="drop-header-title">Popular Programs</span>
                     <a href="#courses" className="drop-header-link" onClick={() => setDropOpen(false)}>
                       View All
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="9 18 15 12 9 6" />
                       </svg>
                     </a>
                   </div>
 
-                  {/* Grid of courses */}
                   <div className="drop-grid">
-                    {courses.length === 0 ? (
-                      // Loading skeletons
-                      Array.from({ length: 4 }).map((_, i) => (
+                    {courses.length === 0
+                      ? Array.from({ length: 4 }).map((_, i) => (
                         <div key={i} className="drop-item" style={{ opacity: 0.5 }}>
                           <div className="drop-icon-wrap" style={{ background: "#E5E7EB" }} />
                           <div style={{ flex: 1 }}>
@@ -331,28 +591,21 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
                           </div>
                         </div>
                       ))
-                    ) : (
-                      courses.map((course) => {
+                      : courses.map((course) => {
                         const badge = badgeStyle(course.topBadge);
                         return (
-                            <a
-                              key={course._id}
-                              href={`/courses/${course.slug}`}
-                              className="drop-item"
-                              onClick={() => setDropOpen(false)}
-                            >
-                            {/* Icon */}
+                          <a
+                            key={course._id}
+                            href={`/courses/${course.slug}`}
+                            className="drop-item"
+                            onClick={() => setDropOpen(false)}
+                          >
                             <div className="drop-icon-wrap">
                               <CourseIcon name={course.iconName} />
                             </div>
-
-                            {/* Text */}
                             <div className="drop-item-body">
                               {course.topBadge && (
-                                <span
-                                  className="drop-badge"
-                                  style={{ background: badge.bg, color: badge.text }}
-                                >
+                                <span className="drop-badge" style={{ background: badge.bg, color: badge.text }}>
                                   {course.topBadge}
                                 </span>
                               )}
@@ -363,89 +616,165 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
                             </div>
                           </a>
                         );
-                      })
-                    )}
-                  </div>
-
-                  {/* Footer */}
-                  <div className="drop-footer">
-                    <span className="drop-footer-text">
-                      🎓 Industry-leading certification programs
-                    </span>
-                    <a href="#apply" className="drop-footer-cta" onClick={() => setDropOpen(false)}>
-                      Apply Now →
-                    </a>
+                      })}
                   </div>
                 </div>
               )}
             </div>
-
-            {/* Other links */}
-            {[
-              { href: "#why", label: "Why Brit Institute" },
-              { href: "#placement", label: "Placement Support" },
-              { href: "#stories", label: "Success Stories" },
-              { href: "/about", label: "About Us" },
-              { href: "/contact", label: "Contact Us" },
-            ].map(({ href, label }) => (
-              <a
-                key={href}
-                href={href}
-                style={{
-                  color: "#4B5563",
-                  fontWeight: 600,
-                  fontSize: "0.95rem",
-                  textDecoration: "none",
-                  transition: "color 0.2s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = BRIT_BLUE)}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#4B5563")}
-              >
-                {label}
-              </a>
-            ))}
           </div>
 
-          {/* ── CTA Button ──────────────────────────────────────────────── */}
-          <a
-            href="#apply"
-            style={{
-              padding: "12px 28px",
-              fontSize: "0.95rem",
-              borderRadius: "99px",
-              fontWeight: 700,
-              background: BRIT_BLUE,
-              color: "#ffffff",
-              textDecoration: "none",
-              transition: "background 0.2s ease, transform 0.2s ease",
-              boxShadow: "0 4px 16px rgba(29,78,216,0.3)",
-              flexShrink: 0,
-              border: `2px solid ${BRIT_BLUE}`,
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "#1e40af";
-              e.currentTarget.style.transform = "translateY(-1px)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = BRIT_BLUE;
-              e.currentTarget.style.transform = "translateY(0)";
-            }}
+          {/* ── CENTER / RIGHT: Nav links + Sign In — desktop ──────────── */}
+          <div
+            className="nav-desktop-right"
+            style={{ display: "flex", alignItems: "center", gap: "36px" }}
           >
-            Apply Now
-          </a>
+            {NAV_RIGHT_LINKS.map(({ href, label, badge }) => (
+              <a key={href} href={href} className="nav-right-link">
+                {label}
+                {badge && <span className="nav-free-badge">{badge}</span>}
+              </a>
+            ))}
+
+            {/* Sign In */}
+            <a href="/login" className="nav-signin-btn">
+              Sign In
+            </a>
+          </div>
+
+          {/* ── MOBILE RIGHT: Courses pill + User icon ─────────────────── */}
+          <div
+            className="nav-mobile-right"
+            style={{ display: "none", alignItems: "center", gap: "12px", flexShrink: 0 }}
+          >
+            <a
+              href="/login"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                background: BRAND_RED,
+                color: "#fff",
+                fontWeight: 700,
+                fontSize: "0.9rem",
+                padding: "8px 16px",
+                borderRadius: "6px",
+                textDecoration: "none",
+                transition: "background .2s",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Sign In
+            </a>
+          </div>
         </div>
       </nav>
+
+      {/* ── Mobile Drawer ──────────────────────────────────────────────────── */}
+      {menuOpen && (
+        <div className="mobile-drawer">
+          <div className="drawer-backdrop" onClick={() => setMenuOpen(false)} />
+          <div className="drawer-panel">
+            {/* Header */}
+            <div className="drawer-header">
+              <a href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }} onClick={() => setMenuOpen(false)}>
+                <span style={{ fontSize: "1.4rem", fontWeight: 700, letterSpacing: "-0.03em", color: "#ffffff" }}>
+                  Alma<span style={{ borderBottom: `3px solid ${BRAND_RED}`, paddingBottom: "2px" }}>Better</span>
+                </span>
+              </a>
+              <button className="drawer-close-btn" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Courses accordion trigger */}
+            <button className="drawer-courses-btn" onClick={() => setDropOpen((p) => !p)}>
+              <span>Courses</span>
+              <svg
+                className="chevron-icon"
+                data-open={dropOpen ? "true" : "false"}
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+
+            {/* Mini course list if expanded */}
+            {dropOpen && courses.length > 0 && (
+              <div style={{ padding: "4px 0 8px", backgroundColor: "rgba(255,255,255,0.03)" }}>
+                {courses.map((course) => (
+                  <a
+                    key={course._id}
+                    href={`/courses/${course.slug}`}
+                    className="drawer-nav-link"
+                    style={{ paddingLeft: "32px" }}
+                    onClick={() => { setMenuOpen(false); setDropOpen(false); }}
+                  >
+                    <span style={{ color: "#9CA3AF", flexShrink: 0 }}>
+                      <CourseIcon name={course.iconName} />
+                    </span>
+                    <span>{course.title}</span>
+                  </a>
+                ))}
+              </div>
+            )}
+
+            {/* Nav links */}
+            <div style={{ flex: 1, marginTop: "10px" }}>
+              {MOBILE_MENU_LINKS.map(({ href, label, badge }) => (
+                <a
+                  key={href}
+                  href={href}
+                  className="drawer-nav-link"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {label}
+                  {badge && (
+                    <span style={{
+                      background: BRAND_CYAN,
+                      color: "#000",
+                      fontSize: "0.6rem",
+                      fontWeight: 800,
+                      padding: "2px 8px",
+                      borderRadius: "4px",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.06em",
+                      marginLeft: "auto",
+                    }}>
+                      {badge}
+                    </span>
+                  )}
+                </a>
+              ))}
+            </div>
+
+            {/* Sign In */}
+            <a href="/login" className="drawer-signin-btn" onClick={() => setMenuOpen(false)}>
+              Sign In
+            </a>
+          </div>
+        </div>
+      )}
     </>
   );
 }
 
-// ── Tiny inline SVG icons (no extra dep) ─────────────────────────────────────
+// ── Helper icons ──────────────────────────────────────────────────────────────
 function ClockIcon() {
   return (
     <svg
-      style={{ display: "inline", verticalAlign: "middle", marginRight: 4 }}
+      style={{ display: "inline", verticalAlign: "middle", marginRight: 6 }}
       width="12" height="12" viewBox="0 0 24 24"
-      fill="none" stroke="#9CA3AF" strokeWidth="2"
+      fill="none" stroke="#64748b" strokeWidth="2.5"
       strokeLinecap="round" strokeLinejoin="round"
     >
       <circle cx="12" cy="12" r="10" />
@@ -468,7 +797,7 @@ const ICON_PATHS: Record<string, React.ReactElement> = {
 function CourseIcon({ name }: { name: string }) {
   const paths = ICON_PATHS[name] ?? ICON_PATHS.BarChart;
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       {paths}
     </svg>
   );
