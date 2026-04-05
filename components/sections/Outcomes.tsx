@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
    AI‑themed icon carousel items
    ─────────────────────────────────────────────── */
 const CAROUSEL_ITEMS = [
-  { label: "Medical AI", icon: "medical" },
+  { label: "Data Analytics", icon: "analytics" },
   { label: "AI Language Processing", icon: "language" },
   { label: "Autonomous Edge AI", icon: "edge" },
   { label: "Computer Vision", icon: "vision" },
@@ -50,7 +50,7 @@ export default function Outcomes() {
           justify-content: space-between;
           gap: 0;
           overflow: hidden;
-          background: #1F1F1F;
+          background: #0F172A;
           padding: 0 64px;
           box-shadow: 0 4px 36px 0 rgba(0,0,0,0.16);
           font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -72,7 +72,7 @@ export default function Outcomes() {
           z-index: 30;
           width: 138px; height: 260px;
           transform: rotate(-139.7deg);
-          background: #F00037;
+          background: #1D4ED8;
           filter: blur(180px);
           pointer-events: none;
         }
@@ -82,7 +82,7 @@ export default function Outcomes() {
           z-index: 30;
           width: 138px; height: 260px;
           transform: rotate(-139.7deg);
-          background: #F00037;
+          background: #1D4ED8;
           filter: blur(180px);
           pointer-events: none;
         }
@@ -127,10 +127,9 @@ export default function Outcomes() {
           }
         }
         .free-tag-text {
-          background: linear-gradient(135deg, #e8192c 0%, #ff3d5a 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          background: #D4AF37;
+          -webkit-text-fill-color: #0F172A;
+          background-clip: unset;
           font-weight: 900;
           font-size: 16px;
           letter-spacing: 2px;
@@ -167,7 +166,7 @@ export default function Outcomes() {
         }
         .outcomes-heading-italic {
           font-style: italic;
-          color: #C9903D;
+          color: #D4AF37;
         }
         .outcomes-subtitle {
           margin-top: 8px;
@@ -203,7 +202,7 @@ export default function Outcomes() {
           gap: 4px;
           font-weight: 600;
           line-height: 1.5;
-          color: #DCAC66;
+          color: #D4AF37;
         }
         .outcomes-stat-label {
           font-weight: 400;
@@ -222,9 +221,9 @@ export default function Outcomes() {
           justify-content: center;
           gap: 8px;
           border-radius: 6px;
-          border: 1px solid #e8192c;
-          background: #e8192c;
-          color: #fff;
+          border: 1px solid #D4AF37;
+          background: #D4AF37;
+          color: #0F172A;
           padding: 0 20px;
           height: 48px;
           font-size: 14px;
@@ -236,7 +235,7 @@ export default function Outcomes() {
           white-space: nowrap;
         }
         .outcomes-cta-btn:hover {
-          background: #c2122a;
+          background: #B08D2C;
           transform: translateY(-1px);
         }
 
@@ -279,7 +278,7 @@ export default function Outcomes() {
           left: 0; top: 0;
           z-index: 10;
           height: 100%; width: 50%;
-          background: linear-gradient(90deg, #1F1F1F 0%, rgba(0,0,0,0) 20%);
+          background: linear-gradient(90deg, #0F172A 0%, rgba(0,0,0,0) 20%);
           pointer-events: none;
         }
         .carousel-fade-right {
@@ -287,7 +286,7 @@ export default function Outcomes() {
           right: 0; top: 0;
           z-index: 10;
           height: 100%; width: 50%;
-          background: linear-gradient(270deg, #1F1F1F 0%, rgba(0,0,0,0) 20%);
+          background: linear-gradient(270deg, #0F172A 0%, rgba(0,0,0,0) 20%);
           pointer-events: none;
         }
 
@@ -337,7 +336,7 @@ export default function Outcomes() {
           font-size: 14px;
           font-weight: 600;
           font-style: italic;
-          color: #CCCCCC;
+          color: #D4AF37;
           transition: opacity 1.4s;
         }
         @media (min-width: 768px) {
@@ -451,11 +450,19 @@ export default function Outcomes() {
    SVG icon per carousel slide
    ═══════════════════════════════════════ */
 function CarouselIcon({ type }: { type: string }) {
-  const fill = "#BDA077";
-  const fillLight = "#CBA56E";
+  const fill = "#D4AF37";
+  const fillLight = "#E5C158";
   const size = "100%";
 
   switch (type) {
+    case "analytics":
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={fill} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10" />
+          <line x1="12" y1="20" x2="12" y2="4" />
+          <line x1="6" y1="20" x2="6" y2="14" />
+        </svg>
+      );
     case "medical":
       return (
         <svg

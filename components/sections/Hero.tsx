@@ -5,10 +5,10 @@ import React, { useState, useEffect } from "react";
 // import Image from "next/image";
 
 const ROLES = [
-  "AI Engineering",
   "Data Science",
-  "ML Engineering",
-  "Software Engineering",
+  "Generative AI",
+  "Machine Learning",
+  "Data Analytics",
 ];
 
 const HERO_IMAGES = [
@@ -28,7 +28,7 @@ export default function HeroSection() {
     const interval = setInterval(() => {
       setActiveRoleIndex((prev) => (prev + 1) % ROLES.length);
       setActiveImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 3000); // changes every 3 seconds
+    }, 2500); // changes every 2.5 seconds for a more dynamic feel
 
     return () => clearInterval(interval);
   }, []);
@@ -37,15 +37,7 @@ export default function HeroSection() {
     <div className="relative flex w-full items-center justify-center overflow-hidden bg-black px-4 sm:px-8 md:px-12 lg:px-[100px]">
       <div className="flex h-full w-full max-w-7xl flex-col items-end justify-between lg:flex-row">
 
-        {/* Background Pattern */}
-        <div className="absolute top-0 left-0 z-[20] h-[80px] w-full max-w-full overflow-hidden sm:h-[120px]">
-          <img
-            alt="bg-vector"
-            src="/assets/pattern.png" // Update with your actual local path
-            className="object-cover object-top w-full h-full"
-            style={{ color: "transparent" }}
-          />
-        </div>
+
 
         {/* --- LEFT CONTENT --- */}
         <div className="relative z-10 flex flex-1">
@@ -58,8 +50,8 @@ export default function HeroSection() {
                   <path d="M8.60061 0.081745C4.50933 -0.524832 0.688052 2.31142 0.0817683 6.40072C-0.524955 10.493 2.30946 14.313 6.40074 14.9196C10.492 15.5261 14.3129 12.6929 14.9196 8.60058C15.526 4.51029 12.6919 0.688322 8.60061 0.081745ZM8.45395 1.07093C8.9436 1.14353 9.40961 1.27327 9.8522 1.44504C9.98153 1.75233 10.0951 2.10479 10.1574 2.53661L6.3985 1.97931C6.64127 1.5624 6.86959 1.25658 7.09589 1.01213C7.54052 0.986053 7.99482 1.00387 8.4538 1.07192L8.45395 1.07093ZM10.9647 2.00121C11.3343 2.23496 11.6793 2.50559 11.9943 2.80895L11.2455 2.69793C11.1367 2.6818 11.0467 2.36821 10.9647 2.00121ZM5.71021 1.25554C5.54886 1.57331 5.40932 1.83265 5.3104 1.81798L4.56059 1.70682C4.92821 1.52009 5.31284 1.36893 5.70922 1.25539L5.71021 1.25554ZM3.31693 2.53336L4.86599 2.76303C4.52249 3.72303 4.27691 4.69755 4.27691 4.69755L1.82768 4.33443C2.21071 3.64869 2.71535 3.03839 3.31693 2.53336ZM5.85518 2.90968L10.3065 3.56964C10.3577 4.58816 10.31 5.59202 10.4089 5.60668L5.2661 4.84421C5.2661 4.84421 5.60961 3.88421 5.85518 2.90968ZM11.3966 3.73126L12.9457 3.96093C13.3752 4.61875 13.6814 5.34927 13.8493 6.11676L11.3991 5.75349C11.3001 5.73882 11.3489 4.73511 11.3966 3.73126ZM1.38922 5.28035L4.03134 5.67207L3.73802 7.65045L1.00687 7.24552C1.03306 6.57477 1.162 5.912 1.38922 5.28035ZM5.02052 5.81873L10.3602 6.61039L10.0668 8.58876L4.7282 7.79725L5.02052 5.81873ZM11.3493 6.75705L13.9925 7.14892C14.0266 7.81932 13.9577 8.49099 13.7882 9.14049L11.056 8.73542L11.3493 6.75705ZM1.04915 8.26272L3.69028 8.6543C3.64254 9.65815 3.5948 10.662 3.69372 10.6767L1.67083 10.3768C1.3437 9.7129 1.13407 8.99791 1.04915 8.26272ZM4.58055 8.78629L9.82324 9.56358C9.67658 10.5528 9.33209 11.5126 9.23317 11.498L4.68291 10.8233C4.48507 10.794 4.53281 9.79014 4.58055 8.78629ZM10.8124 9.71024L13.4536 10.1018C13.159 10.7807 12.7499 11.404 12.2443 11.9444L10.2224 11.6446C10.3213 11.6593 10.6648 10.6993 10.8114 9.71009L10.8124 9.71024ZM2.37389 11.4919L3.84382 11.7099C3.87837 12.3974 4.00037 12.7541 4.12208 13.0582C3.44856 12.6469 2.85677 12.1162 2.37389 11.4919ZM4.83301 11.8565L8.69084 12.4285C8.29079 13.1152 7.91312 13.6375 7.52161 13.9939C7.19574 13.997 6.8701 13.9758 6.5474 13.9304C6.19327 13.8779 5.85332 13.7911 5.52309 13.6865C5.23509 13.2698 5.02171 12.6498 4.83301 11.8565ZM9.68002 12.5751L11.2489 12.8077C10.5717 13.2876 9.80876 13.633 9.00137 13.8251C9.22697 13.5512 9.43012 13.272 9.68002 12.5751Z" fill="url(#paint0_linear_6996_23314)"></path>
                   <defs>
                     <linearGradient id="paint0_linear_6996_23314" x1="0.0816217" y1="6.4017" x2="12.9411" y2="8.30826" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#FFCDD8"></stop>
-                      <stop offset="1" stopColor="#C25D74"></stop>
+                      <stop stopColor="#DBEAFE"></stop>
+                      <stop offset="1" stopColor="#1E40AF"></stop>
                     </linearGradient>
                   </defs>
                 </svg>
@@ -84,19 +76,19 @@ export default function HeroSection() {
                   <div
                     className="relative h-full overflow-hidden"
                     style={{
-                      color: "rgb(240, 0, 55)",
+                      color: "#D4AF37",
                       fontFamily: "Gellix, sans-serif",
                       fontSize: "clamp(28px, 5vw, 47px)",
-                      fontWeight: 400,
+                      fontWeight: 700,
                       lineHeight: "120%",
                       letterSpacing: "-0.96px"
                     }}
                   >
                     <div
-                      className="flex flex-col transition-transform duration-500 ease-in-out"
+                      className="flex flex-col transition-transform duration-700 ease-in-out"
                       style={{
                         willChange: "transform",
-                        transform: `translateY(-${activeRoleIndex * 100}%) translateZ(0px)`
+                        transform: `translateY(-${(activeRoleIndex % ROLES.length) * (100 / ROLES.length)}%) translateZ(0px)`
                       }}
                     >
                       {ROLES.map((role, idx) => (
@@ -124,14 +116,14 @@ export default function HeroSection() {
                         Talk to Career Expert
                       </p>
                       <div className="flex h-9 w-9 mt-2 items-center justify-center rounded-full bg-white">
-                        <svg className="h-5 w-5 text-[#FF3D7F]" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
-                          <path fillRule="evenodd" clipRule="evenodd" d="M14.9822 10.8433C15.0154 10.6705 14.9547 10.4902 14.8187 10.3722C14.8187 10.3722 13.2594 9.02075 12.1517 8.06075C11.3432 7.36025 10.1307 7.4035 9.37419 8.16L8.86944 8.6645C7.50119 8.081 6.41044 6.99025 5.82669 5.622C5.96444 5.484 6.14945 5.29875 6.3432 5.105C7.0932 4.355 7.14319 3.1555 6.45794 2.34575C5.65794 1.40025 4.62294 0.177 4.62294 0.177C4.52794 0.06475 4.38819 0 4.24119 0H3.54045C1.8197 0 0.338443 1.2145 0.000942962 2.9015C0.000942962 2.902 -0.0128058 3.05875 0.0646942 3.3215C1.63769 8.67025 5.82094 12.8535 11.1697 14.4265L11.3474 14.479C11.4269 14.5022 11.5109 14.506 11.5922 14.4897C11.5999 14.4882 11.6239 14.4832 11.6612 14.476C13.3279 14.1425 14.6219 12.8255 14.9262 11.1532C14.9574 10.9802 14.9824 10.843 14.9824 10.843L14.9822 10.8433ZM8.8342 9.7245L8.84469 9.728L8.84794 9.729C8.93919 9.75775 8.99119 9.75 8.99119 9.75C9.12369 9.75 9.25094 9.69725 9.34469 9.6035L10.0812 8.867C10.4669 8.4815 11.0847 8.4595 11.4969 8.8165L13.9482 10.941L13.9422 10.9745C13.7144 12.227 12.7544 13.217 11.5129 13.4853L11.4517 13.4673C6.42919 11.99 2.50119 8.062 1.02394 3.0395L1.0072 2.9825C1.2937 1.823 2.33595 1 3.54045 1H4.0092L5.6947 2.99175C6.0437 3.40425 6.01845 4.01575 5.6362 4.398C5.24445 4.7895 4.88769 5.14675 4.88769 5.14675C4.75019 5.284 4.70494 5.4885 4.77144 5.671C5.45569 7.553 6.93819 9.0355 8.82019 9.71975L8.8342 9.7245Z" fill="#F00037"></path>
+                        <svg className="h-5 w-5 text-[#3B82F6]" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                          <path fillRule="evenodd" clipRule="evenodd" d="M14.9822 10.8433C15.0154 10.6705 14.9547 10.4902 14.8187 10.3722C14.8187 10.3722 13.2594 9.02075 12.1517 8.06075C11.3432 7.36025 10.1307 7.4035 9.37419 8.16L8.86944 8.6645C7.50119 8.081 6.41044 6.99025 5.82669 5.622C5.96444 5.484 6.14945 5.29875 6.3432 5.105C7.0932 4.355 7.14319 3.1555 6.45794 2.34575C5.65794 1.40025 4.62294 0.177 4.62294 0.177C4.52794 0.06475 4.38819 0 4.24119 0H3.54045C1.8197 0 0.338443 1.2145 0.000942962 2.9015C0.000942962 2.902 -0.0128058 3.05875 0.0646942 3.3215C1.63769 8.67025 5.82094 12.8535 11.1697 14.4265L11.3474 14.479C11.4269 14.5022 11.5109 14.506 11.5922 14.4897C11.5999 14.4882 11.6239 14.4832 11.6612 14.476C13.3279 14.1425 14.6219 12.8255 14.9262 11.1532C14.9574 10.9802 14.9824 10.843 14.9824 10.843L14.9822 10.8433ZM8.8342 9.7245L8.84469 9.728L8.84794 9.729C8.93919 9.75775 8.99119 9.75 8.99119 9.75C9.12369 9.75 9.25094 9.69725 9.34469 9.6035L10.0812 8.867C10.4669 8.4815 11.0847 8.4595 11.4969 8.8165L13.9482 10.941L13.9422 10.9745C13.7144 12.227 12.7544 13.217 11.5129 13.4853L11.4517 13.4673C6.42919 11.99 2.50119 8.062 1.02394 3.0395L1.0072 2.9825C1.2937 1.823 2.33595 1 3.54045 1H4.0092L5.6947 2.99175C6.0437 3.40425 6.01845 4.01575 5.6362 4.398C5.24445 4.7895 4.88769 5.14675 4.88769 5.14675C4.75019 5.284 4.70494 5.4885 4.77144 5.671C5.45569 7.553 6.93819 9.0355 8.82019 9.71975L8.8342 9.7245Z" fill="#2563EB"></path>
                         </svg>
                       </div>
                       <div className="absolute bottom-0 right-0 z-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="158" height="99" viewBox="0 0 158 99" fill="none">
                           <g filter="url(#filter0_f_6996_23342)">
-                            <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#F00037"></circle>
+                            <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#2563EB"></circle>
                           </g>
                           <defs>
                             <filter id="filter0_f_6996_23342" x="-40.0311" y="-33.1321" width="341.347" height="341.347" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
@@ -150,14 +142,14 @@ export default function HeroSection() {
                         Discover All Courses
                       </p>
                       <div className="flex h-9 w-9 mt-2 items-center justify-center rounded-full bg-white">
-                        <svg className="h-5 w-5 text-[#FF3D7F]" xmlns="http://www.w3.org/2000/svg" width="13" height="7" viewBox="0 0 13 7" fill="none">
-                          <path d="M6.50063 6.44812C5.97563 6.44812 5.45062 6.24563 5.05312 5.84813L0.163125 0.958125C-0.054375 0.740625 -0.054375 0.380625 0.163125 0.163125C0.380625 -0.054375 0.740625 -0.054375 0.958125 0.163125L5.84813 5.05312C6.20813 5.41312 6.79313 5.41312 7.15313 5.05312L12.0431 0.163125C12.2606 -0.054375 12.6206 -0.054375 12.8381 0.163125C13.0556 0.380625 13.0556 0.740625 12.8381 0.958125L7.94813 5.84813C7.55063 6.24563 7.02563 6.44812 6.50063 6.44812Z" fill="#F00037"></path>
+                        <svg className="h-5 w-5 text-[#3B82F6]" xmlns="http://www.w3.org/2000/svg" width="13" height="7" viewBox="0 0 13 7" fill="none">
+                          <path d="M6.50063 6.44812C5.97563 6.44812 5.45062 6.24563 5.05312 5.84813L0.163125 0.958125C-0.054375 0.740625 -0.054375 0.380625 0.163125 0.163125C0.380625 -0.054375 0.740625 -0.054375 0.958125 0.163125L5.84813 5.05312C6.20813 5.41312 6.79313 5.41312 7.15313 5.05312L12.0431 0.163125C12.2606 -0.054375 12.6206 -0.054375 12.8381 0.163125C13.0556 0.380625 13.0556 0.740625 12.8381 0.958125L7.94813 5.84813C7.55063 6.24563 7.02563 6.44812 6.50063 6.44812Z" fill="#2563EB"></path>
                         </svg>
                       </div>
                       <div className="absolute bottom-0 right-0 z-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="158" height="99" viewBox="0 0 158 99" fill="none">
                           <g filter="url(#filter0_f_6996_23342)">
-                            <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#F00037"></circle>
+                            <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#2563EB"></circle>
                           </g>
                           <defs>
                             <filter id="filter0_f_6996_23342" x="-40.0311" y="-33.1321" width="341.347" height="341.347" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
@@ -208,7 +200,7 @@ export default function HeroSection() {
                       <div className="absolute bottom-0 right-0 z-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="158" height="99" viewBox="0 0 158 99" fill="none">
                           <g filter="url(#filter0_f_6996_23342)">
-                            <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#F00037"></circle>
+                            <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#2563EB"></circle>
                           </g>
                           <defs>
                             <filter id="filter0_f_6996_23342" x="-40.0311" y="-33.1321" width="341.347" height="341.347" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
@@ -241,7 +233,7 @@ export default function HeroSection() {
                       <div className="absolute bottom-0 right-0 z-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="158" height="99" viewBox="0 0 158 99" fill="none">
                           <g filter="url(#filter0_f_6996_23342)">
-                            <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#F00037"></circle>
+                            <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#2563EB"></circle>
                           </g>
                           <defs>
                             <filter id="filter0_f_6996_23342" x="-40.0311" y="-33.1321" width="341.347" height="341.347" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
@@ -274,7 +266,7 @@ export default function HeroSection() {
                       <div className="absolute bottom-0 right-0 z-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="158" height="99" viewBox="0 0 158 99" fill="none">
                           <g filter="url(#filter0_f_6996_23342)">
-                            <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#F00037"></circle>
+                            <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#2563EB"></circle>
                           </g>
                           <defs>
                             <filter id="filter0_f_6996_23342" x="-40.0311" y="-33.1321" width="341.347" height="341.347" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
@@ -323,17 +315,17 @@ export default function HeroSection() {
                   ))}
                 </div>
 
-                {/* Blurry Red Glow behind globe */}
-                <div className="absolute left-1/2 top-1/2 z-0 h-[55vw] w-[80vw] max-h-[243px] max-w-[443px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F00037] blur-[150px] md:h-[443px]"></div>
+                {/* Blurry Blue Glow behind globe */}
+                <div className="absolute left-1/2 top-1/2 z-0 h-[55vw] w-[80vw] max-h-[243px] max-w-[443px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2563EB] blur-[150px] md:h-[443px]"></div>
 
                 {/* Dotted Globe background */}
                 <div className="absolute flex items-center justify-center" style={{ width: '75%', height: '75%' }}>
                   <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" style={{ opacity: 0.7 }}>
                     <defs>
                       <radialGradient id="globeFade" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stopColor="#FF0037" stopOpacity="0.9" />
-                        <stop offset="70%" stopColor="#FF0037" stopOpacity="0.5" />
-                        <stop offset="100%" stopColor="#FF0037" stopOpacity="0" />
+                        <stop offset="0%" stopColor="#2563EB" stopOpacity="0.9" />
+                        <stop offset="70%" stopColor="#2563EB" stopOpacity="0.5" />
+                        <stop offset="100%" stopColor="#2563EB" stopOpacity="0" />
                       </radialGradient>
                     </defs>
                     {/* Procedural dotted globe */}
@@ -372,7 +364,7 @@ export default function HeroSection() {
                               cx={px}
                               cy={py}
                               r={Math.max(dotR, 0.8)}
-                              fill="#FF4466"
+                              fill="#3B82F6"
                               opacity={Math.max(opacity, 0.08)}
                             />
                           );
@@ -402,7 +394,7 @@ export default function HeroSection() {
                               cx={px}
                               cy={py}
                               r={Math.max(dotR, 0.5)}
-                              fill="#FF6680"
+                              fill="#60A5FA"
                               opacity={Math.max(opacity, 0.05)}
                             />
                           );
@@ -450,10 +442,10 @@ export default function HeroSection() {
               <path opacity="0.8" d="M-418.193 2.1847C-624.474 130.299 -386.266 224.988 -304.413 336.185C-284.975 362.591 -191.4 531.93 -295.811 494.764C-356.803 473.054 -108.242 270.955 -81.072 527.076L-85.0915 499.868C-90.265 554.71 -86.5403 706.731 31.5178 655.129C159.395 599.235 273.001 468.21 295.401 521.646C317.802 575.081 328.464 714.104 450.501 705.71C545.001 699.21 537.934 767.159 556.225 748.39C574.516 729.622 632.118 731.814 700.435 767.203C746.249 790.937 717.206 685.233 756.811 697.041" stroke="url(#paint0_linear_6996_23321)" strokeWidth={4.99182}></path>
               <defs>
                 <linearGradient id="paint0_linear_6996_23321" x1="828.05" y1="722.352" x2="-159.859" y2="986.671" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#F00037"></stop>
-                  <stop offset="0.43542" stopColor="#F00037" stopOpacity="0.2"></stop>
-                  <stop offset="0.709382" stopColor="#F00037" stopOpacity="0.5"></stop>
-                  <stop offset="1" stopColor="#F00037" stopOpacity="0.7"></stop>
+                  <stop stopColor="#2563EB"></stop>
+                  <stop offset="0.43542" stopColor="#2563EB" stopOpacity="0.2"></stop>
+                  <stop offset="0.709382" stopColor="#2563EB" stopOpacity="0.5"></stop>
+                  <stop offset="1" stopColor="#2563EB" stopOpacity="0.7"></stop>
                 </linearGradient>
               </defs>
             </svg>

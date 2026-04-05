@@ -30,9 +30,9 @@ const companiesRow2 = [
 export default function LogoStrip() {
   return (
     <section style={{
-      background: "linear-gradient(135deg, #0F172A 0%, #1E40AF 100%)", // Sleek dark blue
+      background: "linear-gradient(90deg, #FFFFFF 0%, #F0F7FF 100%)",
       padding: "80px 0",
-      color: "#FFFFFF",
+      color: "#0F172A",
       fontFamily: "var(--font-inter), sans-serif",
       overflow: "hidden"
     }}>
@@ -92,10 +92,10 @@ export default function LogoStrip() {
         {/* Header Section */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "60px", flexWrap: "wrap", gap: "24px" }}>
           <div style={{ maxWidth: "700px" }}>
-            <h2 style={{ fontSize: "2.4rem", fontWeight: 800, marginBottom: "16px", color: "white", letterSpacing: "-0.02em" }}>
+            <h2 style={{ fontSize: "2.4rem", fontWeight: 800, marginBottom: "16px", color: "#0F172A", letterSpacing: "-0.02em" }}>
               Professional Courses and Placements in the UK
             </h2>
-            <p style={{ fontSize: "1.05rem", color: "#94A3B8", lineHeight: 1.6 }}>
+            <p style={{ fontSize: "1.05rem", color: "#475569", lineHeight: 1.6 }}>
               Top-tier training programs designed for individuals looking to upskill, pursue professional courses, and secure prominent placements in the UK.
             </p>
           </div>
@@ -162,11 +162,11 @@ export default function LogoStrip() {
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
         {/* Divider with Text */}
         <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "40px" }}>
-          <div style={{ flex: 1, height: "1px", background: "linear-gradient(to right, transparent, rgba(255,255,255,0.2))" }} />
-          <div style={{ background: "transparent", color: "#60A5FA", padding: "6px 20px", borderRadius: "99px", fontSize: "0.9rem", fontWeight: 700, border: "1px solid rgba(96, 165, 250, 0.3)" }}>
+          <div style={{ flex: 1, height: "1px", background: "linear-gradient(to right, transparent, rgba(30,64,175,0.1))" }} />
+          <div style={{ background: "#EFF6FF", color: "#1D4ED8", padding: "6px 20px", borderRadius: "99px", fontSize: "0.9rem", fontWeight: 700, border: "1px solid rgba(29, 78, 216, 0.2)" }}>
             Curriculum Designed to Propel Your Career
           </div>
-          <div style={{ flex: 1, height: "1px", background: "linear-gradient(to left, transparent, rgba(255,255,255,0.2))" }} />
+          <div style={{ flex: 1, height: "1px", background: "linear-gradient(to left, transparent, rgba(30,64,175,0.1))" }} />
         </div>
 
         {/* 4 Feature Cards */}

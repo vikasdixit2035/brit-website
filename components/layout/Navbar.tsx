@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 
 const BRAND_RED = "#FF0033"; // AlmaBetter red
 const BRAND_CYAN = "#00E5FF"; // Free badge color
+const BRAND_BLUE = "#1D4ED8";
+const BRAND_GOLD = "#D4AF37";
 const NAV_BG = "#000000";
 const NAV_LINK = "#ffffff";
 const NAV_LINK_HOVER = "#d1d5db";
@@ -144,7 +146,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
           text-transform: uppercase;
         }
         .drop-header-link {
-          color: ${BRAND_RED};
+          color: ${BRAND_BLUE};
           font-size: 0.85rem;
           font-weight: 700;
           text-decoration: none;
@@ -228,8 +230,8 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
           font-weight: 500;
         }
         .drop-footer-cta {
-          background: ${BRAND_RED};
-          color: #fff;
+          background: ${BRAND_GOLD};
+          color: #000;
           font-size: 0.85rem;
           font-weight: 700;
           border: none;
@@ -239,31 +241,32 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
           transition: background .2s, transform .15s;
           text-decoration: none;
         }
-        .drop-footer-cta:hover { background: #d6002b; transform: translateY(-1px); }
+        .drop-footer-cta:hover { background: #b08d2c; transform: translateY(-1px); }
 
         /* ── Courses trigger ─── */
         .nav-courses-trigger {
           display: flex;
           align-items: center;
           gap: 6px;
-          color: ${BRAND_RED};
-          font-weight: 700;
+          color: ${NAV_LINK};
+          font-weight: 500;
           font-size: 0.95rem;
-          background: #ffffff;
+          background: transparent;
           border: none;
-          border-radius: 6px;
+          border-radius: 0;
           cursor: pointer;
-          padding: 10px 18px;
+          padding: 0;
           font-family: inherit;
-          transition: background .2s;
+          transition: color .2s;
           white-space: nowrap;
         }
         .nav-courses-trigger:hover,
         .nav-courses-trigger[data-open="true"] {
-          background: #f1f5f9;
+          color: ${NAV_LINK_HOVER};
+          background: transparent;
         }
 
-        .chevron-icon { transition: transform .2s; flex-shrink: 0; stroke: ${BRAND_RED}; }
+        .chevron-icon { transition: transform .2s; flex-shrink: 0; stroke: currentColor; }
         .chevron-icon[data-open="true"] { transform: rotate(180deg); }
 
         /* ── Right nav links ─── */
@@ -298,8 +301,8 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: ${BRAND_RED};
-          color: #fff;
+          background: ${BRAND_GOLD};
+          color: #000;
           border: none;
           border-radius: 6px;
           padding: 10px 24px;
@@ -312,7 +315,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
           font-family: inherit;
         }
         .nav-signin-btn:hover {
-          background: #d6002b;
+          background: #b08d2c;
         }
 
         /* ── Hamburger ────────── */
@@ -423,18 +426,18 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
           width: 100%;
           margin: 16px 20px 8px;
           width: calc(100% - 40px);
-          color: #ffffff;
-          font-weight: 700;
+          color: ${NAV_LINK};
+          font-weight: 500;
           font-size: 0.9rem;
-          background: rgba(255,255,255,0.07);
-          border: 1px solid rgba(255,255,255,0.12);
-          border-radius: 8px;
+          background: transparent;
+          border: none;
+          border-radius: 0;
           cursor: pointer;
-          padding: 12px 16px;
+          padding: 14px 20px;
           font-family: inherit;
-          transition: background .2s;
+          transition: color .2s;
         }
-        .drawer-courses-btn:hover { background: rgba(255,255,255,0.12); }
+        .drawer-courses-btn:hover { color: #fff; background: rgba(255,255,255,0.04); }
 
         .drawer-nav-link {
           display: flex;
@@ -455,8 +458,8 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: ${BRAND_RED};
-          color: #fff;
+          background: ${BRAND_GOLD};
+          color: #000;
           border: none;
           border-radius: 8px;
           padding: 13px;
@@ -467,7 +470,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
           transition: background .2s;
           font-family: inherit;
         }
-        .drawer-signin-btn:hover { background: #d6002b; }
+        .drawer-signin-btn:hover { background: #b08d2c; }
 
         /* ── Responsive breakpoints ─ */
         @media (max-width: 1024px) {
@@ -479,6 +482,15 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
         @media (min-width: 1025px) {
           .nav-hamburger { display: none !important; }
           .nav-mobile-right { display: none !important; }
+        }
+        @media (max-width: 768px) {
+          .alma-nav .nav-inner-container { padding: 0 16px !important; }
+          .alma-nav .logo-img { height: 32px !important; }
+          .alma-nav .logo-text span { font-size: 1.2rem !important; }
+        }
+        @media (max-width: 480px) {
+          .nav-mobile-right { display: none !important; } /* Only rely on drawer login */
+          .alma-nav .logo-text span { font-size: 1.1rem !important; }
         }
       `}</style>
 
@@ -498,6 +510,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
         }}
       >
         <div
+          className="nav-inner-container"
           style={{
             display: "flex",
             alignItems: "center",
@@ -505,14 +518,14 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
             width: "100%",
             maxWidth: "1400px",
             margin: "0 auto",
-            padding: "0 40px",
+            padding: "0 40px", /* Overridden by media query on mobile */
             boxSizing: "border-box",
             height: "100%",
             position: "relative",
           }}
         >
           {/* ── LEFT: Hamburger (mobile) + Logo + Courses ──────────────── */}
-          <div style={{ display: "flex", alignItems: "center", gap: "24px", flexShrink: 0 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "16px", flexShrink: 0 }}>
             {/* Hamburger — mobile only */}
             <button
               className="nav-hamburger"
@@ -526,9 +539,10 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
             </button>
 
             {/* Logo */}
-            <a href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
-              <span style={{ fontSize: "1.7rem", fontWeight: 700, letterSpacing: "-0.03em", color: "#ffffff" }}>
-                Alma<span style={{ borderBottom: `3px solid ${BRAND_RED}`, paddingBottom: "2px" }}>Better</span>
+            <a href="/" className="logo-text" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0, gap: "12px" }}>
+              <img src="/britinstitute.png" alt="Brit Institute" className="logo-img" style={{ height: "45px", width: "auto" }} />
+              <span style={{ fontSize: "1.5rem", fontWeight: 800, color: BRAND_BLUE, letterSpacing: "-0.02em" }}>
+                Brit <span style={{ color: BRAND_GOLD }}>Institute</span>
               </span>
             </a>
 
@@ -652,8 +666,8 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
                 display: "flex",
                 alignItems: "center",
                 gap: "5px",
-                background: BRAND_RED,
-                color: "#fff",
+                background: BRAND_GOLD,
+                color: "#000",
                 fontWeight: 700,
                 fontSize: "0.9rem",
                 padding: "8px 16px",
@@ -676,9 +690,10 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
           <div className="drawer-panel">
             {/* Header */}
             <div className="drawer-header">
-              <a href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }} onClick={() => setMenuOpen(false)}>
-                <span style={{ fontSize: "1.4rem", fontWeight: 700, letterSpacing: "-0.03em", color: "#ffffff" }}>
-                  Alma<span style={{ borderBottom: `3px solid ${BRAND_RED}`, paddingBottom: "2px" }}>Better</span>
+              <a href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", gap: "10px" }} onClick={() => setMenuOpen(false)}>
+                <img src="/britinstitute.png" alt="Brit Institute" style={{ height: "36px", width: "auto" }} />
+                <span style={{ fontSize: "1.2rem", fontWeight: 800, color: BRAND_BLUE }}>
+                  Brit <span style={{ color: BRAND_GOLD }}>Institute</span>
                 </span>
               </a>
               <button className="drawer-close-btn" onClick={() => setMenuOpen(false)} aria-label="Close menu">
