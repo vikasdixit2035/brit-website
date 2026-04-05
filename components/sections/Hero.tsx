@@ -219,7 +219,7 @@ export default function HeroSection() {
                         <div className="flex gap-2">
                           <div className="flex items-center justify-center py-[16px]">
                             {/* Replaced hashed URL with cleaner one assuming you have this in /public/assets/ */}
-                            <img alt="Shiksha Review" src="/assets/shiksha.png" className="w-[16px] h-[28px] object-contain" />
+                            {/* <img alt="Shiksha Review" src="/assets/shiksha.png" className="w-[16px] h-[28px] object-contain" /> */}
                           </div>
                           <div className="flex items-baseline leading-[200%]">
                             <p className="font-gellix text-[24px] md:text-[28px] font-[400] leading-[200%] text-white">4.7</p>
@@ -252,7 +252,7 @@ export default function HeroSection() {
                         <div className="flex gap-2">
                           <div className="flex h-full items-center justify-center py-[20px]">
                             <div className="flex items-center justify-center">
-                              <img alt="ellipse" src="/assets/Mobile.png" className="w-[106px] h-[34px] object-contain" />
+                              {/* <img alt="ellipse" src="/assets/Mobile.png" className="w-[106px] h-[34px] object-contain" /> */}
                             </div>
                           </div>
                           <div className="flex items-baseline leading-[200%]">
