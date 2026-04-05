@@ -16,7 +16,7 @@ interface Course {
 
 async function getCourse(slug: string): Promise<Course | null> {
   try {
-    const res = await fetch(`http://localhost:4000/api/courses/${slug}`, {
+    const res = await fetch(`https://api.britinstitute.uk/api/courses/${slug}`, {
       cache: "no-store",
       next: { tags: ['courses'] }
     });

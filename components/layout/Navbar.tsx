@@ -76,7 +76,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
 
   // Fetch courses
   useEffect(() => {
-    fetch("http://localhost:4000/api/courses")
+    fetch("https://api.britinstitute.uk/api/courses")
       .then((r) => r.ok ? r.json() : Promise.reject())
       .then((json) => setCourses((json.data ?? []).slice(0, 6)))
       .catch(() => { });

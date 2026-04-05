@@ -78,7 +78,7 @@ export default function Programs() {
       try {
         setLoading(true);
         setError(null);
-        const res = await fetch("http://localhost:4000/api/courses", {
+        const res = await fetch("https://api.britinstitute.uk/api/courses", {
           signal: controller.signal,
         });
         if (!res.ok) throw new Error(`Server error: ${res.status}`);
@@ -156,9 +156,8 @@ export default function Programs() {
 
           {/* Scrolling track */}
           <div
-            className={`flex flex-nowrap gap-6 pb-12 pt-4 px-6 ${
-              loading || courses.length === 0 ? "" : "animate-marquee"
-            }`}
+            className={`flex flex-nowrap gap-6 pb-12 pt-4 px-6 ${loading || courses.length === 0 ? "" : "animate-marquee"
+              }`}
           >
             {loading ? (
               // Skeleton placeholders
