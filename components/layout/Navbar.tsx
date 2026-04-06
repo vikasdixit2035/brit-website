@@ -42,6 +42,7 @@ const NAV_RIGHT_LINKS = [
   { href: "/about", label: "About" },
   { href: "/reviews", label: "Reviews" },
   { href: "/careers", label: "Careers" },
+  { href: "/resources", label: "Resources" },
   { href: "#more", label: "More" },
 ];
 
@@ -56,6 +57,7 @@ const MOBILE_MENU_LINKS = [
   { href: "/about", label: "About Us" },
   { href: "/reviews", label: "Reviews" },
   { href: "/careers", label: "Careers" },
+  { href: "/resources", label: "Resources" },
   { href: "/contact", label: "Contact Us" },
 ];
 
