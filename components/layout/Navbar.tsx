@@ -37,13 +37,12 @@ interface Course {
 const NAV_RIGHT_LINKS = [
   { href: "#placement", label: "Placements" },
   { href: "#masterclass", label: "Masterclass", badge: "Free" },
-  { href: "#practice", label: "Practice" },
-  { href: "#hire", label: "Hire From Us" },
   { href: "/about", label: "About" },
   { href: "/reviews", label: "Reviews" },
   { href: "/careers", label: "Careers" },
   { href: "/resources", label: "Resources" },
-  { href: "#more", label: "More" },
+  { href: "/webinar", label: "Webinar" },
+  { href: "/blog", label: "Blog" },
 ];
 
 // Mobile menu links
@@ -58,6 +57,8 @@ const MOBILE_MENU_LINKS = [
   { href: "/reviews", label: "Reviews" },
   { href: "/careers", label: "Careers" },
   { href: "/resources", label: "Resources" },
+  { href: "/webinar", label: "Webinar" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact Us" },
 ];
 
