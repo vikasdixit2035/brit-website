@@ -40,6 +40,7 @@ const NAV_RIGHT_LINKS = [
   { href: "#practice", label: "Practice" },
   { href: "#hire", label: "Hire From Us" },
   { href: "/about", label: "About" },
+  { href: "/reviews", label: "Reviews" },
   { href: "#more", label: "More" },
 ];
 
@@ -52,6 +53,7 @@ const MOBILE_MENU_LINKS = [
   { href: "#why", label: "Why BritInstitute" },
   { href: "#stories", label: "Success Stories" },
   { href: "/about", label: "About Us" },
+  { href: "/reviews", label: "Reviews" },
   { href: "/contact", label: "Contact Us" },
 ];
 
