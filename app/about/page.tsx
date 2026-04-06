@@ -1,163 +1,157 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import TopBanner from "@/components/layout/TopBanner";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import {
+  Target,
+  Lightbulb,
+  CheckCircle2,
+  Users,
+  ArrowRight,
+  TrendingUp,
+  BookOpen,
+  Briefcase
+} from "lucide-react";
 
 export default function AboutPage() {
   const [banner, setBanner] = useState(true);
 
   return (
-    <main style={{ backgroundColor: "#FAFAFA", minHeight: "100vh", fontFamily: "var(--font-inter), sans-serif" }}>
+    <main className="bg-[#FAFAFA] min-h-screen font-sans text-gray-900 selection:bg-blue-200">
       <TopBanner visible={banner} onClose={() => setBanner(false)} />
       <Navbar hasBanner={banner} />
 
-      {/* Hero Section */}
-      <section style={{ paddingTop: banner ? "140px" : "100px", paddingBottom: "60px", textAlign: "center", maxWidth: "800px", margin: "0 auto", paddingLeft: "24px", paddingRight: "24px" }}>
-        <h1 style={{ fontSize: "3rem", fontWeight: 800, color: "#111827", lineHeight: 1.2, marginBottom: "24px", letterSpacing: "-0.02em" }}>
-          At <span style={{ color: "#1D4ED8" }}>Brit Institute</span>, career evolution isn't a goal. It's our <span style={{ color: "#1D4ED8" }}>obsession</span>.
+      {/* 1. Hero Section */}
+      <section
+        className="text-center max-w-4xl mx-auto px-6"
+        style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}
+      >
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 font-semibold text-sm mb-6 border border-blue-100 shadow-sm">
+          <Target className="w-4 h-4" /> About Brit Institute
+        </div>
+        <h1 className="text-4xl md:text-5xl lg:text-[54px] font-extrabold text-gray-900 leading-[1.15] mb-6 tracking-tight">
+          A Practical Approach to Careers in <span className="text-blue-700">Data, AI and Emerging Technologies</span>
         </h1>
-        <p style={{ fontSize: "1.1rem", color: "#4B5563", lineHeight: 1.6, maxWidth: "700px", margin: "0 auto" }}>
-          Brit Institute is not your typical educational platform. With professionals having experience worth more than a decade, we have focused on one simple thing: creating delightful learning experiences that help our students explore digital concepts.
+        <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto font-medium">
+          We focus on building real-world skills that help learners transition into high-demand tech roles across the UK and beyond.
         </p>
       </section>
 
-      {/* Overview & Vision Cards */}
-      <section style={{ maxWidth: "1000px", margin: "0 auto 80px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px", padding: "0 24px" }}>
-        <div style={{ background: "#FFFFFF", padding: "40px", borderRadius: "16px", boxShadow: "0 10px 30px rgba(0,0,0,0.04)", border: "1px solid rgba(29,78,216,0.1)" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
-            <div style={{ width: "40px", height: "40px", borderRadius: "8px", background: "#EFF6FF", display: "flex", alignItems: "center", justifyContent: "center", color: "#1D4ED8" }}>
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      {/* 2 & 3. Story (Our Approach) & Vision */}
+      <section className="max-w-[1100px] mx-auto px-6 mb-24">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+
+          {/* Our Approach Card */}
+          <div className="bg-white p-8 md:p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgb(29,78,216,0.08)] transition-shadow">
+            <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center mb-6">
+              <Lightbulb className="w-6 h-6 text-blue-600" />
             </div>
-            <h3 style={{ fontSize: "1.2rem", fontWeight: 700, color: "#111827", margin: 0 }}>Program <span style={{ color: "#1D4ED8" }}>Overview</span></h3>
-          </div>
-          <p style={{ color: "#4B5563", fontSize: "0.95rem", lineHeight: 1.6, margin: 0 }}>
-            Brit Institute courses empower students in new ways. We want to improve our course quality every day. We hope our personalized learning paths could provide a stable and retaining path to our modern students.
-          </p>
-        </div>
-
-        <div style={{ background: "#FFFFFF", padding: "40px", borderRadius: "16px", boxShadow: "0 10px 30px rgba(0,0,0,0.04)", border: "1px solid rgba(29,78,216,0.1)" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
-            <div style={{ width: "40px", height: "40px", borderRadius: "8px", background: "#EFF6FF", display: "flex", alignItems: "center", justifyContent: "center", color: "#D4AF37" }}>
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-            </div>
-            <h3 style={{ fontSize: "1.2rem", fontWeight: 700, color: "#111827", margin: 0 }}>Our <span style={{ color: "#1D4ED8" }}>Vision</span></h3>
-          </div>
-          <p style={{ color: "#4B5563", fontSize: "0.95rem", lineHeight: 1.6, margin: 0 }}>
-            We envision an education ecosystem that allows continuous improvement through community, leads to sustainable opportunities, and makes industry-level education globally accessible for everyone.
-          </p>
-        </div>
-      </section>
-
-      {/* Building the future */}
-      <section style={{ maxWidth: "800px", margin: "0 auto 80px", textAlign: "center", padding: "0 24px" }}>
-        <h2 style={{ fontSize: "2.2rem", fontWeight: 800, color: "#111827", marginBottom: "20px" }}>
-          🚀 We build the future of <span style={{ color: "#1D4ED8" }}>tech careers</span>.
-        </h2>
-        <p style={{ color: "#4B5563", fontSize: "1.05rem", lineHeight: 1.6 }}>
-          Brit Institute is the most human tech educational company under the sun. Our approach to education is Tech & AI is comprehensive because it's rooted in years of industry insights. We don't just teach — we empower. Our students are building innovative solutions and transforming industries. With Brit Institute, we're building the future of tech careers by supporting the next generation of tech learners.
-        </p>
-      </section>
-
-      {/* Core Values */}
-      <section style={{ background: "#F8FAFF", padding: "80px 24px", marginBottom: "80px" }}>
-        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "40px" }}>
-            <h2 style={{ fontSize: "2rem", fontWeight: 800, color: "#111827", marginBottom: "16px" }}>
-              Our <span style={{ color: "#1D4ED8" }}>core values</span> drive everything we do
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              Our <span className="text-blue-700">Approach</span>
             </h2>
-            <p style={{ color: "#4B5563", fontSize: "1rem" }}>
-              These principles explain our approach to education, community, and career transformation. They aren't just words on a page.
+            <h3 className="text-lg font-semibold text-gray-800 mb-4 leading-snug">
+              Most learning platforms focus on content. We focus on outcomes.
+            </h3>
+            <p className="text-gray-600 leading-relaxed mb-4">
+              Brit Institute was built around a simple idea: learning should lead to real career opportunities, not just certificates.
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              Our programmes are designed to combine structured learning with practical application, so learners can build skills that are directly relevant to industry roles.
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
-            {[
-              { title: "Embrace change fearlessly", icon: "📈", color: "#3B82F6", text: "Technology is constantly evolving. We equip our students to adapt, innovate, and stay ahead." },
-              { title: "Cultivate tech confidence", icon: "✨", color: "#D4AF37", text: "We break down complex barriers and build your technical confidence from day one." },
-              { title: "Bring out the best in you", icon: "🌟", color: "#8B5CF6", text: "Every student has unique strengths. Our personalized approach helps you discover your potential." },
-              { title: "Champion lifelong learning", icon: "📖", color: "#10B981", text: "Tech education never stops. We instill a growth mindset that keeps you learning and growing." },
-              { title: "Bridge industry divide", icon: "🤝", color: "#6366F1", text: "We bridge the gap between classroom theory and real-world industry demands." },
-              { title: "Explore theory through practice", icon: "🎯", color: "#F43F5E", text: "We believe in hands-on learning over textbooks. Real projects for real experience." }
-            ].map((v, i) => (
-              <div key={i} style={{ background: "#FFFFFF", padding: "30px", borderRadius: "16px", boxShadow: "0 4px 20px rgba(0,0,0,0.03)" }}>
-                <div style={{ width: "40px", height: "40px", borderRadius: "8px", background: `${v.color}15`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.2rem", marginBottom: "16px" }}>
-                  {v.icon}
-                </div>
-                <h4 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#111827", marginBottom: "10px" }}>{v.title}</h4>
-                <p style={{ color: "#4B5563", fontSize: "0.9rem", lineHeight: 1.5, margin: 0 }}>{v.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Empathy & Innovation */}
-      <section style={{ maxWidth: "1000px", margin: "0 auto 80px", padding: "0 24px" }}>
-        <div style={{ background: "#EFF6FF", borderRadius: "24px", padding: "60px 40px", textAlign: "center" }}>
-          <h2 style={{ fontSize: "2rem", fontWeight: 800, color: "#111827", marginBottom: "16px" }}>
-            Our <span style={{ color: "#10B981" }}>empathy</span> drives us, our <span style={{ color: "#1D4ED8" }}>innovation</span> sets us apart
-          </h2>
-          <p style={{ color: "#4B5563", fontSize: "1rem", maxWidth: "700px", margin: "0 auto 40px" }}>
-            We understand that career transitions aren't just about learning new tools – it's about overcoming fears, building confidence, and finding your place in a rapidly growing tech landscape.
-          </p>
-          
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "24px" }}>
-            {[
-              { title: "Empathetic approach", icon: "🫂", color: "#3B82F6" },
-              { title: "Innovation-driven", icon: "💡", color: "#10B981" },
-              { title: "Learning-focused", icon: "🎓", color: "#8B5CF6" }
-            ].map((v, i) => (
-              <div key={i} style={{ background: "#FFFFFF", padding: "30px 20px", borderRadius: "16px", boxShadow: "0 4px 20px rgba(0,0,0,0.03)" }}>
-                <div style={{ width: "50px", height: "50px", borderRadius: "12px", background: `${v.color}15`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.5rem", margin: "0 auto 16px" }}>
-                  {v.icon}
-                </div>
-                <h4 style={{ fontSize: "1.05rem", fontWeight: 700, color: "#111827", margin: 0 }}>{v.title}</h4>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Meet the Team */}
-      <section style={{ background: "#F9FAFB", padding: "80px 24px", textAlign: "center" }}>
-        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: "2.5rem", fontWeight: 800, color: "#111827", marginBottom: "16px" }}>
-            ✨ Meet the <span style={{ color: "#1D4ED8" }}>team</span>
-          </h2>
-          <p style={{ color: "#4B5563", fontSize: "1.05rem", lineHeight: 1.6, marginBottom: "40px" }}>
-            Brit Institute is a community of dedicated professionals inspiring career transformations in AI and Data Science. We believe learning must be accessible and empathetic, customized to the needs of modern students. Our deeply devoted instructors provide competent, hands-on knowledge to navigate the rapidly growing tech landscape, ensuring each student receives high-quality education.
-          </p>
-
-          <div style={{ background: "#FFFFFF", padding: "30px", borderRadius: "20px", boxShadow: "0 10px 40px rgba(0,0,0,0.05)", display: "inline-block", maxWidth: "300px", width: "100%" }}>
-            <div style={{ width: "120px", height: "120px", borderRadius: "16px", background: "#E5E7EB", margin: "0 auto 20px", overflow: "hidden" }}>
-              <img src="/anjali.jpg" alt="Anjali Maheshwari" style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+          {/* Vision Card */}
+          <div className="bg-white p-8 md:p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgb(29,78,216,0.08)] transition-shadow">
+            <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center mb-6">
+              <TrendingUp className="w-6 h-6 text-indigo-600" />
             </div>
-            <h3 style={{ fontSize: "1.2rem", fontWeight: 700, color: "#111827", margin: "0 0 4px" }}>Anjali Maheshwari</h3>
-            <p style={{ color: "#1D4ED8", fontSize: "0.9rem", fontWeight: 600, margin: "0 0 16px" }}>FOUNDER</p>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", background: "#0A66C2", color: "#FFF", textDecoration: "none", padding: "8px 16px", borderRadius: "99px", fontSize: "0.85rem", fontWeight: 600, gap: "6px" }}>
-              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-              Connect on LinkedIn
-            </a>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              Preparing the <span className="text-indigo-600">Future Workforce</span>
+            </h2>
+            <p className="text-gray-600 leading-relaxed mb-4">
+              The demand for skills in data analytics, data science, and AI continues to grow across industries.
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              Our goal is to make these career paths accessible through clear learning pathways, practical training, and a focus on real-world application.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 4. Credibility / What We Focus On */}
+      <section className="bg-[#EFF6FF] py-20 px-6 mb-24">
+        <div className="max-w-[1100px] mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              What We <span className="text-blue-700">Focus On</span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              We bridge the gap between classroom theory and real-world execution.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {[
+              { icon: BookOpen, text: "Industry-relevant curriculum aligned with UK job roles" },
+              { icon: Briefcase, text: "Hands-on projects and portfolio development" },
+              { icon: Users, text: "Structured learning designed for working professionals" },
+              { icon: Target, text: "Career-focused training approach" }
+            ].map((item, idx) => (
+              <div key={idx} className="bg-white p-6 rounded-xl shadow-sm border border-blue-100 flex flex-col items-center text-center group hover:-translate-y-1 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors text-blue-600">
+                  <item.icon className="w-6 h-6" />
+                </div>
+                <p className="text-gray-800 font-medium leading-relaxed">
+                  {item.text}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Stats Row */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 bg-white rounded-2xl p-8 shadow-sm border border-blue-100 max-w-3xl mx-auto">
+            <div className="text-center">
+              <div className="text-4xl md:text-5xl font-extrabold text-blue-700 mb-2">10,000+</div>
+              <div className="text-sm md:text-base font-semibold text-gray-500 uppercase tracking-wider">Learners Trained</div>
+            </div>
+            <div className="hidden sm:block w-px h-16 bg-gray-200"></div>
+            <div className="text-center">
+              <div className="text-4xl md:text-5xl font-extrabold text-indigo-600 mb-2">85%</div>
+              <div className="text-sm md:text-base font-semibold text-gray-500 uppercase tracking-wider">Career Transitions</div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Our Mission */}
-      <section style={{ maxWidth: "800px", margin: "80px auto", padding: "0 24px", textAlign: "center" }}>
-        <h2 style={{ fontSize: "2rem", fontWeight: 800, color: "#111827", marginBottom: "20px" }}>
-          Our <span style={{ color: "#1D4ED8" }}>Mission</span>
-        </h2>
-        <p style={{ color: "#4B5563", fontSize: "1.05rem", lineHeight: 1.6, marginBottom: "20px" }}>
-          We believe technology should be accessible to everyone, and part of our core into all our endeavors is to break down barriers and help passionate professionals master innovative concepts and un-complicate the future.
-        </p>
-        <p style={{ color: "#4B5563", fontSize: "1.05rem", lineHeight: 1.6, marginBottom: "30px" }}>
-          Through personalized learning paths, expert-led instruction, and hands-on projects in AI and Tech Strategy, we build the confidence and core culture that help careers explode.
-        </p>
-        <h3 style={{ fontSize: "1.3rem", fontWeight: 700, color: "#1D4ED8", fontStyle: "italic" }}>
-          "Supporting tomorrow's tech learners, today."
-        </h3>
+      {/* 5. CTA Section */}
+      <section className="max-w-[900px] mx-auto px-6 mb-24">
+        <div className="bg-gradient-to-br from-gray-900 to-blue-900 rounded-3xl p-10 md:p-14 text-center shadow-2xl relative overflow-hidden">
+          {/* Decorative background elements */}
+          <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div className="absolute -top-24 -left-24 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+            <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+          </div>
+
+          <div className="relative z-10">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-6">
+              Explore Our Programmes
+            </h2>
+            <p className="text-blue-100 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+              Start building skills for high-growth careers in data, AI and technology. Your transition into the tech industry begins here.
+            </p>
+
+            <Link
+              href="/courses"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-[16px] transition-all shadow-lg hover:-translate-y-1 hover:shadow-blue-500/30"
+            >
+              View Courses <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
+        </div>
       </section>
 
       <Footer />
