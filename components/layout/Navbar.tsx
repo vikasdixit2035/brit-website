@@ -39,6 +39,7 @@ const NAV_RIGHT_LINKS = [
   { href: "#masterclass", label: "Masterclass", badge: "Free" },
   { href: "#practice", label: "Practice" },
   { href: "#hire", label: "Hire From Us" },
+  { href: "/about", label: "About" },
   { href: "#more", label: "More" },
 ];
 
@@ -81,10 +82,10 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
 
   // Fetch courses
   useEffect(() => {
-    const API_URL = process.env.NODE_ENV === "development" 
-      ? "http://localhost:4000/api/courses" 
+    const API_URL = process.env.NODE_ENV === "development"
+      ? "http://localhost:4000/api/courses"
       : "https://api.britinstitute.uk/api/courses";
-      
+
     fetch(API_URL)
       .then((r) => r.ok ? r.json() : Promise.reject())
       .then((json) => setCourses((json.data ?? []).slice(0, 6)))
@@ -684,10 +685,17 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
             style={{ display: "flex", alignItems: "center", gap: "36px" }}
           >
             {NAV_RIGHT_LINKS.map(({ href, label, badge }) => (
-              <a key={href} href={href} className="nav-right-link">
-                {label}
-                {badge && <span className="nav-free-badge">{badge}</span>}
-              </a>
+              href.startsWith("/") ? (
+                <Link key={href} href={href} className="nav-right-link">
+                  {label}
+                  {badge && <span className="nav-free-badge">{badge}</span>}
+                </Link>
+              ) : (
+                <a key={href} href={href} className="nav-right-link">
+                  {label}
+                  {badge && <span className="nav-free-badge">{badge}</span>}
+                </a>
+              )
             ))}
 
             {/* Sign In */}
@@ -792,29 +800,55 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
             {/* Nav links */}
             <div style={{ flex: 1, marginTop: "10px" }}>
               {MOBILE_MENU_LINKS.map(({ href, label, badge }) => (
-                <a
-                  key={href}
-                  href={href}
-                  className="drawer-nav-link"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {label}
-                  {badge && (
-                    <span style={{
-                      background: BRAND_CYAN,
-                      color: "#000",
-                      fontSize: "0.6rem",
-                      fontWeight: 800,
-                      padding: "2px 8px",
-                      borderRadius: "4px",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                      marginLeft: "auto",
-                    }}>
-                      {badge}
-                    </span>
-                  )}
-                </a>
+                href.startsWith("/") ? (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="drawer-nav-link"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {label}
+                    {badge && (
+                      <span style={{
+                        background: BRAND_CYAN,
+                        color: "#000",
+                        fontSize: "0.6rem",
+                        fontWeight: 800,
+                        padding: "2px 8px",
+                        borderRadius: "4px",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.06em",
+                        marginLeft: "auto"
+                      }}>
+                        {badge}
+                      </span>
+                    )}
+                  </Link>
+                ) : (
+                  <a
+                    key={href}
+                    href={href}
+                    className="drawer-nav-link"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {label}
+                    {badge && (
+                      <span style={{
+                        background: BRAND_CYAN,
+                        color: "#000",
+                        fontSize: "0.6rem",
+                        fontWeight: 800,
+                        padding: "2px 8px",
+                        borderRadius: "4px",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.06em",
+                        marginLeft: "auto"
+                      }}>
+                        {badge}
+                      </span>
+                    )}
+                  </a>
+                )
               ))}
             </div>
 
