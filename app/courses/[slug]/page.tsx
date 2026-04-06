@@ -16,7 +16,11 @@ interface Course {
 
 async function getCourse(slug: string): Promise<Course | null> {
   try {
-    const res = await fetch(`https://api.britinstitute.uk/api/courses/${slug}`, {
+    const API_URL = process.env.NODE_ENV === "development" 
+      ? `http://localhost:4000/api/courses/${slug}` 
+      : `https://api.britinstitute.uk/api/courses/${slug}`;
+      
+    const res = await fetch(API_URL, {
       cache: "no-store",
       next: { tags: ['courses'] }
     });

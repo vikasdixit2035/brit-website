@@ -19,8 +19,26 @@ export default function ChatbotFloat() {
     }
   }, [messages]);
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const payload = Object.fromEntries(formData.entries());
+    payload.source = "Chatbot";
+
+    try {
+      const API_URL = process.env.NODE_ENV === "development" 
+        ? "http://localhost:4000/api/leads" 
+        : "https://api.britinstitute.uk/api/leads";
+        
+      fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }); // don't await, let it run in background so UI updates immediately
+    } catch(err) {
+      console.error(err);
+    }
+    
     setIsRegistered(true);
   };
 
@@ -129,17 +147,17 @@ export default function ChatbotFloat() {
               <form onSubmit={handleRegister} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                 <div style={{ position: "relative" }}>
                   <label style={{ position: "absolute", top: "-10px", left: "10px", background: "white", padding: "0 4px", fontSize: "0.85rem", color: "#4B5563" }}>Name <span style={{ color: "red" }}>*</span></label>
-                  <input required type="text" style={{ width: "100%", padding: "14px", border: "1px solid #D1D5DB", borderRadius: "8px", outline: "none", boxSizing: "border-box", fontSize: "0.95rem" }} />
+                  <input name="name" required type="text" style={{ width: "100%", padding: "14px", border: "1px solid #D1D5DB", borderRadius: "8px", outline: "none", boxSizing: "border-box", fontSize: "0.95rem" }} />
                 </div>
                 
                 <div style={{ position: "relative" }}>
                   <label style={{ position: "absolute", top: "-10px", left: "10px", background: "white", padding: "0 4px", fontSize: "0.85rem", color: "#4B5563" }}>Email <span style={{ color: "red" }}>*</span></label>
-                  <input required type="email" style={{ width: "100%", padding: "14px", border: "1px solid #D1D5DB", borderRadius: "8px", outline: "none", boxSizing: "border-box", fontSize: "0.95rem" }} />
+                  <input name="email" required type="email" style={{ width: "100%", padding: "14px", border: "1px solid #D1D5DB", borderRadius: "8px", outline: "none", boxSizing: "border-box", fontSize: "0.95rem" }} />
                 </div>
 
                 <div style={{ position: "relative" }}>
                   <label style={{ position: "absolute", top: "-10px", left: "10px", background: "white", padding: "0 4px", fontSize: "0.85rem", color: "#4B5563" }}>Phone number <span style={{ color: "red" }}>*</span></label>
-                  <input required type="tel" style={{ width: "100%", padding: "14px", border: "1px solid #D1D5DB", borderRadius: "8px", outline: "none", boxSizing: "border-box", fontSize: "0.95rem" }} />
+                  <input name="phone" required type="tel" style={{ width: "100%", padding: "14px", border: "1px solid #D1D5DB", borderRadius: "8px", outline: "none", boxSizing: "border-box", fontSize: "0.95rem" }} />
                 </div>
 
                 <button 

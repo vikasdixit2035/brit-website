@@ -10,13 +10,34 @@ export default function ContactPage() {
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormStatus("submitting");
-    // Simulate form submission
-    setTimeout(() => {
-      setFormStatus("success");
-    }, 1500);
+    
+    const formData = new FormData(e.currentTarget);
+    const payload = Object.fromEntries(formData.entries());
+    payload.source = "Contact Page";
+
+    try {
+      const API_URL = process.env.NODE_ENV === "development" 
+        ? "http://localhost:4000/api/leads" 
+        : "https://api.britinstitute.uk/api/leads";
+        
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      
+      if (response.ok) {
+        setFormStatus("success");
+      } else {
+        setFormStatus("error");
+      }
+    } catch (err) {
+      console.error(err);
+      setFormStatus("error");
+    }
   };
 
   const faqs = [
@@ -121,23 +142,29 @@ export default function ContactPage() {
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
                   <div>
                     <label style={{ display: "block", fontSize: "0.9rem", fontWeight: 600, color: "#374151", marginBottom: "8px" }}>Full Name *</label>
-                    <input required type="text" placeholder="Enter your full name" style={{ width: "100%", padding: "12px 16px", borderRadius: "10px", border: "1px solid #D1D5DB", outline: "none", fontSize: "0.95rem", boxSizing: "border-box" }} />
+                    <input name="fullName" required type="text" placeholder="Enter your full name" style={{ width: "100%", padding: "12px 16px", borderRadius: "10px", border: "1px solid #D1D5DB", outline: "none", fontSize: "0.95rem", boxSizing: "border-box" }} />
                   </div>
                   <div>
                     <label style={{ display: "block", fontSize: "0.9rem", fontWeight: 600, color: "#374151", marginBottom: "8px" }}>Email Address *</label>
-                    <input required type="email" placeholder="your@email.com" style={{ width: "100%", padding: "12px 16px", borderRadius: "10px", border: "1px solid #D1D5DB", outline: "none", fontSize: "0.95rem", boxSizing: "border-box" }} />
+                    <input name="email" required type="email" placeholder="your@email.com" style={{ width: "100%", padding: "12px 16px", borderRadius: "10px", border: "1px solid #D1D5DB", outline: "none", fontSize: "0.95rem", boxSizing: "border-box" }} />
                   </div>
                 </div>
                 
                 <div>
                   <label style={{ display: "block", fontSize: "0.9rem", fontWeight: 600, color: "#374151", marginBottom: "8px" }}>Subject</label>
-                  <input type="text" placeholder="What's this about?" style={{ width: "100%", padding: "12px 16px", borderRadius: "10px", border: "1px solid #D1D5DB", outline: "none", fontSize: "0.95rem", boxSizing: "border-box" }} />
+                  <input name="subject" type="text" placeholder="What's this about?" style={{ width: "100%", padding: "12px 16px", borderRadius: "10px", border: "1px solid #D1D5DB", outline: "none", fontSize: "0.95rem", boxSizing: "border-box" }} />
                 </div>
 
                 <div>
                   <label style={{ display: "block", fontSize: "0.9rem", fontWeight: 600, color: "#374151", marginBottom: "8px" }}>Message *</label>
-                  <textarea required placeholder="Tell us how we can help you..." rows={5} style={{ width: "100%", padding: "12px 16px", borderRadius: "10px", border: "1px solid #D1D5DB", outline: "none", fontSize: "0.95rem", boxSizing: "border-box", resize: "vertical" }} />
+                  <textarea name="message" required placeholder="Tell us how we can help you..." rows={5} style={{ width: "100%", padding: "12px 16px", borderRadius: "10px", border: "1px solid #D1D5DB", outline: "none", fontSize: "0.95rem", boxSizing: "border-box", resize: "vertical" }} />
                 </div>
+
+                {formStatus === "error" && (
+                  <div style={{ color: "#DC2626", fontSize: "0.9rem", fontWeight: 500, padding: "10px", background: "#FEF2F2", borderRadius: "8px", border: "1px solid #FECACA" }}>
+                    Failed to send message. Please try again later.
+                  </div>
+                )}
 
                 <button 
                   disabled={formStatus === "submitting"}

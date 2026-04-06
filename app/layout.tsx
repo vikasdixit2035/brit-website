@@ -14,6 +14,10 @@ export const metadata: Metadata = {
   title: "Brit Institute — Break Into High-Paying AI & Data Careers in the UK",
   description:
     "Industry-led Agentic AI & Data Analytics programs with structured training, real-world projects, and dedicated placement support. Average salary outcomes: £35,000 – £70,000.",
+  icons: {
+    icon: "/britinstitute.png",
+    apple: "/britinstitute.png",
+  },
   keywords: [
     "AI courses UK",
     "Data Analytics training",

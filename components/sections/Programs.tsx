@@ -78,7 +78,11 @@ export default function Programs() {
       try {
         setLoading(true);
         setError(null);
-        const res = await fetch("https://api.britinstitute.uk/api/courses", {
+        const API_URL = process.env.NODE_ENV === "development" 
+          ? "http://localhost:4000/api/courses" 
+          : "https://api.britinstitute.uk/api/courses";
+          
+        const res = await fetch(API_URL, {
           signal: controller.signal,
         });
         if (!res.ok) throw new Error(`Server error: ${res.status}`);

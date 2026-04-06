@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 
 const BRAND_RED = "#FF0033"; // AlmaBetter red
 const BRAND_CYAN = "#00E5FF"; // Free badge color
@@ -47,7 +48,7 @@ const MOBILE_MENU_LINKS = [
   { href: "#masterclass", label: "Masterclass", badge: "Free" },
   { href: "#practice", label: "Practice" },
   { href: "#hire", label: "Hire From Us" },
-  { href: "#why", label: "Why AlmaBetter" },
+  { href: "#why", label: "Why BritInstitute" },
   { href: "#stories", label: "Success Stories" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact Us" },
@@ -58,7 +59,11 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [navTop, setNavTop] = useState(hasBanner ? 38 : 0);
   const [courses, setCourses] = useState<Course[]>([]);
-  const [dropOpen, setDropOpen] = useState(false);
+
+  // ── SEPARATE STATE: desktop dropdown vs mobile drawer accordion ──
+  const [dropOpen, setDropOpen] = useState(false);           // desktop only
+  const [drawerCoursesOpen, setDrawerCoursesOpen] = useState(false); // mobile only
+
   const dropRef = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -76,13 +81,17 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
 
   // Fetch courses
   useEffect(() => {
-    fetch("https://api.britinstitute.uk/api/courses")
+    const API_URL = process.env.NODE_ENV === "development" 
+      ? "http://localhost:4000/api/courses" 
+      : "https://api.britinstitute.uk/api/courses";
+      
+    fetch(API_URL)
       .then((r) => r.ok ? r.json() : Promise.reject())
       .then((json) => setCourses((json.data ?? []).slice(0, 6)))
       .catch(() => { });
   }, []);
 
-  // Close dropdown on outside click
+  // Close desktop dropdown on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (dropRef.current && !dropRef.current.contains(e.target as Node)) {
@@ -93,17 +102,32 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  // Close mobile menu on resize
+  // Close mobile menu on resize to desktop
   useEffect(() => {
     const handler = () => {
-      if (window.innerWidth >= 900) setMenuOpen(false);
+      if (window.innerWidth >= 900) {
+        setMenuOpen(false);
+        setDrawerCoursesOpen(false);
+      }
     };
     window.addEventListener("resize", handler);
     return () => window.removeEventListener("resize", handler);
   }, []);
 
-  const openDrop = () => { if (closeTimer.current) clearTimeout(closeTimer.current); setDropOpen(true); };
-  const closeDrop = () => { closeTimer.current = setTimeout(() => setDropOpen(false), 180); };
+  // Reset drawer courses state when drawer closes
+  useEffect(() => {
+    if (!menuOpen) {
+      setDrawerCoursesOpen(false);
+    }
+  }, [menuOpen]);
+
+  const openDrop = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setDropOpen(true);
+  };
+  const closeDrop = () => {
+    closeTimer.current = setTimeout(() => setDropOpen(false), 180);
+  };
 
   return (
     <>
@@ -423,9 +447,8 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          width: 100%;
-          margin: 16px 20px 8px;
           width: calc(100% - 40px);
+          margin: 16px 20px 8px;
           color: ${NAV_LINK};
           font-weight: 500;
           font-size: 0.9rem;
@@ -452,6 +475,24 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
           transition: color .2s, background .2s;
         }
         .drawer-nav-link:hover { color: #fff; background: rgba(255,255,255,0.04); }
+
+        /* ── Drawer course sub-items ── */
+        .drawer-course-link {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 12px 20px 12px 32px;
+          color: ${NAV_LINK};
+          font-size: 0.88rem;
+          font-weight: 500;
+          text-decoration: none;
+          border-bottom: 1px solid rgba(255,255,255,0.04);
+          transition: color .2s, background .2s;
+          /* Make sure the full row is tappable */
+          -webkit-tap-highlight-color: rgba(255,255,255,0.1);
+        }
+        .drawer-course-link:hover,
+        .drawer-course-link:active { color: #fff; background: rgba(255,255,255,0.06); }
 
         .drawer-signin-btn {
           margin: 16px 20px;
@@ -489,7 +530,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
           .alma-nav .logo-text span { font-size: 1.2rem !important; }
         }
         @media (max-width: 480px) {
-          .nav-mobile-right { display: none !important; } /* Only rely on drawer login */
+          .nav-mobile-right { display: none !important; }
           .alma-nav .logo-text span { font-size: 1.1rem !important; }
         }
       `}</style>
@@ -518,7 +559,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
             width: "100%",
             maxWidth: "1400px",
             margin: "0 auto",
-            padding: "0 40px", /* Overridden by media query on mobile */
+            padding: "0 40px",
             boxSizing: "border-box",
             height: "100%",
             position: "relative",
@@ -608,11 +649,11 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
                       : courses.map((course) => {
                         const badge = badgeStyle(course.topBadge);
                         return (
-                          <a
+                          <Link
                             key={course._id}
                             href={`/courses/${course.slug}`}
                             className="drop-item"
-                            onClick={() => setDropOpen(false)}
+                            onClick={() => setTimeout(() => setDropOpen(false), 150)}
                           >
                             <div className="drop-icon-wrap">
                               <CourseIcon name={course.iconName} />
@@ -628,7 +669,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
                                 <ClockIcon /> {course.duration}
                               </div>
                             </div>
-                          </a>
+                          </Link>
                         );
                       })}
                   </div>
@@ -655,7 +696,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
             </a>
           </div>
 
-          {/* ── MOBILE RIGHT: Courses pill + User icon ─────────────────── */}
+          {/* ── MOBILE RIGHT: Sign In pill ─────────────────── */}
           <div
             className="nav-mobile-right"
             style={{ display: "none", alignItems: "center", gap: "12px", flexShrink: 0 }}
@@ -704,12 +745,15 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
               </button>
             </div>
 
-            {/* Courses accordion trigger */}
-            <button className="drawer-courses-btn" onClick={() => setDropOpen((p) => !p)}>
+            {/* Courses accordion trigger — uses drawerCoursesOpen, NOT dropOpen */}
+            <button
+              className="drawer-courses-btn"
+              onClick={() => setDrawerCoursesOpen((p) => !p)}
+            >
               <span>Courses</span>
               <svg
                 className="chevron-icon"
-                data-open={dropOpen ? "true" : "false"}
+                data-open={drawerCoursesOpen ? "true" : "false"}
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
@@ -723,22 +767,24 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
               </svg>
             </button>
 
-            {/* Mini course list if expanded */}
-            {dropOpen && courses.length > 0 && (
-              <div style={{ padding: "4px 0 8px", backgroundColor: "rgba(255,255,255,0.03)" }}>
+            {/* Course list — only driven by drawerCoursesOpen */}
+            {drawerCoursesOpen && courses.length > 0 && (
+              <div style={{ backgroundColor: "rgba(255,255,255,0.03)" }}>
                 {courses.map((course) => (
-                  <a
+                  <Link
                     key={course._id}
                     href={`/courses/${course.slug}`}
-                    className="drawer-nav-link"
-                    style={{ paddingLeft: "32px" }}
-                    onClick={() => { setMenuOpen(false); setDropOpen(false); }}
+                    className="drawer-course-link"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setDrawerCoursesOpen(false);
+                    }}
                   >
                     <span style={{ color: "#9CA3AF", flexShrink: 0 }}>
                       <CourseIcon name={course.iconName} />
                     </span>
                     <span>{course.title}</span>
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}

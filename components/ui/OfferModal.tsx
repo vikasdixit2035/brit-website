@@ -18,7 +18,7 @@ export default function OfferModal({ isOpen, onClose }: OfferModalProps) {
     agreed: false
   });
 
-  const BRIT_BLUE = "#1D4ED8"; 
+  const BRIT_BLUE = "#1D4ED8";
 
   if (!isOpen) return null;
 
@@ -28,13 +28,18 @@ export default function OfferModal({ isOpen, onClose }: OfferModalProps) {
       alert("Please agree to the Terms & Conditions.");
       return;
     }
-    
-    // Replace with exact URL from the backend if available
+
     try {
-      const res = await fetch("http://localhost:5000/api/strategy-call", {
+      const API_URL = process.env.NODE_ENV === "development" 
+        ? "http://localhost:4000/api/leads" 
+        : "https://api.britinstitute.uk/api/leads";
+        
+      const payload = { ...formData, source: "Offer Modal" };
+        
+      const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(payload)
       });
       if (res.ok) {
         alert("Success! We will contact you soon.");
@@ -72,11 +77,11 @@ export default function OfferModal({ isOpen, onClose }: OfferModalProps) {
         maxHeight: "90vh",
       }}>
         {/* Close Button */}
-        <button 
+        <button
           onClick={onClose}
           style={{
             position: "absolute", top: "16px", right: "16px",
-            background: "none", border: "none", 
+            background: "none", border: "none",
             cursor: "pointer", fontSize: "24px", color: "#6B7280",
             zIndex: 10
           }}
@@ -99,8 +104,8 @@ export default function OfferModal({ isOpen, onClose }: OfferModalProps) {
             Unlock Growth
           </h2>
           <h3 style={{ color: "white", fontSize: "1.8rem", fontWeight: 700, margin: "10px 0 0 0", display: "flex", alignItems: "center", gap: "10px" }}>
-            <span style={{ color: "#10B981" }}>⬆</span> 
-            Lock in Savings 
+            <span style={{ color: "#10B981" }}>⬆</span>
+            Lock in Savings
             <span style={{ color: "#10B981" }}>⬆</span>
           </h3>
           <div style={{ marginTop: "40px", flex: 1, display: "flex", alignItems: "flex-end" }}>
@@ -123,7 +128,7 @@ export default function OfferModal({ isOpen, onClose }: OfferModalProps) {
           </div>
 
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            
+
             {/* Full Name */}
             <div>
               <input
@@ -158,8 +163,8 @@ export default function OfferModal({ isOpen, onClose }: OfferModalProps) {
 
             {/* Phone */}
             <div style={{ display: "flex", gap: "8px" }}>
-              <div style={{ 
-                display: "flex", alignItems: "center", gap: "6px", width: "100px", 
+              <div style={{
+                display: "flex", alignItems: "center", gap: "6px", width: "100px",
                 border: "1px solid #D1D5DB", borderRadius: "8px", padding: "0 10px",
                 background: "#F9FAFB"
               }}>
@@ -195,9 +200,9 @@ export default function OfferModal({ isOpen, onClose }: OfferModalProps) {
                 }}
               >
                 <option value="">Select an option</option>
-                <option value="software">Software Engineering</option>
+                <option value="software">Data Analytics</option>
                 <option value="data">Data Science</option>
-                <option value="product">Product Management</option>
+                <option value="product">AI Automation</option>
               </select>
               <div style={{ position: "absolute", right: "16px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#6B7280" }}>
                 <Icons.ChevronDown />
@@ -230,8 +235,8 @@ export default function OfferModal({ isOpen, onClose }: OfferModalProps) {
 
             {/* Checkbox */}
             <div style={{ display: "flex", gap: "10px", alignItems: "flex-start", marginTop: "8px" }}>
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 id="agree"
                 required
                 checked={formData.agreed}
@@ -269,7 +274,8 @@ export default function OfferModal({ isOpen, onClose }: OfferModalProps) {
           </form>
         </div>
       </div>
-      <style dangerouslySetInnerHTML={{__html:`
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @media (min-width: 768px) {
           .modal-left-pane { display: flex !important; }
         }

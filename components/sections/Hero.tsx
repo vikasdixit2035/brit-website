@@ -331,6 +331,7 @@ export default function HeroSection() {
                     {/* Procedural dotted globe */}
                     {(() => {
                       const dots: React.ReactElement[] = [];
+                      const round = (n: number) => Number(n.toFixed(4));
                       const cx = 250, cy = 250, R = 210;
                       const latSteps = 18;
                       const lonSteps = 24;
@@ -352,12 +353,12 @@ export default function HeroSection() {
                           const zr = -x3d * Math.sin(angle) + z3d * Math.cos(angle);
                           // Only show front-facing dots
                           if (zr < -0.05) continue;
-                          const px = cx + xr * R;
-                          const py = cy - y3d * R;
+                          const px = round(cx + xr * R);
+                          const py = round(cy - y3d * R);
                           // Dot size based on depth (z) — closer = bigger
-                          const dotR = 2.2 + zr * 2.8;
+                          const dotR = round(2.2 + zr * 2.8);
                           // Opacity based on depth
-                          const opacity = 0.15 + zr * 0.7;
+                          const opacity = round(0.15 + zr * 0.7);
                           dots.push(
                             <circle
                               key={`${i}-${j}`}
@@ -384,10 +385,10 @@ export default function HeroSection() {
                           const xr = x3d * Math.cos(angle) + z3d * Math.sin(angle);
                           const zr = -x3d * Math.sin(angle) + z3d * Math.cos(angle);
                           if (zr < -0.05) continue;
-                          const px = cx + xr * R;
-                          const py = cy - y3d * R;
-                          const dotR = 1.5 + zr * 2;
-                          const opacity = 0.1 + zr * 0.5;
+                          const px = round(cx + xr * R);
+                          const py = round(cy - y3d * R);
+                          const dotR = round(1.5 + zr * 2);
+                          const opacity = round(0.1 + zr * 0.5);
                           dots.push(
                             <circle
                               key={`m-${j}-${t}`}
