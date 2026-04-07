@@ -34,6 +34,8 @@ export const metadata: Metadata = {
   },
 };
 
+import GlobalUI from "@/components/layout/GlobalUI";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -42,6 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable}`}>
       <body>
+        <GlobalUI />
         {children}
         <WhatsAppFloat />
         <ChatbotFloat />
