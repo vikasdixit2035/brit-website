@@ -33,32 +33,34 @@ interface Course {
   iconName: string;
 }
 
+interface NavLink {
+  href: string;
+  label: string;
+  badge?: string;
+}
+
 // Nav links for desktop right side
-const NAV_RIGHT_LINKS = [
-  { href: "#placement", label: "Placements" },
-  { href: "#masterclass", label: "Masterclass", badge: "Free" },
-  { href: "/about", label: "About" },
+const NAV_RIGHT_LINKS: NavLink[] = [
   { href: "/reviews", label: "Reviews" },
-  { href: "/careers", label: "Careers" },
   { href: "/resources", label: "Resources" },
   { href: "/webinar", label: "Webinar" },
   { href: "/blog", label: "Blog" },
+  { href: "/careers", label: "Careers" },
+  { href: "/about", label: "About" },
 ];
 
 // Mobile menu links
-const MOBILE_MENU_LINKS = [
-  { href: "#placement", label: "Placements" },
-  { href: "#masterclass", label: "Masterclass", badge: "Free" },
+const MOBILE_MENU_LINKS: NavLink[] = [
   { href: "#practice", label: "Practice" },
   { href: "#hire", label: "Hire From Us" },
   { href: "#why", label: "Why BritInstitute" },
   { href: "#stories", label: "Success Stories" },
-  { href: "/about", label: "About Us" },
   { href: "/reviews", label: "Reviews" },
-  { href: "/careers", label: "Careers" },
   { href: "/resources", label: "Resources" },
   { href: "/webinar", label: "Webinar" },
   { href: "/blog", label: "Blog" },
+  { href: "/careers", label: "Careers" },
+  { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact Us" },
 ];
 
