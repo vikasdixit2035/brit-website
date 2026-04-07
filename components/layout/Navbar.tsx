@@ -707,9 +707,8 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
               )
             ))}
 
-            {/* Sign In */}
             <a href="/login" className="nav-signin-btn">
-              Sign In
+              Apply now
             </a>
           </div>
 
@@ -735,7 +734,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
                 whiteSpace: "nowrap",
               }}
             >
-              Sign In
+              Apply now
             </a>
           </div>
         </div>
@@ -861,9 +860,8 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
               ))}
             </div>
 
-            {/* Sign In */}
             <a href="/login" className="drawer-signin-btn" onClick={() => setMenuOpen(false)}>
-              Sign In
+              Apply now
             </a>
           </div>
         </div>

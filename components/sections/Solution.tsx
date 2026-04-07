@@ -33,96 +33,44 @@ export default function Solution() {
     <section
       id="solution"
       ref={r.ref}
-      style={{
-        position: "relative",
-        padding: "80px 0 100px",
-        background: "var(--blue-deep)",
-        overflow: "hidden",
-      }}
+      className="relative py-[80px] lg:py-[100px] bg-[var(--blue-deep)] overflow-hidden"
     >
       {/* Background decorations */}
-      <div aria-hidden style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden" }}>
-        <div style={{
-          position: "absolute", width: 600, height: 600, borderRadius: "50%",
-          top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-          background: "radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%)",
-          filter: "blur(40px)",
-        }} />
+      <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute w-[600px] h-[600px] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle,rgba(59,130,246,0.1)_0%,transparent_70%)] blur-[40px]" />
       </div>
 
-      <div className={`section-inner ${r.cls}`} style={{ position: "relative", zIndex: 1, maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+      <div className={`relative z-10 max-w-[1100px] mx-auto px-6 ${r.cls}`}>
         {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "64px" }}>
-          <h2
-            style={{
-              fontSize: "clamp(2rem, 3.5vw, 2.8rem)",
-              fontWeight: 800,
-              letterSpacing: "-0.03em",
-              color: "var(--white)",
-              margin: "0 0 16px",
-              lineHeight: 1.15,
-            }}
-          >
+        <div className="text-center mb-16">
+          <h2 className="text-[clamp(2rem,3.5vw,2.8rem)] font-extrabold tracking-tight text-[var(--white)] mb-4 leading-[1.15]">
             A Structured Path to a{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, var(--gold-400), var(--gold-300))",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
+            <span className="bg-gradient-to-br from-[var(--gold-400)] to-[var(--gold-300)] bg-clip-text text-transparent">
               High-Growth Career
             </span>
           </h2>
         </div>
 
-        {/* Grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "24px",
-          }}
-        >
+        {/* Grid Layout:
+          - grid-cols-1: 1 column on mobile screens
+          - sm:grid-cols-2: 2x2 grid on small/tablet screens
+          - lg:grid-cols-4: All 4 in a single row on desktop screens
+        */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {solutions.map((point, i) => {
             const Icon = point.icon;
             return (
               <div
                 key={i}
-                style={{
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  borderTop: "3px solid var(--gold-400)",
-                  borderRadius: "16px",
-                  padding: "32px 24px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  textAlign: "center",
-                  transition: "transform 0.3s ease",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-5px)")}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
+                className="bg-white/[0.03] border border-white/10 border-t-[3px] border-t-[var(--gold-400)] rounded-2xl p-8 flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-[5px]"
               >
-                <div
-                  style={{
-                    width: 56,
-                    height: 56,
-                    borderRadius: "14px",
-                    background: "rgba(212,168,83,0.1)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginBottom: 20,
-                  }}
-                >
-                  <Icon size={28} color="var(--gold-400)" strokeWidth={2} />
+                <div className="w-14 h-14 rounded-2xl bg-[rgba(212,168,83,0.1)] flex items-center justify-center mb-5">
+                  <Icon size={28} className="text-[var(--gold-400)]" strokeWidth={2} />
                 </div>
-                <h3 style={{ fontSize: "1.2rem", fontWeight: 700, color: "var(--white)", marginBottom: "12px" }}>
+                <h3 className="text-[1.2rem] font-bold text-[var(--white)] mb-3">
                   {point.title}
                 </h3>
-                <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.6, margin: 0 }}>
+                <p className="text-[0.95rem] text-white/70 leading-[1.6] m-0">
                   {point.detail}
                 </p>
               </div>

@@ -14,14 +14,14 @@ export default function Programs() {
   ];
 
   return (
-    <section id="program-snapshot" className="w-full bg-[#111827] py-24 font-sans" ref={r.ref}>
+    <section id="programs" className="w-full bg-[#111827] font-sans" ref={r.ref}>
       <div className={`max-w-[1100px] mx-auto px-6 ${r.cls}`}>
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
             Programme <span className="text-[#D4AF37]">Details</span>
           </h2>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {details.map((item, idx) => {
             const Icon = item.icon;

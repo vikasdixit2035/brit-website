@@ -111,7 +111,7 @@ export default function HeroSection() {
                   <div className="mb-2 grid w-full cursor-pointer grid-cols-[266px_266px] flex-wrap items-start gap-2 pr-4">
 
                     {/* Action Card 1: Talk to Career Expert */}
-                    <div className="curser-pointer z-[20] flex h-full flex-1 flex-col items-end justify-between overflow-hidden rounded-[11.855px] border border-[rgba(255,255,255,0.20)] bg-[rgba(25,22,23,0.60)] px-[20px] py-[16px] backdrop-blur-[51.56px] sm:h-[106px]">
+                    <button type="button" className="cursor-pointer z-[20] flex h-full flex-1 flex-col items-end justify-between overflow-hidden rounded-[11.855px] border border-[rgba(255,255,255,0.20)] bg-[rgba(25,22,23,0.60)] px-[20px] py-[16px] backdrop-blur-[51.56px] sm:h-[106px] text-left">
                       <p className="flex max-w-[150px] flex-shrink-0 -rotate-[0.297deg] flex-col justify-center self-stretch font-gellix text-xs md:text-lg font-normal not-italic tracking-[0.512px] text-white sm:max-w-full">
                         Talk to Career Expert
                       </p>
@@ -120,7 +120,7 @@ export default function HeroSection() {
                           <path fillRule="evenodd" clipRule="evenodd" d="M14.9822 10.8433C15.0154 10.6705 14.9547 10.4902 14.8187 10.3722C14.8187 10.3722 13.2594 9.02075 12.1517 8.06075C11.3432 7.36025 10.1307 7.4035 9.37419 8.16L8.86944 8.6645C7.50119 8.081 6.41044 6.99025 5.82669 5.622C5.96444 5.484 6.14945 5.29875 6.3432 5.105C7.0932 4.355 7.14319 3.1555 6.45794 2.34575C5.65794 1.40025 4.62294 0.177 4.62294 0.177C4.52794 0.06475 4.38819 0 4.24119 0H3.54045C1.8197 0 0.338443 1.2145 0.000942962 2.9015C0.000942962 2.902 -0.0128058 3.05875 0.0646942 3.3215C1.63769 8.67025 5.82094 12.8535 11.1697 14.4265L11.3474 14.479C11.4269 14.5022 11.5109 14.506 11.5922 14.4897C11.5999 14.4882 11.6239 14.4832 11.6612 14.476C13.3279 14.1425 14.6219 12.8255 14.9262 11.1532C14.9574 10.9802 14.9824 10.843 14.9824 10.843L14.9822 10.8433ZM8.8342 9.7245L8.84469 9.728L8.84794 9.729C8.93919 9.75775 8.99119 9.75 8.99119 9.75C9.12369 9.75 9.25094 9.69725 9.34469 9.6035L10.0812 8.867C10.4669 8.4815 11.0847 8.4595 11.4969 8.8165L13.9482 10.941L13.9422 10.9745C13.7144 12.227 12.7544 13.217 11.5129 13.4853L11.4517 13.4673C6.42919 11.99 2.50119 8.062 1.02394 3.0395L1.0072 2.9825C1.2937 1.823 2.33595 1 3.54045 1H4.0092L5.6947 2.99175C6.0437 3.40425 6.01845 4.01575 5.6362 4.398C5.24445 4.7895 4.88769 5.14675 4.88769 5.14675C4.75019 5.284 4.70494 5.4885 4.77144 5.671C5.45569 7.553 6.93819 9.0355 8.82019 9.71975L8.8342 9.7245Z" fill="#2563EB"></path>
                         </svg>
                       </div>
-                      <div className="absolute bottom-0 right-0 z-0">
+                      <div className="absolute bottom-0 right-0 z-0 pointer-events-none">
                         <svg xmlns="http://www.w3.org/2000/svg" width="158" height="99" viewBox="0 0 158 99" fill="none">
                           <g filter="url(#filter0_f_6996_23342)">
                             <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#2563EB"></circle>
@@ -134,10 +134,13 @@ export default function HeroSection() {
                           </defs>
                         </svg>
                       </div>
-                    </div>
+                    </button>
 
                     {/* Action Card 2: Discover All Courses */}
-                    <div className="curser-pointer z-[20] flex h-full flex-1 flex-col items-end justify-between overflow-hidden rounded-[11.855px] border border-[rgba(255,255,255,0.20)] bg-[rgba(25,22,23,0.60)] px-[20px] py-[16px] backdrop-blur-[51.56px] sm:h-[106px]">
+                    <div
+                      className="cursor-pointer z-[20] flex h-full flex-1 flex-col items-end justify-between overflow-hidden rounded-[11.855px] border border-[rgba(255,255,255,0.20)] bg-[rgba(25,22,23,0.60)] px-[20px] py-[16px] backdrop-blur-[51.56px] sm:h-[106px]"
+                      onClick={() => document.getElementById('programs')?.scrollIntoView({ behavior: 'smooth' })}
+                    >
                       <p className="flex max-w-[150px] flex-shrink-0 -rotate-[0.297deg] flex-col justify-center self-stretch font-gellix text-xs md:text-lg font-normal not-italic tracking-[0.512px] text-white sm:max-w-full">
                         Discover All Courses
                       </p>

@@ -33,82 +33,39 @@ export default function PainPoints() {
     <section
       id="pain-points"
       ref={r.ref}
-      style={{
-        position: "relative",
-        padding: "100px 0 80px",
-        background: "#0c0a09", // Very dark background
-        overflow: "hidden",
-      }}
+      className="relative py-[80px] lg:py-[100px] bg-[#0c0a09] overflow-hidden"
     >
-      <div className={`section-inner ${r.cls}`} style={{ position: "relative", zIndex: 1, maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+      <div className={`relative z-10 max-w-[1100px] mx-auto px-6 ${r.cls}`}>
         {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "64px" }}>
-          <h2
-            style={{
-              fontSize: "clamp(2rem, 3.5vw, 2.8rem)",
-              fontWeight: 800,
-              letterSpacing: "-0.03em",
-              color: "var(--white)",
-              margin: "0 0 16px",
-              lineHeight: 1.15,
-            }}
-          >
+        <div className="text-center mb-16">
+          <h2 className="text-[clamp(2rem,3.5vw,2.8rem)] font-extrabold tracking-tight text-white mb-4 leading-[1.15]">
             Stuck in a Role with{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #f87171, #ef4444)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
+            <span className="bg-gradient-to-r from-[#f87171] to-[#ef4444] bg-clip-text text-transparent">
               Limited Growth?
             </span>
           </h2>
         </div>
 
-        {/* Grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "24px",
-          }}
-        >
+        {/* Grid Layout:
+          - grid-cols-1: 1 column on mobile screens
+          - sm:grid-cols-2: 2x2 grid on small/tablet screens
+          - lg:grid-cols-4: All 4 in a single row on desktop screens
+        */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {painPoints.map((point, i) => {
             const Icon = point.icon;
             return (
               <div
                 key={i}
-                style={{
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(2ef,68,68,0.2)",
-                  borderRadius: "16px",
-                  padding: "32px 24px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  textAlign: "center",
-                }}
+                className="bg-white/[0.03] border border-red-500/20 rounded-2xl p-8 flex flex-col items-center text-center transition-transform hover:-translate-y-1 duration-300"
               >
-                <div
-                  style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: "12px",
-                    background: "rgba(239,68,68,0.1)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginBottom: 20,
-                  }}
-                >
-                  <Icon size={24} color="#f87171" strokeWidth={2} />
+                <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-5">
+                  <Icon size={24} className="text-[#f87171]" strokeWidth={2} />
                 </div>
-                <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--white)", marginBottom: "8px" }}>
+                <h3 className="text-lg font-bold text-white mb-2">
                   {point.title}
                 </h3>
-                <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.5, margin: 0 }}>
+                <p className="text-sm text-white/60 leading-relaxed m-0">
                   {point.detail}
                 </p>
               </div>

@@ -35,14 +35,20 @@ export default function Home() {
       
       const isCTA = (el: HTMLElement | null) => {
         if (!el) return false;
+        if (el.closest("form")) return false; // Ignore submit buttons inside forms
+        
         const text = el.textContent?.toLowerCase() || "";
         const href = el.getAttribute("href") || "";
         return (
           el.classList.contains("btn-gold") ||
           text.includes("enroll") ||
           text.includes("register") ||
+          text.includes("apply now") ||
+          text.includes("talk to career expert") ||
+          text.includes("get course details") ||
+          text.includes("consultation") ||
           href === "#final-cta" ||
-          text.includes("consultation")
+          href === "/login"
         );
       };
 
