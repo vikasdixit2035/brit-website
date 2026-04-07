@@ -183,17 +183,17 @@ export default function TopBanner({ visible, onClose }: TopBannerProps) {
               {/* Send icon + Text */}
               <div className="banner-item">
                 <BannerSendIcon fill="#ffffff" />
-                <span className="banner-text-bold">Book a live demo session</span>
+                <span className="banner-text-bold">Limited Seats for Upcoming Cohort</span>
               </div>
 
               {/* Stopwatch + Text */}
               <div className="banner-item banner-cohort-item">
                 <BannerStopwatchIcon fill="#ffffff" />
-                <span className="banner-text-medium">Next cohort starts on 10 Apr, 2026</span>
+                <span className="banner-text-medium">Applications Closing: 19 April 2026</span>
               </div>
 
               {/* Button */}
-              <button className="banner-cta-btn">Book Now</button>
+              <button className="banner-cta-btn">Apply Now</button>
             </div>
 
             <button className="banner-close-btn" onClick={onClose} aria-label="Close banner">

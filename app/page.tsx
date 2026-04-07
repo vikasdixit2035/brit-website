@@ -8,22 +8,20 @@ import Footer from "@/components/layout/Footer";
 
 import Hero from "@/components/sections/Hero";
 import LogoStrip from "@/components/sections/LogoStrip";
-import Programs from "@/components/sections/Programs";
+import PainPoints from "@/components/sections/PainPoints";
+import Solution from "@/components/sections/Solution";
 import Outcomes from "@/components/sections/Outcomes";
-import Highlights from "@/components/sections/Highlights";
-import Projects from "@/components/sections/Projects";
 import Testimonials from "@/components/sections/Testimonials";
-import HowItWorks from "@/components/sections/HowItWorks";
-import FinalCTA from "@/components/sections/FinalCTA";
+import Programs from "@/components/sections/Programs";
+import StickyForm from "@/components/sections/StickyForm";
 import OfferModal from "@/components/ui/OfferModal";
 
 /* ══════════════════════════════════════════
    PAGE — Brit Institute Homepage
-   Layout follows the final copy document:
-   Hero → Social Proof Strip → Choose Your Path →
-   Career Outcomes → Programme Highlights →
-   Projects & Portfolio → Testimonials →
-   How It Works → Final CTA
+   Layout follows the Ads-Ready copy:
+   Hero → Logo Strip → Pain Points →
+   Solution → Outcomes → Proof →
+   Programme Snapshot → Sticky Form
    ══════════════════════════════════════════ */
 export default function Home() {
   const [banner, setBanner] = useState(true);
@@ -67,29 +65,26 @@ export default function Home() {
       {/* 1. Hero */}
       <Hero />
 
-      {/* 2. Company Strip (formerly Enterprise Solutions + Logo Strip) */}
+      {/* Logo Strip for initial trust */}
       <LogoStrip />
 
-      {/* 3. Choose Your Path */}
-      <Programs />
+      {/* 2. Pain Points */}
+      <PainPoints />
 
-      {/* 4. Career Outcomes Snapshot */}
+      {/* 3. Solution */}
+      <Solution />
+
+      {/* 4. Outcomes */}
       <Outcomes />
 
-      {/* 5. Programme Highlights */}
-      <Highlights />
-
-      {/* 6. Testimonials */}
+      {/* 5. Proof (Testimonials) */}
       <Testimonials />
 
-      {/* 7. Projects and Portfolio */}
-      <Projects />
+      {/* 6. Programme Snapshot */}
+      <Programs />
 
-      {/* 8. How It Works */}
-      <HowItWorks />
-
-      {/* 9. Final CTA */}
-      <FinalCTA />
+      {/* 7. Sticky Form */}
+      <StickyForm />
 
       <Footer />
     </>

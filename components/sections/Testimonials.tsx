@@ -18,24 +18,44 @@ export default function Testimonials() {
   ];
 
   return (
-    <section id="testimonials" className="section s-testimonials" ref={r.ref}>
-      <div className={`section-inner ${r.cls}`}>
-        <div className="section-head">
-          <h2 className="section-title">Powering the world's top careers</h2>
-          <p className="section-sub">Hear from our community of successful professionals who transitioned into high-paying roles.</p>
+    <section id="proof" className="section s-testimonials" ref={r.ref} style={{ background: "#0F172A", padding: "80px 0" }}>
+      <div className={`section-inner ${r.cls}`} style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
+        <div className="section-head" style={{ textAlign: "center", marginBottom: "48px" }}>
+          <h2 className="section-title" style={{ color: "var(--white)", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", fontWeight: 800, marginBottom: "24px" }}>Learner Outcomes</h2>
+
+          <div style={{
+            display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "24px",
+            marginBottom: "48px"
+          }}>
+            <div style={{ background: "rgba(255,255,255,0.05)", padding: "16px 24px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.1)" }}>
+              <div style={{ fontSize: "2rem", fontWeight: 800, color: "var(--gold-400)" }}>550+</div>
+              <div style={{ color: "var(--white)", opacity: 0.8 }}>Learners Trained</div>
+            </div>
+            <div style={{ background: "rgba(255,255,255,0.05)", padding: "16px 24px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.1)" }}>
+              <div style={{ fontSize: "2rem", fontWeight: 800, color: "var(--gold-400)" }}>92%</div>
+              <div style={{ color: "var(--white)", opacity: 0.8 }}>Transitioned into New Roles</div>
+            </div>
+            <div style={{ background: "rgba(255, 255, 255, 0.05)", padding: "16px 24px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.1)" }}>
+              <div style={{ fontSize: "2rem", fontWeight: 800, color: "var(--gold-400)" }}>Yes</div>
+              <div style={{ color: "var(--white)", opacity: 0.8 }}>Real-world Projects Completed</div>
+            </div>
+          </div>
         </div>
-        <div className="test-grid">
+        <div className="test-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
           {data.map((t, i) => (
-            <div className="t-card" key={i} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-              <div className="t-stars" style={{ marginBottom: '24px' }}>
+            <div className="t-card" key={i} style={{
+              display: 'flex', flexDirection: 'column', height: '100%',
+              background: "rgba(255,255,255,0.02)", padding: "32px", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.05)"
+            }}>
+              <div className="t-stars" style={{ marginBottom: '24px', display: 'flex', gap: '4px', color: '#D4AF37' }}>
                 <Icons.Star /><Icons.Star /><Icons.Star /><Icons.Star /><Icons.Star />
               </div>
-              <p className="t-quote" style={{ fontSize: '1.05rem', color: 'var(--gray-800)', flex: 1 }}>"{t.quote}"</p>
-              <div className="t-author" style={{ marginTop: '24px', borderTop: '1px solid var(--gray-100)', paddingTop: '24px' }}>
-                <Image src={t.avatar} alt={t.name} width={48} height={48} className="t-avatar" style={{ border: 'none' }} />
+              <p className="t-quote" style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.9)', flex: 1, fontStyle: "italic", lineHeight: 1.6 }}>"{t.quote}"</p>
+              <div className="t-author" style={{ marginTop: '24px', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <Image src={t.avatar} alt={t.name} width={48} height={48} className="t-avatar" style={{ border: 'none', borderRadius: '50%' }} />
                 <div>
-                  <div className="t-name" style={{ fontSize: '1rem' }}>{t.name}</div>
-                  <div className="t-role" style={{ fontSize: '0.85rem' }}>{t.role}</div>
+                  <div className="t-name" style={{ fontSize: '1rem', fontWeight: 600, color: "var(--white)" }}>{t.name}</div>
+                  <div className="t-role" style={{ fontSize: '0.85rem', color: "rgba(255,255,255,0.6)" }}>{t.role}</div>
                 </div>
               </div>
             </div>

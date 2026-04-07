@@ -365,44 +365,35 @@ export default function Outcomes() {
       {/* Dot-grid pattern */}
       <div className="outcomes-dotgrid" />
 
-      {/* FREE tag */}
-      <div className="free-tag">
-        <span className="free-tag-text">FREE</span>
+      {/* CAREERS tag */}
+      <div className="free-tag" style={{ width: "200px" }}>
+        <span className="free-tag-text">CAREERS</span>
       </div>
 
       {/* ═══ LEFT CONTENT ═══ */}
       <div className="outcomes-left">
         <div>
           <h2 className="outcomes-heading">
-            <span className="outcomes-heading-italic">Master</span> AI for a
-            Future-Ready Career
+            <span className="outcomes-heading-italic">Career</span> Opportunities After This Programme
           </h2>
           <p className="outcomes-subtitle">
-            Unlock the &quot;Ultimate GenAI Handbook&quot; and kickstart your AI
-            learning today for FREE!
+            Data Analyst / Data Scientist / AI Specialist <br />
+            Roles across Tech, Finance, Consulting
           </p>
         </div>
 
         {/* Stats */}
         <div className="outcomes-stats-row">
-          <div className="outcomes-stat-item">
-            50K+
-            <span className="outcomes-stat-label">Downloads</span>
-          </div>
-          <div className="outcomes-stat-item">
-            4.9/5
-            <span className="outcomes-stat-label">Rating</span>
-          </div>
-          <div className="outcomes-stat-item">
-            30+
-            <span className="outcomes-stat-label">Hours Content</span>
+          <div className="outcomes-stat-item" style={{ fontSize: "2rem" }}>
+            £54,000 – £98,000+
+            <span className="outcomes-stat-label" style={{ fontSize: "1rem" }}>Salary Range (UK)</span>
           </div>
         </div>
 
         {/* CTA */}
         <div className="outcomes-cta-row">
           <button className="outcomes-cta-btn" type="button">
-            Unlock Free AI Ebook
+            Get Course Details
           </button>
         </div>
       </div>
