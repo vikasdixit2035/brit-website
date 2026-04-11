@@ -32,7 +32,7 @@ export default function Footer() {
           <ul>
             <li><a href="/contact" style={{ color: 'var(--gray-500)' }}>Contact Us</a></li>
             <li><a href="#" style={{ color: 'var(--gray-500)' }}>info@britinstitute.uk</a></li>
-            <li><a href="#" style={{ color: 'var(--gray-500)' }}>+44 20 7123 4567</a></li>
+            <li><a href="tel:+447520664003" style={{ color: 'var(--gray-500)' }}>+44 7520 664 003</a></li>
             <li><a href="#" style={{ color: 'var(--gray-500)' }}>LinkedIn</a></li>
             <li><a href="#" style={{ color: 'var(--gray-500)' }}>Twitter</a></li>
           </ul>

@@ -13,22 +13,22 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormStatus("submitting");
-    
+
     const formData = new FormData(e.currentTarget);
     const payload = Object.fromEntries(formData.entries());
     payload.source = "Contact Page";
 
     try {
-      const API_URL = process.env.NODE_ENV === "development" 
-        ? "http://localhost:4000/api/leads" 
+      const API_URL = process.env.NODE_ENV === "development"
+        ? "http://localhost:4000/api/leads"
         : "https://api.britinstitute.uk/api/leads";
-        
+
       const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      
+
       if (response.ok) {
         setFormStatus("success");
       } else {
@@ -56,7 +56,7 @@ export default function ContactPage() {
       <Navbar hasBanner={banner} />
 
       <div style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px", maxWidth: "1200px", margin: "0 auto", paddingLeft: "24px", paddingRight: "24px" }}>
-        
+
         {/* Intro */}
         <div style={{ textAlign: "center", marginBottom: "60px", maxWidth: "700px", margin: "0 auto 80px" }}>
           <h2 style={{ fontSize: "1.25rem", color: "#6B7280", fontWeight: 500, lineHeight: 1.6 }}>
@@ -66,7 +66,7 @@ export default function ContactPage() {
 
         {/* Main Connect Grid */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", gap: "60px", marginBottom: "100px", alignItems: "start" }}>
-          
+
           {/* Left Column - Contact Methods */}
           <div>
             <h1 style={{ fontSize: "2.5rem", fontWeight: 800, color: "#111827", marginBottom: "16px", letterSpacing: "-0.02em" }}>
@@ -95,13 +95,11 @@ export default function ContactPage() {
                 </div>
                 <p style={{ color: "#6B7280", fontSize: "0.9rem", margin: "0 0 16px 0" }}>Speak directly with our team</p>
                 <div style={{ display: "flex", gap: "40px" }}>
-                  <div>
-                    <div style={{ fontSize: "0.85rem", fontWeight: 600, color: "#111827", marginBottom: "4px" }}>United States</div>
-                    <div style={{ color: "#10B981", fontWeight: 600, fontSize: "0.95rem" }}>+1 (760) 292-2122</div>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: "0.85rem", fontWeight: 600, color: "#111827", marginBottom: "4px" }}>United Kingdom</div>
-                    <div style={{ color: "#10B981", fontWeight: 600, fontSize: "0.95rem" }}>+44 7380 278167</div>
+
+                  <div style={{ fontSize: "0.85rem", fontWeight: 600, color: "#111827", marginBottom: "4px" }}>United Kingdom</div>
+                  <div style={{ fontWeight: 600, fontSize: "0.95rem" }}>
+                    <a href="tel:+447380278167" style={{ color: "#10B981", textDecoration: "none" }}>+44 7380 278167</a><br />
+                    <a href="tel:+447520664003" style={{ color: "#10B981", textDecoration: "none" }}>+44 7520 664 003</a>
                   </div>
                 </div>
               </div>
@@ -149,7 +147,7 @@ export default function ContactPage() {
                     <input name="email" required type="email" placeholder="your@email.com" style={{ width: "100%", padding: "12px 16px", borderRadius: "10px", border: "1px solid #D1D5DB", outline: "none", fontSize: "0.95rem", boxSizing: "border-box" }} />
                   </div>
                 </div>
-                
+
                 <div>
                   <label style={{ display: "block", fontSize: "0.9rem", fontWeight: 600, color: "#374151", marginBottom: "8px" }}>Subject</label>
                   <input name="subject" type="text" placeholder="What's this about?" style={{ width: "100%", padding: "12px 16px", borderRadius: "10px", border: "1px solid #D1D5DB", outline: "none", fontSize: "0.95rem", boxSizing: "border-box" }} />
@@ -166,10 +164,10 @@ export default function ContactPage() {
                   </div>
                 )}
 
-                <button 
+                <button
                   disabled={formStatus === "submitting"}
-                  type="submit" 
-                  style={{ 
+                  type="submit"
+                  style={{
                     background: "#1D4ED8", color: "#FFF", fontWeight: 700, padding: "14px", borderRadius: "10px", border: "none", cursor: formStatus === "submitting" ? "not-allowed" : "pointer", fontSize: "1rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", transition: "background 0.2s", opacity: formStatus === "submitting" ? 0.7 : 1
                   }}
                   onMouseEnter={(e) => { if (formStatus !== "submitting") e.currentTarget.style.background = "#1e40af"; }}
@@ -239,7 +237,7 @@ export default function ContactPage() {
       {/* FAQs Section Layer */}
       <div style={{ background: "#F3F4F6", padding: "80px 24px" }}>
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-          
+
           <div style={{ textAlign: "center", marginBottom: "50px" }}>
             <h2 style={{ fontSize: "2.2rem", fontWeight: 800, color: "#111827", marginBottom: "16px" }}>
               Frequently Asked <span style={{ color: "#1D4ED8" }}>Questions</span>
@@ -254,7 +252,7 @@ export default function ContactPage() {
               const isOpen = openFaq === idx;
               return (
                 <div key={idx} style={{ background: "#FFFFFF", borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.05)" }}>
-                  <button 
+                  <button
                     onClick={() => setOpenFaq(isOpen ? null : idx)}
                     style={{ width: "100%", textAlign: "left", padding: "20px 24px", background: "none", border: "none", display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer", fontSize: "1.05rem", fontWeight: 600, color: "#111827", transition: "background 0.2s" }}
                     onMouseEnter={(e) => e.currentTarget.style.background = "#F9FAFB"}
@@ -263,7 +261,7 @@ export default function ContactPage() {
                     <span>{faq.q}</span>
                     <svg style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.3s" }} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                   </button>
-                  
+
                   {isOpen && (
                     <div style={{ padding: "0 24px 20px", color: "#4B5563", fontSize: "0.95rem", lineHeight: 1.6 }}>
                       {faq.a}
