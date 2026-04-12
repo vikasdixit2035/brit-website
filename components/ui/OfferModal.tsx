@@ -34,7 +34,7 @@ export default function OfferModal({ isOpen, onClose }: OfferModalProps) {
         ? "http://localhost:4000/api/leads" 
         : "https://api.britinstitute.uk/api/leads";
         
-      const payload = { ...formData, source: "Offer Modal" };
+      const payload = { ...formData, source: "Brit Institute Website - Offer Modal" };
         
       const res = await fetch(API_URL, {
         method: "POST",

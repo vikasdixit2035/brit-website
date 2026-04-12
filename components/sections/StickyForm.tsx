@@ -21,7 +21,7 @@ export default function StickyForm() {
         ? "http://localhost:4000/api/leads" 
         : "https://api.britinstitute.uk/api/leads";
         
-      const payload = { ...formData, source: "Sticky Form" };
+      const payload = { ...formData, source: "Brit Institute Website - Sticky Form" };
         
       const res = await fetch(API_URL, {
         method: "POST",
