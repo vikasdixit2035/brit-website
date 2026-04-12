@@ -84,7 +84,7 @@ export default function ContactPage() {
                   <h3 style={{ fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>Email <span style={{ color: "#1D4ED8" }}>Support</span></h3>
                 </div>
                 <p style={{ color: "#6B7280", fontSize: "0.9rem", margin: "0 0 12px 0" }}>Get detailed answers to your questions</p>
-                <a href="mailto:support@1to10x.com" style={{ color: "#1D4ED8", fontWeight: 600, textDecoration: "none", fontSize: "0.95rem" }}>support@britinstitute.uk</a>
+                <a href="mailto:info@britinstitute.uk" style={{ color: "#1D4ED8", fontWeight: 600, textDecoration: "none", fontSize: "0.95rem" }}>info@britinstitute.uk</a>
               </div>
 
               {/* Phone Block */}
@@ -98,8 +98,7 @@ export default function ContactPage() {
 
                   <div style={{ fontSize: "0.85rem", fontWeight: 600, color: "#111827", marginBottom: "4px" }}>United Kingdom</div>
                   <div style={{ fontWeight: 600, fontSize: "0.95rem" }}>
-                    <a href="tel:+447380278167" style={{ color: "#10B981", textDecoration: "none" }}>+44 7380 278167</a><br />
-                    <a href="tel:+447520664003" style={{ color: "#10B981", textDecoration: "none" }}>+44 7520 664 003</a>
+                    <a href="tel:+447520664011" style={{ color: "#10B981", textDecoration: "none" }}>+447520664011</a>
                   </div>
                 </div>
               </div>
@@ -206,7 +205,7 @@ export default function ContactPage() {
             <p style={{ color: "#6B7280", fontSize: "0.95rem", lineHeight: 1.5, marginBottom: "20px" }}>
               Get detailed information about our course structure, curriculum, duration, and enrollment requirements.
             </p>
-            <a href="mailto:programs@britinstitute.uk" style={{ color: "#1D4ED8", fontWeight: 600, fontSize: "0.95rem", textDecoration: "none" }}>programs@britinstitute.uk</a>
+            <a href="mailto:info@britinstitute.uk" style={{ color: "#1D4ED8", fontWeight: 600, fontSize: "0.95rem", textDecoration: "none" }}>info@britinstitute.uk</a>
           </div>
 
           <div style={{ background: "#FFFFFF", padding: "30px", borderRadius: "16px", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
@@ -217,7 +216,7 @@ export default function ContactPage() {
             <p style={{ color: "#6B7280", fontSize: "0.95rem", lineHeight: 1.5, marginBottom: "20px" }}>
               Need help with platform access, technical issues, or troubleshooting? Our tech team is here to help.
             </p>
-            <a href="mailto:support@britinstitute.uk" style={{ color: "#10B981", fontWeight: 600, fontSize: "0.95rem", textDecoration: "none" }}>support@britinstitute.uk</a>
+            <a href="mailto:info@britinstitute.uk" style={{ color: "#10B981", fontWeight: 600, fontSize: "0.95rem", textDecoration: "none" }}>info@britinstitute.uk</a>
           </div>
 
           <div style={{ background: "#FFFFFF", padding: "30px", borderRadius: "16px", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
@@ -228,7 +227,7 @@ export default function ContactPage() {
             <p style={{ color: "#6B7280", fontSize: "0.95rem", lineHeight: 1.5, marginBottom: "20px" }}>
               Discuss your career goals, get guidance on learning opportunities, and learn about our educational support.
             </p>
-            <a href="mailto:careers@britinstitute.uk" style={{ color: "#8B5CF6", fontWeight: 600, fontSize: "0.95rem", textDecoration: "none" }}>careers@britinstitute.uk</a>
+            <a href="mailto:info@britinstitute.uk" style={{ color: "#8B5CF6", fontWeight: 600, fontSize: "0.95rem", textDecoration: "none" }}>info@britinstitute.uk</a>
           </div>
         </div>
 

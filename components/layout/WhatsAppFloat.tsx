@@ -1,7 +1,7 @@
 "use client";
 
 export default function WhatsAppFloat() {
-  const whatsappNumber = "919810249170";
+  const whatsappNumber = "447520664011";
   const defaultMessage = "Hi! I'd like to know more about the courses.";
   
   return (
