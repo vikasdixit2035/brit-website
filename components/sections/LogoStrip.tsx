@@ -1,30 +1,32 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 const companiesRow1 = [
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company1.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company2.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company3.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company5.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company6.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company7.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company8.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company9.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company10.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company11.webp"
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company1.webp", alt: "Hiring partner company 1 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company2.webp", alt: "Hiring partner company 2 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company3.webp", alt: "Hiring partner company 3 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company5.webp", alt: "Hiring partner company 5 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company6.webp", alt: "Hiring partner company 6 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company7.webp", alt: "Hiring partner company 7 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company8.webp", alt: "Hiring partner company 8 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company9.webp", alt: "Hiring partner company 9 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company10.webp", alt: "Hiring partner company 10 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company11.webp", alt: "Hiring partner company 11 logo" }
 ];
 
 const companiesRow2 = [
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company12.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company13.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company14.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company15.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company16.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company17.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company18.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company19.webp",
-  "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company20.webp"
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company12.webp", alt: "Hiring partner company 12 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company13.webp", alt: "Hiring partner company 13 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company14.webp", alt: "Hiring partner company 14 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company15.webp", alt: "Hiring partner company 15 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company16.webp", alt: "Hiring partner company 16 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company17.webp", alt: "Hiring partner company 17 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company18.webp", alt: "Hiring partner company 18 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company19.webp", alt: "Hiring partner company 19 logo" },
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company20.webp", alt: "Hiring partner company 20 logo" }
 ];
 
 export default function LogoStrip() {
@@ -99,7 +101,7 @@ export default function LogoStrip() {
               Top-tier training programs designed for individuals looking to upskill, pursue professional courses, and secure prominent placements in the UK.
             </p>
           </div>
-          <button style={{
+          <Link href="/contact" style={{
             background: "#D4AF37", // Brit Institute Gold
             color: "#111827",
             padding: "16px 32px",
@@ -116,18 +118,10 @@ export default function LogoStrip() {
             transition: "transform 0.2s, background 0.2s"
           }}
             className="btn-gold"
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-2px)";
-              e.currentTarget.style.background = "#FBBF24";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.background = "#D4AF37";
-            }}
           >
             Start A Free Demo
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </button>
+          </Link>
         </div>
 
       </div>
@@ -140,7 +134,7 @@ export default function LogoStrip() {
           <div className="scrolling-track-left" aria-hidden="true">
             {[...companiesRow1, ...companiesRow1].map((src, i) => (
               <div key={`r1-${i}`} className="logo-box">
-                <img src={src} alt="Company logo" />
+                <Image src={src.src} alt={src.alt} width={148} height={40} loading="lazy" />
               </div>
             ))}
           </div>
@@ -151,7 +145,7 @@ export default function LogoStrip() {
           <div className="scrolling-track-right" aria-hidden="true">
             {[...companiesRow2, ...companiesRow2].map((src, i) => (
               <div key={`r2-${i}`} className="logo-box">
-                <img src={src} alt="Company logo" />
+                <Image src={src.src} alt={src.alt} width={148} height={40} loading="lazy" />
               </div>
             ))}
           </div>

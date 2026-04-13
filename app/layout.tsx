@@ -4,6 +4,7 @@ import "./globals.css";
 import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
 import ChatbotFloat from "@/components/layout/ChatbotFloat";
 import StickyBottomBar from "@/components/layout/StickyBottomBar";
+import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -11,26 +12,64 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Brit Institute — Break Into High-Paying AI & Data Careers in the UK",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Brit Institute | AI and Data Career Training in the UK",
+    template: `%s | ${SITE_NAME}`,
+  },
   description:
-    "Industry-led Agentic AI & Data Analytics programs with structured training, real-world projects, and dedicated placement support. Average salary outcomes: £35,000 – £70,000.",
+    "Brit Institute offers practical AI and data career training in the UK with structured programmes, real projects, and dedicated career support.",
+  applicationName: SITE_NAME,
   icons: {
     icon: "/britinstitute.png",
     apple: "/britinstitute.png",
   },
+  manifest: "/site.webmanifest",
   keywords: [
     "AI courses UK",
-    "Data Analytics training",
-    "Agentic AI program",
+    "data analytics course UK",
+    "agentic AI course UK",
+    "AI and data careers UK",
     "UK tech careers",
-    "AI career transition",
     "data analyst course",
   ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Brit Institute — Break Into High-Paying AI & Data Careers in the UK",
+    title: "Brit Institute | AI and Data Career Training in the UK",
     description:
-      "Industry-led programs designed to help you transition into Agentic AI & Data Analytics roles.",
+      "Industry-led programmes designed to help learners transition into AI and data roles in the UK.",
     type: "website",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    locale: "en_GB",
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Brit Institute AI and data career training",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Brit Institute | AI and Data Career Training in the UK",
+    description:
+      "Practical AI and data programmes for UK career transitions, with projects and career support.",
+    images: [DEFAULT_OG_IMAGE],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
 
 export default function FinalCTA() {
@@ -93,8 +94,8 @@ export default function FinalCTA() {
 
         {/* CTA Button */}
         <div style={{ marginBottom: "18px" }}>
-          <a
-            href="#"
+          <Link
+            href="/contact"
             className="btn-gold lg pulse"
             style={{
               display: "inline-flex",
@@ -108,7 +109,7 @@ export default function FinalCTA() {
           >
             Book Free Consultation
             <ArrowRight size={18} />
-          </a>
+          </Link>
         </div>
 
         {/* Trust Line */}

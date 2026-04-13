@@ -1,12 +1,55 @@
-export const coursesData: Record<string, any> = {
+import { SITE_STATS } from "@/lib/site";
+
+export interface CourseSeoData {
+  h1: string;
+  subheadline: string;
+  cohort: string;
+  duration: string;
+  canonicalPath: string;
+  seoTitle: string;
+  seoDescription: string;
+  ogImage: string;
+  updatedAt: string;
+  trustLayer: {
+    learnersTrained: string;
+    placedOrTransitioned: string;
+    toolsUsed: string;
+  };
+  careerOutcomes: {
+    roles: string[];
+    salary: string;
+    demand: string;
+  };
+  isForYou: string[];
+  programmeOverview: {
+    duration: string;
+    format: string;
+    level: string;
+  };
+  curriculum: string[];
+  toolsCovered: string[];
+  projects: string[];
+  careerSupport: string[];
+  pricing: {
+    price: string;
+    emi: boolean;
+  };
+}
+
+export const coursesData: Record<string, CourseSeoData> = {
   "data-analytics": {
     h1: "Data Analytics Course in the UK with Generative AI",
     subheadline: "Master data analytics, dashboards, and AI tools to become job-ready for high-demand data analyst roles in the UK.",
     cohort: "Starting Soon",
     duration: "4-6 weeks",
+    canonicalPath: "/courses/data-analytics",
+    seoTitle: "Data Analytics Course in the UK",
+    seoDescription: "Explore Brit Institute's practical data analytics course in the UK covering SQL, dashboards, AI tools, and career support for analyst roles.",
+    ogImage: "/hero-illustration.png",
+    updatedAt: "2026-04-13",
     trustLayer: {
-      learnersTrained: "10,000+",
-      placedOrTransitioned: "85%",
+      learnersTrained: SITE_STATS.learnersTrained,
+      placedOrTransitioned: SITE_STATS.careerTransitions,
       toolsUsed: "Tools used in real UK data analyst jobs"
     },
     careerOutcomes: {
@@ -52,9 +95,14 @@ export const coursesData: Record<string, any> = {
     subheadline: "Build real-world machine learning models and become job-ready for data science roles in the UK.",
     cohort: "Starting Soon",
     duration: "6 weeks",
+    canonicalPath: "/courses/data-science",
+    seoTitle: "Data Science Course in the UK",
+    seoDescription: "Learn machine learning, Python, model deployment, and portfolio-building through Brit Institute's data science course in the UK.",
+    ogImage: "/hero-illustration.png",
+    updatedAt: "2026-04-13",
     trustLayer: {
-      learnersTrained: "5,000+",
-      placedOrTransitioned: "82%",
+      learnersTrained: SITE_STATS.learnersTrained,
+      placedOrTransitioned: SITE_STATS.careerTransitions,
       toolsUsed: "Industry-aligned ML projects"
     },
     careerOutcomes: {
@@ -100,9 +148,14 @@ export const coursesData: Record<string, any> = {
     subheadline: "Learn AI tools and automation systems to build intelligent workflows and future-ready careers.",
     cohort: "Starting Soon",
     duration: "4 weeks",
+    canonicalPath: "/courses/ai-automation",
+    seoTitle: "AI Automation Course in the UK",
+    seoDescription: "Discover Brit Institute's practical AI automation course in the UK focused on tools, workflows, automation systems, and career-ready projects.",
+    ogImage: "/hero-illustration.png",
+    updatedAt: "2026-04-13",
     trustLayer: {
-      learnersTrained: "2,000+",
-      placedOrTransitioned: "80%",
+      learnersTrained: SITE_STATS.learnersTrained,
+      placedOrTransitioned: SITE_STATS.careerTransitions,
       toolsUsed: "Real-world AI use cases"
     },
     careerOutcomes: {

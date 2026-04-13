@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 
 export default function ChatbotFloat() {
@@ -128,7 +129,7 @@ export default function ChatbotFloat() {
             </button>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
               <div style={{ width: "32px", height: "32px", backgroundColor: "white", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <img src="/britinstitute.png" alt="Logo" style={{ width: "24px", height: "auto" }} />
+                <Image src="/britinstitute.png" alt="Brit Institute logo" width={24} height={24} style={{ width: "24px", height: "auto" }} />
               </div>
               <h3 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 700 }}>Chat with Us</h3>
             </div>

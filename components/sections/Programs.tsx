@@ -1,17 +1,24 @@
 "use client";
 
+import Link from "next/link";
 import useReveal from "@/hooks/useReveal";
-import { Clock, MonitorPlay, TrendingUp, Briefcase } from "lucide-react";
+import { Clock, MonitorPlay, TrendingUp, Briefcase, ArrowRight } from "lucide-react";
+import { coursesData } from "@/app/courses/[slug]/courseData";
 
 export default function Programs() {
   const r = useReveal();
 
-  const details = [
-    { icon: Clock, label: "Duration", value: "[X–X weeks]" },
-    { icon: MonitorPlay, label: "Format", value: "Live + hands-on" },
-    { icon: TrendingUp, label: "Level", value: "Beginner to Advanced" },
-    { icon: Briefcase, label: "Career Support", value: "Career support included" },
-  ];
+  const details = Object.entries(coursesData).map(([slug, course]) => ({
+    slug,
+    title: course.seoTitle,
+    description: course.subheadline,
+    meta: [
+      { icon: Clock, label: course.duration },
+      { icon: MonitorPlay, label: course.programmeOverview.format },
+      { icon: TrendingUp, label: course.programmeOverview.level },
+      { icon: Briefcase, label: "Career support included" },
+    ],
+  }));
 
   return (
     <section id="programs" className="w-full bg-[#111827] font-sans" ref={r.ref}>
@@ -22,19 +29,44 @@ export default function Programs() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {details.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div key={idx} className="bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-2">
-                <div className="w-16 h-16 rounded-2xl bg-[#D4AF37]/10 flex items-center justify-center mb-6">
-                  <Icon className="text-[#D4AF37]" size={32} />
-                </div>
-                <h3 className="text-gray-400 font-semibold text-sm tracking-wider uppercase mb-3">{item.label}</h3>
-                <p className="text-xl font-bold text-white leading-tight">{item.value}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {details.map((item) => (
+            <Link
+              key={item.slug}
+              href={`/courses/${item.slug}`}
+              className="rounded-2xl border border-white/10 bg-white/5 p-8 transition-transform duration-300 hover:-translate-y-2"
+            >
+              <h3 className="mb-4 text-2xl font-bold text-white leading-tight">{item.title}</h3>
+              <p className="mb-6 text-sm leading-7 text-gray-300">{item.description}</p>
+              <div className="grid grid-cols-2 gap-4">
+                {item.meta.map((meta, idx) => {
+                  const Icon = meta.icon;
+                  return (
+                    <div key={idx} className="rounded-2xl bg-black/20 p-4 text-center">
+                      <div className="mb-3 flex justify-center">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10">
+                          <Icon className="text-[#D4AF37]" size={22} />
+                        </div>
+                      </div>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">{meta.label}</p>
+                    </div>
+                  );
+                })}
               </div>
-            );
-          })}
+              <div className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#D4AF37]">
+                View course details <ArrowRight size={16} />
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <Link
+            href="/courses"
+            className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/40 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white/10"
+          >
+            Browse all courses <ArrowRight size={16} />
+          </Link>
         </div>
       </div>
     </section>

@@ -1,125 +1,13 @@
-'use client';
+import PrivacyPolicyPageClient from "@/app/privacy-policy/PrivacyPolicyPageClient";
+import { buildMetadata } from "@/lib/seo";
 
-import { useState } from "react";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+export const metadata = buildMetadata({
+  title: "Privacy Policy",
+  description:
+    "Read the Brit Institute privacy policy covering how we collect, use, and protect personal information on our website and programmes.",
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPolicyPage() {
-  return (
-    <main className="min-h-screen bg-gradient-to-br from-rose-50 via-fuchsia-50 to-purple-50 flex flex-col font-sans text-gray-900">
-      <Navbar hasBanner={false} />
-
-      <div className="pt-[140px] pb-[100px] max-w-[800px] mx-auto px-6 w-full flex-grow">
-
-        <div className="bg-white/90 backdrop-blur-sm p-8 md:p-10 rounded-[20px] shadow-xl shadow-purple-900/5 border border-purple-100/50">
-          <h1 className="text-3xl md:text-[2.2rem] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-purple-700 mb-2 leading-tight">
-            Privacy Policy – Brit Institute
-          </h1>
-          <p className="text-purple-600/70 font-semibold mb-10">
-            Effective Date: 03/03/2026
-          </p>
-
-          <div className="text-gray-700 text-base leading-relaxed flex flex-col gap-6">
-            <p>
-              At Brit Institute (“we”, “our”, “us”), accessible from <a href="https://britinstitute.uk" className="text-rose-600 hover:text-purple-700 hover:underline font-medium transition-colors">https://britinstitute.uk</a>, we are committed to protecting your personal data and your privacy. This Privacy Policy explains how we collect, use, and safeguard your information.
-            </p>
-
-            <section>
-              <h2 className="text-xl font-bold text-purple-950 mb-3 mt-4">1. Information We Collect</h2>
-              <p className="mb-2">We may collect the following:</p>
-              <ul className="list-disc pl-6 text-gray-600 space-y-1 marker:text-purple-400">
-                <li>Full Name</li>
-                <li>Email Address</li>
-                <li>Phone Number</li>
-                <li>Course preferences and responses to form questions</li>
-                <li>Technical data (IP address, browser type, device info, cookies)</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-purple-950 mb-3 mt-4">2. How We Collect Data</h2>
-              <p className="mb-2">We collect data when you:</p>
-              <ul className="list-disc pl-6 text-gray-600 space-y-1 marker:text-purple-400">
-                <li>Fill out forms on our website or ads (e.g., Meta lead forms)</li>
-                <li>Contact us via email, phone, or social media</li>
-                <li>Browse our website (via cookies and analytics tools)</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-purple-950 mb-3 mt-4">3. How We Use Your Information</h2>
-              <p className="mb-2">We use your data to:</p>
-              <ul className="list-disc pl-6 text-gray-600 space-y-1 marker:text-purple-400">
-                <li>Contact you regarding courses, applications, and enquiries</li>
-                <li>Provide course details, counselling, and support</li>
-                <li>Improve our website, services, and user experience</li>
-                <li>Send relevant updates or promotional communication (only if appropriate)</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-purple-950 mb-3 mt-4">4. Data Sharing</h2>
-              <p className="mb-3 font-semibold text-rose-700">We do not sell your personal data.</p>
-              <p className="mb-2">We may share your data with:</p>
-              <ul className="list-disc pl-6 text-gray-600 space-y-1 marker:text-purple-400">
-                <li>Internal team members for communication and support</li>
-                <li>Trusted service providers (CRM tools, email platforms)</li>
-                <li>Legal authorities if required by law</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-purple-950 mb-3 mt-4">5. Data Storage & Security</h2>
-              <p className="mb-2">We implement appropriate technical and organizational measures to protect your data from unauthorized access, misuse, or disclosure.</p>
-              <p>However, no system is 100% secure, and we cannot guarantee absolute security.</p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-purple-950 mb-3 mt-4">6. Cookies & Tracking</h2>
-              <p className="mb-2">We use cookies and similar technologies to:</p>
-              <ul className="list-disc pl-6 text-gray-600 space-y-1 mb-3 marker:text-purple-400">
-                <li>Understand user behavior</li>
-                <li>Improve website performance</li>
-                <li>Support advertising and remarketing (e.g., Meta Pixel)</li>
-              </ul>
-              <p>You can control cookies through your browser settings.</p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-purple-950 mb-3 mt-4">7. Your Rights</h2>
-              <p className="mb-2">You have the right to:</p>
-              <ul className="list-disc pl-6 text-gray-600 space-y-1 mb-3 marker:text-purple-400">
-                <li>Access your personal data</li>
-                <li>Request correction or deletion</li>
-                <li>Withdraw consent for communication</li>
-              </ul>
-              <p>To exercise these rights, contact us at: <a href="mailto:info@britinstitute.uk" className="text-rose-600 hover:text-purple-700 hover:underline font-medium transition-colors">info@britinstitute.uk</a></p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-purple-950 mb-3 mt-4">8. Third-Party Links</h2>
-              <p>Our website may contain links to external sites. We are not responsible for their privacy practices.</p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-purple-950 mb-3 mt-4">9. Updates to This Policy</h2>
-              <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date.</p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-purple-950 mb-3 mt-4">10. Contact Us</h2>
-              <p className="mb-3">If you have any questions about this Privacy Policy, contact:</p>
-              <div className="bg-gradient-to-r from-rose-50/50 to-purple-50/50 border border-purple-100 p-6 rounded-2xl text-gray-800 shadow-sm">
-                <p className="font-bold text-purple-950 text-lg mb-2">Brit Institute</p>
-                <p className="mb-1">Email: <a href="mailto:info@britinstitute.uk" className="text-rose-600 hover:text-purple-700 hover:underline font-medium transition-colors">info@britinstitute.uk</a></p>
-                <p>Website: <a href="https://britinstitute.uk" className="text-rose-600 hover:text-purple-700 hover:underline font-medium transition-colors">https://britinstitute.uk</a></p>
-              </div>
-            </section>
-          </div>
-        </div>
-      </div>
-
-      <Footer />
-    </main>
-  );
+  return <PrivacyPolicyPageClient />;
 }

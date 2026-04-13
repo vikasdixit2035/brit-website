@@ -1,9 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
-const BRAND_RED = "#FF0033"; // AlmaBetter red
 const BRAND_CYAN = "#00E5FF"; // Free badge color
 const BRAND_BLUE = "#1D4ED8";
 const BRAND_GOLD = "#D4AF37";
@@ -124,19 +124,16 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
     return () => window.removeEventListener("resize", handler);
   }, []);
 
-  // Reset drawer courses state when drawer closes
-  useEffect(() => {
-    if (!menuOpen) {
-      setDrawerCoursesOpen(false);
-    }
-  }, [menuOpen]);
-
   const openDrop = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     setDropOpen(true);
   };
   const closeDrop = () => {
     closeTimer.current = setTimeout(() => setDropOpen(false), 180);
+  };
+  const closeMenu = () => {
+    setMenuOpen(false);
+    setDrawerCoursesOpen(false);
   };
 
   return (
@@ -581,7 +578,13 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
             <button
               className="nav-hamburger"
               data-open={menuOpen ? "true" : "false"}
-              onClick={() => setMenuOpen((p) => !p)}
+              onClick={() => {
+                setMenuOpen((p) => {
+                  const next = !p;
+                  if (!next) setDrawerCoursesOpen(false);
+                  return next;
+                });
+              }}
               aria-label="Open menu"
             >
               <span />
@@ -590,12 +593,12 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
             </button>
 
             {/* Logo */}
-            <a href="/" className="logo-text" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0, gap: "12px" }}>
-              <img src="/britinstitute.png" alt="Brit Institute" className="logo-img" style={{ height: "45px", width: "auto" }} />
+            <Link href="/" className="logo-text" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0, gap: "12px" }}>
+              <Image src="/britinstitute.png" alt="Brit Institute logo" className="logo-img" width={45} height={45} style={{ height: "45px", width: "auto" }} />
               <span style={{ fontSize: "1.5rem", fontWeight: 800, color: BRAND_BLUE, letterSpacing: "-0.02em" }}>
                 Brit <span style={{ color: BRAND_GOLD }}>Institute</span>
               </span>
-            </a>
+            </Link>
 
             {/* Courses trigger — desktop only */}
             <div
@@ -743,17 +746,17 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
       {/* ── Mobile Drawer ──────────────────────────────────────────────────── */}
       {menuOpen && (
         <div className="mobile-drawer">
-          <div className="drawer-backdrop" onClick={() => setMenuOpen(false)} />
+          <div className="drawer-backdrop" onClick={closeMenu} />
           <div className="drawer-panel">
             {/* Header */}
             <div className="drawer-header">
-              <a href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", gap: "10px" }} onClick={() => setMenuOpen(false)}>
-                <img src="/britinstitute.png" alt="Brit Institute" style={{ height: "36px", width: "auto" }} />
+              <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", gap: "10px" }} onClick={closeMenu}>
+                <Image src="/britinstitute.png" alt="Brit Institute logo" width={36} height={36} style={{ height: "36px", width: "auto" }} />
                 <span style={{ fontSize: "1.2rem", fontWeight: 800, color: BRAND_BLUE }}>
                   Brit <span style={{ color: BRAND_GOLD }}>Institute</span>
                 </span>
-              </a>
-              <button className="drawer-close-btn" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+              </Link>
+              <button className="drawer-close-btn" onClick={closeMenu} aria-label="Close menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="6" x2="6" y2="18" />
                   <line x1="6" y1="6" x2="18" y2="18" />
@@ -791,10 +794,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
                     key={course._id}
                     href={`/courses/${course.slug}`}
                     className="drawer-course-link"
-                    onClick={() => {
-                      setMenuOpen(false);
-                      setDrawerCoursesOpen(false);
-                    }}
+                    onClick={closeMenu}
                   >
                     <span style={{ color: "#9CA3AF", flexShrink: 0 }}>
                       <CourseIcon name={course.iconName} />
@@ -813,7 +813,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
                     key={href}
                     href={href}
                     className="drawer-nav-link"
-                    onClick={() => setMenuOpen(false)}
+                    onClick={closeMenu}
                   >
                     {label}
                     {badge && (
@@ -837,7 +837,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
                     key={href}
                     href={href}
                     className="drawer-nav-link"
-                    onClick={() => setMenuOpen(false)}
+                    onClick={closeMenu}
                   >
                     {label}
                     {badge && (
@@ -860,7 +860,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
               ))}
             </div>
 
-            <a href="/login" className="drawer-signin-btn" onClick={() => setMenuOpen(false)}>
+            <a href="/login" className="drawer-signin-btn" onClick={closeMenu}>
               Apply now
             </a>
           </div>

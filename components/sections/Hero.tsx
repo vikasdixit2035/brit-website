@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 // If you want to use Next.js Image, you can import it:
 // import Image from "next/image";
@@ -17,6 +18,14 @@ const HERO_IMAGES = [
   "https://ab-public-bucket-prod.s3.ap-south-1.amazonaws.com/website_hero/4.webp",
   "https://ab-public-bucket-prod.s3.ap-south-1.amazonaws.com/website_hero/5.webp",
   "https://ab-public-bucket-prod.s3.ap-south-1.amazonaws.com/website_hero/6.webp",
+];
+
+const HERO_IMAGE_ALTS = [
+  "Brit Institute learner visual for AI and data career training",
+  "Professional upskilling visual for UK data analytics careers",
+  "Career transition visual for AI and data programmes",
+  "Learner success visual for UK tech training",
+  "AI and data skills training hero visual",
 ];
 
 export default function HeroSection() {
@@ -309,9 +318,12 @@ export default function HeroSection() {
                         zIndex: activeImageIndex === idx ? 20 : 10
                       }}
                     >
-                      <img
-                        alt={`Hero ${idx + 1}`}
+                      <Image
                         src={imgSrc}
+                        alt={HERO_IMAGE_ALTS[idx]}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 500px"
+                        priority={idx === 0}
                         className="object-contain pointer-events-none object-bottom absolute h-full w-full inset-0"
                       />
                     </div>

@@ -29,6 +29,13 @@ export interface BlogArticle {
   midCta?: BlogCTA;
   bottomCta?: BlogCTA;
   relatedSlugs?: string[];
+  author?: string;
+  publishedAt?: string;
+  updatedAt?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  canonicalPath?: string;
+  ogImage?: string;
 }
 
 export const BLOG_CATEGORIES = [
@@ -52,6 +59,13 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     featured: true,
     date: "2 Apr 2026",
     readTime: "12 min read",
+    author: "Brit Institute",
+    publishedAt: "2026-04-02",
+    updatedAt: "2026-04-13",
+    canonicalPath: "/blog/how-to-become-data-analyst-uk",
+    seoTitle: "How to Become a Data Analyst in the UK",
+    seoDescription:
+      "Learn the practical step-by-step path to becoming a data analyst in the UK, including skills, salaries, portfolios, and job strategy.",
     color: "#3B82F6",
     relatedSlugs: ["data-analyst-salary-uk-2026", "data-analyst-vs-data-scientist", "best-ai-tools-data-analysts-2026"],
     midCta: {
@@ -193,6 +207,13 @@ If your goal is to transition quickly, structured learning often reduces trial a
     featured: true,
     date: "28 Mar 2026",
     readTime: "10 min read",
+    author: "Brit Institute",
+    publishedAt: "2026-03-28",
+    updatedAt: "2026-04-13",
+    canonicalPath: "/blog/data-analyst-vs-data-scientist",
+    seoTitle: "Data Analyst vs Data Scientist in the UK",
+    seoDescription:
+      "Compare data analyst and data scientist careers in the UK, including tools, salaries, entry barriers, and role fit.",
     color: "#8B5CF6",
     relatedSlugs: ["how-to-become-data-analyst-uk", "data-analyst-salary-uk-2026", "best-ai-tools-data-analysts-2026"],
     midCta: {
@@ -317,6 +338,13 @@ Many professionals start as analysts and transition into data science later afte
     featured: true,
     date: "20 Mar 2026",
     readTime: "10 min read",
+    author: "Brit Institute",
+    publishedAt: "2026-03-20",
+    updatedAt: "2026-04-13",
+    canonicalPath: "/blog/data-analyst-salary-uk-2026",
+    seoTitle: "Data Analyst Salary in the UK (2026 Guide)",
+    seoDescription:
+      "See current data analyst salary ranges in the UK by experience, location, and industry, plus the skills that influence pay.",
     color: "#10B981",
     relatedSlugs: ["how-to-become-data-analyst-uk", "data-analyst-vs-data-scientist", "best-ai-tools-data-analysts-2026"],
     midCta: {
@@ -439,6 +467,10 @@ This makes data analytics one of the more stable and scalable career paths in th
     featured: false,
     date: "15 Mar 2026",
     readTime: "7 min read",
+    author: "Brit Institute",
+    publishedAt: "2026-03-15",
+    updatedAt: "2026-04-13",
+    canonicalPath: "/blog/best-ai-tools-data-analysts-2026",
     color: "#F59E0B",
     content: `AI is rapidly changing the data analytics landscape. Here are the most impactful tools that every data analyst should know in 2026.
 
@@ -476,6 +508,10 @@ Absolutely. Employers increasingly expect familiarity with AI-assisted tools. Th
     featured: false,
     date: "10 Mar 2026",
     readTime: "9 min read",
+    author: "Brit Institute",
+    publishedAt: "2026-03-10",
+    updatedAt: "2026-04-13",
+    canonicalPath: "/blog/how-to-start-career-data-science-uk",
     color: "#3B82F6",
     content: `Data science continues to be one of the most sought-after career paths in the UK. Here is a comprehensive guide to getting started.
 
@@ -522,6 +558,10 @@ Data science roles in the UK typically pay £40,000–£80,000+, with London off
     featured: false,
     date: "5 Mar 2026",
     readTime: "5 min read",
+    author: "Brit Institute",
+    publishedAt: "2026-03-05",
+    updatedAt: "2026-04-13",
+    canonicalPath: "/blog/is-data-analytics-good-career-uk",
     color: "#EF4444",
     content: `If you are considering a career change or entering the job market, data analytics is one of the strongest options available in the UK today.
 
@@ -563,6 +603,10 @@ Yes — data analytics is an excellent career in the UK, particularly for those 
     featured: false,
     date: "1 Mar 2026",
     readTime: "6 min read",
+    author: "Brit Institute",
+    publishedAt: "2026-03-01",
+    updatedAt: "2026-04-13",
+    canonicalPath: "/blog/python-vs-sql-data-analysts",
     color: "#F59E0B",
     content: `Both Python and SQL are essential for data analysts, but which should you learn first? Here is our recommendation.
 
@@ -605,6 +649,10 @@ Most UK data analyst job listings require SQL. About 60% also list Python as a p
     featured: false,
     date: "22 Feb 2026",
     readTime: "5 min read",
+    author: "Brit Institute",
+    publishedAt: "2026-02-22",
+    updatedAt: "2026-04-13",
+    canonicalPath: "/blog/data-scientist-salary-uk-2026",
     color: "#10B981",
     content: `Data science remains one of the highest-paying tech careers in the UK. Here is a comprehensive salary breakdown for 2026.
 
@@ -650,6 +698,10 @@ The average data scientist salary in the UK is approximately £52,000, with a wi
     featured: false,
     date: "15 Feb 2026",
     readTime: "8 min read",
+    author: "Brit Institute",
+    publishedAt: "2026-02-15",
+    updatedAt: "2026-04-13",
+    canonicalPath: "/blog/how-to-become-ai-specialist-uk",
     color: "#3B82F6",
     content: `AI and automation are reshaping industries across the UK. Here is how to position yourself for a career in this rapidly growing field.
 

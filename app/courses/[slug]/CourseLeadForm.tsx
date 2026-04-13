@@ -1,10 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Icons } from "@/components/ui/Icons";
-
-const BRIT_BLUE = "#9333EA"; // Based on screenshot, primary color is purple. Actually in modal it was #1D4ED8. 
-// Wait, screenshot shows purple button for Download Brochure and Submit. I'll use #9333ea.
 
 export default function CourseLeadForm({ courseTitle }: { courseTitle: string }) {
   const [formData, setFormData] = useState({
@@ -128,7 +126,7 @@ export default function CourseLeadForm({ courseTitle }: { courseTitle: string })
             className="mt-1 accent-[#10B981] w-4 h-4 cursor-pointer"
           />
           <label htmlFor="agree" className="text-xs text-gray-600 leading-relaxed cursor-pointer">
-            I agree to Brit Institute's <a href="#" className="font-semibold text-gray-900 underline">Terms & Conditions</a> and <a href="#" className="font-semibold text-gray-900 underline">Privacy Policy</a>.
+            I agree to Brit Institute&apos;s <Link href="/terms" className="font-semibold text-gray-900 underline">Terms & Conditions</Link> and <Link href="/privacy-policy" className="font-semibold text-gray-900 underline">Privacy Policy</Link>.
           </label>
         </div>
 

@@ -1,52 +1,31 @@
-"use client";
+import HomePageClient from "@/app/HomePageClient";
+import { buildMetadata, organizationSchema, websiteSchema } from "@/lib/seo";
 
-import { useState, useEffect } from "react";
+export const metadata = buildMetadata({
+  title: "AI and Data Career Training in the UK",
+  description:
+    "Discover practical AI and data career programmes in the UK with real projects, structured learning, and dedicated career support from Brit Institute.",
+  path: "/",
+  keywords: [
+    "AI course UK",
+    "data analytics course UK",
+    "data career training UK",
+    "AI and data careers UK",
+  ],
+});
 
-import TopBanner from "@/components/layout/TopBanner";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-
-import Hero from "@/components/sections/Hero";
-import LogoStrip from "@/components/sections/LogoStrip";
-import PainPoints from "@/components/sections/PainPoints";
-import Solution from "@/components/sections/Solution";
-import Outcomes from "@/components/sections/Outcomes";
-import Testimonials from "@/components/sections/Testimonials";
-import Programs from "@/components/sections/Programs";
-import StickyForm from "@/components/sections/StickyForm";
 export default function Home() {
-  const [banner, setBanner] = useState(true);
-
   return (
     <>
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
-
-      {/* 1. Hero */}
-      <Hero />
-
-      {/* Logo Strip for initial trust */}
-      <LogoStrip />
-
-      {/* 2. Pain Points */}
-      <PainPoints />
-
-      {/* 3. Solution */}
-      <Solution />
-
-      {/* 4. Outcomes */}
-      <Outcomes />
-
-      {/* 5. Proof (Testimonials) */}
-      <Testimonials />
-
-      {/* 6. Programme Snapshot */}
-      <Programs />
-
-      {/* 7. Sticky Form */}
-      <StickyForm />
-
-      <Footer />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
+      />
+      <HomePageClient />
     </>
   );
 }

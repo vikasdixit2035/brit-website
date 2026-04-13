@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { Icons } from "@/components/ui/Icons";
 
@@ -111,7 +113,7 @@ export default function OfferModal({ isOpen, onClose }: OfferModalProps) {
           <div style={{ marginTop: "40px", flex: 1, display: "flex", alignItems: "flex-end" }}>
             {/* Simple Graphic or Logo */}
             <div style={{ width: "120px", height: "120px", background: "rgba(255,255,255,0.1)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img src="/britinstitute.png" alt="Logo" style={{ width: "80%", borderRadius: "4px" }} />
+              <Image src="/britinstitute.png" alt="Brit Institute logo" width={96} height={96} style={{ width: "80%", height: "auto", borderRadius: "4px" }} />
             </div>
           </div>
         </div>
@@ -244,7 +246,7 @@ export default function OfferModal({ isOpen, onClose }: OfferModalProps) {
                 style={{ marginTop: "4px", accentColor: "#10B981" }}
               />
               <label htmlFor="agree" style={{ fontSize: "0.85rem", color: "#4B5563", lineHeight: 1.5 }}>
-                I agree to Brit Institute's <a href="#" style={{ color: "#111827", fontWeight: 600 }}>Terms & Conditions</a> and <a href="#" style={{ color: "#111827", fontWeight: 600 }}>Privacy Policy.</a>
+                I agree to Brit Institute&apos;s <Link href="/terms" style={{ color: "#111827", fontWeight: 600 }}>Terms & Conditions</Link> and <Link href="/privacy-policy" style={{ color: "#111827", fontWeight: 600 }}>Privacy Policy</Link>.
               </label>
             </div>
 

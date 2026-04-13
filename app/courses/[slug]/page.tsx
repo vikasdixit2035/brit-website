@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   Download, Eye, ChevronRight, CheckCircle2, Briefcase,
@@ -8,6 +10,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CourseLeadForm from "./CourseLeadForm";
 import { coursesData } from "./courseData";
+import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 interface Course {
   _id: string;
@@ -38,6 +42,35 @@ async function getCourse(slug: string): Promise<Course | null> {
   }
 }
 
+export async function generateStaticParams() {
+  return Object.keys(coursesData).map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const richData = coursesData[slug];
+
+  if (!richData) {
+    return buildMetadata({
+      title: "Courses",
+      description: "Explore Brit Institute courses in AI and data.",
+      path: "/courses",
+    });
+  }
+
+  return buildMetadata({
+    title: richData.seoTitle,
+    description: richData.seoDescription,
+    path: richData.canonicalPath,
+    image: richData.ogImage,
+    keywords: [richData.seoTitle, "Brit Institute courses", "UK career training"],
+  });
+}
+
 function StarIcon({ fill = "currentColor" }) {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill={fill} stroke={fill} strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
@@ -63,6 +96,28 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
   }
 
   const richData = coursesData[resolvedParams.slug];
+  const coursePath = richData?.canonicalPath ?? `/courses/${resolvedParams.slug}`;
+  const courseSchema = richData
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        name: richData.seoTitle,
+        description: richData.seoDescription,
+        provider: {
+          "@type": "Organization",
+          name: SITE_NAME,
+          sameAs: SITE_URL,
+        },
+        educationalCredentialAwarded: "Certificate of Completion",
+        timeRequired: richData.duration,
+        teaches: richData.toolsCovered,
+      }
+    : null;
+  const breadcrumbs = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Courses", path: "/courses" },
+    { name: richData?.seoTitle ?? course.title, path: coursePath },
+  ]);
 
   // Fallback points for backward compatibility
   const points = (course.desc || "")
@@ -72,6 +127,16 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
 
   return (
     <div className="bg-[#FAFBFF] min-h-screen font-sans text-gray-900 selection:bg-purple-200">
+      {courseSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
+        />
+      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
       <Navbar hasBanner={false} />
 
       <main className="pt-28 pb-20 max-w-[1200px] mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 lg:gap-16">
@@ -81,9 +146,9 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
 
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8 font-medium">
-            <a href="/" className="hover:text-purple-600 transition-colors">Home</a>
+            <Link href="/" className="hover:text-purple-600 transition-colors">Home</Link>
             <ChevronRight className="w-4 h-4 text-gray-300" />
-            <a href="/courses" className="hover:text-purple-600 transition-colors">Courses</a>
+            <Link href="/courses" className="hover:text-purple-600 transition-colors">Courses</Link>
             <ChevronRight className="w-4 h-4 text-gray-300" />
             <span className="text-purple-600 font-semibold">{course.title}</span>
           </nav>
@@ -115,9 +180,14 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
             {/* Social Proof / Trust Layer */}
             <div className="flex flex-wrap md:flex-nowrap items-center gap-4 bg-white shadow-sm p-2 pr-6 rounded-full border border-gray-200/60 w-max max-w-full">
               <div className="flex -space-x-3 ml-2 flex-shrink-0">
-                <img src="https://i.pravatar.cc/100?img=1" className="w-10 h-10 rounded-full border-2 border-white bg-gray-100 shadow-sm" alt="Learner" />
-                <img src="https://i.pravatar.cc/100?img=5" className="w-10 h-10 rounded-full border-2 border-white bg-gray-100 shadow-sm" alt="Learner" />
-                <img src="https://i.pravatar.cc/100?img=3" className="w-10 h-10 rounded-full border-2 border-white bg-gray-100 shadow-sm" alt="Learner" />
+                {["AL", "RP", "SK"].map((initials) => (
+                  <span
+                    key={initials}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-gradient-to-br from-blue-600 to-indigo-600 text-xs font-bold text-white shadow-sm"
+                  >
+                    {initials}
+                  </span>
+                ))}
               </div>
               <div className="text-sm font-bold text-gray-900 border-r border-gray-200 pr-4">
                 {richData ? richData.trustLayer.learnersTrained : "300K+"} <span className="text-gray-500 font-medium">Trained</span>
