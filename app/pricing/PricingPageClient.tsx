@@ -254,7 +254,7 @@ export default function PricingPageClient({ courses }: PricingPageClientProps) {
                     One-time programme fee
                   </p>
 
-                  <div className="mt-4 space-y-4 md:min-h-[190px]">
+                  <div className="mt-4 space-y-4 md:min-h-[150px]">
                     <p className="text-2xl font-bold leading-tight text-slate-900">
                       {card.fullTitle}
                     </p>
