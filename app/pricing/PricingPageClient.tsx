@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   Check,
   Clock3,
   CreditCard,
   Phone,
-  Sparkles,
   Star,
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
@@ -56,6 +56,25 @@ const COURSE_STYLES: Record<string, {
     accentSoft: "rgba(234,88,12,0.12)",
     gradient: "linear-gradient(135deg, #F59E0B 0%, #EA580C 100%)",
     comparisonLabel: "Best for practical generative AI workflows",
+  },
+} as const;
+
+const COURSE_CARD_IMAGES: Record<string, { src: string; alt: string }> = {
+  "data-analytics": {
+    src: "/da-Photoroom.png",
+    alt: "Data analytics course image",
+  },
+  "data-science": {
+    src: "/ds-ml-Photoroom.png",
+    alt: "Data science and machine learning course image",
+  },
+  "ai-automation": {
+    src: "/agentic-ai-Photoroom.png",
+    alt: "Agentic AI course image",
+  },
+  "gen-ai": {
+    src: "/genai-Photoroom.png",
+    alt: "Generative AI course image",
   },
 } as const;
 
@@ -204,8 +223,15 @@ export default function PricingPageClient({ courses }: PricingPageClientProps) {
                     </span>
                   </div>
 
-                  <div className="mb-8 flex h-24 items-center justify-center">
-                    <Sparkles className="h-12 w-12 text-white/90" strokeWidth={1.8} />
+                  <div className="relative mb-8 h-40 overflow-hidden rounded-[22px] sm:h-44 md:h-48">
+                    <Image
+                      src={COURSE_CARD_IMAGES[card.slug]?.src ?? "/genai.jpg"}
+                      alt={COURSE_CARD_IMAGES[card.slug]?.alt ?? card.fullTitle}
+                      fill
+                      className="object-contain object-center scale-[1.15]"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      priority={index < 2}
+                    />
                   </div>
 
                   <div className="flex flex-wrap items-center justify-between gap-3">
