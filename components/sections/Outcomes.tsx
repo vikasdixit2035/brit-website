@@ -1,36 +1,33 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  Code,
-  Layers,
   Star,
   Clock,
   CheckCircle,
-  BarChart,
-  Brain,
-  Database,
-  Cpu,
-  LineChart,
-  BotMessageSquare,
-  Sparkles,
-  LucideIcon,
 } from "lucide-react";
 import useReveal from "@/hooks/useReveal";
 
-// ─── Icon map — must match the iconName values stored in MongoDB ──────────────
-const ICON_MAP: Record<string, LucideIcon> = {
-  BarChart,
-  Code,
-  Layers,
-  Brain,
-  Database,
-  Cpu,
-  LineChart,
-  BotMessageSquare,
-  Sparkles,
-};
+const COURSE_CARD_IMAGES: Record<string, { src: string; alt: string }> = {
+  "data-analytics": {
+    src: "/da-Photoroom.png",
+    alt: "Data analytics course image",
+  },
+  "data-science": {
+    src: "/ds-ml-Photoroom.png",
+    alt: "Data science and machine learning course image",
+  },
+  "ai-automation": {
+    src: "/agentic-ai-Photoroom.png",
+    alt: "Agentic AI course image",
+  },
+  "gen-ai": {
+    src: "/genai-Photoroom.png",
+    alt: "Generative AI course image",
+  },
+} as const;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface Course {
@@ -176,7 +173,10 @@ export default function Programs() {
               </p>
             ) : (
               displayCourses.map((course, idx) => {
-                const IconComponent = ICON_MAP[course.iconName] ?? BarChart;
+                const courseImage = COURSE_CARD_IMAGES[course.slug] ?? {
+                  src: "/genai.jpg",
+                  alt: course.title,
+                };
                 return (
                   <div
                     key={`${course.slug}-${idx}`}
@@ -190,8 +190,14 @@ export default function Programs() {
                         {course.topBadge}
                       </span>
 
-                      <div className="transform group-hover:scale-110 transition-transform duration-500">
-                        <IconComponent size={56} color="white" strokeWidth={1.5} />
+                      <div className="relative h-40 w-full max-w-[240px] transform group-hover:scale-110 transition-transform duration-500">
+                        <Image
+                          src={courseImage.src}
+                          alt={courseImage.alt}
+                          fill
+                          className="object-contain object-center"
+                          sizes="(max-width: 768px) 100vw, 240px"
+                        />
                       </div>
 
                       <div className="absolute bottom-4 left-4 bg-black/30 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-lg border border-white/10 uppercase tracking-wide">
