@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/site";
+import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL, SITE_EMAIL, SITE_PHONE_UK } from "@/lib/site";
 
 type MetaInput = {
   title: string;
@@ -85,12 +85,20 @@ export function organizationSchema() {
     url: SITE_URL,
     logo: absoluteUrl("/britinstitute.png"),
     email: "info@britinstitute.uk",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Office 7084, 58 Peregrine Road",
+      addressLocality: "Hainault",
+      addressRegion: "Ilford",
+      addressCountry: "GB",
+      postalCode: "IG6 3SZ",
+    },
     contactPoint: [
       {
         "@type": "ContactPoint",
         contactType: "customer support",
-        email: "info@britinstitute.uk",
-        telephone: "+447520664011",
+        email: SITE_EMAIL,
+        telephone: SITE_PHONE_UK,
         areaServed: "GB",
         availableLanguage: ["en"],
       },
