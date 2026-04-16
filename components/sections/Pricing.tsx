@@ -34,7 +34,7 @@ export default function Pricing() {
             <a href="#final-cta" className="btn-gold lg pulse">Enroll Now</a>
             <a href="#faq" className="btn-outline btn-outline-white hidden-mobile">Have questions?</a>
           </div>
-          <p className="price-note" style={{ marginTop: '24px' }}>Flexible EMI starting from ₹8,333/mo</p>
+          <p className="price-note" style={{ marginTop: '24px' }}>Flexible EMI starting from £8,333/mo</p>
         </div>
       </div>
     </section>

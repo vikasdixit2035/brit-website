@@ -5,6 +5,7 @@ import TopBanner from "@/components/layout/TopBanner";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { SITE_STATS } from "@/lib/site";
+import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 
 /* ── tokens ── */
 const BLUE = "#1D4ED8";
@@ -12,8 +13,8 @@ const GOLD = "#D4AF37";
 const DEEP = "#0a0f1e";
 
 /* ── webinar date (update as needed) ── */
-const WEBINAR_DATE = "Saturday, 19 April 2026";
-const WEBINAR_TIME = "11:00 AM – 12:30 PM (UK Time)";
+const WEBINAR_DATE = "Coming Soon";
+const WEBINAR_TIME = "Coming Soon";
 
 /* ── what you'll learn ── */
 const LEARN_POINTS = [
@@ -102,6 +103,7 @@ export default function WebinarPage() {
   /* form */
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phoneCountry, setPhoneCountry] = useState(DEFAULT_PHONE_COUNTRY_CODE);
   const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -131,14 +133,14 @@ export default function WebinarPage() {
         body: JSON.stringify({
           name: name.trim(),
           email: email.trim(),
-          phone: phone.trim() || undefined,
+          phone: phone.trim() ? `${phoneCountry} ${phone.trim()}` : undefined,
           source: "webinar",
           message: `Webinar registration – ${WEBINAR_DATE}`,
         }),
       });
       if (!res.ok) throw new Error("Failed");
       setSuccess(true);
-      setName(""); setEmail(""); setPhone("");
+      setName(""); setEmail(""); setPhoneCountry(DEFAULT_PHONE_COUNTRY_CODE); setPhone("");
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -790,7 +792,39 @@ export default function WebinarPage() {
                     </div>
                     <div className="wb-field">
                       <label className="wb-label">Phone Number *</label>
-                      <input className="wb-input" type="tel" placeholder="e.g. +44 7700 900000" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                      <div style={{ display: "flex", gap: "12px" }}>
+                        <div style={{ position: "relative", width: "180px" }}>
+                          <select
+                            value={phoneCountry}
+                            onChange={(e) => setPhoneCountry(e.target.value)}
+                            style={{
+                              width: "100%",
+                              padding: "13px 36px 13px 16px",
+                              border: "1.5px solid #E5E7EB",
+                              borderRadius: "10px",
+                              fontSize: ".92rem",
+                              color: "#111827",
+                              background: "#FAFAFA",
+                              fontFamily: "inherit",
+                              transition: "border-color .2s, box-shadow .2s",
+                              outline: "none",
+                              appearance: "none",
+                            }}
+                          >
+                            {PHONE_COUNTRY_CODES.map((country) => (
+                              <option key={country.value} value={country.value}>
+                                {country.label}
+                              </option>
+                            ))}
+                          </select>
+                          <div style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#6B7280" }}>
+                            <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </div>
+                        </div>
+                        <input className="wb-input" style={{ flex: 1 }} type="tel" placeholder="e.g. 7700 900000" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                      </div>
                     </div>
 
                     <button type="submit" className="wb-submit" disabled={submitting}>

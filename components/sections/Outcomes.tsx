@@ -14,6 +14,7 @@ import {
   Cpu,
   LineChart,
   BotMessageSquare,
+  Sparkles,
   LucideIcon,
 } from "lucide-react";
 import useReveal from "@/hooks/useReveal";
@@ -28,6 +29,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Cpu,
   LineChart,
   BotMessageSquare,
+  Sparkles,
 };
 
 // ─── Types ───────────────────────────────────────────────────────────────────

@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
+import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 
 export default function ChatbotFloat() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,6 +25,10 @@ export default function ChatbotFloat() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const payload = Object.fromEntries(formData.entries());
+    const phoneCountry = String(payload.phoneCountry ?? DEFAULT_PHONE_COUNTRY_CODE);
+    const phone = String(payload.phone ?? "");
+    payload.phone = `${phoneCountry} ${phone.trim()}`.trim();
+    delete payload.phoneCountry;
     payload.source = "Chatbot";
 
     try {
@@ -158,7 +163,27 @@ export default function ChatbotFloat() {
 
                 <div style={{ position: "relative" }}>
                   <label style={{ position: "absolute", top: "-10px", left: "10px", background: "white", padding: "0 4px", fontSize: "0.85rem", color: "#4B5563" }}>Phone number <span style={{ color: "red" }}>*</span></label>
-                  <input name="phone" required type="tel" style={{ width: "100%", padding: "14px", border: "1px solid #D1D5DB", borderRadius: "8px", outline: "none", boxSizing: "border-box", fontSize: "0.95rem" }} />
+                  <div style={{ display: "flex", gap: "8px" }}>
+                    <div style={{ position: "relative", width: "180px" }}>
+                      <select
+                        name="phoneCountry"
+                        defaultValue={DEFAULT_PHONE_COUNTRY_CODE}
+                        style={{ width: "100%", padding: "14px 34px 14px 14px", border: "1px solid #D1D5DB", borderRadius: "8px", outline: "none", boxSizing: "border-box", fontSize: "0.95rem", appearance: "none", background: "white" }}
+                      >
+                        {PHONE_COUNTRY_CODES.map((country) => (
+                          <option key={country.value} value={country.value}>
+                            {country.label}
+                          </option>
+                        ))}
+                      </select>
+                      <div style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#6B7280" }}>
+                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <input name="phone" required type="tel" placeholder="Phone number" style={{ flex: 1, padding: "14px", border: "1px solid #D1D5DB", borderRadius: "8px", outline: "none", boxSizing: "border-box", fontSize: "0.95rem" }} />
+                  </div>
                 </div>
 
                 <button 

@@ -11,6 +11,7 @@ import Footer from "@/components/layout/Footer";
 import CourseLeadForm from "./CourseLeadForm";
 import { coursesData } from "./courseData";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
+import { fetchCourseBySlug } from "@/lib/courses";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 interface Course {
@@ -18,28 +19,15 @@ interface Course {
   slug: string;
   title: string;
   desc: string;
+  price?: number;
+  currency?: string;
   duration: string;
   iconName: string;
   topBadge?: string;
 }
 
 async function getCourse(slug: string): Promise<Course | null> {
-  try {
-    const API_URL = process.env.NODE_ENV === "development"
-      ? `http://localhost:4000/api/courses/${slug}`
-      : `https://api.britinstitute.uk/api/courses/${slug}`;
-
-    const res = await fetch(API_URL, {
-      cache: "no-store",
-      next: { tags: ['courses'] }
-    });
-    if (!res.ok) return null;
-    const json = await res.json();
-    return json.data;
-  } catch (e) {
-    console.error("Failed to fetch course:", e);
-    return null;
-  }
+  return fetchCourseBySlug(slug);
 }
 
 export async function generateStaticParams() {
@@ -353,7 +341,11 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                       <Zap className="w-4 h-4" /> Course Investment
                     </h3>
                     <div className="text-4xl font-extrabold text-gray-900 mb-2">
-                      {richData.pricing.price}
+                      {course.price ? new Intl.NumberFormat("en-GB", {
+                        style: "currency",
+                        currency: course.currency ?? "GBP",
+                        maximumFractionDigits: 0,
+                      }).format(course.price) : richData.pricing.price}
                     </div>
                     {richData.pricing.emi && (
                       <span className="inline-block bg-white text-emerald-700 text-xs font-bold px-3 py-1 rounded-full border border-emerald-200">

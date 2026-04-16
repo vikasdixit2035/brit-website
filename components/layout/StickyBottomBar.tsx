@@ -10,15 +10,16 @@ export default function StickyBottomBar() {
           left: 0;
           width: 100%;
           z-index: 999;
-          background: linear-gradient(90deg, #fce4ec 0%, #f8bbd0 50%, #fce4ec 100%);
-          border-top: 1px solid #f48fb1;
+          background:
+            linear-gradient(90deg, rgba(29, 78, 216, 0.98) 0%, rgba(255, 255, 255, 0.98) 52%, rgba(212, 175, 55, 0.98) 100%);
+          border-top: 1px solid rgba(29, 78, 216, 0.18);
           padding: 10px 0;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 6px;
           font-family: system-ui, -apple-system, sans-serif;
-          box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+          box-shadow: 0 -4px 18px rgba(29, 78, 216, 0.12);
         }
 
         .sticky-bottom-bar__content {
@@ -35,7 +36,7 @@ export default function StickyBottomBar() {
         }
 
         .sticky-bottom-bar__text {
-          color: #37474f;
+          color: #1f2937;
           font-size: 0.88rem;
           font-weight: 500;
           letter-spacing: 0.01em;
@@ -43,17 +44,17 @@ export default function StickyBottomBar() {
 
         .sticky-bottom-bar__text--bold {
           font-weight: 700;
-          color: #1a237e;
+          color: #0f172a;
         }
 
         .sticky-bottom-bar__divider {
-          color: #90a4ae;
+          color: rgba(15, 23, 42, 0.28);
           margin: 0 4px;
           font-weight: 300;
         }
 
         .sticky-bottom-bar__phone {
-          color: #1a237e;
+          color: #1d4ed8;
           font-weight: 700;
           font-size: 0.88rem;
           text-decoration: none;
@@ -61,12 +62,12 @@ export default function StickyBottomBar() {
         }
 
         .sticky-bottom-bar__phone:hover {
-          color: #d50000;
+          color: #b45309;
           text-decoration: underline;
         }
 
         .sticky-bottom-bar__cta {
-          color: #d50000;
+          color: #b45309;
           font-weight: 800;
           font-size: 0.88rem;
           text-decoration: none;
@@ -78,7 +79,7 @@ export default function StickyBottomBar() {
         }
 
         .sticky-bottom-bar__cta:hover {
-          color: #b71c1c;
+          color: #92400e;
           text-decoration: underline;
         }
 
@@ -95,6 +96,9 @@ export default function StickyBottomBar() {
           .sticky-bottom-bar__phone,
           .sticky-bottom-bar__cta {
             font-size: 0.75rem;
+          }
+          .sticky-bottom-bar__content {
+            gap: 4px;
           }
         }
       `}</style>

@@ -15,10 +15,10 @@ export default function Footer() {
         <div className="f-col">
           <h4 style={{ color: 'var(--blue-900)' }}>Programs</h4>
           <ul>
-            <li><Link href="/#programs" style={{ color: 'var(--gray-500)' }}>Agentic AI</Link></li>
-            <li><Link href="/#programs" style={{ color: 'var(--gray-500)' }}>Data Analytics</Link></li>
-            <li><Link href="/#curriculum" style={{ color: 'var(--gray-500)' }}>Curriculum</Link></li>
-            <li><Link href="/#placement" style={{ color: 'var(--gray-500)' }}>Placement</Link></li>
+            <li><Link href="/courses/data-analytics" style={{ color: 'var(--gray-500)' }}>Data Analytics with Gen AI</Link></li>
+            <li><Link href="/courses/data-science" style={{ color: 'var(--gray-500)' }}>Data Science &amp; Machine Learning</Link></li>
+            <li><Link href="/courses/ai-automation" style={{ color: 'var(--gray-500)' }}>Agentic AI</Link></li>
+            <li><Link href="/courses/gen-ai" style={{ color: 'var(--gray-500)' }}>Gen AI</Link></li>
           </ul>
         </div>
         <div className="f-col">

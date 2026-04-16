@@ -5,6 +5,7 @@ import Link from "next/link";
 import TopBanner from "@/components/layout/TopBanner";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 
 /* ── colour tokens ── */
 const BLUE = "#1D4ED8";
@@ -90,18 +91,19 @@ export default function ResourcesPage() {
   const [banner, setBanner] = useState(true);
 
   /* reveal refs */
-  const hero  = useReveal();
+  const hero = useReveal();
   const cards = useReveal();
-  const form  = useReveal();
+  const form = useReveal();
 
   /* form state */
   const [selected, setSelected] = useState<string | null>(null);
-  const [name, setName]         = useState("");
-  const [email, setEmail]       = useState("");
-  const [phone, setPhone]       = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneCountry, setPhoneCountry] = useState(DEFAULT_PHONE_COUNTRY_CODE);
+  const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess]   = useState(false);
-  const [error, setError]       = useState("");
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   const formRef = useRef<HTMLDivElement>(null);
 
@@ -134,7 +136,7 @@ export default function ResourcesPage() {
         body: JSON.stringify({
           name: name.trim(),
           email: email.trim(),
-          phone: phone.trim() || undefined,
+          phone: phone.trim() ? `${phoneCountry} ${phone.trim()}` : undefined,
           source: "resources",
           resource: selected,
           message: `Resource download: ${RESOURCES.find((r) => r.id === selected)?.title ?? selected}`,
@@ -142,7 +144,7 @@ export default function ResourcesPage() {
       });
       if (!res.ok) throw new Error("Submission failed");
       setSuccess(true);
-      setName(""); setEmail(""); setPhone("");
+      setName(""); setEmail(""); setPhoneCountry(DEFAULT_PHONE_COUNTRY_CODE); setPhone("");
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -218,7 +220,7 @@ export default function ResourcesPage() {
         }
 
         /* shared */
-        .rs-section { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+        .rs-section { max-width: 80%; margin: 0 auto; padding: 0 24px; }
         .rs-section-title { text-align: center; margin-bottom: 48px; }
         .rs-section-title h2 {
           font-size: clamp(1.6rem, 3vw, 2.2rem);
@@ -233,7 +235,7 @@ export default function ResourcesPage() {
         /* ── resource cards ── */
         .rs-cards-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          grid-template-columns: 1fr;
           gap: 24px;
         }
         .rs-card {
@@ -479,8 +481,15 @@ export default function ResourcesPage() {
         .rs-s3 { transition-delay: .3s; }
         .rs-s4 { transition-delay: .4s; }
 
+        @media (min-width: 640px) {
+          .rs-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (min-width: 768px) {
+          .rs-cards-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        }
+
         @media (max-width: 768px) {
-          .rs-cards-grid { grid-template-columns: 1fr; }
           .rs-form-wrap { padding: 32px 20px; }
           .rs-extra-grid { grid-template-columns: 1fr; }
           .rs-cta { padding: 40px 24px; }
@@ -495,12 +504,6 @@ export default function ResourcesPage() {
         style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}
       >
         <div ref={hero.ref} className={`rs-hero-inner rs-fade-up ${hero.visible ? "rs-vis" : ""}`}>
-          <div className="rs-pill">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-            </svg>
-            Resources &amp; Guides
-          </div>
           <h1 className="rs-h1">
             AI, Data Analytics and Data Science<br />
             <span>Resources for the UK Market</span>
@@ -642,13 +645,35 @@ export default function ResourcesPage() {
                   </div>
                   <div className="rs-field">
                     <label className="rs-label">Phone Number <span style={{ color: "#9CA3AF", fontWeight: 400 }}>(optional)</span></label>
-                    <input
-                      className="rs-input"
-                      type="tel"
-                      placeholder="e.g. +44 7700 900000"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
+                    <div style={{ display: "flex", gap: "8px" }}>
+                      <div style={{ position: "relative", width: "180px" }}>
+                        <select
+                          className="rs-input"
+                          style={{ width: "100%", paddingRight: "36px", appearance: "none" }}
+                          value={phoneCountry}
+                          onChange={(e) => setPhoneCountry(e.target.value)}
+                        >
+                          {PHONE_COUNTRY_CODES.map((country) => (
+                            <option key={country.value} value={country.value}>
+                              {country.label}
+                            </option>
+                          ))}
+                        </select>
+                        <div style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#6B7280" }}>
+                          <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+                      </div>
+                      <input
+                        className="rs-input"
+                        type="tel"
+                        placeholder="e.g. 7700 900000"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        style={{ flex: 1 }}
+                      />
+                    </div>
                   </div>
 
                   <button
@@ -723,7 +748,7 @@ export default function ResourcesPage() {
               <p>Explore structured programmes designed to take you from beginner to job-ready in data, AI, and automation.</p>
               <Link href="/courses" className="rs-btn-gold">
                 Explore Courses
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
               </Link>
             </div>
           </div>

@@ -160,13 +160,13 @@ function AnimatedNumber({ value, visible, prefix = "", suffix = "" }: { value: n
 export default function CareersPage() {
   const [banner, setBanner] = useState(true);
 
-  const hero      = useReveal();
-  const salaries  = useReveal();
-  const roles     = useReveal();
-  const skills    = useReveal();
-  const hiring    = useReveal();
-  const paths     = useReveal();
-  const ctaSec    = useReveal();
+  const hero = useReveal();
+  const salaries = useReveal();
+  const roles = useReveal();
+  const skills = useReveal();
+  const hiring = useReveal();
+  const paths = useReveal();
+  const ctaSec = useReveal();
 
   return (
     <main style={{ background: "#FAFAFA", minHeight: "100vh", fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)", color: "#111827" }}>
@@ -485,12 +485,7 @@ export default function CareersPage() {
         style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}
       >
         <div ref={hero.ref} className={`cr-hero-inner cr-fade-up ${hero.visible ? "cr-vis" : ""}`}>
-          <div className="cr-pill">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-            </svg>
-            Careers
-          </div>
+
           <h1 className="cr-h1">
             Careers in <span>AI, Data Analytics</span><br />and Data Science in the UK
           </h1>
@@ -702,7 +697,7 @@ export default function CareersPage() {
               <Link href="/courses" className="cr-btn-gold">
                 Explore Courses
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
                 </svg>
               </Link>
             </div>

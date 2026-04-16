@@ -10,6 +10,7 @@ const BRAND_GOLD = "#D4AF37";
 const NAV_BG = "#000000";
 const NAV_LINK = "#ffffff";
 const NAV_LINK_HOVER = "#d1d5db";
+const TOP_BANNER_HEIGHT = 40;
 
 // Badge colour map
 const BADGE_COLOURS: Record<string, { bg: string; text: string }> = {
@@ -45,6 +46,7 @@ const NAV_RIGHT_LINKS: NavLink[] = [
   { href: "/resources", label: "Resources" },
   { href: "/webinar", label: "Webinar" },
   { href: "/blog", label: "Blog" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/careers", label: "Careers" },
   { href: "/about", label: "About" },
 ];
@@ -59,6 +61,7 @@ const MOBILE_MENU_LINKS: NavLink[] = [
   { href: "/resources", label: "Resources" },
   { href: "/webinar", label: "Webinar" },
   { href: "/blog", label: "Blog" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/careers", label: "Careers" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact Us" },
@@ -67,7 +70,7 @@ const MOBILE_MENU_LINKS: NavLink[] = [
 export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [navTop, setNavTop] = useState(hasBanner ? 38 : 0);
+  const [navTop, setNavTop] = useState(hasBanner ? TOP_BANNER_HEIGHT : 0);
   const [courses, setCourses] = useState<Course[]>([]);
 
   // ── SEPARATE STATE: desktop dropdown vs mobile drawer accordion ──
@@ -80,9 +83,8 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
   // Scroll handler
   useEffect(() => {
     const fn = () => {
-      const sy = window.scrollY;
-      setScrolled(sy > 50);
-      setNavTop(hasBanner ? Math.max(0, 38 - sy) : 0);
+      setScrolled(window.scrollY > 50);
+      setNavTop(hasBanner ? TOP_BANNER_HEIGHT : 0);
     };
     window.addEventListener("scroll", fn, { passive: true });
     fn();
@@ -894,6 +896,7 @@ const ICON_PATHS: Record<string, React.ReactElement> = {
   Cpu: <><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="9" y="9" width="6" height="6" /><line x1="9" y1="1" x2="9" y2="4" /><line x1="15" y1="1" x2="15" y2="4" /><line x1="9" y1="20" x2="9" y2="23" /><line x1="15" y1="20" x2="15" y2="23" /></>,
   LineChart: <><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></>,
   BotMessageSquare: <><path d="M12 6V2H8" /><path d="m8 18-4 4V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2Z" /><path d="M2 12h2" /><path d="M9 11v2" /><path d="M15 11v2" /></>,
+  Sparkles: <><path d="M12 3l1.9 4.1L18 9l-4.1 1.9L12 15l-1.9-4.1L6 9l4.1-1.9L12 3Z" /><path d="M5 17l.9 2.1L8 20l-2.1.9L5 23l-.9-2.1L2 20l2.1-.9L5 17Z" /><path d="M19 15l1.1 2.4L22.5 18l-2.4 1.1L19 21.5l-1.1-2.4L15.5 18l2.4-1.1L19 15Z" /></>,
 };
 
 function CourseIcon({ name }: { name: string }) {

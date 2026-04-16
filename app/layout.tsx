@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
-import ChatbotFloat from "@/components/layout/ChatbotFloat";
 import StickyBottomBar from "@/components/layout/StickyBottomBar";
 import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/site";
 
@@ -86,7 +85,6 @@ export default function RootLayout({
         <GlobalUI />
         {children}
         <WhatsAppFloat />
-        <ChatbotFloat />
         <StickyBottomBar />
       </body>
     </html>

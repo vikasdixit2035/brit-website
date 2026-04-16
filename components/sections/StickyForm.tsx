@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import useReveal from "@/hooks/useReveal";
+import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 
 export default function StickyForm() {
   const r = useReveal();
   
   const [formData, setFormData] = useState({
     name: "",
+    phoneCountry: DEFAULT_PHONE_COUNTRY_CODE,
     phone: "",
     email: "",
     course: "",
@@ -20,9 +22,14 @@ export default function StickyForm() {
       const API_URL = process.env.NODE_ENV === "development" 
         ? "http://localhost:4000/api/leads" 
         : "https://api.britinstitute.uk/api/leads";
-        
-      const payload = { ...formData, source: "Brit Institute Website - Sticky Form" };
-        
+
+      const { phoneCountry, phone, ...rest } = formData;
+      const payload = {
+        ...rest,
+        phone: `${phoneCountry} ${phone.trim()}`.trim(),
+        source: "Brit Institute Website - Sticky Form",
+      };
+
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,7 +37,7 @@ export default function StickyForm() {
       });
       if (res.ok) {
         alert("Success! We will contact you soon.");
-        setFormData({ name: "", email: "", phone: "", course: "" });
+        setFormData({ name: "", phoneCountry: DEFAULT_PHONE_COUNTRY_CODE, email: "", phone: "", course: "" });
       } else {
         alert("Failed to submit. Please try again.");
       }
@@ -62,14 +69,34 @@ export default function StickyForm() {
               onChange={e => setFormData({ ...formData, name: e.target.value })}
               className="w-full rounded-xl border border-white/20 bg-black/40 px-4 py-4 text-sm text-white placeholder-white/50 outline-none focus:border-[#D4AF37] transition-colors" 
             />
-            <input 
-              type="tel" 
-              placeholder="Phone*" 
-              required
-              value={formData.phone}
-              onChange={e => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full rounded-xl border border-white/20 bg-black/40 px-4 py-4 text-sm text-white placeholder-white/50 outline-none focus:border-[#D4AF37] transition-colors" 
-            />
+            <div className="flex gap-2">
+              <div className="relative w-[44%]">
+                <select
+                  value={formData.phoneCountry}
+                  onChange={e => setFormData({ ...formData, phoneCountry: e.target.value })}
+                  className="w-full appearance-none rounded-xl border border-white/20 bg-black/40 px-4 py-4 text-sm text-white outline-none focus:border-[#D4AF37] transition-colors"
+                >
+                  {PHONE_COUNTRY_CODES.map((country) => (
+                    <option key={country.value} value={country.value} className="text-black">
+                      {country.label}
+                    </option>
+                  ))}
+                </select>
+                <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2">
+                  <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1.5L6 6.5L11 1.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <input 
+                type="tel" 
+                placeholder="Phone*" 
+                required
+                value={formData.phone}
+                onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                className="flex-1 rounded-xl border border-white/20 bg-black/40 px-4 py-4 text-sm text-white placeholder-white/50 outline-none focus:border-[#D4AF37] transition-colors" 
+              />
+            </div>
           </div>
           <div className="mb-4">
             <input 

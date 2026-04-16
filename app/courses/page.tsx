@@ -1,27 +1,20 @@
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { coursesData } from "@/app/courses/[slug]/courseData";
+import { fetchCourses } from "@/lib/courses";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Courses",
   description:
-    "Explore Brit Institute courses in data analytics, data science, and AI automation designed for learners building careers in the UK.",
+    "Explore Brit Institute courses in data analytics with Gen AI, data science and machine learning, agentic AI, and generative AI designed for learners building careers in the UK.",
   path: "/courses",
-  keywords: ["Brit Institute courses", "data analytics course UK", "data science course UK", "AI course UK"],
+  keywords: ["Brit Institute courses", "data analytics with Gen AI UK", "data science course UK", "agentic AI course UK", "generative AI course UK"],
 });
 
-const courseCards = Object.entries(coursesData).map(([slug, course]) => ({
-  slug,
-  title: course.seoTitle,
-  description: course.seoDescription,
-  duration: course.duration,
-  cohort: course.cohort,
-  salary: course.careerOutcomes.salary,
-}));
+export default async function CoursesPage() {
+  const courseCards = await fetchCourses();
 
-export default function CoursesPage() {
   return (
     <main className="min-h-screen bg-[#f8fafc] text-slate-900">
       <Navbar hasBanner={false} />
@@ -31,7 +24,7 @@ export default function CoursesPage() {
             Explore Career-Focused Programmes
           </p>
           <h1 className="mb-5 text-4xl font-extrabold tracking-tight md:text-5xl">
-            Courses in AI, Data Analytics, and Data Science for the UK Job Market
+            Courses in Data Analytics with Gen AI, Data Science, Agentic AI, and Generative AI
           </h1>
           <p className="text-lg leading-8 text-slate-600">
             Compare practical programmes built to help learners develop portfolio-ready skills, understand real tools, and prepare for career transitions.
@@ -47,17 +40,23 @@ export default function CoursesPage() {
             >
               <div className="mb-5 flex items-center justify-between gap-4">
                 <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold uppercase tracking-wide text-emerald-700">
-                  {course.cohort}
+                  {course.topBadge}
                 </span>
                 <span className="text-sm font-semibold text-slate-500">{course.duration}</span>
               </div>
               <h2 className="mb-3 text-2xl font-bold tracking-tight text-slate-900 group-hover:text-blue-700">
                 {course.title}
               </h2>
-              <p className="mb-6 text-sm leading-7 text-slate-600">{course.description}</p>
+              <p className="mb-6 text-sm leading-7 text-slate-600">{course.desc}</p>
               <div className="mb-6 rounded-2xl bg-slate-50 p-4">
-                <div className="text-xs font-bold uppercase tracking-wide text-slate-500">Typical Salary Range</div>
-                <div className="mt-2 text-lg font-semibold text-slate-900">{course.salary}</div>
+                <div className="text-xs font-bold uppercase tracking-wide text-slate-500">Programme Fee</div>
+                <div className="mt-2 text-lg font-semibold text-slate-900">
+                  {new Intl.NumberFormat("en-GB", {
+                    style: "currency",
+                    currency: course.currency ?? "GBP",
+                    maximumFractionDigits: 0,
+                  }).format(course.price)}
+                </div>
               </div>
               <span className="inline-flex items-center text-sm font-bold text-blue-700">
                 View course details

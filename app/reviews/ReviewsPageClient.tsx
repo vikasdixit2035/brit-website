@@ -7,10 +7,10 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 /* ── colour tokens ── */
-const BLUE   = "#1D4ED8";
-const GOLD   = "#D4AF37";
-const DEEP   = "#0a0f1e";
-const CYAN   = "#00E5FF";
+const BLUE = "#1D4ED8";
+const GOLD = "#D4AF37";
+const DEEP = "#0a0f1e";
+const CYAN = "#00E5FF";
 
 /* ── video testimonials data ── */
 const VIDEO_TESTIMONIALS = [
@@ -87,19 +87,19 @@ const WRITTEN_REVIEWS = [
 const CASE_HIGHLIGHTS = [
   {
     before: { label: "Retail Manager", detail: "No coding background" },
-    after:  { label: "Data Analyst", detail: "at a Big-4 Consultancy" },
+    after: { label: "Data Analyst", detail: "at a Big-4 Consultancy" },
     timeline: "4 Months",
     color: "#3B82F6",
   },
   {
     before: { label: "Teaching Assistant", detail: "Non-tech background" },
-    after:  { label: "Data Science Role", detail: "at a HealthTech Startup" },
+    after: { label: "Data Science Role", detail: "at a HealthTech Startup" },
     timeline: "5 Months",
     color: "#8B5CF6",
   },
   {
     before: { label: "Call Centre Executive", detail: "Entry-level, stagnant role" },
-    after:  { label: "AI / Automation Role", detail: "at a FinTech Company" },
+    after: { label: "AI / Automation Role", detail: "at a FinTech Company" },
     timeline: "6 Months",
     color: "#10B981",
   },
@@ -128,11 +128,11 @@ function useReveal() {
 export default function ReviewsPage() {
   const [banner, setBanner] = useState(true);
 
-  const hero    = useReveal();
-  const videos  = useReveal();
+  const hero = useReveal();
+  const videos = useReveal();
   const written = useReveal();
-  const cases   = useReveal();
-  const cta     = useReveal();
+  const cases = useReveal();
+  const cta = useReveal();
 
   return (
     <main style={{ background: "#FAFAFA", minHeight: "100vh", fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)", color: "#111827" }}>
@@ -205,7 +205,7 @@ export default function ReviewsPage() {
 
         /* ── Section wrappers ── */
         .rv-section {
-          max-width: 1140px;
+          max-width: 80%;
           margin: 0 auto;
           padding: 0 24px;
         }
@@ -608,10 +608,6 @@ export default function ReviewsPage() {
           ref={hero.ref}
           className={`rv-hero-inner rv-fade-up ${hero.visible ? "rv-visible" : ""}`}
         >
-          <div className="rv-pill">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            Testimonials &amp; Reviews
-          </div>
           <h1 className="rv-h1">
             Real Career Transitions in<br />
             <span>Data, AI and Tech</span>
@@ -666,7 +662,7 @@ export default function ReviewsPage() {
                 {/* Overlay content */}
                 <div className="rv-video-overlay">
                   <div className="rv-video-tag" style={{ background: v.color }}>
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /></svg>
                     {v.tagline}
                   </div>
                   <h3 className="rv-video-title">{v.title}</h3>
@@ -680,7 +676,7 @@ export default function ReviewsPage() {
       {/* ═══════════════════════════════════════════════════════════════
           3. WRITTEN REVIEWS
       ═══════════════════════════════════════════════════════════════ */}
-      <section style={{ paddingBottom: "96px", background: "#F3F4F6" , paddingTop: "80px" }}>
+      <section style={{ paddingBottom: "96px", background: "#F3F4F6", paddingTop: "80px" }}>
         <div ref={written.ref} className="rv-section">
           <div className={`rv-section-title rv-fade-up ${written.visible ? "rv-visible" : ""}`}>
             <h2>What Learners Are <span>Saying</span></h2>
@@ -701,7 +697,7 @@ export default function ReviewsPage() {
                 <div className="rv-stars">
                   {Array.from({ length: 5 }).map((_, si) => (
                     <svg key={si} width="16" height="16" viewBox="0 0 24 24" fill="#FBBF24" stroke="#FBBF24" strokeWidth="1">
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                     </svg>
                   ))}
                 </div>
@@ -744,7 +740,7 @@ export default function ReviewsPage() {
                     Case Study #{i + 1}
                   </span>
                   <span className="rv-case-timeline" style={{ background: c.color }}>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
                     {c.timeline}
                   </span>
                 </div>
@@ -758,8 +754,8 @@ export default function ReviewsPage() {
 
                   <div className="rv-case-arrow">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"/>
-                      <polyline points="12 5 19 12 12 19"/>
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
                     </svg>
                   </div>
 
@@ -789,7 +785,7 @@ export default function ReviewsPage() {
               <div className="rv-cta-btns">
                 <Link href="/courses" className="rv-btn-gold">
                   Explore Courses
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                 </Link>
                 <Link href="/contact" className="rv-btn-outline">
                   Book Free Consultation

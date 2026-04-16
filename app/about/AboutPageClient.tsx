@@ -24,20 +24,51 @@ export default function AboutPage() {
       <TopBanner visible={banner} onClose={() => setBanner(false)} />
       <Navbar hasBanner={banner} />
 
+      <style>{`
+        .about-hero {
+          position: relative;
+          overflow: hidden;
+          text-align: center;
+          background: linear-gradient(180deg, #05070d 0%, #0b1328 58%, #111827 100%);
+        }
+        .about-hero::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background:
+            radial-gradient(ellipse 55% 45% at 20% 80%, rgba(29,78,216,.18), transparent 60%),
+            radial-gradient(ellipse 50% 50% at 82% 18%, rgba(16,185,129,.10), transparent 55%),
+            radial-gradient(ellipse 60% 40% at 50% 0%, rgba(234,179,8,.10), transparent 65%);
+          pointer-events: none;
+        }
+        .about-hero::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image:
+            radial-gradient(circle 2px at 16% 24%, rgba(255,255,255,.12) 0%, transparent 100%),
+            radial-gradient(circle 2px at 72% 20%, rgba(255,255,255,.10) 0%, transparent 100%),
+            radial-gradient(circle 1.5px at 86% 68%, rgba(255,255,255,.08) 0%, transparent 100%),
+            radial-gradient(circle 2px at 34% 76%, rgba(255,255,255,.10) 0%, transparent 100%);
+          pointer-events: none;
+        }
+      `}</style>
+
       {/* 1. Hero Section */}
       <section
-        className="text-center max-w-4xl mx-auto px-6"
-        style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}
+        className="about-hero"
+        style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "88px" }}
       >
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 font-semibold text-sm mb-6 border border-blue-100 shadow-sm">
-          <Target className="w-4 h-4" /> About Brit Institute
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
+
+          <h1 className="text-4xl md:text-5xl lg:text-[54px] font-extrabold text-white leading-[1.15] mb-6 tracking-tight">
+            A Practical Approach to Careers in <span className="text-[#E4BE3B]">Data, AI and Emerging Technologies</span>
+          </h1>
+          <p className="text-lg md:text-xl text-white/60 leading-relaxed max-w-3xl mx-auto font-medium">
+            We focus on building real-world skills that help learners transition into high-demand tech roles across the UK and beyond.
+          </p>
+          <div className="w-14 h-[3px] rounded-full bg-gradient-to-r from-[#2563EB] to-[#E4BE3B] mx-auto mt-8" />
         </div>
-        <h1 className="text-4xl md:text-5xl lg:text-[54px] font-extrabold text-gray-900 leading-[1.15] mb-6 tracking-tight">
-          A Practical Approach to Careers in <span className="text-blue-700">Data, AI and Emerging Technologies</span>
-        </h1>
-        <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto font-medium">
-          We focus on building real-world skills that help learners transition into high-demand tech roles across the UK and beyond.
-        </p>
       </section>
 
       {/* 2 & 3. Story (Our Approach) & Vision */}

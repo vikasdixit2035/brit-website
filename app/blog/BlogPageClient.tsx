@@ -42,12 +42,12 @@ export default function BlogPage() {
   const [nlSubmitting, setNlSubmitting] = useState(false);
   const [nlSuccess, setNlSuccess] = useState(false);
 
-  const hero     = useReveal();
-  const cats     = useReveal();
+  const hero = useReveal();
+  const cats = useReveal();
   const featured = useReveal();
-  const grid     = useReveal();
-  const midCta   = useReveal();
-  const nlSec    = useReveal();
+  const grid = useReveal();
+  const midCta = useReveal();
+  const nlSec = useReveal();
 
   /* filtered articles (non-featured) */
   const allNonFeatured = BLOG_ARTICLES.filter((a) => !a.featured);
@@ -389,12 +389,7 @@ export default function BlogPage() {
       ═══════════════════════════════════════════════════ */}
       <section className="bl-hero" style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}>
         <div ref={hero.ref} className={`bl-hero-inner bl-fade-up ${hero.visible ? "bl-vis" : ""}`}>
-          <div className="bl-pill">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-            </svg>
-            Blog
-          </div>
+
           <h1 className="bl-h1">
             Insights on Data Analytics, Data Science<br />
             and <span>AI Careers in the UK</span>
@@ -463,11 +458,11 @@ export default function BlogPage() {
                   <p className="bl-featured-excerpt">{a.excerpt}</p>
                   <div className="bl-featured-meta">
                     <span>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
                       {a.date}
                     </span>
                     <span>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
                       {a.readTime}
                     </span>
                   </div>
@@ -510,7 +505,7 @@ export default function BlogPage() {
                     </div>
                     <span className="bl-read-more">
                       Read
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                     </span>
                   </div>
                 </Link>
@@ -539,7 +534,7 @@ export default function BlogPage() {
               <p>Explore structured programmes designed for real career outcomes.</p>
               <Link href="/courses" className="bl-mid-cta-btn">
                 View Courses
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
               </Link>
             </div>
           </div>

@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Icons } from "@/components/ui/Icons";
+import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 
 export default function CourseLeadForm({ courseTitle }: { courseTitle: string }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phoneCountry: DEFAULT_PHONE_COUNTRY_CODE,
     phone: "",
     course: courseTitle,
     purpose: "",
@@ -26,7 +28,12 @@ export default function CourseLeadForm({ courseTitle }: { courseTitle: string })
         ? "http://localhost:4000/api/leads" 
         : "https://api.britinstitute.uk/api/leads";
         
-      const payload = { ...formData, source: "Course Lead Form" };
+      const { phoneCountry, phone, ...rest } = formData;
+      const payload = {
+        ...rest,
+        phone: `${phoneCountry} ${phone.trim()}`.trim(),
+        source: "Course Lead Form",
+      };
 
       const res = await fetch(API_URL, {
         method: "POST",
@@ -35,7 +42,15 @@ export default function CourseLeadForm({ courseTitle }: { courseTitle: string })
       });
       if (res.ok) {
         alert("Success! We will contact you soon.");
-        setFormData({ ...formData, name: "", email: "", phone: "", purpose: "", agreed: false });
+        setFormData({
+          ...formData,
+          name: "",
+          email: "",
+          phoneCountry: DEFAULT_PHONE_COUNTRY_CODE,
+          phone: "",
+          purpose: "",
+          agreed: false,
+        });
       } else {
         alert("Failed to submit. Please try again.");
       }
@@ -81,10 +96,21 @@ export default function CourseLeadForm({ courseTitle }: { courseTitle: string })
 
         {/* Phone */}
         <div className="flex gap-2">
-          <div className="flex items-center gap-1 w-[28%] border border-gray-300 rounded-md px-3 bg-gray-50">
-            <span className="text-lg">🇮🇳</span>
-            <span className="text-sm text-gray-700">+91</span>
-            <Icons.ChevronDown />
+          <div className="relative w-[42%]">
+            <select
+              value={formData.phoneCountry}
+              onChange={e => setFormData({ ...formData, phoneCountry: e.target.value })}
+              className="w-full appearance-none border border-gray-300 rounded-md px-3 py-3 bg-gray-50 outline-none focus:border-[#9333ea] focus:ring-1 focus:ring-[#9333ea] transition-all text-sm text-gray-700"
+            >
+              {PHONE_COUNTRY_CODES.map((country) => (
+                <option key={country.value} value={country.value}>
+                  {country.label}
+                </option>
+              ))}
+            </select>
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+              <Icons.ChevronDown />
+            </div>
           </div>
           <input
             type="tel"
