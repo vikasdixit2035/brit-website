@@ -12,21 +12,10 @@ import CourseLeadForm from "./CourseLeadForm";
 import { coursesData } from "./courseData";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { fetchCourseBySlug } from "@/lib/courses";
+import type { CourseRecord } from "@/lib/courses";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
-interface Course {
-  _id: string;
-  slug: string;
-  title: string;
-  desc: string;
-  price?: number;
-  currency?: string;
-  duration: string;
-  iconName: string;
-  topBadge?: string;
-}
-
-async function getCourse(slug: string): Promise<Course | null> {
+async function getCourse(slug: string): Promise<CourseRecord | null> {
   return fetchCourseBySlug(slug);
 }
 
