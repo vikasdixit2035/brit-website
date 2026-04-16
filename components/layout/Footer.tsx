@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SITE_ADDRESS_LINES, SITE_EMAIL, SITE_PHONE_UK } from "@/lib/site";
 
 export default function Footer() {
   return (
@@ -34,8 +35,15 @@ export default function Footer() {
           <h4 style={{ color: 'var(--blue-900)' }}>Contact</h4>
           <ul>
             <li><a href="/contact" style={{ color: 'var(--gray-500)' }}>Contact Us</a></li>
-            <li><a href="mailto:info@britinstitute.uk" style={{ color: 'var(--gray-500)' }}>info@britinstitute.uk</a></li>
-            <li><a href="tel:+447520664011" style={{ color: 'var(--gray-500)' }}>+447520664011</a></li>
+            <li><a href={`mailto:${SITE_EMAIL}`} style={{ color: 'var(--gray-500)' }}>{SITE_EMAIL}</a></li>
+            <li><a href={`tel:${SITE_PHONE_UK}`} style={{ color: 'var(--gray-500)' }}>{SITE_PHONE_UK}</a></li>
+            <li>
+              <address style={{ color: 'var(--gray-500)', lineHeight: 1.6, fontStyle: 'normal' }}>
+                {SITE_ADDRESS_LINES.map((line) => (
+                  <div key={line}>{line}</div>
+                ))}
+              </address>
+            </li>
           </ul>
         </div>
       </div>

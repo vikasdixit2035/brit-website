@@ -4,6 +4,7 @@ import { useState } from "react";
 import TopBanner from "@/components/layout/TopBanner";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { SITE_ADDRESS_LINES, SITE_EMAIL, SITE_PHONE_UK } from "@/lib/site";
 
 export default function ContactPage() {
   const [banner, setBanner] = useState(true);
@@ -60,7 +61,7 @@ export default function ContactPage() {
         {/* Intro */}
         <div style={{ textAlign: "center", marginBottom: "60px", maxWidth: "700px", margin: "0 auto 80px" }}>
           <h2 style={{ fontSize: "1.25rem", color: "#6B7280", fontWeight: 500, lineHeight: 1.6 }}>
-            Ready to explore your career? We're here to guide you every step of the way on your learning journey.
+            Ready to explore your career? We&apos;re here to guide you every step of the way on your learning journey.
           </h2>
         </div>
 
@@ -73,7 +74,7 @@ export default function ContactPage() {
               Multiple Ways to <span style={{ color: "#1D4ED8" }}>Connect</span>
             </h1>
             <p style={{ color: "#4B5563", fontSize: "1rem", lineHeight: 1.6, marginBottom: "40px" }}>
-              Whether you have questions about our programs, need technical support, or want to discuss your career exploration goals, we're here to help. Choose the method that works best for you.
+              Whether you have questions about our programs, need technical support, or want to discuss your career exploration goals, we&apos;re here to help. Choose the method that works best for you.
             </p>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
@@ -84,7 +85,7 @@ export default function ContactPage() {
                   <h3 style={{ fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>Email <span style={{ color: "#1D4ED8" }}>Support</span></h3>
                 </div>
                 <p style={{ color: "#6B7280", fontSize: "0.9rem", margin: "0 0 12px 0" }}>Get detailed answers to your questions</p>
-                <a href="mailto:info@britinstitute.uk" style={{ color: "#1D4ED8", fontWeight: 600, textDecoration: "none", fontSize: "0.95rem" }}>info@britinstitute.uk</a>
+                <a href={`mailto:${SITE_EMAIL}`} style={{ color: "#1D4ED8", fontWeight: 600, textDecoration: "none", fontSize: "0.95rem" }}>{SITE_EMAIL}</a>
               </div>
 
               {/* Phone Block */}
@@ -98,7 +99,7 @@ export default function ContactPage() {
 
                   <div style={{ fontSize: "0.85rem", fontWeight: 600, color: "#111827", marginBottom: "4px" }}>United Kingdom</div>
                   <div style={{ fontWeight: 600, fontSize: "0.95rem" }}>
-                    <a href="tel:+447520664011" style={{ color: "#10B981", textDecoration: "none" }}>+447520664011</a>
+                    <a href={`tel:${SITE_PHONE_UK}`} style={{ color: "#10B981", textDecoration: "none" }}>{SITE_PHONE_UK}</a>
                   </div>
                 </div>
               </div>
@@ -109,10 +110,14 @@ export default function ContactPage() {
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                   <h3 style={{ fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>Our <span style={{ color: "#EF4444" }}>Office</span></h3>
                 </div>
-                <div style={{ fontSize: "0.95rem", fontWeight: 600, color: "#111827", marginBottom: "4px" }}>London, UK</div>
+                <div style={{ fontSize: "0.95rem", fontWeight: 600, color: "#111827", marginBottom: "4px" }}>Hainault, Essex</div>
                 <p style={{ color: "#6B7280", fontSize: "0.9rem", margin: 0, lineHeight: 1.5 }}>
-                  100 College Road<br />
-                  Harrow, HA1 1BQ, United Kingdom
+                  {SITE_ADDRESS_LINES.map((line) => (
+                    <span key={line}>
+                      {line}
+                      <br />
+                    </span>
+                  ))}
                 </p>
               </div>
             </div>
@@ -124,7 +129,7 @@ export default function ContactPage() {
               Send us a <span style={{ color: "#1D4ED8" }}>Message</span>
             </h2>
             <p style={{ color: "#6B7280", fontSize: "0.95rem", marginBottom: "30px", lineHeight: 1.5 }}>
-              Fill out the form below and we'll get back to you within 24 hours during business days.
+              Fill out the form below and we&apos;ll get back to you within 24 hours during business days.
             </p>
 
             {formStatus === "success" ? (
@@ -192,7 +197,7 @@ export default function ContactPage() {
             How Can We <span style={{ color: "#1D4ED8" }}>Help</span> You?
           </h2>
           <p style={{ color: "#6B7280", fontSize: "1rem", maxWidth: "600px", margin: "0 auto" }}>
-            Choose the type of support you need and we'll connect you with the right team member.
+            Choose the type of support you need and we&apos;ll connect you with the right team member.
           </p>
         </div>
 
@@ -205,7 +210,7 @@ export default function ContactPage() {
             <p style={{ color: "#6B7280", fontSize: "0.95rem", lineHeight: 1.5, marginBottom: "20px" }}>
               Get detailed information about our course structure, curriculum, duration, and enrollment requirements.
             </p>
-            <a href="mailto:info@britinstitute.uk" style={{ color: "#1D4ED8", fontWeight: 600, fontSize: "0.95rem", textDecoration: "none" }}>info@britinstitute.uk</a>
+            <a href={`mailto:${SITE_EMAIL}`} style={{ color: "#1D4ED8", fontWeight: 600, fontSize: "0.95rem", textDecoration: "none" }}>{SITE_EMAIL}</a>
           </div>
 
           <div style={{ background: "#FFFFFF", padding: "30px", borderRadius: "16px", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
@@ -216,7 +221,7 @@ export default function ContactPage() {
             <p style={{ color: "#6B7280", fontSize: "0.95rem", lineHeight: 1.5, marginBottom: "20px" }}>
               Need help with platform access, technical issues, or troubleshooting? Our tech team is here to help.
             </p>
-            <a href="mailto:info@britinstitute.uk" style={{ color: "#10B981", fontWeight: 600, fontSize: "0.95rem", textDecoration: "none" }}>info@britinstitute.uk</a>
+            <a href={`mailto:${SITE_EMAIL}`} style={{ color: "#10B981", fontWeight: 600, fontSize: "0.95rem", textDecoration: "none" }}>{SITE_EMAIL}</a>
           </div>
 
           <div style={{ background: "#FFFFFF", padding: "30px", borderRadius: "16px", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
