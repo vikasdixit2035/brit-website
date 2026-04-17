@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
 import StickyBottomBar from "@/components/layout/StickyBottomBar";
+import CareerChatbotFloat from "@/components/layout/CareerChatbotFloat";
 import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -78,6 +79,7 @@ export default function RootLayout({
       <body>
         <GlobalUI />
         {children}
+        <CareerChatbotFloat />
         <WhatsAppFloat />
         <StickyBottomBar />
       </body>

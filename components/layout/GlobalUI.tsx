@@ -47,6 +47,15 @@ export default function GlobalUI() {
     return () => document.removeEventListener("click", handleCTAClick);
   }, []);
 
+  useEffect(() => {
+    const handleOfferModalRequest = () => {
+      setOfferModalOpen(true);
+    };
+
+    window.addEventListener("brit:open-offer-modal", handleOfferModalRequest);
+    return () => window.removeEventListener("brit:open-offer-modal", handleOfferModalRequest);
+  }, []);
+
   return (
     <>
       <OfferModal isOpen={offerModalOpen} onClose={() => setOfferModalOpen(false)} />
