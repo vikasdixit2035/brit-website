@@ -4,16 +4,15 @@ import { notFound } from "next/navigation";
 import {
   Download, Eye, ChevronRight, CheckCircle2, Briefcase,
   Clock, Layers, ArrowRight, Check, MonitorPlay, Zap,
-  TrendingUp, Target, Users, BookOpen, Terminal, Sparkles
+  TrendingUp, Target, Users, BookOpen, Terminal, Sparkles, Quote
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CourseLeadForm from "./CourseLeadForm";
 import { coursesData } from "./courseData";
-import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
+import { breadcrumbSchema, buildCourseSchema, buildMetadata } from "@/lib/seo";
 import { fetchCourseBySlug } from "@/lib/courses";
 import type { CourseRecord } from "@/lib/courses";
-import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 async function getCourse(slug: string): Promise<CourseRecord | null> {
   return fetchCourseBySlug(slug);
@@ -64,6 +63,14 @@ function DiamondIcon() {
   );
 }
 
+function formatReviewDate(date: string) {
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(new Date(date));
+}
+
 export default async function CoursePage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const course = await getCourse(resolvedParams.slug);
@@ -74,27 +81,26 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
 
   const richData = coursesData[resolvedParams.slug];
   const coursePath = richData?.canonicalPath ?? `/courses/${resolvedParams.slug}`;
+  const hasCourseReviews =
+    Boolean(richData?.reviews) &&
+    richData!.reviews.items.length > 0 &&
+    richData!.reviews.items.every((review) => review.author && review.body && review.datePublished);
   const courseSchema = richData
-    ? {
-        "@context": "https://schema.org",
-        "@type": "Course",
+    ? buildCourseSchema({
         name: richData.seoTitle,
         description: richData.seoDescription,
-        provider: {
-          "@type": "Organization",
-          name: SITE_NAME,
-          sameAs: SITE_URL,
-        },
-        educationalCredentialAwarded: "Certificate of Completion",
+        path: coursePath,
         timeRequired: richData.duration,
         teaches: richData.toolsCovered,
-      }
+        reviews: hasCourseReviews ? richData.reviews : null,
+      })
     : null;
   const breadcrumbs = breadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Courses", path: "/courses" },
     { name: richData?.seoTitle ?? course.title, path: coursePath },
   ]);
+  const aggregateRating = hasCourseReviews ? richData!.reviews.aggregate : null;
 
   // Fallback points for backward compatibility
   const points = (course.desc || "")
@@ -180,6 +186,34 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                 </>
               )}
             </div>
+
+            {aggregateRating && (
+              <div className="mt-6 rounded-2xl border border-amber-100 bg-gradient-to-r from-amber-50 via-white to-yellow-50 p-5 shadow-sm">
+                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-700">Learner Reviews</p>
+                    <div className="mt-2 flex items-center gap-3">
+                      <span className="text-4xl font-extrabold tracking-tight text-gray-900">
+                        {aggregateRating.ratingValue.toFixed(1)}
+                      </span>
+                      <div>
+                        <div className="flex items-center gap-1 text-amber-400">
+                          {[1, 2, 3, 4, 5].map((i) => (
+                            <StarIcon key={i} fill="#FBBF24" />
+                          ))}
+                        </div>
+                        <p className="mt-1 text-sm font-medium text-gray-600">
+                          Based on {aggregateRating.reviewCount} first-party learner reviews
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="max-w-md text-sm leading-6 text-gray-600">
+                    These ratings come from learner feedback published on this page and are mirrored in the course structured data for search engines.
+                  </p>
+                </div>
+              </div>
+            )}
           </header>
 
           {!richData ? (
@@ -392,6 +426,56 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                   </ul>
                 </div>
               </section>
+
+              {hasCourseReviews && (
+                <section>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
+                      <Quote className="w-5 h-5 text-amber-700" />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-900">Learner Reviews</h2>
+                      <p className="text-sm text-gray-600 mt-1">
+                        {aggregateRating?.ratingValue.toFixed(1)} / 5 average from {aggregateRating?.reviewCount} published learner reviews
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-5 md:grid-cols-3">
+                    {richData.reviews.items.map((review, idx) => (
+                      <article
+                        key={`${review.author}-${idx}`}
+                        className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm"
+                      >
+                        <div className="flex items-center justify-between gap-4">
+                          <div>
+                            <h3 className="font-bold text-gray-900">{review.author}</h3>
+                            <p className="text-xs font-medium uppercase tracking-[0.18em] text-gray-500">
+                              Published {formatReviewDate(review.datePublished)}
+                            </p>
+                          </div>
+                          <div className="text-right">
+                            <div className="flex items-center justify-end gap-1 text-amber-400">
+                              {[1, 2, 3, 4, 5].map((i) => (
+                                <StarIcon
+                                  key={i}
+                                  fill={i <= Math.round(review.ratingValue) ? "#FBBF24" : "#E5E7EB"}
+                                />
+                              ))}
+                            </div>
+                            <p className="mt-1 text-sm font-bold text-gray-900">
+                              {review.ratingValue.toFixed(1)} / 5
+                            </p>
+                          </div>
+                        </div>
+                        <p className="mt-5 text-sm leading-7 text-gray-700">
+                          {review.body}
+                        </p>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              )}
 
               {/* Final CTA Area */}
               <div className="relative bg-gradient-to-br from-purple-900 via-indigo-900 to-gray-900 rounded-3xl p-10 md:p-14 text-center shadow-2xl overflow-hidden mt-8">

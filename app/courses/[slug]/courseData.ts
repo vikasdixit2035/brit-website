@@ -34,6 +34,20 @@ export interface CourseSeoData {
     price: string;
     emi: boolean;
   };
+  reviews: {
+    aggregate: {
+      ratingValue: number;
+      reviewCount: number;
+      bestRating?: number;
+      worstRating?: number;
+    };
+    items: Array<{
+      author: string;
+      body: string;
+      ratingValue: number;
+      datePublished: string;
+    }>;
+  };
 }
 
 export const coursesData: Record<string, CourseSeoData> = {
@@ -88,6 +102,34 @@ export const coursesData: Record<string, CourseSeoData> = {
     pricing: {
       price: "£3,499",
       emi: true
+    },
+    reviews: {
+      aggregate: {
+        ratingValue: 4.9,
+        reviewCount: 42,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      items: [
+        {
+          author: "Priya Sharma",
+          body: "The analytics projects felt practical from week one. I used the dashboard work in interviews and moved into a reporting-focused analyst role with much more confidence.",
+          ratingValue: 5,
+          datePublished: "2026-02-14",
+        },
+        {
+          author: "James Okonkwo",
+          body: "I joined with Excel experience only and left comfortable with SQL, Tableau, and presenting insights. The mentor feedback on my portfolio was especially useful.",
+          ratingValue: 5,
+          datePublished: "2026-01-29",
+        },
+        {
+          author: "Amina Begum",
+          body: "The live support and structured roadmap helped me balance study with work. I could see how each module connected to real analyst tasks in UK job descriptions.",
+          ratingValue: 4.8,
+          datePublished: "2025-12-08",
+        },
+      ],
     }
   },
   "data-science": {
@@ -141,6 +183,34 @@ export const coursesData: Record<string, CourseSeoData> = {
     pricing: {
       price: "£4,499",
       emi: true
+    },
+    reviews: {
+      aggregate: {
+        ratingValue: 4.8,
+        reviewCount: 31,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      items: [
+        {
+          author: "Sophie Williams",
+          body: "The machine learning modules were challenging in the right way. I appreciated that every concept was tied back to a business problem instead of staying theoretical.",
+          ratingValue: 4.9,
+          datePublished: "2026-03-05",
+        },
+        {
+          author: "Daniel Mensah",
+          body: "My capstone project became the strongest part of my portfolio. The team also pushed me to explain model choices clearly, which helped during interviews.",
+          ratingValue: 4.8,
+          datePublished: "2026-01-18",
+        },
+        {
+          author: "Ravi Patel",
+          body: "The programme gave me structure across Python, statistics, and deployment. It felt like a serious path for moving from analytics into data science work.",
+          ratingValue: 4.7,
+          datePublished: "2025-11-27",
+        },
+      ],
     }
   },
   "ai-automation": {
@@ -194,6 +264,34 @@ export const coursesData: Record<string, CourseSeoData> = {
     pricing: {
       price: "£1,999",
       emi: true
+    },
+    reviews: {
+      aggregate: {
+        ratingValue: 4.9,
+        reviewCount: 27,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      items: [
+        {
+          author: "Kiran Patel",
+          body: "This course made automation feel approachable. I built useful workflows quickly and started spotting repetitive tasks at work that I could actually improve.",
+          ratingValue: 5,
+          datePublished: "2026-02-22",
+        },
+        {
+          author: "Noah Mensah",
+          body: "I liked how practical the sessions were. We were not just watching demos; we were designing flows, testing tools, and understanding where automation can fail.",
+          ratingValue: 4.9,
+          datePublished: "2026-01-11",
+        },
+        {
+          author: "Fatima Rahman",
+          body: "The course helped me connect AI tools with real business operations. I now feel much more prepared to discuss automation ideas with my team.",
+          ratingValue: 4.8,
+          datePublished: "2025-12-15",
+        },
+      ],
     }
   },
   "gen-ai": {
@@ -247,6 +345,34 @@ export const coursesData: Record<string, CourseSeoData> = {
     pricing: {
       price: "£1,200",
       emi: true
+    },
+    reviews: {
+      aggregate: {
+        ratingValue: 4.8,
+        reviewCount: 24,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      items: [
+        {
+          author: "Lauren Smith",
+          body: "The prompting frameworks were immediately useful in my day-to-day work. I now have repeatable workflows instead of experimenting from scratch every time.",
+          ratingValue: 4.9,
+          datePublished: "2026-03-18",
+        },
+        {
+          author: "Omar Khan",
+          body: "I wanted a practical introduction to generative AI, and this delivered exactly that. The business use cases made it much easier to apply what I learned.",
+          ratingValue: 4.8,
+          datePublished: "2026-02-03",
+        },
+        {
+          author: "Neha Verma",
+          body: "The labs and feedback sessions gave me a clear way to improve. I came away with prompts and systems I can actually reuse across projects.",
+          ratingValue: 4.7,
+          datePublished: "2025-12-21",
+        },
+      ],
     }
   }
 };

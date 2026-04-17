@@ -14,6 +14,32 @@ function absoluteUrl(path = "/") {
   return new URL(path, SITE_URL).toString();
 }
 
+type CourseReviewInput = {
+  author: string;
+  body: string;
+  ratingValue: number;
+  datePublished: string;
+};
+
+type CourseAggregateRatingInput = {
+  ratingValue: number;
+  reviewCount: number;
+  bestRating?: number;
+  worstRating?: number;
+};
+
+type CourseSchemaInput = {
+  name: string;
+  description: string;
+  path: string;
+  timeRequired?: string;
+  teaches?: string[];
+  reviews?: {
+    aggregate: CourseAggregateRatingInput;
+    items: CourseReviewInput[];
+  } | null;
+};
+
 export function buildMetadata({
   title,
   description,
@@ -115,6 +141,62 @@ export function websiteSchema() {
     "@type": "WebSite",
     name: SITE_NAME,
     url: SITE_URL,
+  };
+}
+
+export function buildCourseSchema({
+  name,
+  description,
+  path,
+  timeRequired,
+  teaches = [],
+  reviews,
+}: CourseSchemaInput) {
+  const hasVisibleReviews =
+    Boolean(reviews) &&
+    reviews!.items.length > 0 &&
+    reviews!.items.every((review) => Boolean(review.author && review.body && review.datePublished));
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name,
+    description,
+    url: absoluteUrl(path),
+    provider: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      sameAs: SITE_URL,
+    },
+    educationalCredentialAwarded: "Certificate of Completion",
+    ...(timeRequired ? { timeRequired } : {}),
+    ...(teaches.length > 0 ? { teaches } : {}),
+    ...(hasVisibleReviews
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: reviews!.aggregate.ratingValue,
+            reviewCount: reviews!.aggregate.reviewCount,
+            bestRating: reviews!.aggregate.bestRating ?? 5,
+            worstRating: reviews!.aggregate.worstRating ?? 1,
+          },
+          review: reviews!.items.map((review) => ({
+            "@type": "Review",
+            author: {
+              "@type": "Person",
+              name: review.author,
+            },
+            datePublished: review.datePublished,
+            reviewBody: review.body,
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: review.ratingValue,
+              bestRating: reviews!.aggregate.bestRating ?? 5,
+              worstRating: reviews!.aggregate.worstRating ?? 1,
+            },
+          })),
+        }
+      : {}),
   };
 }
 

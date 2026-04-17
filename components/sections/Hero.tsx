@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
+import { coursesData } from "@/app/courses/[slug]/courseData";
 // If you want to use Next.js Image, you can import it:
 // import Image from "next/image";
 
@@ -27,6 +28,21 @@ const HERO_IMAGE_ALTS = [
   "Learner success visual for UK tech training",
   "AI and data skills training hero visual",
 ];
+
+const COURSE_REVIEW_SUMMARY = Object.values(coursesData).reduce(
+  (summary, course) => {
+    summary.ratingTotal += course.reviews.aggregate.ratingValue * course.reviews.aggregate.reviewCount;
+    summary.reviewCount += course.reviews.aggregate.reviewCount;
+    summary.courseCount += 1;
+    return summary;
+  },
+  { ratingTotal: 0, reviewCount: 0, courseCount: 0 }
+);
+
+const HOMEPAGE_AVERAGE_RATING =
+  COURSE_REVIEW_SUMMARY.reviewCount > 0
+    ? (COURSE_REVIEW_SUMMARY.ratingTotal / COURSE_REVIEW_SUMMARY.reviewCount).toFixed(1)
+    : "4.8";
 
 export default function HeroSection() {
   const [activeRoleIndex, setActiveRoleIndex] = useState(0);
@@ -180,35 +196,24 @@ export default function HeroSection() {
                 <div className="hidden md:flex mt-2">
                   <div className="z-[10] flex whitespace-nowrap items-start justify-start gap-2 w-full">
 
-                    {/* Google Review Card */}
+                    {/* Learner Rating Card */}
                     <div className="relative flex h-full flex-1 flex-col overflow-hidden rounded-[11.855px] border border-[rgba(255,255,255,0.20)] bg-[rgba(25,22,23,0.60)] px-[20px] py-[14px] backdrop-blur-[51.56px] sm:px-[20px] sm:py-[12px]">
                       <div className="flex items-start flex-col">
                         <div className="flex gap-2">
                           <div className="flex items-center justify-center py-[16px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="28" viewBox="0 0 27 28" fill="none">
-                              <g clipPath="url(#clip0_8088_3048)">
-                                <path d="M26.9857 14.2619C26.9857 13.1148 26.8939 12.2777 26.6951 11.4096H13.7689V16.5872H21.3563C21.2034 17.8739 20.3773 19.8117 18.5416 21.1138L18.5159 21.2872L22.6029 24.4957L22.8861 24.5244C25.4866 22.0905 26.9857 18.5095 26.9857 14.2619Z" fill="#4285F4"></path>
-                                <path d="M13.7689 27.9038C17.4861 27.9038 20.6067 26.6636 22.8861 24.5244L18.5416 21.1138C17.3791 21.9354 15.8187 22.509 13.7689 22.509C10.1282 22.509 7.03819 20.0753 5.93668 16.7113L5.77523 16.7252L1.52549 20.0582L1.46991 20.2147C3.73388 24.7723 8.38426 27.9038 13.7689 27.9038Z" fill="#34A853"></path>
-                                <path d="M5.93668 16.7113C5.64604 15.8432 5.47783 14.913 5.47783 13.9519C5.47783 12.9907 5.64604 12.0606 5.92139 11.1925L5.91369 11.0076L1.61069 7.62113L1.4699 7.68899C0.536814 9.58028 0.00140381 11.7041 0.00140381 13.9519C0.00140381 16.1997 0.536814 18.3234 1.4699 20.2147L5.93668 16.7113Z" fill="#FBBC05"></path>
-                                <path d="M13.7689 5.3947C16.3541 5.3947 18.098 6.52635 19.0923 7.47205L22.9778 3.6275C20.5915 1.37969 17.4861 0 13.7689 0C8.38425 0 3.73388 3.1314 1.46991 7.68899L5.92139 11.1925C7.03819 7.82857 10.1282 5.3947 13.7689 5.3947Z" fill="#EB4335"></path>
-                              </g>
-                              <defs>
-                                <clipPath id="clip0_8088_3048">
-                                  <rect width="27" height="28" fill="white"></rect>
-                                </clipPath>
-                              </defs>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path d="M12 2L14.97 8.11L21.7 9.08L16.85 13.75L18 20.5L12 17.27L6 20.5L7.15 13.75L2.3 9.08L9.03 8.11L12 2Z" fill="#FBBF24"></path>
                             </svg>
                           </div>
                           <div className="flex items-baseline leading-[200%]">
-                            <p className="font-gellix text-[24px] md:text-[28px] font-[400] leading-[200%] text-white">4.6</p>
+                            <p className="font-gellix text-[24px] md:text-[28px] font-[400] leading-[200%] text-white">{HOMEPAGE_AVERAGE_RATING}</p>
                             <span className="font-gellix text-xs md:text-sm font-[400] leading-[200%] text-white/60">/5</span>
                           </div>
                         </div>
                         <div className="flex flex-col">
-                          <span className="font-gellix text-xs md:text-sm font-[400] leading-[200%] text-white/60">Google Review</span>
+                          <span className="font-gellix text-xs md:text-sm font-[400] leading-[200%] text-white/60">First-Party Learner Rating</span>
                         </div>
                       </div>
-                      {/* Red glow background pattern inside card */}
                       <div className="absolute bottom-0 right-0 z-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="158" height="99" viewBox="0 0 158 99" fill="none">
                           <g filter="url(#filter0_f_6996_23342)">
@@ -225,21 +230,21 @@ export default function HeroSection() {
                       </div>
                     </div>
 
-                    {/* Shiksha Review Card */}
+                    {/* Published Reviews Card */}
                     <div className="relative flex h-full flex-1 flex-col overflow-hidden rounded-[11.855px] border border-[rgba(255,255,255,0.20)] bg-[rgba(25,22,23,0.60)] px-[20px] py-[14px] backdrop-blur-[51.56px] sm:px-[20px] sm:py-[12px]">
                       <div className="flex items-start flex-col">
                         <div className="flex gap-2">
                           <div className="flex items-center justify-center py-[16px]">
-                            {/* Replaced hashed URL with cleaner one assuming you have this in /public/assets/ */}
-                            {/* <img alt="Shiksha Review" src="/assets/shiksha.png" className="w-[16px] h-[28px] object-contain" /> */}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path d="M8 7H16M8 12H16M8 17H13M7 3H17C18.1046 3 19 3.89543 19 5V19L15.5 16.5L12 19L8.5 16.5L5 19V5C5 3.89543 5.89543 3 7 3Z" stroke="#93C5FD" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"></path>
+                            </svg>
                           </div>
                           <div className="flex items-baseline leading-[200%]">
-                            <p className="font-gellix text-[24px] md:text-[28px] font-[400] leading-[200%] text-white">4.7</p>
-                            <span className="font-gellix text-xs md:text-sm font-[400] leading-[200%] text-white/60">/5</span>
+                            <p className="font-gellix text-[24px] md:text-[28px] font-[400] leading-[200%] text-white">{COURSE_REVIEW_SUMMARY.reviewCount}</p>
                           </div>
                         </div>
                         <div className="flex flex-col">
-                          <span className="font-gellix text-xs md:text-sm font-[400] leading-[200%] text-white/60">Shiksha Review</span>
+                          <span className="font-gellix text-xs md:text-sm font-[400] leading-[200%] text-white/60">Published Learner Reviews</span>
                         </div>
                       </div>
                       <div className="absolute bottom-0 right-0 z-0">
@@ -268,11 +273,11 @@ export default function HeroSection() {
                             </div>
                           </div>
                           <div className="flex items-baseline leading-[200%]">
-                            <p className="font-gellix text-[24px] md:text-[28px] font-[400] leading-[200%] text-white">24k+</p>
+                            <p className="font-gellix text-[24px] md:text-[28px] font-[400] leading-[200%] text-white">{COURSE_REVIEW_SUMMARY.courseCount}</p>
                           </div>
                         </div>
                         <div className="flex flex-col">
-                          <span className="font-gellix text-xs md:text-sm font-[400] leading-[200%] text-white/60">Skilled Learners</span>
+                          <span className="font-gellix text-xs md:text-sm font-[400] leading-[200%] text-white/60">Rated Career Programmes</span>
                         </div>
                       </div>
                       <div className="absolute bottom-0 right-0 z-0">
