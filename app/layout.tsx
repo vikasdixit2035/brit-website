@@ -65,6 +65,9 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  verification: {
+    google: "hQzAGuOJ9VGAVEm86eQ9iwTOvWRvp0kA8JGz4u8S21U",
+  },
 };
 
 import GlobalUI from "@/components/layout/GlobalUI";
