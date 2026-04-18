@@ -141,6 +141,38 @@ export function websiteSchema() {
     "@type": "WebSite",
     name: SITE_NAME,
     url: SITE_URL,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${SITE_URL}/courses?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
+export function siteNavigationSchema() {
+  const navItems = [
+    { name: "About Brit Institute", url: "/about" },
+    { name: "Courses", url: "/courses" },
+    { name: "Pricing", url: "/pricing" },
+    { name: "Reviews", url: "/reviews" },
+    { name: "Resources", url: "/resources" },
+    { name: "Blog", url: "/blog" },
+    { name: "Contact Brit Institute", url: "/contact" },
+    { name: "Careers", url: "/careers" },
+  ];
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: navItems.map((item, index) => ({
+      "@type": "SiteNavigationElement",
+      position: index + 1,
+      name: item.name,
+      url: `${SITE_URL}${item.url}`,
+    })),
   };
 }
 

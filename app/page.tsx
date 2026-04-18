@@ -1,5 +1,5 @@
 import HomePageClient from "@/app/HomePageClient";
-import { buildMetadata, organizationSchema, websiteSchema } from "@/lib/seo";
+import { buildMetadata, organizationSchema } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "AI and Data Career Training in the UK",
@@ -20,10 +20,6 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
       />
       <HomePageClient />
     </>

@@ -72,6 +72,7 @@ export const metadata: Metadata = {
 
 import GlobalUI from "@/components/layout/GlobalUI";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
+import { websiteSchema, siteNavigationSchema } from "@/lib/seo";
 
 export default function RootLayout({
   children,
@@ -82,6 +83,14 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <OrganizationSchema />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationSchema()) }}
+        />
       </head>
       <body>
         <GlobalUI />

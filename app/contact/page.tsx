@@ -1,5 +1,5 @@
 import ContactPageClient from "@/app/contact/ContactPageClient";
-import { buildMetadata, organizationSchema } from "@/lib/seo";
+import { breadcrumbSchema, buildMetadata, organizationSchema } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Contact Brit Institute",
@@ -10,6 +10,11 @@ export const metadata = buildMetadata({
 });
 
 export default function ContactPage() {
+  const breadcrumbs = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Contact", path: "/contact" },
+  ]);
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
@@ -21,6 +26,10 @@ export default function ContactPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
       />
       <ContactPageClient />
     </>

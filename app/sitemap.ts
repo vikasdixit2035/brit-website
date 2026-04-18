@@ -18,12 +18,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/terms",
   ];
 
-  const staticEntries = staticRoutes.map((path) => ({
-    url: `${SITE_URL}${path}`,
-    lastModified: new Date(),
-    changeFrequency: path === "/" ? "weekly" : "monthly",
-    priority: path === "/" ? 1 : 0.7,
-  })) satisfies MetadataRoute.Sitemap;
+  const staticEntries = staticRoutes.map((path) => {
+    let priority = 0.7;
+    if (path === "/") priority = 1.0;
+    else if (["/about", "/contact", "/courses", "/pricing"].includes(path)) priority = 0.9;
+    
+    return {
+      url: `${SITE_URL}${path}`,
+      lastModified: new Date(),
+      changeFrequency: path === "/" ? "weekly" : "monthly",
+      priority,
+    };
+  }) satisfies MetadataRoute.Sitemap;
 
   const blogEntries = BLOG_ARTICLES.map((article) => ({
     url: `${SITE_URL}/blog/${article.slug}`,
