@@ -20,6 +20,7 @@ export default function Footer() {
             <li><Link href="/courses/data-science" style={{ color: 'var(--gray-500)' }}>Data Science &amp; Machine Learning</Link></li>
             <li><Link href="/courses/ai-automation" style={{ color: 'var(--gray-500)' }}>Agentic AI</Link></li>
             <li><Link href="/courses/gen-ai" style={{ color: 'var(--gray-500)' }}>Gen AI</Link></li>
+            <li><Link href="/courses" style={{ color: 'var(--blue-600)', fontWeight: 500 }}>View All Courses</Link></li>
           </ul>
         </div>
         <div className="f-col">

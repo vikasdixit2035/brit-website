@@ -642,12 +642,12 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
                 >
                   <div className="drop-header">
                     <span className="drop-header-title">Popular Programs</span>
-                    <a href="#courses" className="drop-header-link" onClick={() => setDropOpen(false)}>
+                    <Link href="/courses" className="drop-header-link" onClick={() => setDropOpen(false)}>
                       View All
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="9 18 15 12 9 6" />
                       </svg>
-                    </a>
+                    </Link>
                   </div>
 
                   <div className="drop-grid">
