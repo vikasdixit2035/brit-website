@@ -316,6 +316,7 @@ export default function CareerChatbotFloat({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const lastFocusedElementRef = useRef<HTMLElement | null>(null);
   const leadSubmittedRef = useRef(false);
+  const skipAutoScrollRef = useRef(false);
 
   const currentQuestion = CHAT_QUESTIONS[currentQuestionIndex];
   const currentStep = result ? CAREER_STEPS : currentQuestion?.step ?? 1;
@@ -323,6 +324,10 @@ export default function CareerChatbotFloat({
 
   useEffect(() => {
     if (!isOpen) return;
+    if (skipAutoScrollRef.current) {
+      skipAutoScrollRef.current = false;
+      return;
+    }
 
     const frame = window.requestAnimationFrame(() => {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -504,6 +509,7 @@ export default function CareerChatbotFloat({
         nextAnswers.targetRole === "gen-ai"
           ? "That is a smart direction. The next win is turning your AI curiosity into project proof and a clearer interview story."
           : "This is very fixable. With the right roadmap, your profile can move from interest-led to shortlist-ready much faster.";
+      skipAutoScrollRef.current = true;
       setResult(computed);
       setIsProcessing(false);
       setMessages((previous) => [
