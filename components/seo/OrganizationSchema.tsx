@@ -1,11 +1,12 @@
-import { SITE_NAME, SITE_URL, SITE_STATS } from "@/lib/site";
+import { SITE_STATS } from "@/lib/site";
+import type { SiteConfig } from "@/lib/siteConfig";
 
-export default function OrganizationSchema() {
+export default function OrganizationSchema({ siteConfig }: { siteConfig: SiteConfig }) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
-    name: SITE_NAME,
-    url: SITE_URL,
+    name: siteConfig.siteName,
+    url: siteConfig.siteUrl,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: SITE_STATS.averageRating,

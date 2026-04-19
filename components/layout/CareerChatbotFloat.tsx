@@ -294,8 +294,13 @@ function ObjectionMessage() {
   );
 }
 
-export default function CareerChatbotFloat() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function CareerChatbotFloat({
+  mode = "floating",
+}: {
+  mode?: "floating" | "standalone";
+}) {
+  const isStandalone = mode === "standalone";
+  const [isOpen, setIsOpen] = useState(isStandalone);
   const [answers, setAnswers] = useState<AssessmentAnswers>({});
   const [messages, setMessages] = useState<ChatMessage[]>([createQuestionMessage(CHAT_QUESTIONS[0])]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -317,12 +322,12 @@ export default function CareerChatbotFloat() {
   const resultShown = result !== null;
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || isStandalone) return;
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-  }, [isOpen, messages, isProcessing]);
+  }, [isOpen, isProcessing, isStandalone, messages]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || isStandalone) return;
 
     lastFocusedElementRef.current = document.activeElement as HTMLElement | null;
     const previousOverflow = document.body.style.overflow;
@@ -338,10 +343,10 @@ export default function CareerChatbotFloat() {
       window.clearTimeout(timer);
       lastFocusedElementRef.current?.focus?.();
     };
-  }, [isOpen]);
+  }, [isOpen, isStandalone]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || isStandalone) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -373,7 +378,7 @@ export default function CareerChatbotFloat() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
+  }, [isOpen, isStandalone]);
 
   const resetFlow = () => {
     setAnswers({});
@@ -578,26 +583,34 @@ export default function CareerChatbotFloat() {
 
   return (
     <>
-      <FloatingLauncher isOpen={isOpen} onClick={() => setIsOpen((current) => !current)} />
+      {isStandalone ? null : <FloatingLauncher isOpen={isOpen} onClick={() => setIsOpen((current) => !current)} />}
 
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {isOpen ? (
           <motion.div
-            className="fixed inset-0 z-[10001] bg-[rgba(16,24,40,0.42)] px-3 py-4 backdrop-blur-[3px] md:px-6 md:py-6"
-            initial={{ opacity: 0 }}
+            className={
+              isStandalone
+                ? "w-full"
+                : "fixed inset-0 z-[10001] bg-[rgba(16,24,40,0.42)] px-3 py-4 backdrop-blur-[3px] md:px-6 md:py-6"
+            }
+            initial={isStandalone ? { opacity: 1 } : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            exit={isStandalone ? undefined : { opacity: 0 }}
           >
-            <div className="flex h-full items-end justify-end md:items-end">
+            <div className={isStandalone ? "flex w-full justify-center" : "flex h-full items-end justify-end md:items-end"}>
               <motion.div
                 ref={modalRef}
-                initial={{ opacity: 0, y: 24, scale: 0.98 }}
+                initial={isStandalone ? { opacity: 0, y: 12 } : { opacity: 0, y: 24, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 24, scale: 0.98 }}
+                exit={isStandalone ? undefined : { opacity: 0, y: 24, scale: 0.98 }}
                 transition={{ duration: 0.28, ease: "easeOut" }}
-                className="flex h-[min(820px,calc(100vh-1rem))] w-full max-w-[460px] flex-col overflow-hidden rounded-[30px] border border-white/70 bg-[#F7F9FC] shadow-[0_35px_90px_rgba(18,35,79,0.24)] md:h-[min(840px,calc(100vh-3rem))]"
+                className={
+                  isStandalone
+                    ? "flex h-[min(860px,calc(100vh-2rem))] w-full max-w-[540px] flex-col overflow-hidden rounded-[32px] border border-white/75 bg-[#F7F9FC] shadow-[0_35px_90px_rgba(18,35,79,0.18)]"
+                    : "flex h-[min(820px,calc(100vh-1rem))] w-full max-w-[460px] flex-col overflow-hidden rounded-[30px] border border-white/70 bg-[#F7F9FC] shadow-[0_35px_90px_rgba(18,35,79,0.24)] md:h-[min(840px,calc(100vh-3rem))]"
+                }
                 role="dialog"
-                aria-modal="true"
+                aria-modal={!isStandalone}
                 aria-label="Digital Career Counsellor"
               >
                 <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#E9EDF4] bg-white px-4 py-4 shadow-[0_4px_12px_rgba(31,41,55,0.03)]">
@@ -625,14 +638,16 @@ export default function CareerChatbotFloat() {
                     >
                       <MoreHorizontal size={20} />
                     </button>
-                    <button
-                      type="button"
-                      onClick={() => setIsOpen(false)}
-                      className="rounded-full p-2 text-[#8E9AB0] transition hover:bg-[#F3F6FB] hover:text-[#52617C]"
-                      aria-label="Close chatbot"
-                    >
-                      <X size={20} />
-                    </button>
+                    {isStandalone ? null : (
+                      <button
+                        type="button"
+                        onClick={() => setIsOpen(false)}
+                        className="rounded-full p-2 text-[#8E9AB0] transition hover:bg-[#F3F6FB] hover:text-[#52617C]"
+                        aria-label="Close chatbot"
+                      >
+                        <X size={20} />
+                      </button>
+                    )}
                   </div>
                 </div>
 

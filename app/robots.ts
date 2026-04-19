@@ -1,6 +1,11 @@
 import type { MetadataRoute } from "next";
+import { headers } from "next/headers";
+import { getRequestSiteConfig } from "@/lib/siteConfig";
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const requestHeaders = await headers();
+  const siteConfig = getRequestSiteConfig(requestHeaders);
+
   return {
     rules: [
       {
@@ -9,7 +14,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/webinar"],
       },
     ],
-    sitemap: "https://britinstitute.uk/sitemap.xml",
-    host: "https://britinstitute.uk",
+    sitemap: `${siteConfig.siteUrl}/sitemap.xml`,
+    host: siteConfig.siteUrl,
   };
 }

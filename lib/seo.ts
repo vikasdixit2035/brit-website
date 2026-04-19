@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL, SITE_EMAIL, SITE_PHONE_UK } from "@/lib/site";
+import type { SiteConfig } from "@/lib/siteConfig";
 
 type MetaInput = {
   title: string;
@@ -12,6 +13,11 @@ type MetaInput = {
 
 function absoluteUrl(path = "/") {
   return new URL(path, SITE_URL).toString();
+}
+
+function getAbsoluteUrl(path = "/", siteConfig?: SiteConfig) {
+  if (!siteConfig) return absoluteUrl(path);
+  return new URL(path, siteConfig.siteUrl).toString();
 }
 
 type CourseReviewInput = {
@@ -47,9 +53,10 @@ export function buildMetadata({
   image = DEFAULT_OG_IMAGE,
   keywords = [],
   noindex = false,
-}: MetaInput): Metadata {
-  const url = absoluteUrl(path);
-  const imageUrl = absoluteUrl(image);
+}: MetaInput, siteConfig?: SiteConfig): Metadata {
+  const url = getAbsoluteUrl(path, siteConfig);
+  const imageUrl = getAbsoluteUrl(image, siteConfig);
+  const siteName = siteConfig?.siteName ?? SITE_NAME;
 
   return {
     title,
@@ -62,7 +69,7 @@ export function buildMetadata({
       title,
       description,
       url,
-      siteName: SITE_NAME,
+      siteName,
       type: "website",
       locale: "en_GB",
       images: [
@@ -135,6 +142,36 @@ export function organizationSchema() {
   };
 }
 
+export function organizationSchemaForSite(siteConfig: SiteConfig) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteConfig.siteName,
+    url: siteConfig.siteUrl,
+    logo: getAbsoluteUrl("/britinstitute.png", siteConfig),
+    email: SITE_EMAIL,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Office 7084, 58 Peregrine Road",
+      addressLocality: "Hainault",
+      addressRegion: "Ilford",
+      addressCountry: "GB",
+      postalCode: "IG6 3SZ",
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        email: SITE_EMAIL,
+        telephone: SITE_PHONE_UK,
+        areaServed: "GB",
+        availableLanguage: ["en"],
+      },
+    ],
+    sameAs: ["https://www.trustpilot.com/review/britinstitute.uk"],
+  };
+}
+
 export function websiteSchema() {
   return {
     "@context": "https://schema.org",
@@ -146,6 +183,23 @@ export function websiteSchema() {
       target: {
         "@type": "EntryPoint",
         urlTemplate: `${SITE_URL}/courses?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
+export function websiteSchemaForSite(siteConfig: SiteConfig) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.siteName,
+    url: siteConfig.siteUrl,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${siteConfig.siteUrl}/courses?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -172,6 +226,30 @@ export function siteNavigationSchema() {
       position: index + 1,
       name: item.name,
       url: `${SITE_URL}${item.url}`,
+    })),
+  };
+}
+
+export function siteNavigationSchemaForSite(siteConfig: SiteConfig) {
+  const navItems = [
+    { name: "About Brit Institute", url: "/about" },
+    { name: "Courses", url: "/courses" },
+    { name: "Pricing", url: "/pricing" },
+    { name: "Reviews", url: "/reviews" },
+    { name: "Resources", url: "/resources" },
+    { name: "Blog", url: "/blog" },
+    { name: "Contact Brit Institute", url: "/contact" },
+    { name: "Careers", url: "/careers" },
+  ];
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: navItems.map((item, index) => ({
+      "@type": "SiteNavigationElement",
+      position: index + 1,
+      name: item.name,
+      url: `${siteConfig.siteUrl}${item.url}`,
     })),
   };
 }
