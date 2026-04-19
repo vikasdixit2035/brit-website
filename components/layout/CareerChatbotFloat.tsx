@@ -314,9 +314,11 @@ export default function CareerChatbotFloat({
 
   const modalRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const analysisStartRef = useRef<HTMLDivElement>(null);
   const lastFocusedElementRef = useRef<HTMLElement | null>(null);
   const leadSubmittedRef = useRef(false);
   const skipAutoScrollRef = useRef(false);
+  const pendingAnalysisScrollRef = useRef(false);
 
   const currentQuestion = CHAT_QUESTIONS[currentQuestionIndex];
   const currentStep = result ? CAREER_STEPS : currentQuestion?.step ?? 1;
@@ -335,6 +337,17 @@ export default function CareerChatbotFloat({
 
     return () => window.cancelAnimationFrame(frame);
   }, [currentQuestionIndex, isOpen, isProcessing, messages, resultShown]);
+
+  useEffect(() => {
+    if (!isOpen || !pendingAnalysisScrollRef.current) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      analysisStartRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      pendingAnalysisScrollRef.current = false;
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [isOpen, messages, resultShown]);
 
   useEffect(() => {
     if (!isOpen || isStandalone) return;
@@ -510,6 +523,7 @@ export default function CareerChatbotFloat({
           ? "That is a smart direction. The next win is turning your AI curiosity into project proof and a clearer interview story."
           : "This is very fixable. With the right roadmap, your profile can move from interest-led to shortlist-ready much faster.";
       skipAutoScrollRef.current = true;
+      pendingAnalysisScrollRef.current = true;
       setResult(computed);
       setIsProcessing(false);
       setMessages((previous) => [
@@ -666,7 +680,11 @@ export default function CareerChatbotFloat({
                   <div className="space-y-4">
                     {messages.map((message) => {
                       if (message.kind === "dashboard") {
-                        return <DashboardMessage key={message.id} result={message.result} onOpenOfferModal={openOfferModal} />;
+                        return (
+                          <div key={message.id} ref={analysisStartRef}>
+                            <DashboardMessage result={message.result} onOpenOfferModal={openOfferModal} />
+                          </div>
+                        );
                       }
 
                       if (message.kind === "objections") {
