@@ -322,9 +322,14 @@ export default function CareerChatbotFloat({
   const resultShown = result !== null;
 
   useEffect(() => {
-    if (!isOpen || isStandalone) return;
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-  }, [isOpen, isProcessing, isStandalone, messages]);
+    if (!isOpen) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [currentQuestionIndex, isOpen, isProcessing, messages, resultShown]);
 
   useEffect(() => {
     if (!isOpen || isStandalone) return;
