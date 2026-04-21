@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ExternalLink, Sparkles, CheckCircle2 } from "lucide-react";
+import { Sparkles, CheckCircle2 } from "lucide-react";
 import useReveal from "@/hooks/useReveal";
 
 type ExpertCard = {
@@ -139,10 +139,17 @@ export default function IndustryExperts() {
                       href={expert.linkedinUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[11px] font-bold text-black transition-all hover:bg-[#D4AF37] hover:text-white"
+                      aria-label={`${expert.name} LinkedIn profile`}
+                      title={`${expert.name} LinkedIn profile`}
+                      className="group inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#0A66C2] text-white transition-all hover:bg-[#084f98]"
                     >
-                      <ExternalLink size={14} />
-                      View Profile
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        className="h-[18px] w-[18px] fill-current"
+                      >
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.327-.024-3.037-1.852-3.037-1.852 0-2.136 1.445-2.136 2.94v5.666h-3.553V9h3.413v1.561h.049c.476-.9 1.637-1.85 3.369-1.85 3.603 0 4.268 2.372 4.268 5.456v6.285zM5.337 7.433a2.062 2.062 0 1 1 0-4.123 2.062 2.062 0 0 1 0 4.123zM7.114 20.452H3.56V9h3.554v11.452z" />
+                      </svg>
                     </a>
                   )}
                 </div>
