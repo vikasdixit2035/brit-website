@@ -15,6 +15,15 @@ const DEEP = "#0a0f1e";
 /* ── webinar date (update as needed) ── */
 const WEBINAR_DATE = "Coming Soon";
 const WEBINAR_TIME = "Coming Soon";
+const SPEAKER_NAME = "Alok Pandey";
+const SPEAKER_TITLE = "Senior Data Analyst @ Stryker";
+const SPEAKER_AVATAR = "AP";
+const SPEAKER_BIO_POINTS = [
+  "7 years of experience in data and analytics",
+  "Focused on supply chain analytics and process optimization",
+  "Worked across Stryker, KPMG, EY, and NSUT",
+  "Guidance on learner portfolios, CV positioning, and interview readiness",
+];
 
 /* ── what you'll learn ── */
 const LEARN_POINTS = [
@@ -605,20 +614,20 @@ export default function WebinarPage() {
           <div className="wb-hero-right">
             <div className="wb-hero-card">
               <div className="wb-hero-card-label">Your Speaker</div>
-              <div className="wb-hero-card-avatar">BI</div>
-              <p className="wb-hero-card-name">Industry Expert</p>
-              <p className="wb-hero-card-role">Senior Data &amp; AI Consultant</p>
+              <div className="wb-hero-card-avatar">{SPEAKER_AVATAR}</div>
+              <p className="wb-hero-card-name">{SPEAKER_NAME}</p>
+              <p className="wb-hero-card-role">{SPEAKER_TITLE}</p>
               <div className="wb-hero-card-stats">
                 <div className="wb-hero-card-stat">
-                  <span className="wb-hero-card-stat-val">12+</span>
+                  <span className="wb-hero-card-stat-val">7+</span>
                   <span className="wb-hero-card-stat-label">Years Exp</span>
                 </div>
                 <div className="wb-hero-card-stat">
-                  <span className="wb-hero-card-stat-val">5k+</span>
-                  <span className="wb-hero-card-stat-label">Mentored</span>
+                  <span className="wb-hero-card-stat-val">4</span>
+                  <span className="wb-hero-card-stat-label">Teams</span>
                 </div>
                 <div className="wb-hero-card-stat">
-                  <span className="wb-hero-card-stat-val">20+</span>
+                  <span className="wb-hero-card-stat-val">4</span>
                   <span className="wb-hero-card-stat-label">Companies</span>
                 </div>
               </div>
@@ -663,35 +672,19 @@ export default function WebinarPage() {
           </div>
 
           <div className={`wb-speaker-wrap wb-fade-up ${speaker.visible ? "wb-vis" : ""}`}>
-            <div className="wb-speaker-avatar">BI</div>
+            <div className="wb-speaker-avatar">{SPEAKER_AVATAR}</div>
             <div className="wb-speaker-info">
-              <h3>Industry Expert</h3>
-              <p className="wb-sp-role">Senior Data &amp; AI Consultant</p>
+              <h3>{SPEAKER_NAME}</h3>
+              <p className="wb-sp-role">{SPEAKER_TITLE}</p>
               <ul className="wb-speaker-points">
-                <li>
-                  <span className="wb-sp-check">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                  </span>
-                  12+ years of experience in data science and AI
-                </li>
-                <li>
-                  <span className="wb-sp-check">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                  </span>
-                  Worked with leading tech and consulting firms
-                </li>
-                <li>
-                  <span className="wb-sp-check">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                  </span>
-                  Extensive experience in training and mentoring professionals
-                </li>
-                <li>
-                  <span className="wb-sp-check">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                  </span>
-                  Specialises in UK job market placement and career transitions
-                </li>
+                {SPEAKER_BIO_POINTS.map((point) => (
+                  <li key={point}>
+                    <span className="wb-sp-check">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                    </span>
+                    {point}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
