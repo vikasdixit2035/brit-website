@@ -219,7 +219,7 @@ export default function HeroSection() {
 
                 {/* Floating "10x Growth" Card */}
                 <div
-                  className="absolute right-3 top-12 z-[10] flex w-[186px] flex-col items-center justify-center gap-[24px] rounded-[7.33px] px-3 py-3 backdrop-blur-[1.637px] sm:right-0 sm:top-8 sm:w-[246px] sm:gap-[30px] sm:px-4 sm:py-[24px]"
+                  className="absolute right-[-10px] top-4 z-[10] flex w-[186px] flex-col items-center justify-center gap-[24px] rounded-[7.33px] px-3 py-3 backdrop-blur-[1.637px] sm:right-[-12px] sm:top-4 sm:w-[246px] sm:gap-[30px] sm:px-4 sm:py-[24px]"
                   style={{ transition: "opacity 800ms cubic-bezier(0.4, 0, 0.2, 1), transform 800ms cubic-bezier(0.4, 0, 0.2, 1)" }}
                 >
                   <div
