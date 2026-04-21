@@ -641,7 +641,7 @@ export default function CareerChatbotFloat({
                 <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#E9EDF4] bg-white px-4 py-4 shadow-[0_4px_12px_rgba(31,41,55,0.03)]">
                   <div className="flex min-w-0 items-center gap-3">
                     <div className="relative h-12 w-12 overflow-hidden rounded-full border border-[#E5EAF4] bg-[#F3F6FB]">
-                      <Image src="/avatar-1.png" alt="Digital Career Counsellor" fill className="object-cover" />
+                      <Image src="/avatar-1.png" alt="Digital Career Counsellor" fill sizes="48px" className="object-cover" />
                       <span className="absolute bottom-1 right-1 h-3 w-3 rounded-full border-2 border-white bg-[#6CD48B]" />
                     </div>
                     <div className="min-w-0">

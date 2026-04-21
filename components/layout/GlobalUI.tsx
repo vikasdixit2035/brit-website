@@ -35,8 +35,7 @@ export default function GlobalUI() {
       };
 
       if (isCTA(link) || isCTA(button)) {
-        // If it's a "login" link or "apply now", open the modal
-        // We only prevent default if it's intended to be a CTA modal trigger
+        // Treat CTA-style clicks as modal triggers instead of real navigation.
         e.preventDefault();
         setOfferModalOpen(true);
       }

@@ -54,7 +54,7 @@ export default function StickyForm() {
           <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
             Get Full Programme Details
           </h2>
-          <p className="text-gray-400">
+          <p className="text-gray-300">
             Fill out the form below and our career experts will reach out to you shortly.
           </p>
         </div>
@@ -127,7 +127,7 @@ export default function StickyForm() {
             </div>
           </div>
           <button type="submit" className="w-full rounded-xl bg-[#D4AF37] hover:bg-white hover:text-black py-4 text-base font-bold text-black transition-colors">
-            Apply Now
+            Book Free Consultation
           </button>
         </form>
       </div>

@@ -533,7 +533,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
         }
         @media (max-width: 768px) {
           .alma-nav .nav-inner-container { padding: 0 16px !important; }
-          .alma-nav .logo-img { height: 32px !important; }
+          .alma-nav .logo-img { width: 32px !important; height: 32px !important; }
           .alma-nav .logo-text span { font-size: 1.2rem !important; }
         }
         @media (max-width: 480px) {
@@ -594,7 +594,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
 
             {/* Logo */}
             <Link href="/" className="logo-text" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0, gap: "12px" }}>
-              <Image src="/britinstitute.png" alt="Brit Institute logo" className="logo-img" width={45} height={45} style={{ height: "45px", width: "auto" }} />
+              <Image src="/britinstitute.png" alt="Brit Institute logo" className="logo-img" width={45} height={45} style={{ width: "45px", height: "45px" }} />
               <span style={{ fontSize: "1.5rem", fontWeight: 800, color: BRAND_BLUE, letterSpacing: "-0.02em" }}>
                 Brit <span style={{ color: BRAND_GOLD }}>Institute</span>
               </span>
@@ -711,9 +711,9 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
               )
             ))}
 
-            <a href="/login" className="nav-signin-btn">
-              Apply now
-            </a>
+            <Link href="/contact" className="nav-signin-btn">
+              Book Free Consultation
+            </Link>
           </div>
 
           {/* ── MOBILE RIGHT: Sign In pill ─────────────────── */}
@@ -721,25 +721,18 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
             className="nav-mobile-right"
             style={{ display: "none", alignItems: "center", gap: "12px", flexShrink: 0 }}
           >
-            <a
-              href="/login"
+            <Link
+              href="/contact"
+              className="nav-signin-btn"
               style={{
-                display: "flex",
-                alignItems: "center",
                 gap: "5px",
-                background: BRAND_GOLD,
-                color: "#000",
-                fontWeight: 700,
                 fontSize: "0.9rem",
                 padding: "8px 16px",
-                borderRadius: "6px",
-                textDecoration: "none",
-                transition: "background .2s",
                 whiteSpace: "nowrap",
               }}
             >
-              Apply now
-            </a>
+              Book Free Consultation
+            </Link>
           </div>
         </div>
       </nav>
@@ -752,7 +745,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
             {/* Header */}
             <div className="drawer-header">
               <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", gap: "10px" }} onClick={closeMenu}>
-                <Image src="/britinstitute.png" alt="Brit Institute logo" width={36} height={36} style={{ height: "36px", width: "auto" }} />
+                <Image src="/britinstitute.png" alt="Brit Institute logo" width={36} height={36} style={{ width: "36px", height: "36px" }} />
                 <span style={{ fontSize: "1.2rem", fontWeight: 800, color: BRAND_BLUE }}>
                   Brit <span style={{ color: BRAND_GOLD }}>Institute</span>
                 </span>
@@ -861,9 +854,9 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
               ))}
             </div>
 
-            <a href="/login" className="drawer-signin-btn" onClick={closeMenu}>
-              Apply now
-            </a>
+            <Link href="/contact" className="drawer-signin-btn" onClick={closeMenu}>
+              Book Free Consultation
+            </Link>
           </div>
         </div>
       )}

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
+import { ShieldCheck, Sparkles } from "lucide-react";
 
 export default function FinalCTA() {
   return (
@@ -82,7 +82,7 @@ export default function FinalCTA() {
         <p
           style={{
             fontSize: "1.15rem",
-            color: "rgba(255,255,255,0.65)",
+            color: "rgba(255,255,255,0.78)",
             marginBottom: "48px",
             lineHeight: 1.7,
           }}
@@ -108,7 +108,6 @@ export default function FinalCTA() {
             }}
           >
             Book Free Consultation
-            <ArrowRight size={18} />
           </Link>
         </div>
 
@@ -120,7 +119,7 @@ export default function FinalCTA() {
             gap: "18px",
             flexWrap: "wrap",
             fontSize: "0.8rem",
-            color: "rgba(255,255,255,0.45)",
+            color: "rgba(255,255,255,0.72)",
             marginTop: "10px",
           }}
         >

@@ -1,17 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { coursesData } from "@/app/courses/[slug]/courseData";
-// If you want to use Next.js Image, you can import it:
-// import Image from "next/image";
-
-const ROLES = [
-  "Data Science",
-  "Generative AI",
-  "Machine Learning",
-  "Data Analytics",
-];
+import { SITE_STATS } from "@/lib/site";
 
 const HERO_IMAGES = [
   "/hero1.png",
@@ -27,31 +19,14 @@ const HERO_IMAGE_ALTS = [
   "AI and data skills training hero visual",
 ];
 
-const COURSE_REVIEW_SUMMARY = Object.values(coursesData).reduce(
-  (summary, course) => {
-    summary.ratingTotal += course.reviews.aggregate.ratingValue * course.reviews.aggregate.reviewCount;
-    summary.reviewCount += course.reviews.aggregate.reviewCount;
-    summary.courseCount += 1;
-    return summary;
-  },
-  { ratingTotal: 0, reviewCount: 0, courseCount: 0 }
-);
-
-const HOMEPAGE_AVERAGE_RATING =
-  COURSE_REVIEW_SUMMARY.reviewCount > 0
-    ? (COURSE_REVIEW_SUMMARY.ratingTotal / COURSE_REVIEW_SUMMARY.reviewCount).toFixed(1)
-    : "4.8";
-
 export default function HeroSection() {
-  const [activeRoleIndex, setActiveRoleIndex] = useState(0);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  // Animation effect for both Text Carousel and Hero Images
+  // Keep the visual alive without adding headline complexity.
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveRoleIndex((prev) => (prev + 1) % ROLES.length);
       setActiveImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 2500); // changes every 2.5 seconds for a more dynamic feel
+    }, 2500);
 
     return () => clearInterval(interval);
   }, []);
@@ -81,223 +56,41 @@ export default function HeroSection() {
                 <span className="flex-shrink-0 md:text-base text-xs">World Class Education. Engineered for Outcome</span>
               </div>
 
-              {/* Main Heading */}
-              <h1 className="z-[3] mt-[13px] flex-shrink-0 text-[28px] sm:text-[36px] md:text-[42px] lg:text-[48px]">
-                <span className="block font-gellix font-normal text-white">Learn, build &amp; Secure</span>
-
-                <span className="relative block font-gellix font-normal text-white">
-                  Your Career in Tech
-                  <span className="relative bottom-[5px] left-[20px] ml-[10px] inline-flex rotate-[-15.332deg] flex-col justify-start gap-[5.957px] rounded-[4.765px] border-[0.413px] border-white p-[5px_3px] sm:bottom-[8px] sm:right-[-40px] sm:p-[6px_4px] md:bottom-[10px] md:right-[-50px] md:p-[7.148px_4.765px]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="12" viewBox="0 0 17 12" fill="none">
-                      <path d="M5.72547 10.807C5.5261 10.862 5.31348 10.8417 5.1281 10.75L-1.97633e-06 8.21527L3.29139 3.15306C3.41556 2.96981 3.60669 2.84261 3.82367 2.79881C4.04066 2.755 4.26617 2.79811 4.4517 2.91884C4.63724 3.03957 4.76799 3.2283 4.81583 3.44443C4.86367 3.66056 4.82478 3.88683 4.70753 4.07459L2.45272 7.5428L5.87601 9.23431C6.02976 9.31013 6.1568 9.43092 6.24028 9.58065C6.32376 9.73038 6.35972 9.90196 6.34339 10.0726C6.32705 10.2433 6.2592 10.4049 6.14883 10.5361C6.03847 10.6672 5.89081 10.7618 5.72547 10.807ZM13.0139 8.80696L16.3053 3.74475L11.1772 1.20999C10.9763 1.11078 10.7443 1.09544 10.5321 1.16734C10.3199 1.23924 10.1449 1.39249 10.0457 1.59338C9.9465 1.79427 9.93115 2.02634 10.0031 2.23854C10.075 2.45074 10.2282 2.62569 10.4291 2.7249L13.8526 4.41723L11.5976 7.88462C11.4753 8.07244 11.4326 8.30116 11.4789 8.52045C11.5252 8.73975 11.6568 8.93166 11.8446 9.05397C12.0324 9.17628 12.2611 9.21897 12.4804 9.17264C12.6997 9.12632 12.8916 8.99478 13.0139 8.80696ZM9.5186 11.0067L8.46735 0.781607C8.45889 0.669027 8.42795 0.559284 8.37637 0.458861C8.32478 0.358438 8.25359 0.269371 8.16701 0.196921C8.08043 0.124472 7.9802 0.0701097 7.87225 0.0370449C7.76431 0.00398002 7.65083 -0.00711637 7.53852 0.00441147C7.42621 0.0159393 7.31735 0.049857 7.21837 0.104162C7.1194 0.158466 7.0323 0.232056 6.96224 0.320585C6.89218 0.409113 6.84057 0.510784 6.81046 0.619593C6.78035 0.728401 6.77236 0.842141 6.78694 0.954092L7.8382 11.1792C7.84666 11.2918 7.8776 11.4016 7.92918 11.502C7.98077 11.6024 8.05195 11.6915 8.13854 11.7639C8.22512 11.8364 8.32535 11.8907 8.4333 11.9238C8.54124 11.9569 8.65472 11.968 8.76703 11.9564C8.87934 11.9449 8.9882 11.911 9.08717 11.8567C9.18615 11.8024 9.27325 11.7288 9.34331 11.6403C9.41337 11.5517 9.46498 11.4501 9.49508 11.3412C9.52519 11.2324 9.53319 11.1187 9.5186 11.0067Z" fill="white"></path>
-                    </svg>
-                  </span>
-                </span>
-
-                {/* Animated Text Carousel */}
-                <div className="h-[38px] sm:h-[43px] md:h-[50px] lg:h-[58px]">
-                  <div
-                    className="relative h-full overflow-hidden"
-                    style={{
-                      color: "#D4AF37",
-                      fontFamily: "Gellix, sans-serif",
-                      fontSize: "clamp(28px, 5vw, 47px)",
-                      fontWeight: 700,
-                      lineHeight: "120%",
-                      letterSpacing: "-0.96px"
-                    }}
-                  >
-                    <div
-                      className="flex flex-col transition-transform duration-700 ease-in-out"
-                      style={{
-                        willChange: "transform",
-                        transform: `translateY(-${(activeRoleIndex % ROLES.length) * (100 / ROLES.length)}%) translateZ(0px)`
-                      }}
-                    >
-                      {ROLES.map((role, idx) => (
-                        <div key={idx} className="w-full flex-shrink-0 h-[38px] sm:h-[43px] md:h-[50px] lg:h-[58px] flex items-center">
-                          {role}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+              <h1 className="z-[3] mt-5 max-w-[720px] flex-shrink-0 font-gellix text-[40px] font-bold leading-[1.05] text-white sm:text-[52px] md:text-[64px] lg:text-[72px]">
+                Launch Your Tech Career with Practical AI &amp; Data Training
               </h1>
 
-              <p className="mt-5 max-w-full font-gellix text-sm md:text-base font-normal text-white/60 sm:max-w-[60%]">
-                Get certified from Top institutes and land jobs in high growth tech roles.
+              <p className="mt-6 max-w-[620px] font-gellix text-base font-normal leading-7 text-white/75 md:text-lg">
+                Build portfolio-ready skills, get mentor support, and prepare for UK data, AI, and automation roles with a clear learning path.
               </p>
 
-              {/* Action Cards & Stats (Desktop Grid) */}
-              <div className="mt-[20px] sm:mt-[40px] md:mt-[60px]">
-                <div className="hidden pr-16 md:flex">
-                  <div className="mb-2 grid w-full cursor-pointer grid-cols-[266px_266px] flex-wrap items-start gap-2 pr-4">
+              <div className="mt-8 flex w-full flex-col gap-3 sm:max-w-[560px] sm:flex-row">
+                <Link href="/contact" className="btn-gold lg w-full sm:w-auto">
+                  Book Free Consultation
+                </Link>
+                <a href="#programs" className="btn-outline btn-outline-white w-full sm:w-auto">
+                  Browse Courses
+                </a>
+              </div>
 
-                    {/* Action Card 1: Talk to Career Expert */}
-                    <button type="button" className="cursor-pointer z-[20] flex h-full flex-1 flex-col items-end justify-between overflow-hidden rounded-[11.855px] border border-[rgba(255,255,255,0.20)] bg-[rgba(25,22,23,0.60)] px-[20px] py-[16px] backdrop-blur-[51.56px] sm:h-[106px] text-left">
-                      <p className="flex max-w-[150px] flex-shrink-0 -rotate-[0.297deg] flex-col justify-center self-stretch font-gellix text-xs md:text-lg font-normal not-italic tracking-[0.512px] text-white sm:max-w-full">
-                        Talk to Career Expert
-                      </p>
-                      <div className="flex h-9 w-9 mt-2 items-center justify-center rounded-full bg-white">
-                        <svg className="h-5 w-5 text-[#3B82F6]" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
-                          <path fillRule="evenodd" clipRule="evenodd" d="M14.9822 10.8433C15.0154 10.6705 14.9547 10.4902 14.8187 10.3722C14.8187 10.3722 13.2594 9.02075 12.1517 8.06075C11.3432 7.36025 10.1307 7.4035 9.37419 8.16L8.86944 8.6645C7.50119 8.081 6.41044 6.99025 5.82669 5.622C5.96444 5.484 6.14945 5.29875 6.3432 5.105C7.0932 4.355 7.14319 3.1555 6.45794 2.34575C5.65794 1.40025 4.62294 0.177 4.62294 0.177C4.52794 0.06475 4.38819 0 4.24119 0H3.54045C1.8197 0 0.338443 1.2145 0.000942962 2.9015C0.000942962 2.902 -0.0128058 3.05875 0.0646942 3.3215C1.63769 8.67025 5.82094 12.8535 11.1697 14.4265L11.3474 14.479C11.4269 14.5022 11.5109 14.506 11.5922 14.4897C11.5999 14.4882 11.6239 14.4832 11.6612 14.476C13.3279 14.1425 14.6219 12.8255 14.9262 11.1532C14.9574 10.9802 14.9824 10.843 14.9824 10.843L14.9822 10.8433ZM8.8342 9.7245L8.84469 9.728L8.84794 9.729C8.93919 9.75775 8.99119 9.75 8.99119 9.75C9.12369 9.75 9.25094 9.69725 9.34469 9.6035L10.0812 8.867C10.4669 8.4815 11.0847 8.4595 11.4969 8.8165L13.9482 10.941L13.9422 10.9745C13.7144 12.227 12.7544 13.217 11.5129 13.4853L11.4517 13.4673C6.42919 11.99 2.50119 8.062 1.02394 3.0395L1.0072 2.9825C1.2937 1.823 2.33595 1 3.54045 1H4.0092L5.6947 2.99175C6.0437 3.40425 6.01845 4.01575 5.6362 4.398C5.24445 4.7895 4.88769 5.14675 4.88769 5.14675C4.75019 5.284 4.70494 5.4885 4.77144 5.671C5.45569 7.553 6.93819 9.0355 8.82019 9.71975L8.8342 9.7245Z" fill="#2563EB"></path>
-                        </svg>
-                      </div>
-                      <div className="absolute bottom-0 right-0 z-0 pointer-events-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="158" height="99" viewBox="0 0 158 99" fill="none">
-                          <g filter="url(#filter0_f_6996_23342)">
-                            <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#2563EB"></circle>
-                          </g>
-                          <defs>
-                            <filter id="filter0_f_6996_23342" x="-40.0311" y="-33.1321" width="341.347" height="341.347" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                              <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
-                              <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
-                              <feGaussianBlur stdDeviation="61.8755" result="effect1_foregroundBlur_6996_23342"></feGaussianBlur>
-                            </filter>
-                          </defs>
-                        </svg>
-                      </div>
-                    </button>
-
-                    {/* Action Card 2: Discover All Courses */}
-                    <div
-                      className="cursor-pointer z-[20] flex h-full flex-1 flex-col items-end justify-between overflow-hidden rounded-[11.855px] border border-[rgba(255,255,255,0.20)] bg-[rgba(25,22,23,0.60)] px-[20px] py-[16px] backdrop-blur-[51.56px] sm:h-[106px]"
-                      onClick={() => document.getElementById('programs')?.scrollIntoView({ behavior: 'smooth' })}
-                    >
-                      <p className="flex max-w-[150px] flex-shrink-0 -rotate-[0.297deg] flex-col justify-center self-stretch font-gellix text-xs md:text-lg font-normal not-italic tracking-[0.512px] text-white sm:max-w-full">
-                        Discover All Courses
-                      </p>
-                      <div className="flex h-9 w-9 mt-2 items-center justify-center rounded-full bg-white">
-                        <svg className="h-5 w-5 text-[#3B82F6]" xmlns="http://www.w3.org/2000/svg" width="13" height="7" viewBox="0 0 13 7" fill="none">
-                          <path d="M6.50063 6.44812C5.97563 6.44812 5.45062 6.24563 5.05312 5.84813L0.163125 0.958125C-0.054375 0.740625 -0.054375 0.380625 0.163125 0.163125C0.380625 -0.054375 0.740625 -0.054375 0.958125 0.163125L5.84813 5.05312C6.20813 5.41312 6.79313 5.41312 7.15313 5.05312L12.0431 0.163125C12.2606 -0.054375 12.6206 -0.054375 12.8381 0.163125C13.0556 0.380625 13.0556 0.740625 12.8381 0.958125L7.94813 5.84813C7.55063 6.24563 7.02563 6.44812 6.50063 6.44812Z" fill="#2563EB"></path>
-                        </svg>
-                      </div>
-                      <div className="absolute bottom-0 right-0 z-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="158" height="99" viewBox="0 0 158 99" fill="none">
-                          <g filter="url(#filter0_f_6996_23342)">
-                            <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#2563EB"></circle>
-                          </g>
-                          <defs>
-                            <filter id="filter0_f_6996_23342" x="-40.0311" y="-33.1321" width="341.347" height="341.347" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                              <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
-                              <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
-                              <feGaussianBlur stdDeviation="61.8755" result="effect1_foregroundBlur_6996_23342"></feGaussianBlur>
-                            </filter>
-                          </defs>
-                        </svg>
-                      </div>
+              <div className="mt-8 grid w-full max-w-[620px] grid-cols-1 gap-3 sm:grid-cols-3">
+                {[
+                  { value: SITE_STATS.learnersTrained, label: "learners trained" },
+                  { value: `${SITE_STATS.averageRating}/5`, label: "learner rating" },
+                  { value: SITE_STATS.hiringPartners, label: "hiring partners" },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="rounded-2xl border border-white/15 bg-white/[0.06] px-5 py-4 backdrop-blur-md"
+                  >
+                    <div className="font-gellix text-2xl font-bold leading-none text-white">
+                      {stat.value}
+                    </div>
+                    <div className="mt-2 font-gellix text-xs font-medium text-white/70">
+                      {stat.label}
                     </div>
                   </div>
-                </div>
-
-                {/* Stats Row */}
-                <div className="hidden md:flex mt-2">
-                  <div className="z-[10] flex whitespace-nowrap items-start justify-start gap-2 w-full">
-
-                    {/* Learner Rating Card */}
-                    <div className="relative flex h-full flex-1 flex-col overflow-hidden rounded-[11.855px] border border-[rgba(255,255,255,0.20)] bg-[rgba(25,22,23,0.60)] px-[20px] py-[14px] backdrop-blur-[51.56px] sm:px-[20px] sm:py-[12px]">
-                      <div className="flex items-start flex-col">
-                        <div className="flex gap-2">
-                          <div className="flex items-center justify-center py-[16px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                              <path d="M12 2L14.97 8.11L21.7 9.08L16.85 13.75L18 20.5L12 17.27L6 20.5L7.15 13.75L2.3 9.08L9.03 8.11L12 2Z" fill="#FBBF24"></path>
-                            </svg>
-                          </div>
-                          <div className="flex items-baseline leading-[200%]">
-                            <p className="font-gellix text-[24px] md:text-[28px] font-[400] leading-[200%] text-white">{HOMEPAGE_AVERAGE_RATING}</p>
-                            <span className="font-gellix text-xs md:text-sm font-[400] leading-[200%] text-white/60">/5</span>
-                          </div>
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="font-gellix text-xs md:text-sm font-[400] leading-[200%] text-white/60">First-Party Learner Rating</span>
-                        </div>
-                      </div>
-                      <div className="absolute bottom-0 right-0 z-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="158" height="99" viewBox="0 0 158 99" fill="none">
-                          <g filter="url(#filter0_f_6996_23342)">
-                            <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#2563EB"></circle>
-                          </g>
-                          <defs>
-                            <filter id="filter0_f_6996_23342" x="-40.0311" y="-33.1321" width="341.347" height="341.347" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                              <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
-                              <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
-                              <feGaussianBlur stdDeviation="61.8755" result="effect1_foregroundBlur_6996_23342"></feGaussianBlur>
-                            </filter>
-                          </defs>
-                        </svg>
-                      </div>
-                    </div>
-
-                    {/* Published Reviews Card */}
-                    <div className="relative flex h-full flex-1 flex-col overflow-hidden rounded-[11.855px] border border-[rgba(255,255,255,0.20)] bg-[rgba(25,22,23,0.60)] px-[20px] py-[14px] backdrop-blur-[51.56px] sm:px-[20px] sm:py-[12px]">
-                      <div className="flex items-start flex-col">
-                        <div className="flex gap-2">
-                          <div className="flex items-center justify-center py-[16px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                              <path d="M8 7H16M8 12H16M8 17H13M7 3H17C18.1046 3 19 3.89543 19 5V19L15.5 16.5L12 19L8.5 16.5L5 19V5C5 3.89543 5.89543 3 7 3Z" stroke="#93C5FD" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"></path>
-                            </svg>
-                          </div>
-                          <div className="flex items-baseline leading-[200%]">
-                            <p className="font-gellix text-[24px] md:text-[28px] font-[400] leading-[200%] text-white">{COURSE_REVIEW_SUMMARY.reviewCount}</p>
-                          </div>
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="font-gellix text-xs md:text-sm font-[400] leading-[200%] text-white/60">Published Learner Reviews</span>
-                        </div>
-                      </div>
-                      <div className="absolute bottom-0 right-0 z-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="158" height="99" viewBox="0 0 158 99" fill="none">
-                          <g filter="url(#filter0_f_6996_23342)">
-                            <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#2563EB"></circle>
-                          </g>
-                          <defs>
-                            <filter id="filter0_f_6996_23342" x="-40.0311" y="-33.1321" width="341.347" height="341.347" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                              <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
-                              <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
-                              <feGaussianBlur stdDeviation="61.8755" result="effect1_foregroundBlur_6996_23342"></feGaussianBlur>
-                            </filter>
-                          </defs>
-                        </svg>
-                      </div>
-                    </div>
-
-                    {/* Skilled Learners Card */}
-                    <div className="relative flex h-full flex-1 flex-col overflow-hidden rounded-[11.855px] border border-[rgba(255,255,255,0.20)] bg-[rgba(25,22,23,0.60)] px-[20px] py-[14px] backdrop-blur-[51.56px] sm:px-[20px] sm:py-[12px]">
-                      <div className="flex items-start flex-col">
-                        <div className="flex gap-2">
-                          <div className="flex h-full items-center justify-center py-[20px]">
-                            <div className="flex items-center justify-center">
-                              {/* <img alt="ellipse" src="/assets/Mobile.png" className="w-[106px] h-[34px] object-contain" /> */}
-                            </div>
-                          </div>
-                          <div className="flex items-baseline leading-[200%]">
-                            <p className="font-gellix text-[24px] md:text-[28px] font-[400] leading-[200%] text-white">{COURSE_REVIEW_SUMMARY.courseCount}</p>
-                          </div>
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="font-gellix text-xs md:text-sm font-[400] leading-[200%] text-white/60">Rated Career Programmes</span>
-                        </div>
-                      </div>
-                      <div className="absolute bottom-0 right-0 z-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="158" height="99" viewBox="0 0 158 99" fill="none">
-                          <g filter="url(#filter0_f_6996_23342)">
-                            <circle cx="46.9223" cy="46.9223" r="46.9223" transform="matrix(-1 0 0 1 177.564 90.6189)" fill="#2563EB"></circle>
-                          </g>
-                          <defs>
-                            <filter id="filter0_f_6996_23342" x="-40.0311" y="-33.1321" width="341.347" height="341.347" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                              <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
-                              <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
-                              <feGaussianBlur stdDeviation="61.8755" result="effect1_foregroundBlur_6996_23342"></feGaussianBlur>
-                            </filter>
-                          </defs>
-                        </svg>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-
-                {/* Mobile version of grids excluded for brevity but easy to duplicate structure if needed as in original HTML */}
+                ))}
               </div>
             </div>
           </div>
@@ -426,25 +219,30 @@ export default function HeroSection() {
 
                 {/* Floating "10x Growth" Card */}
                 <div
-                  className="absolute right-3 top-12 z-[10] flex w-[166px] flex-col items-center justify-center gap-[12px] rounded-[7.33px] border-[0.275px] border-white/30 bg-[rgba(0,0,0,0.15)] px-3 py-3 backdrop-blur-[1.637px] sm:right-0 sm:top-8 sm:w-[226px] sm:gap-[18px] sm:px-4 sm:py-[24px]"
+                  className="absolute right-3 top-12 z-[10] flex w-[186px] flex-col items-center justify-center gap-[24px] rounded-[7.33px] px-3 py-3 backdrop-blur-[1.637px] sm:right-0 sm:top-8 sm:w-[246px] sm:gap-[30px] sm:px-4 sm:py-[24px]"
                   style={{ transition: "opacity 800ms cubic-bezier(0.4, 0, 0.2, 1), transform 800ms cubic-bezier(0.4, 0, 0.2, 1)" }}
                 >
-                  <div style={{ opacity: 1, transform: "scale(1)", transition: "opacity 800ms cubic-bezier(0.4, 0, 0.2, 1), transform 800ms cubic-bezier(0.4, 0, 0.2, 1)" }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="99" height="87" viewBox="0 0 99 87" fill="none">
-                      <path opacity="0.7" fillRule="evenodd" clipRule="evenodd" d="M78.6164 10.1035L98.5024 0L95.8896 25.5152L90.4083 20.6249C72.0602 43.6497 41.3096 61.1782 9.25116 58.7257L9.79537 48.8148C38.7311 51.0272 66.7727 35.3073 83.6508 14.5951L78.6164 10.1035Z" fill="url(#paint0_linear_7855_25493)"></path>
-                      <path d="M16.611 44.5834V86.4166H9.59354V54.2103L0 61.8535V53.4518L11.755 44.5834H16.611Z" fill="white"></path>
-                      <path d="M38.7887 87C35.4724 87 32.6003 86.1151 30.1723 84.3453C27.764 82.5755 25.9282 80.0764 24.6649 76.848C23.4213 73.6196 22.7995 69.837 22.7995 65.5C22.7995 61.163 23.4213 57.3804 24.6649 54.152C25.9282 50.9236 27.764 48.4245 30.1723 46.6547C32.6003 44.8849 35.4724 44 38.7887 44C43.8026 44 47.7308 45.9448 50.5734 49.8345C53.4356 53.7047 54.8668 58.9265 54.8668 65.5C54.8668 72.0735 53.4356 77.3051 50.5734 81.1947C47.7308 85.0649 43.8026 87 38.7887 87ZM38.7887 80.2029C41.5917 80.2029 43.7533 78.9582 45.2732 76.4688C46.8129 73.9794 47.5828 70.3232 47.5828 65.5C47.5828 60.6768 46.8129 57.0206 45.2732 54.5312C43.7533 52.0418 41.5917 50.7972 38.7887 50.7972C36.0251 50.7972 33.8834 52.0418 32.3634 54.5312C30.8434 57.0206 30.0834 60.6768 30.0834 65.5C30.0834 70.3232 30.8434 73.9794 32.3634 76.4688C33.8834 78.9582 36.0251 80.2029 38.7887 80.2029Z" fill="white"></path>
-                      <path d="M88 86.4166H79.8869L73.0471 76.9647L66.2369 86.4166H58.183L69.0202 71.3636L58.7752 57.2151H66.9771L73.1063 65.7334L79.2651 57.2151H87.2894L77.1628 71.3053L88 86.4166Z" fill="white"></path>
-                      <defs>
-                        <linearGradient id="paint0_linear_7855_25493" x1="85.0032" y1="22.7757" x2="12.532" y2="49.4338" gradientUnits="userSpaceOnUse">
-                          <stop stopColor="white"></stop>
-                          <stop offset="0.444" stopColor="#9D9D9D" stopOpacity="0.41"></stop>
-                          <stop offset="0.999" stopColor="#A5A5A5" stopOpacity="0"></stop>
-                        </linearGradient>
-                      </defs>
-                    </svg>
+                  <div
+                    className="hero-badge-arrow"
+                    style={{ opacity: 1, transform: "scale(1)", transition: "opacity 800ms cubic-bezier(0.4, 0, 0.2, 1), transform 800ms cubic-bezier(0.4, 0, 0.2, 1)" }}
+                  >
+                    <div className="hero-badge-grow">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="116" height="102" viewBox="0 0 99 87" fill="none">
+                        <path opacity="0.7" fillRule="evenodd" clipRule="evenodd" d="M78.6164 10.1035L98.5024 0L95.8896 25.5152L90.4083 20.6249C72.0602 43.6497 41.3096 61.1782 9.25116 58.7257L9.79537 48.8148C38.7311 51.0272 66.7727 35.3073 83.6508 14.5951L78.6164 10.1035Z" fill="url(#paint0_linear_7855_25493)"></path>
+                        <path d="M16.611 44.5834V86.4166H9.59354V54.2103L0 61.8535V53.4518L11.755 44.5834H16.611Z" fill="white"></path>
+                        <path d="M38.7887 87C35.4724 87 32.6003 86.1151 30.1723 84.3453C27.764 82.5755 25.9282 80.0764 24.6649 76.848C23.4213 73.6196 22.7995 69.837 22.7995 65.5C22.7995 61.163 23.4213 57.3804 24.6649 54.152C25.9282 50.9236 27.764 48.4245 30.1723 46.6547C32.6003 44.8849 35.4724 44 38.7887 44C43.8026 44 47.7308 45.9448 50.5734 49.8345C53.4356 53.7047 54.8668 58.9265 54.8668 65.5C54.8668 72.0735 53.4356 77.3051 50.5734 81.1947C47.7308 85.0649 43.8026 87 38.7887 87ZM38.7887 80.2029C41.5917 80.2029 43.7533 78.9582 45.2732 76.4688C46.8129 73.9794 47.5828 70.3232 47.5828 65.5C47.5828 60.6768 46.8129 57.0206 45.2732 54.5312C43.7533 52.0418 41.5917 50.7972 38.7887 50.7972C36.0251 50.7972 33.8834 52.0418 32.3634 54.5312C30.8434 57.0206 30.0834 60.6768 30.0834 65.5C30.0834 70.3232 30.8434 73.9794 32.3634 76.4688C33.8834 78.9582 36.0251 80.2029 38.7887 80.2029Z" fill="white"></path>
+                        <path d="M88 86.4166H79.8869L73.0471 76.9647L66.2369 86.4166H58.183L69.0202 71.3636L58.7752 57.2151H66.9771L73.1063 65.7334L79.2651 57.2151H87.2894L77.1628 71.3053L88 86.4166Z" fill="white"></path>
+                        <defs>
+                          <linearGradient id="paint0_linear_7855_25493" x1="85.0032" y1="22.7757" x2="12.532" y2="49.4338" gradientUnits="userSpaceOnUse">
+                            <stop stopColor="white"></stop>
+                            <stop offset="0.444" stopColor="#9D9D9D" stopOpacity="0.41"></stop>
+                            <stop offset="0.999" stopColor="#A5A5A5" stopOpacity="0"></stop>
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                    </div>
                   </div>
-                  <div className="whitespace-nowrap font-gellix text-[10px] font-normal leading-[19.652px] text-white sm:text-xs">
+                  <div className="hero-badge-copy whitespace-nowrap font-gellix text-sm font-normal leading-[22px] text-white sm:text-base">
                     Growth in AI Skill
                   </div>
                 </div>
@@ -472,6 +270,72 @@ export default function HeroSection() {
         </div>
 
       </div>
+      <style jsx>{`
+        .hero-badge-arrow {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          animation: heroArrowBob 4.8s ease-in-out infinite;
+          will-change: transform, opacity;
+        }
+
+        .hero-badge-grow {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          transform-origin: center;
+          animation: heroArrowGrow 2.8s ease-in-out infinite;
+          will-change: transform, opacity;
+        }
+
+        .hero-badge-copy {
+          animation: heroBadgeCopy 4.8s ease-in-out infinite;
+          letter-spacing: 0.01em;
+        }
+
+        @keyframes heroArrowGrow {
+          0% {
+            transform: scale(0.72);
+            opacity: 0.55;
+          }
+          60% {
+            transform: scale(1.1);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        @keyframes heroArrowBob {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-3px);
+          }
+        }
+
+        @keyframes heroBadgeCopy {
+          0%, 100% {
+            opacity: 0.88;
+            transform: translateY(0);
+          }
+          50% {
+            opacity: 1;
+            transform: translateY(-2px);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .hero-badge-arrow,
+          .hero-badge-copy,
+          .hero-badge-grow {
+            animation: none;
+          }
+        }
+      `}</style>
     </div>
   );
 }

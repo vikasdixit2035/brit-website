@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 // Expanded data array to include diagnostic advice and actionable steps
@@ -13,14 +14,14 @@ const painPoints = [
     accentBorder: "#a78bfa",
     image: "/1.png",
     title: "Stagnant Progression",
-    detail: "Working hard but not seeing career progression",
+    detail: "Working hard without a clear route to promotion.",
     diagnosis: "You've hit a ceiling because upward mobility requires shifting from task execution to strategic value creation. Hard work alone rarely equals a promotion without visibility.",
     steps: [
       "Document your daily impact using quantifiable metrics.",
       "Schedule a specific 1-on-1 to discuss career mapping, not just project status.",
       "Identify and learn the skills the level above you uses daily."
     ],
-    actionText: "Start Career Mapping"
+    actionText: "Book Free Consultation"
   },
   {
     id: 1,
@@ -29,14 +30,14 @@ const painPoints = [
     accentBorder: "#f59e0b",
     image: "/2.png",
     title: "Lack of Direction",
-    detail: "Unsure how to enter data or AI roles",
+    detail: "Unsure which data or AI role fits you.",
     diagnosis: "The tech landscape is overwhelming. You are likely suffering from analysis paralysis, trying to learn everything instead of focusing on a specific, employable niche.",
     steps: [
       "Choose one specific role (e.g., Data Analyst vs. ML Engineer) and ignore the rest for now.",
       "Find 5 job descriptions for that role and extract the top 3 overlapping required tools.",
       "Build a single, end-to-end project using those specific tools."
     ],
-    actionText: "Find Your Niche"
+    actionText: "Book Free Consultation"
   },
   {
     id: 2,
@@ -45,14 +46,14 @@ const painPoints = [
     accentBorder: "#60a5fa",
     image: "/3.png",
     title: "Theory Over Practice",
-    detail: "Learning online but lacking real-world application",
+    detail: "Learning online without portfolio-ready proof.",
     diagnosis: "Tutorial hell is real. You are passively consuming information rather than actively struggling through problem-solving, which is where true skill acquisition happens.",
     steps: [
       "Stop taking new courses until you complete a project from scratch.",
       "Contribute to an open-source project or solve a problem for a local business.",
       "Rebuild a tutorial project without looking at the source code."
     ],
-    actionText: "Build Your Portfolio"
+    actionText: "Book Free Consultation"
   },
   {
     id: 3,
@@ -61,14 +62,14 @@ const painPoints = [
     accentBorder: "#fb7185",
     image: "/4.png",
     title: "No Clear Path",
-    detail: "No clear path to a high-paying tech career",
+    detail: "No sequenced roadmap from skills to interviews.",
     diagnosis: "You lack a structured roadmap. Without a sequenced learning and networking plan, you are relying on luck rather than a repeatable system.",
     steps: [
       "Audit your current skills against industry standard salary bands.",
       "Optimize your LinkedIn profile to attract technical recruiters.",
       "Join specialized tech communities to network with industry insiders."
     ],
-    actionText: "Unlock the Roadmap"
+    actionText: "Book Free Consultation"
   },
 ];
 
@@ -130,6 +131,7 @@ export default function PainPoints() {
                         src={point.image} 
                         alt={point.title} 
                         fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         className="object-contain p-2 transition-transform duration-500 group-hover:scale-110"
                       />
                     </div>
@@ -179,13 +181,13 @@ export default function PainPoints() {
                     </li>
                   ))}
                 </ul>
-                <button
-                  className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 text-white rounded-xl font-semibold transition-colors"
-                  style={{ backgroundColor: painPoints[activeId].accent }}
+                <Link
+                  href="/contact"
+                  className="btn-outline btn-outline-blue w-full sm:w-auto"
                 >
                   {painPoints[activeId].actionText}
                   <ArrowRight size={18} />
-                </button>
+                </Link>
               </div>
 
             </div>

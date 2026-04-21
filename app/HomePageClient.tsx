@@ -12,7 +12,9 @@ import PainPoints from "@/components/sections/PainPoints";
 import Solution from "@/components/sections/Solution";
 import Outcomes from "@/components/sections/Outcomes";
 import Testimonials from "@/components/sections/Testimonials";
+import IndustryExperts from "@/components/sections/IndustryExperts";
 import Programs from "@/components/sections/Programs";
+import FinalCTA from "@/components/sections/FinalCTA";
 import StickyForm from "@/components/sections/StickyForm";
 export default function Home() {
   const [banner, setBanner] = useState(true);
@@ -40,10 +42,16 @@ export default function Home() {
       {/* 5. Proof (Testimonials) */}
       <Testimonials />
 
-      {/* 6. Programme Snapshot */}
+      {/* 6. Industry Experts */}
+      <IndustryExperts />
+
+      {/* 7. Programme Snapshot */}
       <Programs />
 
-      {/* 7. Sticky Form */}
+      {/* 8. Final CTA */}
+      <FinalCTA />
+
+      {/* 9. Sticky Form */}
       <StickyForm />
 
       <Footer />

@@ -142,10 +142,11 @@ export default function TopBanner({ visible, onClose }: TopBannerProps) {
           font-size: 0.85rem;
           font-weight: 700;
           cursor: pointer;
+          text-decoration: none;
           transition: background 0.2s;
         }
         .banner-cta-btn:hover {
-          background: #d6002b;
+          background: #facc15;
         }
         .banner-close-btn {
           position: absolute;
@@ -216,7 +217,7 @@ export default function TopBanner({ visible, onClose }: TopBannerProps) {
               </div>
 
               {/* Button */}
-              <button className="banner-cta-btn">Apply Now</button>
+              <a href="/contact" className="banner-cta-btn">Book Free Consultation</a>
             </div>
 
             <button className="banner-close-btn" onClick={onClose} aria-label="Close banner">

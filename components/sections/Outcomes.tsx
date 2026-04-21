@@ -113,7 +113,7 @@ export default function Programs() {
 
   return (
     <section
-      id="programs"
+      id="outcomes"
       className="w-full bg-[#0F1218] py-24 font-sans overflow-hidden"
       ref={r.ref}
     >
@@ -148,7 +148,7 @@ export default function Programs() {
               Path
             </span>
           </h2>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
             Select the programme that matches your goals and start building a
             high-demand career in data and AI.
           </p>
@@ -228,7 +228,7 @@ export default function Programs() {
                       <h3 className="text-xl font-bold text-white leading-tight mb-3">
                         {course.title}
                       </h3>
-                      <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                      <p className="text-gray-300 text-sm leading-relaxed mb-6 flex-grow">
                         {course.desc}
                       </p>
 

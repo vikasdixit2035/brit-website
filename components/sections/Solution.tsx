@@ -70,7 +70,7 @@ export default function Solution() {
                 <h3 className="text-[1.2rem] font-bold text-[var(--white)] mb-3">
                   {point.title}
                 </h3>
-                <p className="text-[0.95rem] text-white/70 leading-[1.6] m-0">
+                <p className="text-[0.95rem] text-white/75 leading-[1.6] m-0">
                   {point.detail}
                 </p>
               </div>

@@ -115,8 +115,8 @@ export default function StickyBottomBar() {
             +447520664011
           </a>
           <span className="sticky-bottom-bar__text">or</span>
-          <a href="#final-cta" className="sticky-bottom-bar__cta">
-            REGISTER FOR FREE »
+          <a href="/contact" className="sticky-bottom-bar__cta">
+            BOOK FREE CONSULTATION »
           </a>
         </div>
       </div>

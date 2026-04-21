@@ -1,11 +1,15 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Icons } from "@/components/ui/Icons";
 import useReveal from "@/hooks/useReveal";
 
 export default function Testimonials() {
   const r = useReveal();
+  const [statsVisible, setStatsVisible] = useState(false);
+  const [learnersTrained, setLearnersTrained] = useState(0);
+  const [transitionRate, setTransitionRate] = useState(0);
   const data = [
     {
       name: "Daniel Robertson", role: "AI Engineer, London", avatar: "/avatar-1.png",
@@ -16,6 +20,57 @@ export default function Testimonials() {
       quote: "Building real-world ML models and AI-powered dashboards gave me the practical portfolio I needed to confidently ace my technical interviews."
     }
   ];
+
+  useEffect(() => {
+    const el = r.ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStatsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [r.ref]);
+
+  useEffect(() => {
+    if (!statsVisible) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      setLearnersTrained(550);
+      setTransitionRate(92);
+      return;
+    }
+
+    const duration = 1300;
+    const start = performance.now();
+    let frame = 0;
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+
+      setLearnersTrained(Math.round(550 * eased));
+      setTransitionRate(Math.round(92 * eased));
+
+      if (progress < 1) {
+        frame = window.requestAnimationFrame(tick);
+      } else {
+        setLearnersTrained(550);
+        setTransitionRate(92);
+      }
+    };
+
+    frame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frame);
+  }, [statsVisible]);
 
   return (
     <section id="proof" className="section s-testimonials" ref={r.ref} style={{ background: "#0F172A", padding: "80px 0" }}>
@@ -28,11 +83,11 @@ export default function Testimonials() {
             marginBottom: "48px"
           }}>
             <div style={{ background: "rgba(255,255,255,0.05)", padding: "16px 24px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.1)" }}>
-              <div style={{ fontSize: "2rem", fontWeight: 800, color: "var(--gold-400)" }}>550+</div>
+              <div style={{ fontSize: "2rem", fontWeight: 800, color: "var(--gold-400)" }}>{learnersTrained}+</div>
               <div style={{ color: "var(--white)", opacity: 0.8 }}>Learners Trained</div>
             </div>
             <div style={{ background: "rgba(255,255,255,0.05)", padding: "16px 24px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.1)" }}>
-              <div style={{ fontSize: "2rem", fontWeight: 800, color: "var(--gold-400)" }}>92%</div>
+              <div style={{ fontSize: "2rem", fontWeight: 800, color: "var(--gold-400)" }}>{transitionRate}%</div>
               <div style={{ color: "var(--white)", opacity: 0.8 }}>Transitioned into New Roles</div>
             </div>
             <div style={{ background: "rgba(255, 255, 255, 0.05)", padding: "16px 24px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.1)" }}>
@@ -55,7 +110,7 @@ export default function Testimonials() {
                 <Image src={t.avatar} alt={t.name} width={48} height={48} className="t-avatar" style={{ border: 'none', borderRadius: '50%' }} />
                 <div>
                   <div className="t-name" style={{ fontSize: '1rem', fontWeight: 600, color: "var(--white)" }}>{t.name}</div>
-                  <div className="t-role" style={{ fontSize: '0.85rem', color: "rgba(255,255,255,0.6)" }}>{t.role}</div>
+                  <div className="t-role" style={{ fontSize: '0.85rem', color: "rgba(255,255,255,0.75)" }}>{t.role}</div>
                 </div>
               </div>
             </div>

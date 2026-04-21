@@ -78,6 +78,8 @@ export default function LogoStrip() {
         }
 
         .logo-box img {
+          width: auto;
+          height: auto;
           max-width: 100%;
           max-height: 100%;
           object-fit: contain;
@@ -101,25 +103,8 @@ export default function LogoStrip() {
               Top-tier training programs designed for individuals looking to upskill, pursue professional courses, and secure prominent placements in the UK.
             </p>
           </div>
-          <Link href="/contact" style={{
-            background: "#D4AF37", // Brit Institute Gold
-            color: "#111827",
-            padding: "16px 32px",
-            borderRadius: "8px",
-            fontWeight: 700,
-            fontSize: "1rem",
-            border: "none",
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            cursor: "pointer",
-            boxShadow: "0 10px 25px rgba(212, 175, 55, 0.3)",
-            whiteSpace: "nowrap",
-            transition: "transform 0.2s, background 0.2s"
-          }}
-            className="btn-gold"
-          >
-            Start A Free Demo
+          <Link href="/courses" className="btn-outline btn-outline-blue" style={{ whiteSpace: "nowrap" }}>
+            View Courses
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </Link>
         </div>
@@ -134,7 +119,7 @@ export default function LogoStrip() {
           <div className="scrolling-track-left" aria-hidden="true">
             {[...companiesRow1, ...companiesRow1].map((src, i) => (
               <div key={`r1-${i}`} className="logo-box">
-                <Image src={src.src} alt={src.alt} width={148} height={40} loading="lazy" />
+                <Image src={src.src} alt={src.alt} width={148} height={40} loading="lazy" style={{ width: "auto", height: "auto" }} />
               </div>
             ))}
           </div>
@@ -145,7 +130,7 @@ export default function LogoStrip() {
           <div className="scrolling-track-right" aria-hidden="true">
             {[...companiesRow2, ...companiesRow2].map((src, i) => (
               <div key={`r2-${i}`} className="logo-box">
-                <Image src={src.src} alt={src.alt} width={148} height={40} loading="lazy" />
+                <Image src={src.src} alt={src.alt} width={148} height={40} loading="lazy" style={{ width: "auto", height: "auto" }} />
               </div>
             ))}
           </div>
