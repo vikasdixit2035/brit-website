@@ -14,7 +14,7 @@ const TOP_BANNER_HEIGHT = 40;
 
 // Badge colour map
 const BADGE_COLOURS: Record<string, { bg: string; text: string }> = {
-  FEATURED: { bg: "#EF4444", text: "#fff" },
+  FEATURED: { bg: "#FFD700", text: "#000" },
   "MOST POPULAR": { bg: "#8B5CF6", text: "#fff" },
   "IN DEMAND": { bg: "#10B981", text: "#fff" },
   "AI LEADER": { bg: "#D4AF37", text: "#1a1a1a" },
@@ -42,7 +42,6 @@ interface NavLink {
 
 // Nav links for desktop right side
 const NAV_RIGHT_LINKS: NavLink[] = [
-  { href: "/reviews", label: "Reviews" },
   { href: "/resources", label: "Resources" },
   { href: "/webinar", label: "Webinar" },
   { href: "/blog", label: "Blog" },
@@ -57,7 +56,6 @@ const MOBILE_MENU_LINKS: NavLink[] = [
   { href: "#hire", label: "Hire From Us" },
   { href: "#why", label: "Why BritInstitute" },
   { href: "#stories", label: "Success Stories" },
-  { href: "/reviews", label: "Reviews" },
   { href: "/resources", label: "Resources" },
   { href: "/webinar", label: "Webinar" },
   { href: "/blog", label: "Blog" },
@@ -602,6 +600,13 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
               </span>
             </Link>
 
+          </div>
+
+          {/* ── CENTER / RIGHT: Nav links + Sign In — desktop ──────────── */}
+          <div
+            className="nav-desktop-right"
+            style={{ display: "flex", alignItems: "center", gap: "36px" }}
+          >
             {/* Courses trigger — desktop only */}
             <div
               ref={dropRef}
@@ -691,13 +696,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
                 </div>
               )}
             </div>
-          </div>
 
-          {/* ── CENTER / RIGHT: Nav links + Sign In — desktop ──────────── */}
-          <div
-            className="nav-desktop-right"
-            style={{ display: "flex", alignItems: "center", gap: "36px" }}
-          >
             {NAV_RIGHT_LINKS.map(({ href, label, badge }) => (
               href.startsWith("/") ? (
                 <Link key={href} href={href} className="nav-right-link">

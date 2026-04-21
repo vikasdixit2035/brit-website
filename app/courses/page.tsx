@@ -9,7 +9,7 @@ export const metadata = buildMetadata({
   description:
     "Explore Brit Institute courses in data analytics with Gen AI, data science and machine learning, agentic AI, and generative AI designed for learners building careers in the UK.",
   path: "/courses",
-  keywords: ["Brit Institute courses", "data analytics with Gen AI UK", "data science course UK", "agentic AI course UK", "generative AI course UK"],
+  keywords: ["Brit Institute courses", "data analytics with Gen AI UK", "data science course UK", "agentic AI course UK", "Generative AI UK"],
 });
 
 export default async function CoursesPage() {
@@ -24,7 +24,7 @@ export default async function CoursesPage() {
             Explore Career-Focused Programmes
           </p>
           <h1 className="mb-5 text-4xl font-extrabold tracking-tight md:text-5xl">
-            Courses in Data Analytics with Gen AI, Data Science, Agentic AI, and Generative AI
+            Data Analytics with Gen AI, Data Science, Agentic AI, and Generative AI
           </h1>
           <p className="text-lg leading-8 text-slate-600">
             Compare practical programmes built to help learners develop portfolio-ready skills, understand real tools, and prepare for career transitions.

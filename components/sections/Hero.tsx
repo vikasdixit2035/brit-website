@@ -14,11 +14,9 @@ const ROLES = [
 ];
 
 const HERO_IMAGES = [
-  "https://ab-public-bucket-prod.s3.ap-south-1.amazonaws.com/website_hero/2.webp",
-  "https://ab-public-bucket-prod.s3.ap-south-1.amazonaws.com/website_hero/3.webp",
-  "https://ab-public-bucket-prod.s3.ap-south-1.amazonaws.com/website_hero/4.webp",
-  "https://ab-public-bucket-prod.s3.ap-south-1.amazonaws.com/website_hero/5.webp",
-  "https://ab-public-bucket-prod.s3.ap-south-1.amazonaws.com/website_hero/6.webp",
+  "/hero1.png",
+  "/hero2.png",
+  "/hero3.png",
 ];
 
 const HERO_IMAGE_ALTS = [

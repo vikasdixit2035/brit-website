@@ -44,6 +44,7 @@ interface TopBannerProps {
 
 export default function TopBanner({ visible, onClose }: TopBannerProps) {
   const [scrolled, setScrolled] = useState(false);
+  const [closingDate, setClosingDate] = useState("");
   const dropRef = useRef<HTMLDivElement>(null);
 
   // Scroll handler for navbar shadow
@@ -53,6 +54,28 @@ export default function TopBanner({ visible, onClose }: TopBannerProps) {
     };
     window.addEventListener("scroll", fn, { passive: true });
     fn();
+
+    // Calculate closing date: 2 days from now
+    const date = new Date();
+    date.setDate(date.getDate() + 2);
+
+    const day = date.getDate();
+    const month = date.toLocaleDateString("en-GB", { month: "long" });
+    const year = date.getFullYear();
+
+    const getOrdinal = (d: number) => {
+      if (d > 3 && d < 21) return "th";
+      switch (d % 10) {
+        case 1: return "st";
+        case 2: return "nd";
+        case 3: return "rd";
+        default: return "th";
+      }
+    };
+
+    const formatted = `${day}${getOrdinal(day)} ${month} ${year}`;
+    setClosingDate(formatted);
+
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
@@ -189,7 +212,7 @@ export default function TopBanner({ visible, onClose }: TopBannerProps) {
               {/* Stopwatch + Text */}
               <div className="banner-item banner-cohort-item">
                 <BannerStopwatchIcon fill="#ffffff" />
-                <span className="banner-text-medium">Applications Closing: 19 April 2026</span>
+                <span className="banner-text-medium">Applications Closing: {closingDate || "Calculating..."}</span>
               </div>
 
               {/* Button */}

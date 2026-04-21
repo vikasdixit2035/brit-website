@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -25,8 +26,15 @@ const COURSE_CARD_IMAGES: Record<string, { src: string; alt: string }> = {
   },
   "gen-ai": {
     src: "/genai-Photoroom.png",
-    alt: "Generative AI course image",
+    alt: "Generative AI image",
   },
+} as const;
+
+const COURSE_ROUTE_MAP: Record<string, string> = {
+  "data-analytics": "/courses/data-analytics",
+  "data-science": "/courses/data-science",
+  "ai-automation": "/courses/ai-automation",
+  "gen-ai": "/courses/gen-ai",
 } as const;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -177,10 +185,13 @@ export default function Programs() {
                   src: "/genai.jpg",
                   alt: course.title,
                 };
+                const courseHref = COURSE_ROUTE_MAP[course.slug] ?? `/courses/${course.slug}`;
                 return (
-                  <div
+                  <Link
                     key={`${course.slug}-${idx}`}
-                    className="w-[340px] md:w-[380px] flex-none bg-[#1A1D24] rounded-2xl border border-gray-800 overflow-hidden flex flex-col group hover:-translate-y-2 transition-transform duration-300 shadow-xl cursor-pointer"
+                    href={courseHref}
+                    className="w-[340px] md:w-[380px] flex-none bg-[#1A1D24] rounded-2xl border border-gray-800 overflow-hidden flex flex-col group hover:-translate-y-2 transition-transform duration-300 shadow-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#0F1218]"
+                    aria-label={`View details for ${course.title}`}
                   >
                     {/* Card top */}
                     <div
@@ -233,15 +244,15 @@ export default function Programs() {
                       </div>
 
                       <div className="flex gap-3 mt-auto">
-                        <button className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-4 rounded-xl text-sm transition-colors duration-200">
+                        <span className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-4 rounded-xl text-sm transition-colors duration-200 text-center">
                           View Details
-                        </button>
-                        <button className="flex-1 bg-transparent border border-gray-700 hover:border-gray-500 hover:bg-white/5 text-white font-semibold py-3 px-4 rounded-xl text-sm transition-all duration-200">
-                          Apply Now
-                        </button>
+                        </span>
+                        <span className="flex-1 bg-transparent border border-gray-700 hover:border-gray-500 hover:bg-white/5 text-white font-semibold py-3 px-4 rounded-xl text-sm transition-all duration-200 text-center">
+                          Course Page
+                        </span>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 );
               })
             )}

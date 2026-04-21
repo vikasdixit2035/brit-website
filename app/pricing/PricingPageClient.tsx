@@ -74,7 +74,7 @@ const COURSE_CARD_IMAGES: Record<string, { src: string; alt: string }> = {
   },
   "gen-ai": {
     src: "/genai-Photoroom.png",
-    alt: "Generative AI course image",
+    alt: "Generative AI image",
   },
 } as const;
 

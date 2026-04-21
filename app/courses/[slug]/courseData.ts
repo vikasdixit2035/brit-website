@@ -52,7 +52,7 @@ export interface CourseSeoData {
 
 export const coursesData: Record<string, CourseSeoData> = {
   "data-analytics": {
-    h1: "Data Analytics Course with Generative AI Program",
+    h1: "Data Analytics  with Generative AI Program",
     subheadline: "Master data analytics, dashboards, and AI tools to become job-ready for high-demand data analyst roles in the UK.",
     cohort: "Starting Soon",
     duration: "6 months",
@@ -295,13 +295,13 @@ export const coursesData: Record<string, CourseSeoData> = {
     }
   },
   "gen-ai": {
-    h1: "Generative AI Course in the UK for Practical Business Use Cases",
+    h1: "Generative AI in the UK for Practical Business Use Cases",
     subheadline: "Learn prompting, copilots, and real-world generative AI workflows you can use across business, operations, and content roles.",
     cohort: "Starting Soon",
     duration: "3 months",
     canonicalPath: "/courses/gen-ai",
-    seoTitle: "Generative AI Course in the UK",
-    seoDescription: "Explore Brit Institute's practical Generative AI course in the UK covering prompting, copilots, AI workflows, and business-ready applications.",
+    seoTitle: "Generative AI in the UK",
+    seoDescription: "Explore Brit Institute's practical Generative AI in the UK covering prompting, copilots, AI workflows, and business-ready applications.",
     ogImage: "/hero-illustration.png",
     updatedAt: "2026-04-16",
     trustLayer: {
