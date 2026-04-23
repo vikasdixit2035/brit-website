@@ -62,7 +62,51 @@ export const faqItems: FaqItem[] = [
   {
     question: "What support will I receive, and what salary can I expect?",
     answer:
-      "You will receive dedicated mentor and doubt support throughout the course.\n\nUK entry-level Data Analyst salary expectation: £45,000 to £60,000 per year, depending on skills, interview performance, and role.",
+      "You will receive dedicated mentor and doubt support throughout the course.\n\nUK entry-level Data Analyst salary expectation: £28,000 to £55,000 per year, depending on skills, interview performance, and role.",
+  },
+];
+
+// ── Data Analytics Course – targeted FAQ for UK search queries ──────────────
+export const dataAnalyticsFaqItems: FaqItem[] = [
+  {
+    question: "Is Brit Institute's data analytics course available in the UK?",
+    answer:
+      "Yes. Brit Institute's data analytics course is designed specifically for learners in the UK. The programme is delivered online via live instructor-led sessions, so you can join from anywhere in the United Kingdom.",
+  },
+  {
+    question: "What is the best data analytics course in the UK for beginners?",
+    answer:
+      "Brit Institute offers a beginner-friendly Data Analytics with Generative AI programme that covers Excel, SQL, Power BI, Tableau, and Python from scratch. It includes hands-on projects and end-to-end career support tailored for the UK job market.",
+  },
+  {
+    question: "How long is the data analytics course at Brit Institute?",
+    answer:
+      "The Data Analytics with Generative AI programme is 6 months long, with live online classes, recorded sessions, and mentored projects throughout.",
+  },
+  {
+    question: "What salary can I expect after completing a data analytics course in the UK?",
+    answer:
+      "UK data analyst salaries typically range from £28,000 to £55,000+ depending on experience, location, and sector. Brit Institute graduates have transitioned into roles in finance, retail, SaaS, and consulting.",
+  },
+  {
+    question: "What tools are taught in the data analytics course UK?",
+    answer:
+      "The course covers Excel, SQL, Power BI, Tableau, Python (basic), and ChatGPT/Generative AI for data workflows — all tools actively used in UK data analyst job descriptions.",
+  },
+  {
+    question: "Do I need a degree to join a data analytics course in the UK?",
+    answer:
+      "No degree is required. Brit Institute's data analytics course is open to career switchers, non-technical professionals, and anyone looking to build data skills for the UK job market.",
+  },
+  {
+    question: "Does the data analytics course include job placement support?",
+    answer:
+      "Yes. The programme includes CV preparation for UK data analyst roles, interview coaching, portfolio review, and ongoing placement support until you secure a relevant position.",
+  },
+  {
+    question: "How much does the data analytics course cost in the UK?",
+    answer:
+      "The Data Analytics with Generative AI programme is priced at £3,499. EMI payment options are available, and eligible learners may qualify for Pay After Placement arrangements.",
   },
 ];
 
@@ -70,6 +114,21 @@ export const faqPageSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+
+// Dedicated FAQPage schema for /courses/data-analytics
+// Targets "data analytics course UK" rich snippets in Google Search
+export const dataAnalyticsFaqPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: dataAnalyticsFaqItems.map((item) => ({
     "@type": "Question",
     name: item.question,
     acceptedAnswer: {

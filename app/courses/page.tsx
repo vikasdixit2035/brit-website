@@ -5,11 +5,19 @@ import { fetchCourses } from "@/lib/courses";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Courses",
+  title: "Data Analytics Course UK and AI Career Courses",
   description:
-    "Explore Brit Institute courses in data analytics with Gen AI, data science and machine learning, agentic AI, and generative AI designed for learners building careers in the UK.",
+    "Compare Brit Institute's data analytics course in the UK with Gen AI, data science and machine learning, agentic AI, and generative AI programmes for UK career growth.",
   path: "/courses",
-  keywords: ["Brit Institute courses", "data analytics with Gen AI UK", "data science course UK", "agentic AI course UK", "Generative AI UK"],
+  keywords: [
+    "data analytics course UK",
+    "data analyst course UK",
+    "data analytics with Gen AI UK",
+    "data science course UK",
+    "agentic AI course UK",
+    "Generative AI UK",
+    "Brit Institute courses",
+  ],
 });
 
 export default async function CoursesPage() {

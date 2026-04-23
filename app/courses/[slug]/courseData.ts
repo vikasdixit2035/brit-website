@@ -52,13 +52,13 @@ export interface CourseSeoData {
 
 export const coursesData: Record<string, CourseSeoData> = {
   "data-analytics": {
-    h1: "Data Analytics  with Generative AI Program",
-    subheadline: "Master data analytics, dashboards, and AI tools to become job-ready for high-demand data analyst roles in the UK.",
+    h1: "Data Analytics Course in the UK with Generative AI",
+    subheadline: "Master SQL, Power BI, Tableau, dashboards, and AI tools through a practical data analytics course built for UK data analyst roles.",
     cohort: "Starting Soon",
     duration: "6 months",
     canonicalPath: "/courses/data-analytics",
-    seoTitle: "Data Analytics Course in the UK",
-    seoDescription: "Explore Brit Institute's practical data analytics course in the UK covering SQL, dashboards, AI tools, and career support for analyst roles.",
+    seoTitle: "Data Analytics Course UK with Gen AI",
+    seoDescription: "Join Brit Institute's practical data analytics course in the UK. Learn Excel, SQL, Power BI, Tableau, Python basics, Gen AI workflows, projects, and career support.",
     ogImage: "/hero-illustration.png",
     updatedAt: "2026-04-13",
     trustLayer: {
@@ -75,7 +75,7 @@ export const coursesData: Record<string, CourseSeoData> = {
       "Non-tech professionals switching to data analytics",
       "Beginners starting a data analytics career",
       "Excel users upgrading to modern tools",
-      "Anyone searching for a data analytics course UK with job outcomes"
+      "Anyone searching for a data analytics course UK with job-focused projects"
     ],
     programmeOverview: {
       duration: "6 months",

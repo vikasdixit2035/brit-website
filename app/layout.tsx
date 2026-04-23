@@ -13,7 +13,11 @@ import {
 
 import GlobalUI from "@/components/layout/GlobalUI";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
-import { siteNavigationSchemaForSite, websiteSchemaForSite } from "@/lib/seo";
+import {
+  educationalOrganizationSchema,
+  siteNavigationSchemaForSite,
+  websiteSchemaForSite,
+} from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -119,6 +123,12 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationSchemaForSite(siteConfig)) }}
         />
+        {!isStandalone && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(educationalOrganizationSchema()) }}
+          />
+        )}
       </head>
       <body>
         <GlobalUI />

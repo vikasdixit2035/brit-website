@@ -3,13 +3,16 @@ import { buildMetadata, organizationSchema } from "@/lib/seo";
 import { faqPageSchema } from "@/lib/faqData";
 
 export const metadata = buildMetadata({
-  title: "AI and Data Career Training in the UK",
+  title: "Data Analytics Course UK | AI and Data Career Training",
   description:
-    "Discover practical AI and data career programmes in the UK with real projects, structured learning, and dedicated career support from Brit Institute.",
+    "Brit Institute offers a practical data analytics course in the UK plus AI and data career programmes with real projects, structured learning, and career support.",
   path: "/",
   keywords: [
-    "AI course UK",
     "data analytics course UK",
+    "data analyst course UK",
+    "AI course UK",
+    "Power BI course UK",
+    "SQL course UK",
     "data career training UK",
     "AI and data careers UK",
   ],

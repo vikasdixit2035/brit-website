@@ -40,6 +40,10 @@ type CourseSchemaInput = {
   path: string;
   timeRequired?: string;
   teaches?: string[];
+  price?: string;
+  currency?: string;
+  courseMode?: string;
+  providerName?: string;
   reviews?: {
     aggregate: CourseAggregateRatingInput;
     items: CourseReviewInput[];
@@ -260,6 +264,10 @@ export function buildCourseSchema({
   path,
   timeRequired,
   teaches = [],
+  price,
+  currency = "GBP",
+  courseMode = "online",
+  providerName = SITE_NAME,
   reviews,
 }: CourseSchemaInput) {
   const hasVisibleReviews =
@@ -275,12 +283,50 @@ export function buildCourseSchema({
     url: absoluteUrl(path),
     provider: {
       "@type": "Organization",
-      name: SITE_NAME,
+      name: providerName,
       sameAs: SITE_URL,
+    },
+    inLanguage: "en-GB",
+    audience: {
+      "@type": "Audience",
+      audienceType: "UK learners, beginners, career switchers, and working professionals",
+      geographicArea: {
+        "@type": "Country",
+        name: "United Kingdom",
+      },
     },
     educationalCredentialAwarded: "Certificate of Completion",
     ...(timeRequired ? { timeRequired } : {}),
     ...(teaches.length > 0 ? { teaches } : {}),
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode,
+      courseWorkload: timeRequired,
+      location: {
+        "@type": "VirtualLocation",
+        url: absoluteUrl(path),
+      },
+      instructor: {
+        "@type": "Organization",
+        name: providerName,
+      },
+    },
+    ...(price
+      ? {
+          offers: {
+            "@type": "Offer",
+            category: "Paid",
+            price,
+            priceCurrency: currency,
+            availability: "https://schema.org/InStock",
+            url: absoluteUrl(path),
+            eligibleRegion: {
+              "@type": "Country",
+              name: "United Kingdom",
+            },
+          },
+        }
+      : {}),
     ...(hasVisibleReviews
       ? {
           aggregateRating: {
@@ -320,5 +366,91 @@ export function breadcrumbSchema(items: Array<{ name: string; path: string }>) {
       name: item.name,
       item: absoluteUrl(item.path),
     })),
+  };
+}
+
+/**
+ * EducationalOrganization schema – signals to Google that Brit Institute
+ * is a training provider, improving eligibility for course-related rich
+ * results on queries like "data analytics course UK".
+ */
+export function educationalOrganizationSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: absoluteUrl("/britinstitute.png"),
+    email: SITE_EMAIL,
+    telephone: SITE_PHONE_UK,
+    description:
+      "Brit Institute offers practical AI and data career training in the UK including data analytics, data science, agentic AI, and generative AI programmes with career support.",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Office 7084, 58 Peregrine Road",
+      addressLocality: "Hainault",
+      addressRegion: "Ilford",
+      addressCountry: "GB",
+      postalCode: "IG6 3SZ",
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "admissions",
+        email: SITE_EMAIL,
+        telephone: SITE_PHONE_UK,
+        areaServed: "GB",
+        availableLanguage: ["en"],
+      },
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "UK Data & AI Career Programmes",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Course",
+            name: "Data Analytics with Generative AI",
+            url: absoluteUrl("/courses/data-analytics"),
+            description:
+              "Master SQL, Power BI, Tableau, and AI tools to become a job-ready data analyst in the UK.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Course",
+            name: "Data Science with Machine Learning",
+            url: absoluteUrl("/courses/data-science"),
+            description:
+              "Build real-world machine learning models and launch a data science career in the UK.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Course",
+            name: "Agentic AI Automation",
+            url: absoluteUrl("/courses/ai-automation"),
+            description:
+              "Learn agentic AI tools and automation systems to build intelligent workflows in the UK.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Course",
+            name: "Generative AI for Business",
+            url: absoluteUrl("/courses/gen-ai"),
+            description:
+              "Practical generative AI prompting, copilots, and workflow automation for UK professionals.",
+          },
+        },
+      ],
+    },
+    sameAs: [
+      "https://www.trustpilot.com/review/britinstitute.uk",
+    ],
   };
 }

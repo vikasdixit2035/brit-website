@@ -13,6 +13,7 @@ import { coursesData } from "./courseData";
 import { breadcrumbSchema, buildCourseSchema, buildMetadata } from "@/lib/seo";
 import { fetchCourseBySlug } from "@/lib/courses";
 import type { CourseRecord } from "@/lib/courses";
+import { dataAnalyticsFaqItems, dataAnalyticsFaqPageSchema } from "@/lib/faqData";
 
 async function getCourse(slug: string): Promise<CourseRecord | null> {
   return fetchCourseBySlug(slug);
@@ -43,7 +44,18 @@ export async function generateMetadata({
     description: richData.seoDescription,
     path: richData.canonicalPath,
     image: richData.ogImage,
-    keywords: [richData.seoTitle, "Brit Institute courses", "UK career training"],
+    keywords:
+      slug === "data-analytics"
+        ? [
+            "data analytics course UK",
+            "data analyst course UK",
+            "data analytics with generative AI",
+            "Power BI course UK",
+            "SQL course UK",
+            "Brit Institute data analytics",
+            "UK data analyst training",
+          ]
+        : [richData.seoTitle, "Brit Institute courses", "UK career training"],
   });
 }
 
@@ -71,16 +83,47 @@ function formatReviewDate(date: string) {
   }).format(new Date(date));
 }
 
+function schemaPrice(value: string) {
+  return value.replace(/[^\d.]/g, "");
+}
+
+function schemaDuration(value: string) {
+  const match = value.match(/^(\d+)\s+months?$/i);
+  return match ? `P${match[1]}M` : value;
+}
+
+function buildFallbackCourse(slug: string): CourseRecord | null {
+  const richData = coursesData[slug];
+  if (!richData) return null;
+
+  return {
+    slug,
+    topBadge: richData.cohort,
+    bottomLeftBadge: richData.programmeOverview.level,
+    isPopular: slug === "data-analytics",
+    title: richData.h1,
+    desc: richData.subheadline,
+    price: Number(schemaPrice(richData.pricing.price)) || 0,
+    currency: "GBP",
+    duration: richData.duration,
+    projects: richData.projects.join(", "),
+    gradient: "",
+    iconName: "chart",
+    order: 0,
+  };
+}
+
 export default async function CoursePage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  const course = await getCourse(resolvedParams.slug);
+  const richData = coursesData[resolvedParams.slug];
+  const course = (await getCourse(resolvedParams.slug)) ?? buildFallbackCourse(resolvedParams.slug);
 
   if (!course) {
     notFound();
   }
 
-  const richData = coursesData[resolvedParams.slug];
   const coursePath = richData?.canonicalPath ?? `/courses/${resolvedParams.slug}`;
+  const isDataAnalyticsCourse = resolvedParams.slug === "data-analytics";
   const hasCourseReviews =
     Boolean(richData?.reviews) &&
     richData!.reviews.items.length > 0 &&
@@ -90,8 +133,11 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
         name: richData.seoTitle,
         description: richData.seoDescription,
         path: coursePath,
-        timeRequired: richData.duration,
+        timeRequired: schemaDuration(richData.duration),
         teaches: richData.toolsCovered,
+        price: schemaPrice(richData.pricing.price),
+        currency: "GBP",
+        courseMode: richData.programmeOverview.format,
         reviews: hasCourseReviews ? richData.reviews : null,
       })
     : null;
@@ -120,6 +166,12 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
       />
+      {isDataAnalyticsCourse && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(dataAnalyticsFaqPageSchema) }}
+        />
+      )}
       <Navbar hasBanner={false} />
 
       <main className="pt-28 pb-20 max-w-[1200px] mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 lg:gap-16">
@@ -472,6 +524,34 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                           {review.body}
                         </p>
                       </article>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {isDataAnalyticsCourse && (
+                <section className="rounded-3xl border border-blue-100 bg-white p-8 shadow-sm">
+                  <div className="mb-7">
+                    <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-700">
+                      Data Analytics Course UK FAQ
+                    </p>
+                    <h2 className="mt-2 text-2xl font-bold text-gray-900">
+                      Common questions about studying data analytics in the UK
+                    </h2>
+                  </div>
+                  <div className="divide-y divide-gray-100">
+                    {dataAnalyticsFaqItems.map((item) => (
+                      <details key={item.question} className="group py-5">
+                        <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-left text-base font-bold text-gray-900">
+                          <span>{item.question}</span>
+                          <span className="mt-1 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-blue-50 text-blue-700 transition-transform group-open:rotate-45">
+                            +
+                          </span>
+                        </summary>
+                        <p className="mt-3 whitespace-pre-line text-sm leading-7 text-gray-700">
+                          {item.answer}
+                        </p>
+                      </details>
                     ))}
                   </div>
                 </section>
