@@ -40,13 +40,15 @@ interface NavLink {
   badge?: string;
 }
 
+const HOME_FAQ_HREF = "/#faq";
+
 // Nav links for desktop right side
 const NAV_RIGHT_LINKS: NavLink[] = [
   { href: "/resources", label: "Resources" },
   { href: "/webinar", label: "Webinar" },
   { href: "/blog", label: "Blog" },
   { href: "/pricing", label: "Pricing" },
-  { href: "#faq", label: "FAQ" },
+  { href: HOME_FAQ_HREF, label: "FAQ" },
   { href: "/careers", label: "Careers" },
   { href: "/about", label: "About" },
 ];
@@ -61,7 +63,7 @@ const MOBILE_MENU_LINKS: NavLink[] = [
   { href: "/webinar", label: "Webinar" },
   { href: "/blog", label: "Blog" },
   { href: "/pricing", label: "Pricing" },
-  { href: "#faq", label: "FAQ" },
+  { href: HOME_FAQ_HREF, label: "FAQ" },
   { href: "/careers", label: "Careers" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact Us" },
