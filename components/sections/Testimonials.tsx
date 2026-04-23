@@ -6,7 +6,7 @@ import { Icons } from "@/components/ui/Icons";
 import useReveal from "@/hooks/useReveal";
 
 export default function Testimonials() {
-  const r = useReveal();
+  const { ref, cls } = useReveal();
   const [statsVisible, setStatsVisible] = useState(false);
   const [learnersTrained, setLearnersTrained] = useState(0);
   const [transitionRate, setTransitionRate] = useState(0);
@@ -22,7 +22,7 @@ export default function Testimonials() {
   ];
 
   useEffect(() => {
-    const el = r.ref.current;
+    const el = ref.current;
     if (!el) return;
 
     const observer = new IntersectionObserver(
@@ -37,16 +37,18 @@ export default function Testimonials() {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [r.ref]);
+  }, [ref]);
 
   useEffect(() => {
     if (!statsVisible) return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) {
-      setLearnersTrained(550);
-      setTransitionRate(92);
-      return;
+      const timer = window.setTimeout(() => {
+        setLearnersTrained(550);
+        setTransitionRate(92);
+      }, 0);
+      return () => window.clearTimeout(timer);
     }
 
     const duration = 1300;
@@ -73,8 +75,8 @@ export default function Testimonials() {
   }, [statsVisible]);
 
   return (
-    <section id="proof" className="section s-testimonials" ref={r.ref} style={{ background: "#0F172A", padding: "80px 0" }}>
-      <div className={`section-inner ${r.cls}`} style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
+    <section id="proof" className="section s-testimonials" ref={ref} style={{ background: "#0F172A", padding: "96px 28px" }}>
+      <div className={`section-inner ${cls}`} style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
         <div className="section-head" style={{ textAlign: "center", marginBottom: "48px" }}>
           <h2 className="section-title" style={{ color: "var(--white)", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", fontWeight: 800, marginBottom: "24px" }}>Learner Outcomes</h2>
 
@@ -105,7 +107,7 @@ export default function Testimonials() {
               <div className="t-stars" style={{ marginBottom: '24px', display: 'flex', gap: '4px', color: '#D4AF37' }}>
                 <Icons.Star /><Icons.Star /><Icons.Star /><Icons.Star /><Icons.Star />
               </div>
-              <p className="t-quote" style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.9)', flex: 1, fontStyle: "italic", lineHeight: 1.6 }}>"{t.quote}"</p>
+              <p className="t-quote" style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.9)', flex: 1, fontStyle: "italic", lineHeight: 1.6 }}>&ldquo;{t.quote}&rdquo;</p>
               <div className="t-author" style={{ marginTop: '24px', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
                 <Image src={t.avatar} alt={t.name} width={48} height={48} className="t-avatar" style={{ border: 'none', borderRadius: '50%' }} />
                 <div>

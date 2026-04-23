@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import useReveal from "@/hooks/useReveal";
-import { Clock, MonitorPlay, TrendingUp, Briefcase, ArrowRight, Sparkles } from "lucide-react";
+import { Clock, MonitorPlay, TrendingUp, Briefcase, ArrowRight } from "lucide-react";
 import { coursesData } from "@/app/courses/[slug]/courseData";
 
 export default function Programs() {
@@ -25,7 +25,7 @@ export default function Programs() {
   return (
     <section
       id="programs"
-      className="relative w-full overflow-hidden bg-[#070B14] py-16 font-sans text-white lg:py-24"
+      className="relative w-full overflow-hidden bg-[#070B14] py-24 font-sans text-white"
       ref={ref}
     >
       {/* Subtle Background Effects for Premium Feel */}
@@ -35,11 +35,7 @@ export default function Programs() {
       <div className={`relative z-10 mx-auto max-w-[1440px] px-6 md:px-12 lg:px-20 ${cls}`}>
 
         {/* Header section */}
-        <div className="mb-16 flex flex-col items-center text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/5 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
-            <Sparkles size={14} />
-            Curated Paths
-          </div>
+        <div className="mb-12 flex flex-col items-center text-center">
           <h2 className="mb-4 text-4xl font-bold leading-tight tracking-tight text-white md:text-[2.8rem] lg:text-[3.2rem]">
             Programme <span className="text-[#D4AF37]">Details</span>
           </h2>

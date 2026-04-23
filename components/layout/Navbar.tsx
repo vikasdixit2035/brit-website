@@ -46,6 +46,7 @@ const NAV_RIGHT_LINKS: NavLink[] = [
   { href: "/webinar", label: "Webinar" },
   { href: "/blog", label: "Blog" },
   { href: "/pricing", label: "Pricing" },
+  { href: "#faq", label: "FAQ" },
   { href: "/careers", label: "Careers" },
   { href: "/about", label: "About" },
 ];
@@ -60,6 +61,7 @@ const MOBILE_MENU_LINKS: NavLink[] = [
   { href: "/webinar", label: "Webinar" },
   { href: "/blog", label: "Blog" },
   { href: "/pricing", label: "Pricing" },
+  { href: "#faq", label: "FAQ" },
   { href: "/careers", label: "Careers" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact Us" },

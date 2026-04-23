@@ -3,7 +3,7 @@ import { MAIN_SITE_NAME, MAIN_SITE_URL } from "@/lib/siteConfig";
 export const SITE_URL = MAIN_SITE_URL;
 export const SITE_NAME = MAIN_SITE_NAME;
 export const SITE_EMAIL = "info@britinstitute.uk";
-export const SITE_PHONE_UK = "+447520664011";
+export const SITE_PHONE_UK = "+447520664004";
 export const SITE_ADDRESS_LINES = [
   "Office 7084",
   "58 Peregrine Road",

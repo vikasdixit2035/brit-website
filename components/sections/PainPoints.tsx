@@ -80,12 +80,12 @@ export default function PainPoints() {
   return (
     <section
       id="pain-points"
-      className="relative py-[80px] lg:py-[100px] bg-[#F7F8FC] overflow-hidden"
+      className="relative py-24 bg-[#F7F8FC] overflow-hidden"
     >
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top,_rgba(37,99,235,0.08),_transparent_36%),radial-gradient(circle_at_80%_20%,_rgba(251,191,36,0.08),_transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.85),rgba(247,248,252,1))]" />
       <div className="relative z-10 max-w-[1100px] mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-[clamp(2rem,3.5vw,2.8rem)] font-extrabold tracking-tight text-slate-900 mb-4 leading-[1.15]">
             Stuck in a Role with{" "}
             <span className="bg-gradient-to-r from-[#2563EB] to-[#E4BE3B] bg-clip-text text-transparent">

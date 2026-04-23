@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { ShieldCheck, Sparkles } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 
 export default function FinalCTA() {
   return (
     <section
       id="final-cta"
       style={{
-        padding: "120px 28px",
+        padding: "96px 28px",
         background:
           "linear-gradient(135deg, #0a0f1e 0%, #0f172a 40%, #1e293b 100%)",
         position: "relative",
@@ -40,29 +40,6 @@ export default function FinalCTA() {
           zIndex: 2,
         }}
       >
-        {/* Badge */}
-        <div
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "8px",
-            background: "rgba(212,168,83,0.12)",
-            border: "1px solid rgba(212,168,83,0.3)",
-            color: "#facc15",
-            borderRadius: "999px",
-            padding: "8px 20px",
-            fontSize: "0.75rem",
-            fontWeight: 700,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-            marginBottom: "28px",
-            backdropFilter: "blur(8px)",
-          }}
-        >
-          <Sparkles size={14} />
-          Limited Consultation Slots
-        </div>
-
         {/* Heading */}
         <h2
           style={{

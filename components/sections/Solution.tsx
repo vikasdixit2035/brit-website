@@ -27,22 +27,22 @@ const solutions = [
 ];
 
 export default function Solution() {
-  const r = useReveal();
+  const { ref, cls } = useReveal();
 
   return (
     <section
       id="solution"
-      ref={r.ref}
-      className="relative py-[80px] lg:py-[100px] bg-[var(--blue-deep)] overflow-hidden"
+      ref={ref}
+      className="relative py-24 bg-[var(--blue-deep)] overflow-hidden"
     >
       {/* Background decorations */}
       <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute w-[600px] h-[600px] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle,rgba(59,130,246,0.1)_0%,transparent_70%)] blur-[40px]" />
       </div>
 
-      <div className={`relative z-10 max-w-[1100px] mx-auto px-6 ${r.cls}`}>
+      <div className={`relative z-10 max-w-[1100px] mx-auto px-6 ${cls}`}>
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-[clamp(2rem,3.5vw,2.8rem)] font-extrabold tracking-tight text-[var(--white)] mb-4 leading-[1.15]">
             A Structured Path to a{" "}
             <span className="bg-gradient-to-br from-[var(--gold-400)] to-[var(--gold-300)] bg-clip-text text-transparent">

@@ -1,33 +1,109 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+
 import useReveal from "@/hooks/useReveal";
+import { faqItems } from "@/lib/faqData";
 
 export default function FAQ() {
-  const r = useReveal();
-  const [open, setOpen] = useState(-1);
-  const faqs = [
-    { q: "Do I need prior experience?", a: "No — our programs are structured for beginners transitioning into tech. We start from the fundamentals and build up to advanced, industry-ready skills." },
-    { q: "Will you guarantee a job?", a: "We provide strong placement support, mentorship, and preparation aligned with real hiring standards. While we can't guarantee a job, our 85% interview success rate speaks for itself." },
-    { q: "Is this UK-focused?", a: "Yes — our curriculum, mentorship, and career guidance are specifically tailored for UK opportunities, including job market insights and visa-friendly strategies." },
-    { q: "How long are the programs?", a: "The Agentic AI program is 4–6 months and the Data Analytics program is 3–5 months. Both are designed for part-time learners balancing work or studies." },
-  ];
-  return (
-    <section id="faq" className="section s-faq" ref={r.ref}>
-      <div className={`section-inner ${r.cls}`}>
-        <div className="section-head">
-          <h2 className="section-title">Frequently Asked Questions</h2>
-        </div>
-        <div className="faq-list">
-          {faqs.map((f, i) => (
-            <div className={`faq-item${open === i ? " open" : ""}`} key={i}>
-              <button className="faq-btn" onClick={() => setOpen(open === i ? -1 : i)} aria-expanded={open === i} style={{ padding: '24px' }}>
-                <h4 style={{ fontSize: '1.1rem' }}>{f.q}</h4>
-                <span className="faq-chev" style={{ fontSize: '1.5rem', fontWeight: 300 }}>{open === i ? '−' : '+'}</span>
-              </button>
-              <div className="faq-body"><p style={{ fontSize: '1rem', paddingBottom: '24px' }}>{f.a}</p></div>
+  const { ref, cls } = useReveal();
+  const [openIndex, setOpenIndex] = useState(0);
+  const midpoint = Math.ceil(faqItems.length / 2);
+  const leftFaqs = faqItems.slice(0, midpoint);
+  const rightFaqs = faqItems.slice(midpoint);
+
+  const renderFaqColumn = (items: typeof faqItems, offset: number) => (
+    <div className="space-y-3">
+      {items.map((faq, index) => {
+        const globalIndex = offset + index;
+        const isOpen = openIndex === globalIndex;
+        const panelId = `faq-panel-${globalIndex}`;
+        const buttonId = `faq-button-${globalIndex}`;
+
+        return (
+          <article
+            key={faq.question}
+            className={`group overflow-hidden rounded-2xl border bg-white transition-all duration-300 ${
+              isOpen
+                ? "border-amber-300 shadow-[0_14px_32px_-22px_rgba(180,138,48,0.35)]"
+                : "border-slate-200 hover:border-slate-300 hover:shadow-[0_10px_24px_-20px_rgba(15,23,42,0.2)]"
+            }`}
+          >
+            <button
+              id={buttonId}
+              type="button"
+              className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left outline-none transition-colors md:px-5 md:py-4"
+              onClick={() => setOpenIndex(isOpen ? -1 : globalIndex)}
+              aria-expanded={isOpen}
+              aria-controls={panelId}
+            >
+              <h3 className="pr-2 text-[15px] font-semibold leading-snug text-slate-900 md:text-base">
+                {faq.question}
+              </h3>
+
+              <span
+                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
+                  isOpen
+                    ? "border-amber-300 bg-amber-400 text-white"
+                    : "border-slate-200 bg-slate-50 text-slate-500 group-hover:border-amber-200 group-hover:text-amber-600"
+                }`}
+              >
+                <ChevronDown
+                  size={16}
+                  className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                />
+              </span>
+            </button>
+
+            <div
+              id={panelId}
+              role="region"
+              aria-labelledby={buttonId}
+              className="overflow-hidden"
+              style={{
+                maxHeight: isOpen ? "1000px" : "0px",
+                opacity: isOpen ? 1 : 0,
+                transition:
+                  "max-height 320ms cubic-bezier(.4,0,.2,1), opacity 240ms ease",
+              }}
+            >
+              <div className="px-4 pb-4 md:px-5 md:pb-5">
+                <div className="border-t border-slate-100 pt-3">
+                  <p className="whitespace-pre-line text-sm leading-6 text-slate-600 md:text-[15px]">
+                    {faq.answer}
+                  </p>
+                </div>
+              </div>
             </div>
-          ))}
+          </article>
+        );
+      })}
+    </div>
+  );
+
+  return (
+    <section
+      id="faq"
+      ref={ref}
+      className="relative w-full overflow-hidden bg-gradient-to-b from-slate-50 to-white py-24 font-sans text-slate-900"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(251,191,36,0.12),_transparent_36%),radial-gradient(circle_at_bottom_right,_rgba(148,163,184,0.12),_transparent_30%)]" />
+
+      <div className={`relative z-10 mx-auto max-w-[1440px] px-6 md:px-12 lg:px-20 ${cls}`}>
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <h2 className="mb-4 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl lg:text-[2.9rem]">
+            Frequently Asked <span className="text-amber-600">Questions</span>
+          </h2>
+          <p className="mx-auto max-w-xl text-sm leading-relaxed text-slate-600 md:text-base">
+            Clear answers about our programmes, eligibility, delivery format,
+            placement support, and next steps.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-4">
+          {renderFaqColumn(leftFaqs, 0)}
+          {renderFaqColumn(rightFaqs, midpoint)}
         </div>
       </div>
     </section>

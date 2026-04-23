@@ -4,7 +4,7 @@ import useReveal from "@/hooks/useReveal";
 import { GraduationCap, Code2, Briefcase } from "lucide-react";
 
 export default function HowItWorks() {
-  const r = useReveal();
+  const { ref, cls } = useReveal();
 
   const steps = [
     {
@@ -33,9 +33,9 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      ref={r.ref}
+      ref={ref}
       style={{
-        padding: "110px 28px",
+        padding: "96px 28px",
         background:
           "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
         position: "relative",
@@ -57,7 +57,7 @@ export default function HowItWorks() {
       />
 
       <div
-        className={`section-inner ${r.cls}`}
+        className={`section-inner ${cls}`}
         style={{
           maxWidth: "1100px",
           margin: "0 auto",
@@ -68,24 +68,8 @@ export default function HowItWorks() {
         {/* Header */}
         <div
           className="section-head"
-          style={{ textAlign: "center", marginBottom: "64px" }}
+          style={{ textAlign: "center", marginBottom: "48px" }}
         >
-          <div
-            style={{
-              display: "inline-block",
-              background: "var(--blue-50)",
-              color: "var(--blue-600)",
-              padding: "6px 14px",
-              borderRadius: "999px",
-              fontSize: "0.75rem",
-              fontWeight: 700,
-              marginBottom: "14px",
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-            }}
-          >
-            Simple Process
-          </div>
 
           <h2
             style={{

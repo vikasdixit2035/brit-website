@@ -15,6 +15,7 @@ import Testimonials from "@/components/sections/Testimonials";
 import IndustryExperts from "@/components/sections/IndustryExperts";
 import Programs from "@/components/sections/Programs";
 import FinalCTA from "@/components/sections/FinalCTA";
+import FAQ from "@/components/sections/FAQ";
 import StickyForm from "@/components/sections/StickyForm";
 export default function Home() {
   const [banner, setBanner] = useState(true);
@@ -51,7 +52,10 @@ export default function Home() {
       {/* 8. Final CTA */}
       <FinalCTA />
 
-      {/* 9. Sticky Form */}
+      {/* 9. FAQ */}
+      <FAQ />
+
+      {/* 10. Sticky Form */}
       <StickyForm />
 
       <Footer />

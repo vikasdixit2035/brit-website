@@ -33,7 +33,7 @@ export default function LogoStrip() {
   return (
     <section style={{
       background: "linear-gradient(90deg, #FFFFFF 0%, #F0F7FF 100%)",
-      padding: "80px 0",
+      padding: "96px 0",
       color: "#0F172A",
       fontFamily: "var(--font-inter), sans-serif",
       overflow: "hidden"
@@ -94,7 +94,7 @@ export default function LogoStrip() {
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
 
         {/* Header Section */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "60px", flexWrap: "wrap", gap: "24px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "48px", flexWrap: "wrap", gap: "24px" }}>
           <div style={{ maxWidth: "700px" }}>
             <h2 style={{ fontSize: "2.4rem", fontWeight: 800, marginBottom: "16px", color: "#0F172A", letterSpacing: "-0.02em" }}>
               Professional Courses and Placements in the UK
@@ -112,7 +112,7 @@ export default function LogoStrip() {
       </div>
 
       {/* Scrolling Logos */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "24px", marginBottom: "80px", position: "relative" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "24px", marginBottom: "64px", position: "relative" }}>
 
         {/* Row 1 - Left scroll */}
         <div style={{ display: "flex", overflow: "hidden" }}>
@@ -140,7 +140,7 @@ export default function LogoStrip() {
 
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
         {/* Divider with Text */}
-        <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "40px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "32px" }}>
           <div style={{ flex: 1, height: "1px", background: "linear-gradient(to right, transparent, rgba(30,64,175,0.1))" }} />
           <div style={{ background: "#EFF6FF", color: "#1D4ED8", padding: "6px 20px", borderRadius: "99px", fontSize: "0.9rem", fontWeight: 700, border: "1px solid rgba(29, 78, 216, 0.2)" }}>
             Curriculum Designed to Propel Your Career

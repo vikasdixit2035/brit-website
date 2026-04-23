@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import {
   Star,
   Clock,
@@ -134,14 +133,7 @@ export default function Programs() {
 
       <div className={`max-w-[1400px] mx-auto ${r.cls}`}>
         {/* Header */}
-        <header className="text-center mb-16 px-6">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-blue-400 text-sm font-semibold tracking-wider mb-4 uppercase"
-          >
-            Your Career Journey Starts Here
-          </motion.span>
+        <header className="text-center mb-12 px-6">
           <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
             Choose Your{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-300">
