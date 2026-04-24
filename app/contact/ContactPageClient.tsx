@@ -4,6 +4,7 @@ import { useState } from "react";
 import TopBanner from "@/components/layout/TopBanner";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { trackLead } from "@/lib/analytics";
 import { SITE_ADDRESS_LINES, SITE_EMAIL, SITE_PHONE_UK } from "@/lib/site";
 
 export default function ContactPage() {
@@ -31,6 +32,10 @@ export default function ContactPage() {
       });
 
       if (response.ok) {
+        trackLead({
+          formName: "contact_page",
+          source: String(payload.source),
+        });
         setFormStatus("success");
       } else {
         setFormStatus("error");

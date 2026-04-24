@@ -17,6 +17,7 @@ import {
   X,
 } from "lucide-react";
 
+import { trackLead } from "@/lib/analytics";
 import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 import {
   CAREER_CHATBOT_SOURCE,
@@ -444,9 +445,19 @@ export default function CareerChatbotFloat({
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
-    }).catch((error) => {
-      console.error(error);
-    });
+    })
+      .then((res) => {
+        if (!res.ok) return;
+
+        trackLead({
+          formName: "career_chatbot",
+          source: payload.source,
+          course: nextAnswers.targetRole,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const advanceConversation = (question: ChatQuestion, value: AssessmentAnswers[keyof AssessmentAnswers]) => {

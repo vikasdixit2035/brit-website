@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import useReveal from "@/hooks/useReveal";
+import { trackLead } from "@/lib/analytics";
 import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 
 export default function StickyForm() {
@@ -36,6 +37,11 @@ export default function StickyForm() {
         body: JSON.stringify(payload)
       });
       if (res.ok) {
+        trackLead({
+          formName: "sticky_form",
+          source: payload.source,
+          course: formData.course,
+        });
         alert("Success! We will contact you soon.");
         setFormData({ name: "", phoneCountry: DEFAULT_PHONE_COUNTRY_CODE, email: "", phone: "", course: "" });
       } else {

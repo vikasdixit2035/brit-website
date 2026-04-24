@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Icons } from "@/components/ui/Icons";
+import { trackLead } from "@/lib/analytics";
 import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 
 export default function CourseLeadForm({ courseTitle }: { courseTitle: string }) {
@@ -41,6 +42,11 @@ export default function CourseLeadForm({ courseTitle }: { courseTitle: string })
         body: JSON.stringify(payload)
       });
       if (res.ok) {
+        trackLead({
+          formName: "course_lead_form",
+          source: payload.source,
+          course: formData.course,
+        });
         alert("Success! We will contact you soon.");
         setFormData({
           ...formData,

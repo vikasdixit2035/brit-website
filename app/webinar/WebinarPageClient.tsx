@@ -5,6 +5,7 @@ import TopBanner from "@/components/layout/TopBanner";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { SITE_STATS } from "@/lib/site";
+import { trackLead } from "@/lib/analytics";
 import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 
 /* ── tokens ── */
@@ -148,6 +149,10 @@ export default function WebinarPage() {
         }),
       });
       if (!res.ok) throw new Error("Failed");
+      trackLead({
+        formName: "webinar_form",
+        source: "webinar",
+      });
       setSuccess(true);
       setName(""); setEmail(""); setPhoneCountry(DEFAULT_PHONE_COUNTRY_CODE); setPhone("");
     } catch {

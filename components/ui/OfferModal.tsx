@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Icons } from "@/components/ui/Icons";
+import { trackLead, trackSubmitRequest } from "@/lib/analytics";
 import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 
 interface OfferModalProps {
@@ -63,6 +64,16 @@ export default function OfferModal({ isOpen, onClose }: OfferModalProps) {
       });
 
       if (res.ok) {
+        trackLead({
+          formName: "offer_modal",
+          source: payload.source,
+          course: formData.course,
+        });
+        trackSubmitRequest({
+          formName: "offer_modal",
+          source: payload.source,
+          course: formData.course,
+        });
         alert("Success! We will contact you soon.");
         setFormData({
           name: "",

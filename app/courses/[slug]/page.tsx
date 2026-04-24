@@ -9,6 +9,7 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CourseLeadForm from "./CourseLeadForm";
+import CourseInvestmentTracker from "./CourseInvestmentTracker";
 import { coursesData } from "./courseData";
 import { breadcrumbSchema, buildCourseSchema, buildMetadata } from "@/lib/seo";
 import { fetchCourseBySlug } from "@/lib/courses";
@@ -422,7 +423,12 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                   </div>
 
                   {/* Pricing Box */}
-                  <div className="bg-emerald-50 rounded-2xl p-6 border border-emerald-100">
+                  <CourseInvestmentTracker
+                    courseTitle={course.title}
+                    courseSlug={resolvedParams.slug}
+                    price={course.price || richData.pricing.price}
+                    currency={course.currency ?? "GBP"}
+                  >
                     <h3 className="text-sm font-bold text-emerald-800 uppercase tracking-wider mb-2 flex items-center gap-2">
                       <Zap className="w-4 h-4" /> Course Investment
                     </h3>
@@ -438,7 +444,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                         EMI Available
                       </span>
                     )}
-                  </div>
+                  </CourseInvestmentTracker>
                 </div>
               </section>
 

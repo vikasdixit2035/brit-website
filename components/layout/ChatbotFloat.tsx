@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
+import { trackLead } from "@/lib/analytics";
 import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 
 export default function ChatbotFloat() {
@@ -36,11 +37,18 @@ export default function ChatbotFloat() {
         ? "http://localhost:4000/api/leads" 
         : "https://api.britinstitute.uk/api/leads";
         
-      fetch(API_URL, {
+      const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
-      }); // don't await, let it run in background so UI updates immediately
+      });
+
+      if (res.ok) {
+        trackLead({
+          formName: "chatbot_registration",
+          source: String(payload.source),
+        });
+      }
     } catch(err) {
       console.error(err);
     }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import TopBanner from "@/components/layout/TopBanner";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { trackLead } from "@/lib/analytics";
 import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 
 /* ── colour tokens ── */
@@ -143,6 +144,11 @@ export default function ResourcesPage() {
         }),
       });
       if (!res.ok) throw new Error("Submission failed");
+      trackLead({
+        formName: "resources_form",
+        source: "resources",
+        resource: selected,
+      });
       setSuccess(true);
       setName(""); setEmail(""); setPhoneCountry(DEFAULT_PHONE_COUNTRY_CODE); setPhone("");
     } catch {

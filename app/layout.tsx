@@ -13,6 +13,7 @@ import {
 
 import GlobalUI from "@/components/layout/GlobalUI";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
+import GoogleTagManager from "@/components/analytics/GoogleTagManager";
 import {
   educationalOrganizationSchema,
   siteNavigationSchemaForSite,
@@ -131,6 +132,7 @@ export default async function RootLayout({
         )}
       </head>
       <body>
+        <GoogleTagManager />
         <GlobalUI />
         {children}
         {isStandalone ? null : <CareerChatbotFloat />}

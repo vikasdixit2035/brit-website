@@ -5,6 +5,7 @@ import Link from "next/link";
 import TopBanner from "@/components/layout/TopBanner";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { trackLead } from "@/lib/analytics";
 import { BLOG_ARTICLES, BLOG_CATEGORIES } from "./blogData";
 
 /* ── tokens ── */
@@ -68,10 +69,15 @@ export default function BlogPage() {
         ? "http://localhost:4000/api/leads"
         : "https://api.britinstitute.uk/api/leads";
     try {
-      await fetch(API_URL, {
+      const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: nlEmail.trim(), source: "blog-newsletter", name: "Blog Subscriber" }),
+      });
+      if (!res.ok) throw new Error("Newsletter submission failed");
+      trackLead({
+        formName: "blog_newsletter",
+        source: "blog-newsletter",
       });
       setNlSuccess(true);
       setNlEmail("");
