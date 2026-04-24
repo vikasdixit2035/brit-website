@@ -1,4 +1,5 @@
 import HomePageClient from "@/app/HomePageClient";
+import OpenOfferModalOnMount from "@/components/layout/OpenOfferModalOnMount";
 import { buildMetadata, organizationSchema } from "@/lib/seo";
 import { faqPageSchema } from "@/lib/faqData";
 
@@ -18,7 +19,26 @@ export const metadata = buildMetadata({
   ],
 });
 
-export default function Home() {
+type HomeProps = {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
+
+function hasApplyParam(value: string | string[] | undefined): boolean {
+  if (Array.isArray(value)) {
+    return value.some((item) => hasApplyParam(item));
+  }
+
+  if (!value) {
+    return false;
+  }
+
+  return ["1", "true", "yes", "open"].includes(value.toLowerCase());
+}
+
+export default async function Home({ searchParams }: HomeProps) {
+  const params = await searchParams;
+  const shouldOpenOfferModal = hasApplyParam(params?.apply) || hasApplyParam(params?.form);
+
   return (
     <>
       <script
@@ -29,6 +49,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
       />
+      {shouldOpenOfferModal && <OpenOfferModalOnMount />}
       <HomePageClient />
     </>
   );
