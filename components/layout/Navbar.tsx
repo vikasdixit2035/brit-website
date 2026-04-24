@@ -53,21 +53,8 @@ const NAV_RIGHT_LINKS: NavLink[] = [
   { href: "/about", label: "About" },
 ];
 
-// Mobile menu links
-const MOBILE_MENU_LINKS: NavLink[] = [
-  { href: "#practice", label: "Practice" },
-  { href: "#hire", label: "Hire From Us" },
-  { href: "#why", label: "Why BritInstitute" },
-  { href: "#stories", label: "Success Stories" },
-  { href: "/resources", label: "Resources" },
-  { href: "/webinar", label: "Webinar" },
-  { href: "/blog", label: "Blog" },
-  { href: "/pricing", label: "Pricing" },
-  { href: HOME_FAQ_HREF, label: "FAQ" },
-  { href: "/careers", label: "Careers" },
-  { href: "/about", label: "About Us" },
-  { href: "/contact", label: "Contact Us" },
-];
+// Mobile menu links mirror the desktop navigation links.
+const MOBILE_MENU_LINKS: NavLink[] = [...NAV_RIGHT_LINKS];
 
 export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
   const [scrolled, setScrolled] = useState(false);

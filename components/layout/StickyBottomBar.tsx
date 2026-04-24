@@ -111,8 +111,8 @@ export default function StickyBottomBar() {
           </span>
           <span className="sticky-bottom-bar__divider">|</span>
           <span className="sticky-bottom-bar__text">Call Us at</span>
-          <a href="tel:+447520664004" className="sticky-bottom-bar__phone">
-            +447520664004
+          <a href="tel:+447520664011" className="sticky-bottom-bar__phone">
+            +447520664011
           </a>
           <span className="sticky-bottom-bar__text">or</span>
           <a href="/contact" className="sticky-bottom-bar__cta">
