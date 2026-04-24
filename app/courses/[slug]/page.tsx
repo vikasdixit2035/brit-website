@@ -15,6 +15,9 @@ import { fetchCourseBySlug } from "@/lib/courses";
 import type { CourseRecord } from "@/lib/courses";
 import { dataAnalyticsFaqItems, dataAnalyticsFaqPageSchema } from "@/lib/faqData";
 
+const BROCHURE_HREF = "/brochure/Brit_Institute_Brochure_A4_HD-2.pdf";
+const BROCHURE_DOWNLOAD_NAME = "Brit_Institute_Data_Analytics_Brochure.pdf";
+
 async function getCourse(slug: string): Promise<CourseRecord | null> {
   return fetchCourseBySlug(slug);
 }
@@ -47,14 +50,14 @@ export async function generateMetadata({
     keywords:
       slug === "data-analytics"
         ? [
-            "data analytics course UK",
-            "data analyst course UK",
-            "data analytics with generative AI",
-            "Power BI course UK",
-            "SQL course UK",
-            "Brit Institute data analytics",
-            "UK data analyst training",
-          ]
+          "data analytics course UK",
+          "data analyst course UK",
+          "data analytics with generative AI",
+          "Power BI course UK",
+          "SQL course UK",
+          "Brit Institute data analytics",
+          "UK data analyst training",
+        ]
         : [richData.seoTitle, "Brit Institute courses", "UK career training"],
   });
 }
@@ -130,16 +133,16 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
     richData!.reviews.items.every((review) => review.author && review.body && review.datePublished);
   const courseSchema = richData
     ? buildCourseSchema({
-        name: richData.seoTitle,
-        description: richData.seoDescription,
-        path: coursePath,
-        timeRequired: schemaDuration(richData.duration),
-        teaches: richData.toolsCovered,
-        price: schemaPrice(richData.pricing.price),
-        currency: "GBP",
-        courseMode: richData.programmeOverview.format,
-        reviews: hasCourseReviews ? richData.reviews : null,
-      })
+      name: richData.seoTitle,
+      description: richData.seoDescription,
+      path: coursePath,
+      timeRequired: schemaDuration(richData.duration),
+      teaches: richData.toolsCovered,
+      price: schemaPrice(richData.pricing.price),
+      currency: "GBP",
+      courseMode: richData.programmeOverview.format,
+      reviews: hasCourseReviews ? richData.reviews : null,
+    })
     : null;
   const breadcrumbs = breadcrumbSchema([
     { name: "Home", path: "/" },
@@ -287,9 +290,13 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row items-center gap-4">
-                <button className="w-full sm:w-auto px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-bold text-[15px] transition-all flex items-center justify-center gap-2 shadow-lg shadow-purple-200">
+                <a
+                  href={BROCHURE_HREF}
+                  download={BROCHURE_DOWNLOAD_NAME}
+                  className="w-full sm:w-auto px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-bold text-[15px] transition-all flex items-center justify-center gap-2 shadow-lg shadow-purple-200"
+                >
                   Download Brochure <Download className="w-4 h-4" />
-                </button>
+                </a>
                 <button className="w-full sm:w-auto px-8 py-4 bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-900 rounded-xl font-bold text-[15px] transition-all flex items-center justify-center gap-2">
                   <Eye className="w-4 h-4" /> View Schedules
                 </button>
@@ -304,9 +311,13 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                 <button className="w-full sm:w-auto px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white rounded-xl font-bold text-[16px] transition-all shadow-md flex items-center justify-center gap-2 hover:-translate-y-0.5">
                   Apply Now <ArrowRight className="w-5 h-5" />
                 </button>
-                <button className="w-full sm:w-auto px-8 py-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-900 rounded-xl font-bold text-[16px] transition-all shadow-sm flex items-center justify-center gap-2 hover:-translate-y-0.5">
+                <a
+                  href={BROCHURE_HREF}
+                  download={BROCHURE_DOWNLOAD_NAME}
+                  className="w-full sm:w-auto px-8 py-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-900 rounded-xl font-bold text-[16px] transition-all shadow-sm flex items-center justify-center gap-2 hover:-translate-y-0.5"
+                >
                   Download Brochure <Download className="w-5 h-5 text-gray-500" />
-                </button>
+                </a>
               </div>
 
               {/* Career Outcomes - Elevated Cards */}
