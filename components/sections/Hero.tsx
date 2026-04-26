@@ -8,7 +8,7 @@ import { SITE_STATS } from "@/lib/site";
 const HERO_IMAGES = [
   "/hero1.png",
   "/hero2.png",
-  "/hero3.png",
+  "/hero3_v2.png",
 ];
 
 const HERO_IMAGE_ALTS = [
