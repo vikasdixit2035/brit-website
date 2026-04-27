@@ -27,12 +27,12 @@ const solutions = [
 ];
 
 export default function Solution() {
-  const { ref, cls } = useReveal();
+  const { revealRef, cls } = useReveal();
 
   return (
     <section
       id="solution"
-      ref={ref}
+      ref={revealRef}
       className="relative py-24 bg-[var(--blue-deep)] overflow-hidden"
     >
       {/* Background decorations */}

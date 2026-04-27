@@ -6,7 +6,7 @@ import { trackLead } from "@/lib/analytics";
 import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 
 export default function StickyForm() {
-  const r = useReveal();
+  const { revealRef, cls } = useReveal();
   
   const [formData, setFormData] = useState({
     name: "",
@@ -54,8 +54,8 @@ export default function StickyForm() {
   };
 
   return (
-    <section id="sticky-form" className="w-full bg-[#0c0a09] py-24 font-sans border-t border-white/10" ref={r.ref}>
-      <div className={`max-w-[800px] mx-auto px-6 ${r.cls}`}>
+    <section id="sticky-form" className="w-full bg-[#0c0a09] py-24 font-sans border-t border-white/10" ref={revealRef}>
+      <div className={`max-w-[800px] mx-auto px-6 ${cls}`}>
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
             Get Full Programme Details

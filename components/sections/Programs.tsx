@@ -6,7 +6,7 @@ import { Clock, MonitorPlay, TrendingUp, Briefcase, ArrowRight } from "lucide-re
 import { coursesData } from "@/app/courses/[slug]/courseData";
 
 export default function Programs() {
-  const { ref, cls } = useReveal();
+  const { revealRef, cls } = useReveal();
 
   const details = Object.entries(coursesData)
     .slice(0, 3)
@@ -26,7 +26,7 @@ export default function Programs() {
     <section
       id="programs"
       className="relative w-full overflow-hidden bg-[#070B14] py-24 font-sans text-white"
-      ref={ref}
+      ref={revealRef}
     >
       {/* Subtle Background Effects for Premium Feel */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(212,175,55,0.08),_transparent_50%)]" />

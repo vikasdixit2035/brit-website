@@ -14,6 +14,7 @@ import {
 import GlobalUI from "@/components/layout/GlobalUI";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
 import GoogleTagManager from "@/components/analytics/GoogleTagManager";
+import MetaPixel from "@/components/analytics/MetaPixel";
 import {
   educationalOrganizationSchema,
   siteNavigationSchemaForSite,
@@ -133,6 +134,7 @@ export default async function RootLayout({
       </head>
       <body>
         <GoogleTagManager />
+        <MetaPixel />
         <GlobalUI />
         {children}
         {isStandalone ? null : <CareerChatbotFloat />}

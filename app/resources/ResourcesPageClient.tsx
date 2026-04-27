@@ -84,7 +84,7 @@ function useReveal() {
     io.observe(el);
     return () => io.disconnect();
   }, []);
-  return { ref, visible };
+  return { revealRef: ref, visible };
 }
 
 /* ══════════════════════════════════════════════════════════════════ */
@@ -92,9 +92,9 @@ export default function ResourcesPage() {
   const [banner, setBanner] = useState(true);
 
   /* reveal refs */
-  const hero = useReveal();
-  const cards = useReveal();
-  const form = useReveal();
+  const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
+  const { revealRef: cardsRevealRef, visible: cardsVisible } = useReveal();
+  const { revealRef: formRevealRef, visible: formVisible } = useReveal();
 
   /* form state */
   const [selected, setSelected] = useState<string | null>(null);
@@ -509,7 +509,7 @@ export default function ResourcesPage() {
         className="rs-hero"
         style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}
       >
-        <div ref={hero.ref} className={`rs-hero-inner rs-fade-up ${hero.visible ? "rs-vis" : ""}`}>
+        <div ref={heroRevealRef} className={`rs-hero-inner rs-fade-up ${heroVisible ? "rs-vis" : ""}`}>
           <h1 className="rs-h1">
             AI, Data Analytics and Data Science<br />
             <span>Resources for the UK Market</span>
@@ -525,8 +525,8 @@ export default function ResourcesPage() {
           2. RESOURCE CARDS
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingTop: 96, paddingBottom: 96 }}>
-        <div ref={cards.ref} className="rs-section">
-          <div className={`rs-section-title rs-fade-up ${cards.visible ? "rs-vis" : ""}`}>
+        <div ref={cardsRevealRef} className="rs-section">
+          <div className={`rs-section-title rs-fade-up ${cardsVisible ? "rs-vis" : ""}`}>
             <h2>Featured <span>Resources</span></h2>
             <p>Free guides and reports to accelerate your career transition into data and AI.</p>
           </div>
@@ -535,7 +535,7 @@ export default function ResourcesPage() {
             {RESOURCES.map((r, i) => (
               <div
                 key={r.id}
-                className={`rs-card rs-fade-up rs-s${i + 1} ${cards.visible ? "rs-vis" : ""} ${selected === r.id ? "rs-selected" : ""}`}
+                className={`rs-card rs-fade-up rs-s${i + 1} ${cardsVisible ? "rs-vis" : ""} ${selected === r.id ? "rs-selected" : ""}`}
               >
                 <div className="rs-card-accent" style={{ background: r.color }} />
                 <div className="rs-card-body">
@@ -573,8 +573,8 @@ export default function ResourcesPage() {
           3. DOWNLOAD FORM (GATED)
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingBottom: 96, background: "#F3F4F6", paddingTop: 80 }}>
-        <div ref={form.ref} className="rs-section">
-          <div ref={formRef} className={`rs-form-wrap rs-fade-up ${form.visible ? "rs-vis" : ""}`}>
+        <div ref={formRevealRef} className="rs-section">
+          <div ref={formRef} className={`rs-form-wrap rs-fade-up ${formVisible ? "rs-vis" : ""}`}>
             {success ? (
               <div className="rs-success">
                 <div className="rs-success-icon">

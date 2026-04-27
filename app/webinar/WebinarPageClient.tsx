@@ -97,18 +97,18 @@ function useReveal(threshold = 0.12) {
     io.observe(el);
     return () => io.disconnect();
   }, [threshold]);
-  return { ref, visible };
+  return { revealRef: ref, visible };
 }
 
 /* ══════════════════════════════════════════════════════════════════ */
 export default function WebinarPage() {
   const [banner, setBanner] = useState(true);
 
-  const hero = useReveal();
-  const learn = useReveal();
-  const speaker = useReveal();
-  const proof = useReveal();
-  const regSec = useReveal();
+  const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
+  const { revealRef: learnRevealRef, visible: learnVisible } = useReveal();
+  const { revealRef: speakerRevealRef, visible: speakerVisible } = useReveal();
+  const { revealRef: proofRevealRef, visible: proofVisible } = useReveal();
+  const { revealRef: regSecRevealRef, visible: regSecVisible } = useReveal();
 
   /* form */
   const [name, setName] = useState("");
@@ -570,7 +570,7 @@ export default function WebinarPage() {
         className="wb-hero"
         style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}
       >
-        <div ref={hero.ref} className={`wb-hero-inner wb-fade-up ${hero.visible ? "wb-vis" : ""}`}>
+        <div ref={heroRevealRef} className={`wb-hero-inner wb-fade-up ${heroVisible ? "wb-vis" : ""}`}>
           {/* left */}
           <div className="wb-hero-left">
             <div className="wb-live-badge">
@@ -645,8 +645,8 @@ export default function WebinarPage() {
           2. WHAT YOU'LL LEARN
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingTop: 96, paddingBottom: 96 }}>
-        <div ref={learn.ref} className="wb-section">
-          <div className={`wb-section-title wb-fade-up ${learn.visible ? "wb-vis" : ""}`}>
+        <div ref={learnRevealRef} className="wb-section">
+          <div className={`wb-section-title wb-fade-up ${learnVisible ? "wb-vis" : ""}`}>
             <h2>What You Will <span>Learn</span></h2>
             <p>Key takeaways from this 90-minute live session.</p>
           </div>
@@ -655,7 +655,7 @@ export default function WebinarPage() {
             {LEARN_POINTS.map((lp, i) => (
               <div
                 key={i}
-                className={`wb-learn-item wb-fade-up wb-s${i + 1} ${learn.visible ? "wb-vis" : ""}`}
+                className={`wb-learn-item wb-fade-up wb-s${i + 1} ${learnVisible ? "wb-vis" : ""}`}
               >
                 <div className="wb-learn-icon" style={{ background: lp.color }}>
                   {lp.icon}
@@ -671,12 +671,12 @@ export default function WebinarPage() {
           3. SPEAKER
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingBottom: 96, background: "#F3F4F6", paddingTop: 80 }}>
-        <div ref={speaker.ref} className="wb-section">
-          <div className={`wb-section-title wb-fade-up ${speaker.visible ? "wb-vis" : ""}`}>
+        <div ref={speakerRevealRef} className="wb-section">
+          <div className={`wb-section-title wb-fade-up ${speakerVisible ? "wb-vis" : ""}`}>
             <h2>Your <span>Speaker</span></h2>
           </div>
 
-          <div className={`wb-speaker-wrap wb-fade-up ${speaker.visible ? "wb-vis" : ""}`}>
+          <div className={`wb-speaker-wrap wb-fade-up ${speakerVisible ? "wb-vis" : ""}`}>
             <div className="wb-speaker-avatar">{SPEAKER_AVATAR}</div>
             <div className="wb-speaker-info">
               <h3>{SPEAKER_NAME}</h3>
@@ -700,8 +700,8 @@ export default function WebinarPage() {
           4. PROOF / TRUST
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingTop: 96, paddingBottom: 96 }}>
-        <div ref={proof.ref} className="wb-section">
-          <div className={`wb-section-title wb-fade-up ${proof.visible ? "wb-vis" : ""}`}>
+        <div ref={proofRevealRef} className="wb-section">
+          <div className={`wb-section-title wb-fade-up ${proofVisible ? "wb-vis" : ""}`}>
             <h2>Why Attend <span>This Webinar</span></h2>
             <p>Join thousands of learners who have accelerated their careers with Brit Institute.</p>
           </div>
@@ -710,7 +710,7 @@ export default function WebinarPage() {
             {PROOF_STATS.map((s, i) => (
               <div
                 key={i}
-                className={`wb-proof-card wb-fade-up wb-s${i + 1} ${proof.visible ? "wb-vis" : ""}`}
+                className={`wb-proof-card wb-fade-up wb-s${i + 1} ${proofVisible ? "wb-vis" : ""}`}
                 style={{ borderTop: `3px solid ${s.color}` }}
               >
                 <div className="wb-proof-val" style={{ color: s.color }}>{s.value}</div>
@@ -725,8 +725,8 @@ export default function WebinarPage() {
           5. REGISTRATION FORM
       ═══════════════════════════════════════════════════ */}
       <section ref={formRef} style={{ paddingBottom: 96, background: "#F3F4F6", paddingTop: 80 }}>
-        <div ref={regSec.ref} className="wb-section">
-          <div className={`wb-reg-grid wb-fade-up ${regSec.visible ? "wb-vis" : ""}`}>
+        <div ref={regSecRevealRef} className="wb-section">
+          <div className={`wb-reg-grid wb-fade-up ${regSecVisible ? "wb-vis" : ""}`}>
             {/* left info */}
             <div className="wb-reg-info">
               <h2>Reserve Your <span>Spot</span></h2>

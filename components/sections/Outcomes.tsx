@@ -72,7 +72,7 @@ function SkeletonCard() {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function Programs() {
-  const r = useReveal();
+  const { revealRef, cls } = useReveal();
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -114,7 +114,7 @@ export default function Programs() {
     <section
       id="outcomes"
       className="w-full bg-[#0F1218] py-24 font-sans overflow-hidden"
-      ref={r.ref}
+      ref={revealRef}
     >
       {/* Marquee animation styles */}
       <style>{`
@@ -131,7 +131,7 @@ export default function Programs() {
         }
       `}</style>
 
-      <div className={`max-w-[1400px] mx-auto ${r.cls}`}>
+      <div className={`max-w-[1400px] mx-auto ${cls}`}>
         {/* Header */}
         <header className="text-center mb-12 px-6">
           <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">

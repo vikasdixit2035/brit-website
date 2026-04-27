@@ -7,7 +7,7 @@ import useReveal from "@/hooks/useReveal";
 import { faqItems } from "@/lib/faqData";
 
 export default function FAQ() {
-  const { ref, cls } = useReveal();
+  const { revealRef, cls } = useReveal();
   const [openIndex, setOpenIndex] = useState(0);
   const midpoint = Math.ceil(faqItems.length / 2);
   const leftFaqs = faqItems.slice(0, midpoint);
@@ -85,7 +85,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      ref={ref}
+      ref={revealRef}
       className="relative w-full overflow-hidden bg-gradient-to-b from-slate-50 to-white py-24 font-sans text-slate-900"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(251,191,36,0.12),_transparent_36%),radial-gradient(circle_at_bottom_right,_rgba(148,163,184,0.12),_transparent_30%)]" />

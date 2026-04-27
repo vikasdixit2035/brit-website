@@ -4,12 +4,12 @@ import useReveal from "@/hooks/useReveal";
 import { Clock, Users, Sparkles } from "lucide-react";
 
 export default function NextCohort() {
-  const r = useReveal();
+  const { revealRef, cls } = useReveal();
 
   return (
     <section
       id="next-cohort"
-      ref={r.ref}
+      ref={revealRef}
       style={{
         padding: "100px 28px",
         background: "linear-gradient(135deg, #0a0f1e 0%, #0f172a 40%, #1e293b 100%)",
@@ -33,7 +33,7 @@ export default function NextCohort() {
       />
 
       <div
-        className={`section-inner ${r.cls}`}
+        className={`section-inner ${cls}`}
         style={{
           maxWidth: "780px",
           margin: "0 auto",

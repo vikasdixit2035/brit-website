@@ -4,10 +4,10 @@ import { Icons } from "@/components/ui/Icons";
 import useReveal from "@/hooks/useReveal";
 
 export default function Pricing() {
-  const r = useReveal();
+  const { revealRef, cls } = useReveal();
   return (
-    <section id="pricing" className="section s-pricing" ref={r.ref}>
-      <div className={`section-inner ${r.cls}`}>
+    <section id="pricing" className="section s-pricing" ref={revealRef}>
+      <div className={`section-inner ${cls}`}>
         <div className="price-card" style={{ maxWidth: '800px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: 'white', letterSpacing: '-0.02em', marginBottom: '16px' }}>
             Invest in a Career That Pays Back

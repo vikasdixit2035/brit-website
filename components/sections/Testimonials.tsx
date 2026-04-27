@@ -6,7 +6,7 @@ import { Icons } from "@/components/ui/Icons";
 import useReveal from "@/hooks/useReveal";
 
 export default function Testimonials() {
-  const { ref, cls } = useReveal();
+  const { revealRef, cls } = useReveal();
   const [statsVisible, setStatsVisible] = useState(false);
   const [learnersTrained, setLearnersTrained] = useState(0);
   const [transitionRate, setTransitionRate] = useState(0);
@@ -22,7 +22,7 @@ export default function Testimonials() {
   ];
 
   useEffect(() => {
-    const el = ref.current;
+    const el = revealRef.current;
     if (!el) return;
 
     const observer = new IntersectionObserver(
@@ -37,7 +37,7 @@ export default function Testimonials() {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [ref]);
+  }, [revealRef]);
 
   useEffect(() => {
     if (!statsVisible) return;
@@ -75,7 +75,7 @@ export default function Testimonials() {
   }, [statsVisible]);
 
   return (
-    <section id="proof" className="section s-testimonials" ref={ref} style={{ background: "#0F172A", padding: "96px 28px" }}>
+    <section id="proof" className="section s-testimonials" ref={revealRef} style={{ background: "#0F172A", padding: "96px 28px" }}>
       <div className={`section-inner ${cls}`} style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
         <div className="section-head" style={{ textAlign: "center", marginBottom: "48px" }}>
           <h2 className="section-title" style={{ color: "var(--white)", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", fontWeight: 800, marginBottom: "24px" }}>Learner Outcomes</h2>

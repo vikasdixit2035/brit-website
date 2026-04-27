@@ -52,12 +52,12 @@ const highlights = [
 ];
 
 export default function Highlights() {
-  const r = useReveal();
+  const { revealRef, cls } = useReveal();
 
   return (
     <section
       id="highlights"
-      ref={r.ref}
+      ref={revealRef}
       style={{
         position: 'relative',
         padding: '100px 0 120px',
@@ -91,7 +91,7 @@ export default function Highlights() {
         }} />
       </div>
 
-      <div className={`section-inner ${r.cls}`} style={{ position: 'relative', zIndex: 1 }}>
+      <div className={`section-inner ${cls}`} style={{ position: 'relative', zIndex: 1 }}>
 
         {/* ── Header ── */}
         <div style={{ textAlign: 'center', marginBottom: '64px' }}>

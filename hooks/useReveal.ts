@@ -17,5 +17,5 @@ export default function useReveal() {
     return () => obs.disconnect();
   }, []);
   
-  return { ref, cls: `reveal${vis ? " visible" : ""}` };
+  return { revealRef: ref, cls: `reveal${vis ? " visible" : ""}` };
 }

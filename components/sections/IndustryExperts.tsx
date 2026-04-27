@@ -58,12 +58,12 @@ const COMPANY_COLORS = [
 ];
 
 export default function IndustryExperts() {
-  const { ref, cls } = useReveal();
+  const { revealRef, cls } = useReveal();
 
   return (
     <section
       id="industry-experts"
-      ref={ref}
+      ref={revealRef}
       className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50 py-24 text-slate-900"
     >
       {/* Background Effects */}

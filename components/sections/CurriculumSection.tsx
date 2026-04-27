@@ -4,7 +4,7 @@ import { useState } from "react";
 import useReveal from "@/hooks/useReveal";
 
 export default function CurriculumSection() {
-  const r = useReveal();
+  const { revealRef, cls } = useReveal();
   const [open, setOpen] = useState(0);
   const modules = [
     { t: "Foundations of AI & Data", items: ["Introduction to AI, ML, and Data Science", "Python programming fundamentals", "Statistics & probability for data", "Data structures for analytics"] },
@@ -15,8 +15,8 @@ export default function CurriculumSection() {
   ];
 
   return (
-    <section id="curriculum" className="section s-curriculum" ref={r.ref}>
-      <div className={`section-inner ${r.cls}`}>
+    <section id="curriculum" className="section s-curriculum" ref={revealRef}>
+      <div className={`section-inner ${cls}`}>
         <div className="section-head">
           <h2 className="section-title">Built for Real-World Skills</h2>
           <p className="section-sub">A structured learning path from fundamentals to career-ready skills.</p>

@@ -10,7 +10,6 @@ import Footer from "@/components/layout/Footer";
 const BLUE = "#1D4ED8";
 const GOLD = "#D4AF37";
 const DEEP = "#0a0f1e";
-const CYAN = "#00E5FF";
 
 /* ── video testimonials data ── */
 const VIDEO_TESTIMONIALS = [
@@ -121,18 +120,18 @@ function useReveal() {
     return () => io.disconnect();
   }, []);
 
-  return { ref, visible };
+  return { revealRef: ref, visible };
 }
 
 /* ──────────────────────────────────────────────────────────────────── */
 export default function ReviewsPage() {
   const [banner, setBanner] = useState(true);
 
-  const hero = useReveal();
-  const videos = useReveal();
-  const written = useReveal();
-  const cases = useReveal();
-  const cta = useReveal();
+  const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
+  const { revealRef: videosRevealRef, visible: videosVisible } = useReveal();
+  const { revealRef: writtenRevealRef, visible: writtenVisible } = useReveal();
+  const { revealRef: casesRevealRef, visible: casesVisible } = useReveal();
+  const { revealRef: ctaRevealRef, visible: ctaVisible } = useReveal();
 
   return (
     <main style={{ background: "#FAFAFA", minHeight: "100vh", fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)", color: "#111827" }}>
@@ -605,8 +604,8 @@ export default function ReviewsPage() {
         style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}
       >
         <div
-          ref={hero.ref}
-          className={`rv-hero-inner rv-fade-up ${hero.visible ? "rv-visible" : ""}`}
+          ref={heroRevealRef}
+          className={`rv-hero-inner rv-fade-up ${heroVisible ? "rv-visible" : ""}`}
         >
           <h1 className="rv-h1">
             Real Career Transitions in<br />
@@ -623,8 +622,8 @@ export default function ReviewsPage() {
           2. VIDEO TESTIMONIALS
       ═══════════════════════════════════════════════════════════════ */}
       <section style={{ paddingTop: "96px", paddingBottom: "96px" }}>
-        <div ref={videos.ref} className="rv-section">
-          <div className={`rv-section-title rv-fade-up ${videos.visible ? "rv-visible" : ""}`}>
+        <div ref={videosRevealRef} className="rv-section">
+          <div className={`rv-section-title rv-fade-up ${videosVisible ? "rv-visible" : ""}`}>
             <h2>Hear Directly from <span>Our Learners</span></h2>
             <p>Watch how real learners transformed their careers with practical skills and mentorship.</p>
           </div>
@@ -633,7 +632,7 @@ export default function ReviewsPage() {
             {VIDEO_TESTIMONIALS.map((v, i) => (
               <div
                 key={v.id}
-                className={`rv-video-card rv-fade-up rv-stagger-${i + 1} ${videos.visible ? "rv-visible" : ""}`}
+                className={`rv-video-card rv-fade-up rv-stagger-${i + 1} ${videosVisible ? "rv-visible" : ""}`}
               >
                 {/* Gradient placeholder background */}
                 <div
@@ -677,8 +676,8 @@ export default function ReviewsPage() {
           3. WRITTEN REVIEWS
       ═══════════════════════════════════════════════════════════════ */}
       <section style={{ paddingBottom: "96px", background: "#F3F4F6", paddingTop: "80px" }}>
-        <div ref={written.ref} className="rv-section">
-          <div className={`rv-section-title rv-fade-up ${written.visible ? "rv-visible" : ""}`}>
+        <div ref={writtenRevealRef} className="rv-section">
+          <div className={`rv-section-title rv-fade-up ${writtenVisible ? "rv-visible" : ""}`}>
             <h2>What Learners Are <span>Saying</span></h2>
             <p>Honest feedback from professionals who made the transition.</p>
           </div>
@@ -687,11 +686,11 @@ export default function ReviewsPage() {
             {WRITTEN_REVIEWS.map((r, i) => (
               <div
                 key={i}
-                className={`rv-review-card rv-fade-up rv-stagger-${i + 1} ${written.visible ? "rv-visible" : ""}`}
+                className={`rv-review-card rv-fade-up rv-stagger-${i + 1} ${writtenVisible ? "rv-visible" : ""}`}
                 style={{ ["--accent" as string]: r.accent }}
               >
                 <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: r.accent, borderRadius: "16px 16px 0 0" }} />
-                <div className="rv-review-quote" style={{ color: r.accent }}>"</div>
+                <div className="rv-review-quote" style={{ color: r.accent }}>&ldquo;</div>
 
                 {/* Stars */}
                 <div className="rv-stars">
@@ -702,7 +701,7 @@ export default function ReviewsPage() {
                   ))}
                 </div>
 
-                <p className="rv-review-text">"{r.text}"</p>
+                <p className="rv-review-text">&ldquo;{r.text}&rdquo;</p>
 
                 <div className="rv-review-author">
                   <div className="rv-review-avatar" style={{ background: r.accent }}>
@@ -723,8 +722,8 @@ export default function ReviewsPage() {
           4. CASE HIGHLIGHTS — BEFORE / AFTER
       ═══════════════════════════════════════════════════════════════ */}
       <section style={{ paddingTop: "96px", paddingBottom: "96px" }}>
-        <div ref={cases.ref} className="rv-section">
-          <div className={`rv-section-title rv-fade-up ${cases.visible ? "rv-visible" : ""}`}>
+        <div ref={casesRevealRef} className="rv-section">
+          <div className={`rv-section-title rv-fade-up ${casesVisible ? "rv-visible" : ""}`}>
             <h2>Career Transformation <span>Snapshots</span></h2>
             <p>Real before-and-after stories of learners who made the shift into tech.</p>
           </div>
@@ -733,7 +732,7 @@ export default function ReviewsPage() {
             {CASE_HIGHLIGHTS.map((c, i) => (
               <div
                 key={i}
-                className={`rv-case-card rv-fade-up rv-stagger-${i + 1} ${cases.visible ? "rv-visible" : ""}`}
+                className={`rv-case-card rv-fade-up rv-stagger-${i + 1} ${casesVisible ? "rv-visible" : ""}`}
               >
                 <div className="rv-case-header">
                   <span style={{ fontSize: ".82rem", fontWeight: 700, color: "#111827" }}>
@@ -775,7 +774,7 @@ export default function ReviewsPage() {
           5. CTA
       ═══════════════════════════════════════════════════════════════ */}
       <section style={{ paddingBottom: "96px" }}>
-        <div ref={cta.ref} className={`rv-cta-wrap rv-fade-up ${cta.visible ? "rv-visible" : ""}`}>
+        <div ref={ctaRevealRef} className={`rv-cta-wrap rv-fade-up ${ctaVisible ? "rv-visible" : ""}`}>
           <div className="rv-cta">
             <div className="rv-cta-inner">
               <h2>Start Your Own Career Transition</h2>

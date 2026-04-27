@@ -1,14 +1,34 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-
 // --- Configuration & Helpers ---
-const BRAND_RED = "#FF0033"; // AlmaBetter brand red
-const BRAND_CYAN = "#00E5FF"; // Cyan/teal for "Free" badge
 const BRAND_BLUE = "#1D4ED8";
 const BRAND_GOLD = "#D4AF37";
-const BANNER_YELLOW_START = "#ffe55c";
-const BANNER_YELLOW_END = "#ffb057";
+
+function getOrdinal(day: number) {
+  if (day > 3 && day < 21) return "th";
+
+  switch (day % 10) {
+    case 1:
+      return "st";
+    case 2:
+      return "nd";
+    case 3:
+      return "rd";
+    default:
+      return "th";
+  }
+}
+
+function getClosingDate() {
+  const date = new Date();
+  date.setDate(date.getDate() + 2);
+
+  const day = date.getDate();
+  const month = date.toLocaleDateString("en-GB", { month: "long" });
+  const year = date.getFullYear();
+
+  return `${day}${getOrdinal(day)} ${month} ${year}`;
+}
 
 // --- Private Helper Icons for Top Banner ---
 // Paper plane / Send style icon from image
@@ -43,41 +63,7 @@ interface TopBannerProps {
 }
 
 export default function TopBanner({ visible, onClose }: TopBannerProps) {
-  const [scrolled, setScrolled] = useState(false);
-  const [closingDate, setClosingDate] = useState("");
-  const dropRef = useRef<HTMLDivElement>(null);
-
-  // Scroll handler for navbar shadow
-  useEffect(() => {
-    const fn = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", fn, { passive: true });
-    fn();
-
-    // Calculate closing date: 2 days from now
-    const date = new Date();
-    date.setDate(date.getDate() + 2);
-
-    const day = date.getDate();
-    const month = date.toLocaleDateString("en-GB", { month: "long" });
-    const year = date.getFullYear();
-
-    const getOrdinal = (d: number) => {
-      if (d > 3 && d < 21) return "th";
-      switch (d % 10) {
-        case 1: return "st";
-        case 2: return "nd";
-        case 3: return "rd";
-        default: return "th";
-      }
-    };
-
-    const formatted = `${day}${getOrdinal(day)} ${month} ${year}`;
-    setClosingDate(formatted);
-
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
+  const closingDate = getClosingDate();
 
   if (!visible) return null;
 

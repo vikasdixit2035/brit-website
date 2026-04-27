@@ -3,10 +3,10 @@
 import useReveal from "@/hooks/useReveal";
 
 export default function StatsStrip() {
-  const r = useReveal();
+  const { revealRef, cls } = useReveal();
   return (
-    <section className="stats-strip" ref={r.ref}>
-      <div className={`stats-inner ${r.cls}`}>
+    <section className="stats-strip" ref={revealRef}>
+      <div className={`stats-inner ${cls}`}>
         {[
           { num: "50+", text: "Countries with Learners" },
           { num: "1,000+", text: "Learners Trained" },

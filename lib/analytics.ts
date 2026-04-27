@@ -21,6 +21,12 @@ type CourseInvestmentInput = {
 declare global {
   interface Window {
     dataLayer?: Array<Record<string, unknown>>;
+    fbq?: (
+      action: "track" | "trackCustom",
+      eventName: string,
+      payload?: Record<string, DataLayerValue>,
+      options?: { eventID?: string },
+    ) => void;
   }
 }
 
@@ -41,30 +47,59 @@ function pagePath() {
 function pushDataLayer(event: string, payload: DataLayerPayload = {}) {
   if (typeof window === "undefined") return;
 
+  const eventId = createEventId(event);
+
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     event,
-    event_id: createEventId(event),
+    event_id: eventId,
     page_path: pagePath(),
     ...payload,
   });
+
+  return eventId;
+}
+
+function trackMetaPixel(
+  eventName: string,
+  payload: DataLayerPayload = {},
+  action: "track" | "trackCustom" = "track",
+) {
+  if (typeof window === "undefined" || typeof window.fbq !== "function") return;
+
+  const eventId = createEventId(eventName);
+  window.fbq(
+    action,
+    eventName,
+    {
+      page_path: pagePath(),
+      ...payload,
+    },
+    { eventID: eventId },
+  );
 }
 
 export function trackLead({ formName, source, course, resource }: LeadEventInput) {
-  pushDataLayer("meta_lead", {
+  const payload = {
     form_name: formName,
     source,
     course,
     resource,
-  });
+  };
+
+  pushDataLayer("meta_lead", payload);
+  trackMetaPixel("Lead", payload);
 }
 
 export function trackSubmitRequest({ formName, source, course }: LeadEventInput) {
-  pushDataLayer("meta_submit_request", {
+  const payload = {
     form_name: formName,
     source,
     course,
-  });
+  };
+
+  pushDataLayer("meta_submit_request", payload);
+  trackMetaPixel("SubmitApplication", payload);
 }
 
 export function trackCourseInvestmentClick({
@@ -73,10 +108,13 @@ export function trackCourseInvestmentClick({
   price,
   currency,
 }: CourseInvestmentInput) {
-  pushDataLayer("meta_course_investment_click", {
+  const payload = {
     course_title: courseTitle,
     course_slug: courseSlug,
     price,
     currency,
-  });
+  };
+
+  pushDataLayer("meta_course_investment_click", payload);
+  trackMetaPixel("CourseInvestmentClick", payload, "trackCustom");
 }

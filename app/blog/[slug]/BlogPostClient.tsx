@@ -27,7 +27,7 @@ function useReveal(threshold = 0.1) {
     io.observe(el);
     return () => io.disconnect();
   }, [threshold]);
-  return { ref, visible };
+  return { revealRef: ref, visible };
 }
 
 /* ── simple markdown-ish renderer ── */
@@ -231,8 +231,8 @@ export default function BlogPostPage() {
   const slug = params?.slug as string;
   const [banner, setBanner] = useState(true);
 
-  const heroRef = useReveal();
-  const bodyRef = useReveal();
+  const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
+  const { revealRef: bodyRevealRef, visible: bodyVisible } = useReveal();
 
   const article = BLOG_ARTICLES.find((a) => a.slug === slug);
 
@@ -380,7 +380,7 @@ export default function BlogPostPage() {
 
       {/* ── HERO ── */}
       <section className="bp-hero" style={{ paddingTop: banner ? "150px" : "110px", paddingBottom: "60px" }}>
-        <div ref={heroRef.ref} className={`bp-hero-inner bp-fade-up ${heroRef.visible ? "bp-vis" : ""}`}>
+        <div ref={heroRevealRef} className={`bp-hero-inner bp-fade-up ${heroVisible ? "bp-vis" : ""}`}>
           <Link href="/blog" className="bp-back">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12" /><polyline points="12 19 5 12 12 5" /></svg>
             Back to Blog
@@ -402,7 +402,7 @@ export default function BlogPostPage() {
 
       {/* ── BODY (first half) ── */}
       <section style={{ paddingTop: 48, paddingBottom: article.midCta ? 40 : 80 }}>
-        <div ref={bodyRef.ref} className={`bp-body bp-fade-up ${bodyRef.visible ? "bp-vis" : ""}`}>
+        <div ref={bodyRevealRef} className={`bp-body bp-fade-up ${bodyVisible ? "bp-vis" : ""}`}>
           <div className="bp-content">
             {renderContent(contentBefore)}
           </div>

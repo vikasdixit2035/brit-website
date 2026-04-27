@@ -29,7 +29,7 @@ function useReveal(threshold = 0.1) {
     io.observe(el);
     return () => io.disconnect();
   }, [threshold]);
-  return { ref, visible };
+  return { revealRef: ref, visible };
 }
 
 /* ══════════════════════════════════════════════════════════════════ */
@@ -43,12 +43,12 @@ export default function BlogPage() {
   const [nlSubmitting, setNlSubmitting] = useState(false);
   const [nlSuccess, setNlSuccess] = useState(false);
 
-  const hero = useReveal();
-  const cats = useReveal();
-  const featured = useReveal();
-  const grid = useReveal();
-  const midCta = useReveal();
-  const nlSec = useReveal();
+  const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
+  const { revealRef: catsRevealRef, visible: catsVisible } = useReveal();
+  const { revealRef: featuredRevealRef, visible: featuredVisible } = useReveal();
+  const { revealRef: gridRevealRef, visible: gridVisible } = useReveal();
+  const { revealRef: midCtaRevealRef, visible: midCtaVisible } = useReveal();
+  const { revealRef: nlSecRevealRef, visible: nlSecVisible } = useReveal();
 
   /* filtered articles (non-featured) */
   const allNonFeatured = BLOG_ARTICLES.filter((a) => !a.featured);
@@ -394,7 +394,7 @@ export default function BlogPage() {
           1. HERO
       ═══════════════════════════════════════════════════ */}
       <section className="bl-hero" style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}>
-        <div ref={hero.ref} className={`bl-hero-inner bl-fade-up ${hero.visible ? "bl-vis" : ""}`}>
+        <div ref={heroRevealRef} className={`bl-hero-inner bl-fade-up ${heroVisible ? "bl-vis" : ""}`}>
 
           <h1 className="bl-h1">
             Insights on Data Analytics, Data Science<br />
@@ -411,11 +411,11 @@ export default function BlogPage() {
           2. CATEGORY NAVIGATION
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingTop: 64, paddingBottom: 0 }}>
-        <div ref={cats.ref} className="bl-section">
-          <div className={`bl-section-title bl-fade-up ${cats.visible ? "bl-vis" : ""}`}>
+        <div ref={catsRevealRef} className="bl-section">
+          <div className={`bl-section-title bl-fade-up ${catsVisible ? "bl-vis" : ""}`}>
             <h2>Explore by <span>Topic</span></h2>
           </div>
-          <div className={`bl-cats bl-fade-up ${cats.visible ? "bl-vis" : ""}`}>
+          <div className={`bl-cats bl-fade-up ${catsVisible ? "bl-vis" : ""}`}>
             {BLOG_CATEGORIES.map((c) => (
               <button
                 key={c.slug}
@@ -433,8 +433,8 @@ export default function BlogPage() {
           3. FEATURED ARTICLES
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingTop: 48, paddingBottom: 96 }}>
-        <div ref={featured.ref} className="bl-section">
-          <div className={`bl-section-title bl-fade-up ${featured.visible ? "bl-vis" : ""}`}>
+        <div ref={featuredRevealRef} className="bl-section">
+          <div className={`bl-section-title bl-fade-up ${featuredVisible ? "bl-vis" : ""}`}>
             <h2>Featured <span>Guides</span></h2>
           </div>
 
@@ -443,7 +443,7 @@ export default function BlogPage() {
               <Link
                 key={a.slug}
                 href={`/blog/${a.slug}`}
-                className={`bl-featured-card bl-fade-up bl-s${i + 1} ${featured.visible ? "bl-vis" : ""}`}
+                className={`bl-featured-card bl-fade-up bl-s${i + 1} ${featuredVisible ? "bl-vis" : ""}`}
               >
                 <div className="bl-featured-img">
                   <div
@@ -483,8 +483,8 @@ export default function BlogPage() {
           4. ALL ARTICLES GRID
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingBottom: 80, background: "#F3F4F6", paddingTop: 80 }}>
-        <div ref={grid.ref} className="bl-section">
-          <div className={`bl-section-title bl-fade-up ${grid.visible ? "bl-vis" : ""}`}>
+        <div ref={gridRevealRef} className="bl-section">
+          <div className={`bl-section-title bl-fade-up ${gridVisible ? "bl-vis" : ""}`}>
             <h2>Latest <span>Articles</span></h2>
           </div>
 
@@ -498,7 +498,7 @@ export default function BlogPage() {
                 <Link
                   key={a.slug}
                   href={`/blog/${a.slug}`}
-                  className={`bl-article-card bl-fade-up ${grid.visible ? "bl-vis" : ""}`}
+                  className={`bl-article-card bl-fade-up ${gridVisible ? "bl-vis" : ""}`}
                   style={{ transitionDelay: `${Math.min(i * 0.08, 0.4)}s` }}
                 >
                   <span className="bl-article-cat" style={{ background: a.color }}>{a.category}</span>
@@ -533,7 +533,7 @@ export default function BlogPage() {
           5. MID CTA
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingTop: 80, paddingBottom: 80 }}>
-        <div ref={midCta.ref} className={`bl-section bl-fade-up ${midCta.visible ? "bl-vis" : ""}`}>
+        <div ref={midCtaRevealRef} className={`bl-section bl-fade-up ${midCtaVisible ? "bl-vis" : ""}`}>
           <div className="bl-mid-cta">
             <div className="bl-mid-cta-inner">
               <h2>Looking to Build These Skills?</h2>
@@ -551,7 +551,7 @@ export default function BlogPage() {
           6. NEWSLETTER
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingBottom: 96 }}>
-        <div ref={nlSec.ref} className={`bl-section bl-fade-up ${nlSec.visible ? "bl-vis" : ""}`}>
+        <div ref={nlSecRevealRef} className={`bl-section bl-fade-up ${nlSecVisible ? "bl-vis" : ""}`}>
           <div className="bl-nl-wrap">
             <h2>Get Career Insights Directly</h2>
             <p>Receive updates on data, AI, and tech careers in the UK.</p>

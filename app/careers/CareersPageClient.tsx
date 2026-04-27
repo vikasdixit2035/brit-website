@@ -135,7 +135,7 @@ function useReveal() {
     io.observe(el);
     return () => io.disconnect();
   }, []);
-  return { ref, visible };
+  return { revealRef: ref, visible };
 }
 
 /* ── animated counter ── */
@@ -160,13 +160,13 @@ function AnimatedNumber({ value, visible, prefix = "", suffix = "" }: { value: n
 export default function CareersPage() {
   const [banner, setBanner] = useState(true);
 
-  const hero = useReveal();
-  const salaries = useReveal();
-  const roles = useReveal();
-  const skills = useReveal();
-  const hiring = useReveal();
-  const paths = useReveal();
-  const ctaSec = useReveal();
+  const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
+  const { revealRef: salariesRevealRef, visible: salariesVisible } = useReveal();
+  const { revealRef: rolesRevealRef, visible: rolesVisible } = useReveal();
+  const { revealRef: skillsRevealRef, visible: skillsVisible } = useReveal();
+  const { revealRef: hiringRevealRef, visible: hiringVisible } = useReveal();
+  const { revealRef: pathsRevealRef, visible: pathsVisible } = useReveal();
+  const { revealRef: ctaSecRevealRef, visible: ctaSecVisible } = useReveal();
 
   return (
     <main style={{ background: "#FAFAFA", minHeight: "100vh", fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)", color: "#111827" }}>
@@ -484,7 +484,7 @@ export default function CareersPage() {
         className="cr-hero"
         style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}
       >
-        <div ref={hero.ref} className={`cr-hero-inner cr-fade-up ${hero.visible ? "cr-vis" : ""}`}>
+        <div ref={heroRevealRef} className={`cr-hero-inner cr-fade-up ${heroVisible ? "cr-vis" : ""}`}>
 
           <h1 className="cr-h1">
             Careers in <span>AI, Data Analytics</span><br />and Data Science in the UK
@@ -500,8 +500,8 @@ export default function CareersPage() {
           2. SALARY BENCHMARKS
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingTop: 96, paddingBottom: 96 }}>
-        <div ref={salaries.ref} className="cr-section">
-          <div className={`cr-section-title cr-fade-up ${salaries.visible ? "cr-vis" : ""}`}>
+        <div ref={salariesRevealRef} className="cr-section">
+          <div className={`cr-section-title cr-fade-up ${salariesVisible ? "cr-vis" : ""}`}>
             <h2>Salary Insights Across <span>Key Roles</span></h2>
             <p>UK-based salary ranges for the most in-demand data and AI positions.</p>
           </div>
@@ -512,7 +512,7 @@ export default function CareersPage() {
               return (
                 <div
                   key={i}
-                  className={`cr-salary-card cr-fade-up cr-s${i + 1} ${salaries.visible ? "cr-vis" : ""}`}
+                  className={`cr-salary-card cr-fade-up cr-s${i + 1} ${salariesVisible ? "cr-vis" : ""}`}
                   style={{ ["--acc" as string]: s.color }}
                 >
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: s.color, borderRadius: "16px 16px 0 0" }} />
@@ -523,7 +523,7 @@ export default function CareersPage() {
                     <div
                       className="cr-salary-bar"
                       style={{
-                        width: salaries.visible ? `${barPct}%` : "0%",
+                        width: salariesVisible ? `${barPct}%` : "0%",
                         background: `linear-gradient(90deg, ${s.color}, ${s.color}99)`,
                       }}
                     />
@@ -531,10 +531,10 @@ export default function CareersPage() {
 
                   <div className="cr-salary-range">
                     <span style={{ color: s.color }}>
-                      £<AnimatedNumber value={s.min} visible={salaries.visible} />
+                      £<AnimatedNumber value={s.min} visible={salariesVisible} />
                     </span>
                     <span style={{ color: s.color }}>
-                      £<AnimatedNumber value={s.max} visible={salaries.visible} suffix="+" />
+                      £<AnimatedNumber value={s.max} visible={salariesVisible} suffix="+" />
                     </span>
                   </div>
 
@@ -552,8 +552,8 @@ export default function CareersPage() {
           3. JOB ROLES
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingBottom: 96, background: "#F3F4F6", paddingTop: 80 }}>
-        <div ref={roles.ref} className="cr-section">
-          <div className={`cr-section-title cr-fade-up ${roles.visible ? "cr-vis" : ""}`}>
+        <div ref={rolesRevealRef} className="cr-section">
+          <div className={`cr-section-title cr-fade-up ${rolesVisible ? "cr-vis" : ""}`}>
             <h2>Popular <span>Career Roles</span></h2>
             <p>Explore the roles driving digital transformation across industries.</p>
           </div>
@@ -562,7 +562,7 @@ export default function CareersPage() {
             {JOB_ROLES.map((r, i) => (
               <div
                 key={i}
-                className={`cr-role-card cr-fade-up cr-s${i + 1} ${roles.visible ? "cr-vis" : ""}`}
+                className={`cr-role-card cr-fade-up cr-s${i + 1} ${rolesVisible ? "cr-vis" : ""}`}
               >
                 <div className="cr-role-icon" style={{ background: r.color }}>{r.icon}</div>
                 <h3 className="cr-role-title">{r.title}</h3>
@@ -577,26 +577,26 @@ export default function CareersPage() {
           4. SKILLS REQUIRED
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingTop: 96, paddingBottom: 96 }}>
-        <div ref={skills.ref} className="cr-section">
-          <div className={`cr-section-title cr-fade-up ${skills.visible ? "cr-vis" : ""}`}>
+        <div ref={skillsRevealRef} className="cr-section">
+          <div className={`cr-section-title cr-fade-up ${skillsVisible ? "cr-vis" : ""}`}>
             <h2>Skills Employers <span>Look For</span></h2>
             <p>The most requested skills by UK employers hiring for data and AI roles.</p>
           </div>
 
-          <div className={`cr-skills-wrap cr-fade-up ${skills.visible ? "cr-vis" : ""}`}>
+          <div className={`cr-skills-wrap cr-fade-up ${skillsVisible ? "cr-vis" : ""}`}>
             {SKILLS.map((sk, i) => (
-              <div key={i} className={`cr-skill-row cr-fade-up cr-s${i + 1} ${skills.visible ? "cr-vis" : ""}`}>
+              <div key={i} className={`cr-skill-row cr-fade-up cr-s${i + 1} ${skillsVisible ? "cr-vis" : ""}`}>
                 <div className="cr-skill-label">
                   <span className="cr-skill-name">{sk.label}</span>
                   <span className="cr-skill-pct" style={{ color: sk.color }}>
-                    {skills.visible ? sk.pct : 0}%
+                    {skillsVisible ? sk.pct : 0}%
                   </span>
                 </div>
                 <div className="cr-skill-track">
                   <div
                     className="cr-skill-fill"
                     style={{
-                      width: skills.visible ? `${sk.pct}%` : "0%",
+                      width: skillsVisible ? `${sk.pct}%` : "0%",
                       background: `linear-gradient(90deg, ${sk.color}, ${sk.color}bb)`,
                     }}
                   />
@@ -614,8 +614,8 @@ export default function CareersPage() {
           5. HIRING INDUSTRIES
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingBottom: 96, background: "#F3F4F6", paddingTop: 80 }}>
-        <div ref={hiring.ref} className="cr-section">
-          <div className={`cr-section-title cr-fade-up ${hiring.visible ? "cr-vis" : ""}`}>
+        <div ref={hiringRevealRef} className="cr-section">
+          <div className={`cr-section-title cr-fade-up ${hiringVisible ? "cr-vis" : ""}`}>
             <h2>Industries Hiring for <span>These Roles</span></h2>
             <p>From finance to startups, data and AI talent is in demand everywhere.</p>
           </div>
@@ -624,7 +624,7 @@ export default function CareersPage() {
             {INDUSTRIES.map((ind, i) => (
               <div
                 key={i}
-                className={`cr-industry-card cr-fade-up cr-s${i + 1} ${hiring.visible ? "cr-vis" : ""}`}
+                className={`cr-industry-card cr-fade-up cr-s${i + 1} ${hiringVisible ? "cr-vis" : ""}`}
                 style={{ borderTop: `3px solid ${ind.accent}` }}
               >
                 <span className="cr-industry-icon">{ind.icon}</span>
@@ -639,8 +639,8 @@ export default function CareersPage() {
           6. CAREER PATHS
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingTop: 96, paddingBottom: 96 }}>
-        <div ref={paths.ref} className="cr-section">
-          <div className={`cr-section-title cr-fade-up ${paths.visible ? "cr-vis" : ""}`}>
+        <div ref={pathsRevealRef} className="cr-section">
+          <div className={`cr-section-title cr-fade-up ${pathsVisible ? "cr-vis" : ""}`}>
             <h2>Typical Career <span>Progression</span></h2>
             <p>See how professionals typically grow through these career tracks.</p>
           </div>
@@ -649,7 +649,7 @@ export default function CareersPage() {
             {CAREER_PATHS.map((p, i) => (
               <div
                 key={i}
-                className={`cr-path-card cr-fade-up cr-s${i + 1} ${paths.visible ? "cr-vis" : ""}`}
+                className={`cr-path-card cr-fade-up cr-s${i + 1} ${pathsVisible ? "cr-vis" : ""}`}
               >
                 <h3 className="cr-path-title">
                   <span className="cr-path-dot" style={{ background: p.color }} />
@@ -687,7 +687,7 @@ export default function CareersPage() {
           7. CTA
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingBottom: 96 }}>
-        <div ref={ctaSec.ref} className={`cr-cta-wrap cr-fade-up ${ctaSec.visible ? "cr-vis" : ""}`}>
+        <div ref={ctaSecRevealRef} className={`cr-cta-wrap cr-fade-up ${ctaSecVisible ? "cr-vis" : ""}`}>
           <div className="cr-cta">
             <div className="cr-cta-inner">
               <h2>Start Your Career in Data or AI</h2>

@@ -4,7 +4,7 @@ import useReveal from "@/hooks/useReveal";
 import { GraduationCap, Code2, Briefcase } from "lucide-react";
 
 export default function HowItWorks() {
-  const { ref, cls } = useReveal();
+  const { revealRef, cls } = useReveal();
 
   const steps = [
     {
@@ -33,7 +33,7 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      ref={ref}
+      ref={revealRef}
       style={{
         padding: "96px 28px",
         background:

@@ -4,7 +4,7 @@ import useReveal from "@/hooks/useReveal";
 import { BarChart, Code, Layers } from 'lucide-react';
 
 export default function Projects() {
-  const r = useReveal();
+  const { revealRef, cls } = useReveal();
   const projects = [
     { icon: <BarChart size={32} />, title: "Data Dashboards", desc: "Interactive dashboards and reporting systems" },
     { icon: <Code size={32} />, title: "Machine Learning", desc: "Predictive models and advanced algorithms" },
@@ -12,8 +12,8 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="section s-projects" ref={r.ref} style={{ padding: '80px 0', background: 'var(--blue-950)', color: 'white' }}>
-      <div className={`section-inner ${r.cls}`}>
+    <section id="projects" className="section s-projects" ref={revealRef} style={{ padding: '80px 0', background: 'var(--blue-950)', color: 'white' }}>
+      <div className={`section-inner ${cls}`}>
         <div className="section-head" style={{ textAlign: 'center', marginBottom: '40px' }}>
           <h2 className="section-title" style={{ color: 'white' }}>Projects and Portfolio</h2>
           <p className="section-sub" style={{ color: 'rgba(255,255,255,0.7)' }}>Build a practical portfolio that stands out to employers.</p>
