@@ -28,7 +28,7 @@ export default function Home() {
       {/* 1. Hero */}
       <Hero />
 
-      {/* Logo Strip for initial trust */}
+      {/* Recruiting partners */}
       <LogoStrip />
 
       {/* 2. Pain Points */}

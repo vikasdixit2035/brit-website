@@ -1,10 +1,17 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import type { LucideIcon } from "lucide-react";
+import { Briefcase, Building2, Rocket, Star, TrendingUp, Trophy, Users, Zap } from "lucide-react";
+import useReveal from "@/hooks/useReveal";
 
-const companiesRow1 = [
+type PartnerLogo = {
+  src: string;
+  alt: string;
+};
+
+const legacyPartners: PartnerLogo[] = [
   { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company1.webp", alt: "Hiring partner company 1 logo" },
   { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company2.webp", alt: "Hiring partner company 2 logo" },
   { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company3.webp", alt: "Hiring partner company 3 logo" },
@@ -14,10 +21,7 @@ const companiesRow1 = [
   { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company8.webp", alt: "Hiring partner company 8 logo" },
   { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company9.webp", alt: "Hiring partner company 9 logo" },
   { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company10.webp", alt: "Hiring partner company 10 logo" },
-  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company11.webp", alt: "Hiring partner company 11 logo" }
-];
-
-const companiesRow2 = [
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company11.webp", alt: "Hiring partner company 11 logo" },
   { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company12.webp", alt: "Hiring partner company 12 logo" },
   { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company13.webp", alt: "Hiring partner company 13 logo" },
   { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company14.webp", alt: "Hiring partner company 14 logo" },
@@ -26,31 +30,214 @@ const companiesRow2 = [
   { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company17.webp", alt: "Hiring partner company 17 logo" },
   { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company18.webp", alt: "Hiring partner company 18 logo" },
   { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company19.webp", alt: "Hiring partner company 19 logo" },
-  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company20.webp", alt: "Hiring partner company 20 logo" }
+  { src: "https://d1qnndbrfkpp2h.cloudfront.net/static-images/companies/company20.webp", alt: "Hiring partner company 20 logo" },
 ];
 
-export default function LogoStrip() {
+const localPartnerFiles = [
+  "Accenture.webp",
+  "Allianz logo.webp",
+  "DataBricks logo.webp",
+  "Evergreen logo.webp",
+  "Google Deeo mind logo.webp",
+  "HSBC logo.webp",
+  "Harrods logo.webp",
+  "JP morragn logo.webp",
+  "Legal & general Logo.webp",
+  "Moonplay logo.webp",
+  "Nivoda logo.webp",
+  "Poly ai logo.webp",
+  "Sky logo.webp",
+  "Stat sports logo.webp",
+  "arm logo.webp",
+  "artemis.webp",
+  "blackswan.webp",
+  "bumble logo.webp",
+  "capgemini.webp",
+  "cgi.webp",
+  "cityfootball.webp",
+  "cloudfare logo.webp",
+  "coinbase.webp",
+  "confluent.webp",
+  "couchbase.webp",
+  "cycle.webp",
+  "deliveroo.webp",
+  "elastic logo.webp",
+  "goldman logo.webp",
+  "graphcore.webp",
+  "mck.webp",
+  "monzo.webp",
+  "natwest.webp",
+  "nvidia.webp",
+  "ocado.webp",
+  "oodle.webp",
+  "pure DC.webp",
+  "rackspace.webp",
+  "revolut.webp",
+  "skyscanner.webp",
+  "snowflake.webp",
+  "softcat logo.webp",
+  "synthesia.webp",
+  "thoughts.webp",
+  "toluna.webp",
+  "tractable.webp",
+  "truelayer logo.webp",
+  "watson logo.webp",
+  "wayfair.webp",
+  "wayve.webp",
+  "wise.webp",
+  "zopa.webp",
+];
+
+const localPartners: PartnerLogo[] = localPartnerFiles.map((file) => ({
+  src: `/companies/${encodeURIComponent(file)}`,
+  alt: file.replace(/\.webp$/i, "").replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim(),
+}));
+
+const localSplitPoint = Math.ceil(localPartners.length / 2);
+const localRowOne = localPartners.slice(0, localSplitPoint);
+const localRowTwo = localPartners.slice(localSplitPoint);
+const legacyTrack = [...legacyPartners, ...legacyPartners];
+const localTrackOne = [...localRowOne, ...localRowOne];
+const localTrackTwo = [...localRowTwo, ...localRowTwo];
+
+function LogoCard({ partner }: { partner: PartnerLogo }) {
   return (
-    <section style={{
-      background: "linear-gradient(90deg, #FFFFFF 0%, #F0F7FF 100%)",
-      padding: "96px 0",
-      color: "#0F172A",
-      fontFamily: "var(--font-inter), sans-serif",
-      overflow: "hidden"
-    }}>
+    <div className="logo-box">
+      <Image
+        src={partner.src}
+        alt={partner.alt}
+        width={160}
+        height={44}
+        loading="lazy"
+        style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
+      />
+    </div>
+  );
+}
+
+type PlacementCard = {
+  icon: LucideIcon;
+  metric: string;
+  label: string;
+  background: string;
+  iconColor: string;
+  accent?: LucideIcon;
+};
+
+const placementCards: PlacementCard[] = [
+  {
+    icon: Users,
+    metric: "847+",
+    label: "Professionals Placed in Jobs",
+    background: "#EFF6FF",
+    iconColor: "#2563EB",
+  },
+  {
+    icon: Star,
+    metric: "4.8/5",
+    label: "Professional Satisfaction",
+    background: "#ECFDF3",
+    iconColor: "#16A34A",
+    accent: Star,
+  },
+  {
+    icon: TrendingUp,
+    metric: "98%",
+    label: "Job Placement Success",
+    background: "#FAF5FF",
+    iconColor: "#9333EA",
+  },
+  {
+    icon: Building2,
+    metric: "150+",
+    label: "Hiring Partners",
+    background: "#FFF7ED",
+    iconColor: "#EA580C",
+  },
+];
+
+const placementProofs: { icon: LucideIcon; text: string; color: string }[] = [
+  { icon: Trophy, text: "#1 Rated Data Analytics Program in UK", color: "#F59E0B" },
+  { icon: Zap, text: "4.9/5 Average Professional Rating", color: "#FBBF24" },
+  { icon: Briefcase, text: "Job Placement Guarantee", color: "#92400E" },
+  { icon: Rocket, text: "95% Career Success Rate", color: "#2563EB" },
+];
+
+function StatCard({ card }: { card: PlacementCard }) {
+  const Icon = card.icon;
+  const Accent = card.accent;
+
+  return (
+    <div
+      style={{
+        borderRadius: "22px",
+        border: "1px solid rgba(226, 232, 240, 0.7)",
+        background: card.background,
+        padding: "28px 20px 26px",
+        boxShadow: "0 18px 38px rgba(15,23,42,0.10)",
+        textAlign: "center",
+        minHeight: "156px",
+      }}
+    >
+      <div style={{ marginBottom: "12px", color: card.iconColor }}>
+        <Icon size={34} strokeWidth={2.3} style={{ margin: "0 auto" }} />
+      </div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "6px",
+          fontSize: "2rem",
+          fontWeight: 900,
+          color: "#020617",
+          letterSpacing: 0,
+          lineHeight: 1,
+          marginBottom: "10px",
+        }}
+      >
+        <span>{card.metric}</span>
+        {Accent && <Accent size={30} fill="#FACC15" color="#FACC15" strokeWidth={1.8} />}
+      </div>
+      <div style={{ fontSize: "0.95rem", fontWeight: 700, color: "#334155", lineHeight: 1.45 }}>
+        {card.label}
+      </div>
+    </div>
+  );
+}
+
+export default function LogoStrip() {
+  const { revealRef } = useReveal();
+
+  return (
+    <section
+      ref={revealRef}
+      style={{
+        background: "linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)",
+        padding: "48px 0 36px",
+        color: "#0F172A",
+        fontFamily: "var(--font-inter), sans-serif",
+        overflow: "hidden",
+      }}
+    >
       <style>{`
-        .scrolling-track-left {
-          display: flex;
-          width: max-content;
-          animation: scrollLeft 40s linear infinite;
-        }
+        .scrolling-track-left,
         .scrolling-track-right {
           display: flex;
           width: max-content;
-          animation: scrollRight 40s linear infinite;
+          will-change: transform;
         }
-        
-        .scrolling-track-left:hover, .scrolling-track-right:hover {
+
+        .scrolling-track-left {
+          animation: scrollLeft 72s linear infinite;
+        }
+
+        .scrolling-track-right {
+          animation: scrollRight 72s linear infinite;
+        }
+
+        .scrolling-track-left:hover,
+        .scrolling-track-right:hover {
           animation-play-state: paused;
         }
 
@@ -58,23 +245,33 @@ export default function LogoStrip() {
           from { transform: translateX(0); }
           to { transform: translateX(-50%); }
         }
+
         @keyframes scrollRight {
           from { transform: translateX(-50%); }
           to { transform: translateX(0); }
         }
 
         .logo-box {
-          background: #FFFFFF;
-          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.9);
+          border: 1px solid rgba(148, 163, 184, 0.18);
+          border-radius: 16px;
           height: 64px;
-          width: 180px;
+          width: 176px;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 0 12px;
-          padding: 16px;
+          margin: 0 10px;
+          padding: 12px 14px;
           flex-shrink: 0;
-          box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+          box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+          backdrop-filter: blur(8px);
+          transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .logo-box:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+          border-color: rgba(212, 175, 55, 0.35);
         }
 
         .logo-box img {
@@ -85,92 +282,126 @@ export default function LogoStrip() {
           object-fit: contain;
           transition: transform 0.3s ease;
         }
-        
+
         .logo-box:hover img {
           transform: scale(1.05);
         }
       `}</style>
 
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
+      <div className="relative z-10 mx-auto max-w-[1440px] px-6 md:px-10 lg:px-14">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "28px",
+            flexWrap: "wrap",
+            gap: "16px",
+          }}
+        >
+          <div style={{ maxWidth: "1040px", flex: "1 1 760px" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                marginBottom: "14px",
+                borderRadius: "999px",
+                border: "1px solid rgba(212,175,55,0.22)",
+                background: "rgba(212,175,55,0.08)",
+                padding: "7px 12px",
+                color: "#9A6B00",
+                fontSize: "0.8rem",
+                fontWeight: 500,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+              }}
+            >
+              Our Recruiting Partners
+            </div>
 
-        {/* Header Section */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "48px", flexWrap: "wrap", gap: "24px" }}>
-          <div style={{ maxWidth: "700px" }}>
-            <h2 style={{ fontSize: "2.4rem", fontWeight: 800, marginBottom: "16px", color: "#0F172A", letterSpacing: "-0.02em" }}>
-              Professional Courses and Placements in the UK
-            </h2>
-            <p style={{ fontSize: "1.05rem", color: "#475569", lineHeight: 1.6 }}>
-              Top-tier training programs designed for individuals looking to upskill, pursue professional courses, and secure prominent placements in the UK.
-            </p>
           </div>
-          <Link href="/courses" className="btn-outline btn-outline-blue" style={{ whiteSpace: "nowrap" }}>
-            View Courses
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+
+          <Link href="/courses" className="btn-outline btn-outline-blue" style={{ whiteSpace: "nowrap", alignSelf: "flex-start", marginTop: "8px" }}>
+            Explore Courses
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
           </Link>
         </div>
-
       </div>
 
-      {/* Scrolling Logos */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "24px", marginBottom: "64px", position: "relative" }}>
-
-        {/* Row 1 - Left scroll */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px", position: "relative" }}>
         <div style={{ display: "flex", overflow: "hidden" }}>
           <div className="scrolling-track-left" aria-hidden="true">
-            {[...companiesRow1, ...companiesRow1].map((src, i) => (
-              <div key={`r1-${i}`} className="logo-box">
-                <Image src={src.src} alt={src.alt} width={148} height={40} loading="lazy" style={{ width: "auto", height: "auto" }} />
-              </div>
+            {legacyTrack.map((partner, i) => (
+              <LogoCard key={`left-${partner.alt}-${i}`} partner={partner} />
             ))}
           </div>
         </div>
 
-        {/* Row 2 - Right scroll */}
         <div style={{ display: "flex", overflow: "hidden" }}>
           <div className="scrolling-track-right" aria-hidden="true">
-            {[...companiesRow2, ...companiesRow2].map((src, i) => (
-              <div key={`r2-${i}`} className="logo-box">
-                <Image src={src.src} alt={src.alt} width={148} height={40} loading="lazy" style={{ width: "auto", height: "auto" }} />
-              </div>
+            {localTrackOne.map((partner, i) => (
+              <LogoCard key={`middle-${partner.alt}-${i}`} partner={partner} />
             ))}
           </div>
         </div>
 
+        <div style={{ display: "flex", overflow: "hidden" }}>
+          <div className="scrolling-track-left" aria-hidden="true">
+            {localTrackTwo.map((partner, i) => (
+              <LogoCard key={`bottom-${partner.alt}-${i}`} partner={partner} />
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
-        {/* Divider with Text */}
-        <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "32px" }}>
-          <div style={{ flex: 1, height: "1px", background: "linear-gradient(to right, transparent, rgba(30,64,175,0.1))" }} />
-          <div style={{ background: "#EFF6FF", color: "#1D4ED8", padding: "6px 20px", borderRadius: "99px", fontSize: "0.9rem", fontWeight: 700, border: "1px solid rgba(29, 78, 216, 0.2)" }}>
-            Curriculum Designed to Propel Your Career
-          </div>
-          <div style={{ flex: 1, height: "1px", background: "linear-gradient(to left, transparent, rgba(30,64,175,0.1))" }} />
+      <div className="mx-auto mt-8 max-w-[1400px] px-6 md:px-10 lg:px-14">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "22px" }}>
+          {placementCards.map((card) => (
+            <StatCard key={card.metric} card={card} />
+          ))}
         </div>
+      </div>
 
-        {/* 4 Feature Cards */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "20px" }}>
-          {[
-            { text: "Immersive learning experience that blends theory with practical application.", icon: <LineChartIcon /> },
-            { text: "Results-driven learning journeys to empower you with the skills for success.", icon: <StarIcon /> },
-            { text: "Learning Pathways tailored to specific roles and career goals.", icon: <CheckCircleIcon /> },
-            { text: "Equip yourself with the skills required to thrive in the future job market.", icon: <LockIcon /> }
-          ].map((item, idx) => (
-            <div key={idx} style={{
-              background: "#FFFFFF",
-              borderRadius: "16px",
-              padding: "24px",
-              display: "flex",
-              gap: "16px",
-              alignItems: "center",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.15)"
-            }}>
-              <div style={{ width: "48px", height: "48px", borderRadius: "10px", background: "#EFF6FF", display: "flex", alignItems: "center", justifyContent: "center", color: "#1D4ED8", flexShrink: 0 }}>
-                {item.icon}
-              </div>
-              <p style={{ color: "#374151", fontSize: "0.9rem", lineHeight: 1.5, margin: 0, fontWeight: 600 }}>
-                {item.text}
-              </p>
+      <div
+        style={{
+          marginTop: "48px",
+          background: "#FFFFFF",
+          borderTop: "1px solid rgba(226, 232, 240, 0.9)",
+          borderBottom: "1px solid rgba(226, 232, 240, 0.9)",
+          boxShadow: "0 18px 35px rgba(15,23,42,0.10)",
+        }}
+      >
+        <div
+          className="mx-auto max-w-[1400px] px-6 md:px-10 lg:px-14"
+          style={{
+            padding: "28px 0",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            gap: "20px",
+          }}
+        >
+          {placementProofs.map(({ icon: Icon, text, color }) => (
+            <div
+              key={text}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                padding: "8px",
+                color: "#1E293B",
+                fontSize: "0.95rem",
+                fontWeight: 800,
+                lineHeight: 1.45,
+                textAlign: "center",
+              }}
+            >
+              <Icon size={18} color={color} fill={text.startsWith("#1") ? color : "none"} strokeWidth={2.5} />
+              <span>{text}</span>
             </div>
           ))}
         </div>
@@ -178,8 +409,3 @@ export default function LogoStrip() {
     </section>
   );
 }
-
-function LineChartIcon() { return <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>; }
-function StarIcon() { return <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>; }
-function CheckCircleIcon() { return <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>; }
-function LockIcon() { return <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>; }
