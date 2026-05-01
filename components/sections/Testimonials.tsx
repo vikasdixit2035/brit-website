@@ -135,11 +135,10 @@ function LearnerCard({
 }) {
   return (
     <article
-      className={`relative w-[330px] md:w-[390px] flex-none overflow-hidden rounded-2xl border p-6 shadow-xl transition-transform duration-300 hover:-translate-y-2 ${
-        featured
+      className={`relative w-[330px] md:w-[390px] flex-none overflow-hidden rounded-2xl border p-6 shadow-xl transition-transform duration-300 hover:-translate-y-2 ${featured
           ? "border-blue-400/30 bg-gradient-to-br from-blue-500/15 via-[#1A1D24] to-teal-400/10"
           : "border-gray-800 bg-[#1A1D24]"
-      }`}
+        }`}
     >
       <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-blue-500/10 blur-2xl" />
       <div className="absolute -bottom-16 -left-16 h-40 w-40 rounded-full bg-teal-400/10 blur-3xl" />
@@ -191,7 +190,7 @@ export default function Testimonials() {
   return (
     <section
       id="proof"
-      className="w-full overflow-hidden bg-[#0F1218] py-24 font-sans"
+      className="w-full overflow-hidden bg-[#0F1218]  font-sans"
       ref={revealRef}
     >
       <style>{`
