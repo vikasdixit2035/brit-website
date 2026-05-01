@@ -33,7 +33,7 @@ export default function Solution() {
     <section
       id="solution"
       ref={revealRef}
-      className="relative py-24 bg-[var(--blue-deep)] overflow-hidden"
+      className="relative py-16 bg-[var(--blue-deep)] overflow-hidden"
     >
       {/* Background decorations */}
       <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -42,7 +42,7 @@ export default function Solution() {
 
       <div className={`relative z-10 max-w-[1100px] mx-auto px-6 ${cls}`}>
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-6">
           <h2 className="text-[clamp(2rem,3.5vw,2.8rem)] font-extrabold tracking-tight text-[var(--white)] mb-4 leading-[1.15]">
             A Structured Path to a{" "}
             <span className="bg-gradient-to-br from-[var(--gold-400)] to-[var(--gold-300)] bg-clip-text text-transparent">
