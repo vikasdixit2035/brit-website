@@ -44,8 +44,8 @@ export async function generateMetadata(): Promise<Metadata> {
     description: siteDescription,
     applicationName: siteConfig.siteName,
     icons: {
-      icon: "/britinstitute.png",
-      apple: "/britinstitute.png",
+      icon: "/britinstitute_v1.png",
+      apple: "/britinstitute_v1.png",
     },
     manifest: "/site.webmanifest",
     keywords: [

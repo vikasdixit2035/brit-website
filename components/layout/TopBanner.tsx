@@ -91,33 +91,46 @@ export default function TopBanner({ visible, onClose }: TopBannerProps) {
         .banner-bar {
           background: ${BRAND_BLUE};
           width: 100%;
-          height: 40px;
+          min-height: 40px;
+          padding: 6px 0;
           display: flex;
           align-items: center;
           justify-content: center; /* Centered content */
           position: relative;
+          overflow: hidden;
         }
         .banner-content {
           display: flex;
           align-items: center;
+          justify-content: center;
           gap: 24px;
-          padding: 0 20px;
+          padding: 0 64px 0 20px;
+          max-width: 100%;
+          min-width: 0;
+          flex-wrap: nowrap;
         }
         .banner-item {
           display: flex;
           align-items: center;
           gap: 8px;
+          min-width: 0;
         }
         .banner-text-bold {
           color: #ffffff;
           font-weight: 700;
           font-size: 0.9rem;
           letter-spacing: -0.01em;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .banner-text-medium {
           color: #ffffff;
           font-weight: 500;
           font-size: 0.9rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .banner-cta-btn {
           background: ${BRAND_GOLD};
@@ -130,6 +143,8 @@ export default function TopBanner({ visible, onClose }: TopBannerProps) {
           cursor: pointer;
           text-decoration: none;
           transition: background 0.2s;
+          white-space: nowrap;
+          flex-shrink: 0;
         }
         .banner-cta-btn:hover {
           background: #facc15;
@@ -157,25 +172,49 @@ export default function TopBanner({ visible, onClose }: TopBannerProps) {
         }
 
         /* --- Responsive Top Banner --- */
-        @media (max-width: 768px) {
+        @media (max-width: 980px) {
           .banner-cohort-item {
             display: none !important;
           }
           .banner-content {
             gap: 12px;
+            padding-right: 56px;
           }
         }
-        @media (max-width: 480px) {
-          .banner-text-bold {
-            font-size: 0.75rem;
-          }
-          .banner-cta-btn {
-            padding: 4px 10px;
-            font-size: 0.75rem;
+        @media (max-width: 560px) {
+          .banner-bar {
+            min-height: 48px;
           }
           .banner-content {
             gap: 8px;
-            padding-right: 40px; /* Space for absolute close button */
+            padding: 0 48px 0 12px;
+          }
+          .banner-text-bold,
+          .banner-text-medium {
+            font-size: 0.72rem;
+          }
+          .banner-cta-btn {
+            padding: 4px 10px;
+            font-size: 0.72rem;
+            border-radius: 5px;
+          }
+          .banner-close-btn {
+            right: 10px;
+          }
+          .header-spacer {
+            height: 48px;
+          }
+        }
+        @media (max-width: 480px) {
+          .banner-content {
+            gap: 6px;
+            padding-right: 44px; /* Space for absolute close button */
+          }
+          .banner-bar {
+            min-height: 52px;
+          }
+          .header-spacer {
+            height: 52px;
           }
         }
 

@@ -120,7 +120,7 @@ export function organizationSchema() {
     "@type": "Organization",
     name: SITE_NAME,
     url: SITE_URL,
-    logo: absoluteUrl("/britinstitute.png"),
+    logo: absoluteUrl("/britinstitute_v1.png"),
     email: "info@britinstitute.uk",
     address: {
       "@type": "PostalAddress",
@@ -152,7 +152,7 @@ export function organizationSchemaForSite(siteConfig: SiteConfig) {
     "@type": "Organization",
     name: siteConfig.siteName,
     url: siteConfig.siteUrl,
-    logo: getAbsoluteUrl("/britinstitute.png", siteConfig),
+    logo: getAbsoluteUrl("/britinstitute_v1.png", siteConfig),
     email: SITE_EMAIL,
     address: {
       "@type": "PostalAddress",
@@ -380,7 +380,7 @@ export function educationalOrganizationSchema() {
     "@type": "EducationalOrganization",
     name: SITE_NAME,
     url: SITE_URL,
-    logo: absoluteUrl("/britinstitute.png"),
+    logo: absoluteUrl("/britinstitute_v1.png"),
     email: SITE_EMAIL,
     telephone: SITE_PHONE_UK,
     description:

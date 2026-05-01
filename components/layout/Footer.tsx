@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="footer-grid">
         <div className="footer-brand">
           <div className="f-logo" style={{ color: 'var(--blue-900)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Image src="/britinstitute.png" alt="Brit Institute logo" width={24} height={24} style={{ width: '24px', height: '24px', borderRadius: '4px' }} />
+            <Image src="/britinstitute_v1.png" alt="Brit Institute logo" width={24} height={24} style={{ width: '24px', height: '24px', borderRadius: '4px' }} />
             Brit Institute
           </div>
           <p style={{ color: 'var(--gray-500)' }}>Industry-led AI & Data Analytics programs, designed for the UK job market.</p>

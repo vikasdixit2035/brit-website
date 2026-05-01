@@ -585,7 +585,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
 
             {/* Logo */}
             <Link href="/" className="logo-text" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0, gap: "12px" }}>
-              <Image src="/britinstitute.png" alt="Brit Institute logo" className="logo-img" width={45} height={45} style={{ width: "45px", height: "45px" }} />
+              <Image src="/britinstitute_v1.png" alt="Brit Institute logo" className="logo-img" width={45} height={45} style={{ width: "45px", height: "45px" }} />
               <span style={{ fontSize: "1.5rem", fontWeight: 800, color: BRAND_BLUE, letterSpacing: "-0.02em" }}>
                 Brit <span style={{ color: BRAND_GOLD }}>Institute</span>
               </span>
@@ -736,7 +736,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
             {/* Header */}
             <div className="drawer-header">
               <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", gap: "10px" }} onClick={closeMenu}>
-                <Image src="/britinstitute.png" alt="Brit Institute logo" width={36} height={36} style={{ width: "36px", height: "36px" }} />
+                <Image src="/britinstitute_v1.png" alt="Brit Institute logo" width={36} height={36} style={{ width: "36px", height: "36px" }} />
                 <span style={{ fontSize: "1.2rem", fontWeight: 800, color: BRAND_BLUE }}>
                   Brit <span style={{ color: BRAND_GOLD }}>Institute</span>
                 </span>
