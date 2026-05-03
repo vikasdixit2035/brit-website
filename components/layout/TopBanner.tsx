@@ -21,7 +21,7 @@ function getOrdinal(day: number) {
 
 function getClosingDate() {
   const date = new Date();
-  date.setDate(date.getDate() + 2);
+  date.setDate(date.getDate() + 3);
 
   const day = date.getDate();
   const month = date.toLocaleDateString("en-GB", { month: "long" });
