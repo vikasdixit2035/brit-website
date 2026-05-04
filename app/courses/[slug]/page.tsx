@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  Download, Eye, ChevronRight, CheckCircle2, Briefcase,
+  Eye, ChevronRight, CheckCircle2, Briefcase,
   Clock, Layers, ArrowRight, Check, MonitorPlay, Zap,
   TrendingUp, Target, Users, BookOpen, Terminal, Sparkles, Quote
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import BrochureDownloadButton from "./BrochureDownloadButton";
 import CourseLeadForm from "./CourseLeadForm";
 import CourseInvestmentTracker from "./CourseInvestmentTracker";
 import { coursesData } from "./courseData";
@@ -291,13 +292,12 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row items-center gap-4">
-                <a
-                  href={BROCHURE_HREF}
-                  download={BROCHURE_DOWNLOAD_NAME}
-                  className="w-full sm:w-auto px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-bold text-[15px] transition-all flex items-center justify-center gap-2 shadow-lg shadow-purple-200"
-                >
-                  Download Brochure <Download className="w-4 h-4" />
-                </a>
+                <BrochureDownloadButton
+                  brochureHref={BROCHURE_HREF}
+                  downloadName={BROCHURE_DOWNLOAD_NAME}
+                  courseTitle={course.title}
+                  variant="primary"
+                />
                 <button className="w-full sm:w-auto px-8 py-4 bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-900 rounded-xl font-bold text-[15px] transition-all flex items-center justify-center gap-2">
                   <Eye className="w-4 h-4" /> View Schedules
                 </button>
@@ -312,13 +312,11 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                 <button className="w-full sm:w-auto px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white rounded-xl font-bold text-[16px] transition-all shadow-md flex items-center justify-center gap-2 hover:-translate-y-0.5">
                   Apply Now <ArrowRight className="w-5 h-5" />
                 </button>
-                <a
-                  href={BROCHURE_HREF}
-                  download={BROCHURE_DOWNLOAD_NAME}
-                  className="w-full sm:w-auto px-8 py-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-900 rounded-xl font-bold text-[16px] transition-all shadow-sm flex items-center justify-center gap-2 hover:-translate-y-0.5"
-                >
-                  Download Brochure <Download className="w-5 h-5 text-gray-500" />
-                </a>
+                <BrochureDownloadButton
+                  brochureHref={BROCHURE_HREF}
+                  downloadName={BROCHURE_DOWNLOAD_NAME}
+                  courseTitle={course.title}
+                />
               </div>
 
               {/* Career Outcomes - Elevated Cards */}
