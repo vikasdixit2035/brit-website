@@ -52,12 +52,12 @@ export interface CourseSeoData {
 
 export const coursesData: Record<string, CourseSeoData> = {
   "data-analytics": {
-    h1: "Data Analytics Course in the UK with Generative AI",
+    h1: "Data Analyst and Gen AI certification program",
     subheadline: "Master SQL, Power BI, Tableau, dashboards, and AI tools through a practical data analytics course built for UK data analyst roles.",
     cohort: "Starting Soon",
     duration: "6 months",
     canonicalPath: "/courses/data-analytics",
-    seoTitle: "Data Analytics Course UK with Gen AI",
+    seoTitle: "Data Analyst and Gen AI certification program",
     seoDescription: "Join Brit Institute's practical data analytics course in the UK. Learn Excel, SQL, Power BI, Tableau, Python basics, Gen AI workflows, projects, and career support.",
     ogImage: "/hero-illustration.png",
     updatedAt: "2026-04-13",
@@ -133,12 +133,12 @@ export const coursesData: Record<string, CourseSeoData> = {
     }
   },
   "data-science": {
-    h1: "Data Science Course in the UK with Machine Learning",
+    h1: "Data Science & Machine Learning Certification Program",
     subheadline: "Build real-world machine learning models and become job-ready for data science roles in the UK.",
     cohort: "Starting Soon",
     duration: "12 months",
     canonicalPath: "/courses/data-science",
-    seoTitle: "Data Science Course in the UK",
+    seoTitle: "Data Science & Machine Learning Certification Program",
     seoDescription: "Learn machine learning, Python, model deployment, and portfolio-building through Brit Institute's data science course in the UK.",
     ogImage: "/hero-illustration.png",
     updatedAt: "2026-04-13",
@@ -214,12 +214,12 @@ export const coursesData: Record<string, CourseSeoData> = {
     }
   },
   "ai-automation": {
-    h1: "Agentic AI Course in the UK with Real-World Applications",
+    h1: "Agentic AI Certification Program",
     subheadline: "Learn agentic AI tools and automation systems to build intelligent workflows and future-ready careers.",
     cohort: "Starting Soon",
     duration: "4 months",
     canonicalPath: "/courses/ai-automation",
-    seoTitle: "Agentic AI Course in the UK",
+    seoTitle: "Agentic AI Certification Program",
     seoDescription: "Discover Brit Institute's practical agentic AI course in the UK focused on tools, workflows, automation systems, and career-ready projects.",
     ogImage: "/hero-illustration.png",
     updatedAt: "2026-04-13",
@@ -295,12 +295,12 @@ export const coursesData: Record<string, CourseSeoData> = {
     }
   },
   "gen-ai": {
-    h1: "Generative AI in the UK for Practical Business Use Cases",
+    h1: "Generative AI Certificaation Program",
     subheadline: "Learn prompting, copilots, and real-world generative AI workflows you can use across business, operations, and content roles.",
     cohort: "Starting Soon",
     duration: "3 months",
     canonicalPath: "/courses/gen-ai",
-    seoTitle: "Generative AI in the UK",
+    seoTitle: "Generative AI Certificaation Program",
     seoDescription: "Explore Brit Institute's practical Generative AI in the UK covering prompting, copilots, AI workflows, and business-ready applications.",
     ogImage: "/hero-illustration.png",
     updatedAt: "2026-04-16",

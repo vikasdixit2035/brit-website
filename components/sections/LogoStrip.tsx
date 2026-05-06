@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
-import { Briefcase, Building2, Rocket, Star, TrendingUp, Trophy, Users, Zap } from "lucide-react";
+import { Briefcase, Building2, CircleDollarSign, Rocket, Star, TrendingUp, Trophy, Users, Zap } from "lucide-react";
 import useReveal from "@/hooks/useReveal";
 
 type PartnerLogo = {
@@ -154,6 +154,13 @@ const placementCards: PlacementCard[] = [
     background: "#FFF7ED",
     iconColor: "#EA580C",
   },
+  {
+    icon: CircleDollarSign,
+    metric: "150%",
+    label: "Average Salary Hike",
+    background: "#F0FDFA",
+    iconColor: "#0D9488",
+  },
 ];
 
 const placementProofs: { icon: LucideIcon; text: string; color: string }[] = [
@@ -212,15 +219,30 @@ export default function LogoStrip() {
   return (
     <section
       ref={revealRef}
-      style={{
-        background: "linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)",
-        padding: "48px 0 36px",
-        color: "#0F172A",
-        fontFamily: "var(--font-inter), sans-serif",
-        overflow: "hidden",
-      }}
+      className="relative overflow-hidden bg-[#F8FAFC] py-12 font-sans text-slate-900"
     >
       <style>{`
+        .logo-marquee-wrap::before,
+        .logo-marquee-wrap::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          z-index: 2;
+          width: min(12vw, 150px);
+          height: 100%;
+          pointer-events: none;
+        }
+
+        .logo-marquee-wrap::before {
+          left: 0;
+          background: linear-gradient(90deg, #F8FAFC 0%, rgba(248, 250, 252, 0) 100%);
+        }
+
+        .logo-marquee-wrap::after {
+          right: 0;
+          background: linear-gradient(270deg, #F8FAFC 0%, rgba(248, 250, 252, 0) 100%);
+        }
+
         .scrolling-track-left,
         .scrolling-track-right {
           display: flex;
@@ -254,16 +276,16 @@ export default function LogoStrip() {
         .logo-box {
           background: rgba(255, 255, 255, 0.9);
           border: 1px solid rgba(148, 163, 184, 0.18);
-          border-radius: 16px;
-          height: 64px;
-          width: 176px;
+          border-radius: 12px;
+          height: 58px;
+          width: 166px;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 0 10px;
+          margin: 0 8px;
           padding: 12px 14px;
           flex-shrink: 0;
-          box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+          box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
           backdrop-filter: blur(8px);
           transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
@@ -288,51 +310,26 @@ export default function LogoStrip() {
         }
       `}</style>
 
-      <div className="relative z-10 mx-auto max-w-[1440px] px-6 md:px-10 lg:px-14">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: "28px",
-            flexWrap: "wrap",
-            gap: "16px",
-          }}
-        >
-          <div style={{ maxWidth: "1040px", flex: "1 1 760px" }}>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                marginBottom: "14px",
-                borderRadius: "999px",
-                border: "1px solid rgba(212,175,55,0.22)",
-                background: "rgba(212,175,55,0.08)",
-                padding: "7px 12px",
-                color: "#9A6B00",
-                fontSize: "0.8rem",
-                fontWeight: 500,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-              }}
-            >
-              Our Recruiting Partners
-            </div>
-
-          </div>
-
-          <Link href="/courses" className="btn-outline btn-outline-blue" style={{ whiteSpace: "nowrap", alignSelf: "flex-start", marginTop: "8px" }}>
-            Explore Courses
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </Link>
+      <div className="relative z-10 mx-auto mb-7 flex max-w-[1400px] flex-col gap-5 px-6 md:px-10 lg:flex-row lg:items-end lg:justify-between lg:px-14">
+        <div className="max-w-2xl">
+          <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.24em] text-[var(--gold-700)]">
+            Recruiting Partners
+          </p>
+          <h2 className="text-2xl font-black tracking-tight text-slate-950 md:text-4xl">
+            Learners prepare for teams already hiring these skills.
+          </h2>
         </div>
+
+        <Link href="/courses" className="btn-outline btn-outline-blue w-max whitespace-nowrap">
+          Explore Courses
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </Link>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "10px", position: "relative" }}>
+      <div className="logo-marquee-wrap relative flex flex-col gap-4">
         <div style={{ display: "flex", overflow: "hidden" }}>
           <div className="scrolling-track-left" aria-hidden="true">
             {legacyTrack.map((partner, i) => (
@@ -359,7 +356,7 @@ export default function LogoStrip() {
       </div>
 
       <div className="mx-auto mt-8 max-w-[1400px] px-6 md:px-10 lg:px-14">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "22px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "16px" }}>
           {placementCards.map((card) => (
             <StatCard key={card.metric} card={card} />
           ))}
@@ -368,11 +365,11 @@ export default function LogoStrip() {
 
       <div
         style={{
-          marginTop: "48px",
+          marginTop: "30px",
           background: "#FFFFFF",
           borderTop: "1px solid rgba(226, 232, 240, 0.9)",
           borderBottom: "1px solid rgba(226, 232, 240, 0.9)",
-          boxShadow: "0 18px 35px rgba(15,23,42,0.10)",
+          boxShadow: "0 14px 28px rgba(15,23,42,0.06)",
         }}
       >
         <div

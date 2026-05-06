@@ -70,7 +70,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     relatedSlugs: ["data-analyst-salary-uk-2026", "data-analyst-vs-data-scientist", "best-ai-tools-data-analysts-2026"],
     midCta: {
       heading: "Start Your Data Analytics Career Today",
-      text: "Explore a job-ready Data Analytics Course with Generative AI designed for UK career transitions.",
+      text: "Explore a job-ready Data Analyst and Gen AI certification program designed for UK career transitions.",
       primaryLabel: "View Programme",
       primaryHref: "/courses",
     },

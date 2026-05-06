@@ -16,10 +16,10 @@ export default function Footer() {
         <div className="f-col">
           <h4 style={{ color: 'var(--blue-900)' }}>Programs</h4>
           <ul>
-            <li><Link href="/courses/data-analytics" style={{ color: 'var(--gray-500)' }}>Data Analytics with Gen AI</Link></li>
-            <li><Link href="/courses/data-science" style={{ color: 'var(--gray-500)' }}>Data Science &amp; Machine Learning</Link></li>
-            <li><Link href="/courses/ai-automation" style={{ color: 'var(--gray-500)' }}>Agentic AI</Link></li>
-            <li><Link href="/courses/gen-ai" style={{ color: 'var(--gray-500)' }}>Gen AI</Link></li>
+            <li><Link href="/courses/data-analytics" style={{ color: 'var(--gray-500)' }}>Data Analyst and Gen AI certification program</Link></li>
+            <li><Link href="/courses/data-science" style={{ color: 'var(--gray-500)' }}>Data Science &amp; Machine Learning Certification Program</Link></li>
+            <li><Link href="/courses/ai-automation" style={{ color: 'var(--gray-500)' }}>Agentic AI Certification Program</Link></li>
+            <li><Link href="/courses/gen-ai" style={{ color: 'var(--gray-500)' }}>Generative AI Certificaation Program</Link></li>
             <li><Link href="/courses" style={{ color: 'var(--blue-600)', fontWeight: 500 }}>View All Courses</Link></li>
           </ul>
         </div>

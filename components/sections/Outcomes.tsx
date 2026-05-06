@@ -113,7 +113,7 @@ export default function Programs() {
   return (
     <section
       id="outcomes"
-      className="w-full bg-[#0F1218] py-24 font-sans overflow-hidden"
+      className="w-full bg-[#0F1218] pt-24 pb-12 font-sans overflow-hidden"
       ref={revealRef}
     >
       {/* Marquee animation styles */}
@@ -159,7 +159,7 @@ export default function Programs() {
 
           {/* Scrolling track */}
           <div
-            className={`flex flex-nowrap gap-6 pb-12 pt-4 px-6 ${loading || courses.length === 0 ? "" : "animate-marquee"
+            className={`flex flex-nowrap gap-6 pb-6 pt-4 px-6 ${loading || courses.length === 0 ? "" : "animate-marquee"
               }`}
           >
             {loading ? (

@@ -76,12 +76,12 @@ export const dataAnalyticsFaqItems: FaqItem[] = [
   {
     question: "What is the best data analytics course in the UK for beginners?",
     answer:
-      "Brit Institute offers a beginner-friendly Data Analytics with Generative AI programme that covers Excel, SQL, Power BI, Tableau, and Python from scratch. It includes hands-on projects and end-to-end career support tailored for the UK job market.",
+      "Brit Institute offers a beginner-friendly Data Analyst and Gen AI certification program that covers Excel, SQL, Power BI, Tableau, and Python from scratch. It includes hands-on projects and end-to-end career support tailored for the UK job market.",
   },
   {
     question: "How long is the data analytics course at Brit Institute?",
     answer:
-      "The Data Analytics with Generative AI programme is 6 months long, with live online classes, recorded sessions, and mentored projects throughout.",
+      "The Data Analyst and Gen AI certification program is 6 months long, with live online classes, recorded sessions, and mentored projects throughout.",
   },
   {
     question: "What salary can I expect after completing a data analytics course in the UK?",
@@ -106,7 +106,7 @@ export const dataAnalyticsFaqItems: FaqItem[] = [
   {
     question: "How much does the data analytics course cost in the UK?",
     answer:
-      "The Data Analytics with Generative AI programme is priced at £3,499. EMI payment options are available, and eligible learners may qualify for Pay After Placement arrangements.",
+      "The Data Analyst and Gen AI certification program is priced at £3,499. EMI payment options are available, and eligible learners may qualify for Pay After Placement arrangements.",
   },
 ];
 

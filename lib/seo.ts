@@ -411,7 +411,7 @@ export function educationalOrganizationSchema() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Course",
-            name: "Data Analytics with Generative AI",
+            name: "Data Analyst and Gen AI certification program",
             url: absoluteUrl("/courses/data-analytics"),
             description:
               "Master SQL, Power BI, Tableau, and AI tools to become a job-ready data analyst in the UK.",
@@ -421,7 +421,7 @@ export function educationalOrganizationSchema() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Course",
-            name: "Data Science with Machine Learning",
+            name: "Data Science & Machine Learning Certification Program",
             url: absoluteUrl("/courses/data-science"),
             description:
               "Build real-world machine learning models and launch a data science career in the UK.",
@@ -431,7 +431,7 @@ export function educationalOrganizationSchema() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Course",
-            name: "Agentic AI Automation",
+            name: "Agentic AI Certification Program",
             url: absoluteUrl("/courses/ai-automation"),
             description:
               "Learn agentic AI tools and automation systems to build intelligent workflows in the UK.",
@@ -441,7 +441,7 @@ export function educationalOrganizationSchema() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Course",
-            name: "Generative AI for Business",
+            name: "Generative AI Certificaation Program",
             url: absoluteUrl("/courses/gen-ai"),
             description:
               "Practical generative AI prompting, copilots, and workflow automation for UK professionals.",

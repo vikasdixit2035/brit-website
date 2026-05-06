@@ -32,7 +32,7 @@ export default async function CoursesPage() {
             Explore Career-Focused Programmes
           </p>
           <h1 className="mb-5 text-4xl font-extrabold tracking-tight md:text-5xl">
-            Data Analytics with Gen AI, Data Science, Agentic AI, and Generative AI
+            Generative AI, Data Analyst and Gen AI, Data Science & Machine Learning, and Agentic AI Certification Programs
           </h1>
           <p className="text-lg leading-8 text-slate-600">
             Compare practical programmes built to help learners develop portfolio-ready skills, understand real tools, and prepare for career transitions.

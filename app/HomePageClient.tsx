@@ -14,6 +14,17 @@ import Outcomes from "@/components/sections/Outcomes";
 import Testimonials from "@/components/sections/Testimonials";
 import IndustryExperts from "@/components/sections/IndustryExperts";
 import Programs from "@/components/sections/Programs";
+import CurriculumSection from "@/components/sections/CurriculumSection";
+import Projects from "@/components/sections/Projects";
+import NextCohort from "@/components/sections/NextCohort";
+import {
+  AboutTrust,
+  BenefitsGrid,
+  BlogAndContact,
+  CareerOutcomes,
+  CertificateAndChooser,
+  PlacementJourney,
+} from "@/components/sections/EngagementSections";
 import FinalCTA from "@/components/sections/FinalCTA";
 import FAQ from "@/components/sections/FAQ";
 import StickyForm from "@/components/sections/StickyForm";
@@ -31,14 +42,29 @@ export default function Home() {
       {/* Recruiting partners */}
       <LogoStrip />
 
+      {/* Brand trust */}
+      <AboutTrust />
+
       {/* 2. Pain Points */}
       <PainPoints />
 
       {/* 3. Solution */}
       <Solution />
 
+      {/* What learners get */}
+      <BenefitsGrid />
+
       {/* 4. Outcomes */}
       <Outcomes />
+
+      {/* Career outcomes and salary clarity */}
+      <CareerOutcomes />
+
+      {/* Curriculum preview */}
+      <CurriculumSection />
+
+      {/* Portfolio projects */}
+      <Projects />
 
       {/* 5. Proof (Testimonials) */}
       <Testimonials />
@@ -46,8 +72,20 @@ export default function Home() {
       {/* 6. Industry Experts */}
       <IndustryExperts />
 
+      {/* Placement journey */}
+      <PlacementJourney />
+
       {/* 7. Programme Snapshot */}
       <Programs />
+
+      {/* Certificate and course chooser */}
+      <CertificateAndChooser />
+
+      {/* Cohort urgency */}
+      <NextCohort />
+
+      {/* Blog and contact */}
+      <BlogAndContact />
 
       {/* 8. Final CTA */}
       <FinalCTA />
