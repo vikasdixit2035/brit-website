@@ -3,32 +3,7 @@
 // --- Configuration & Helpers ---
 const BRAND_BLUE = "#1D4ED8";
 const BRAND_GOLD = "#D4AF37";
-
-function getOrdinal(day: number) {
-  if (day > 3 && day < 21) return "th";
-
-  switch (day % 10) {
-    case 1:
-      return "st";
-    case 2:
-      return "nd";
-    case 3:
-      return "rd";
-    default:
-      return "th";
-  }
-}
-
-function getClosingDate() {
-  const date = new Date();
-  date.setDate(date.getDate() + 3);
-
-  const day = date.getDate();
-  const month = date.toLocaleDateString("en-GB", { month: "long" });
-  const year = date.getFullYear();
-
-  return `${day}${getOrdinal(day)} ${month} ${year}`;
-}
+const WEBINAR_DATE = "16th May 2026";
 
 // --- Private Helper Icons for Top Banner ---
 // Paper plane / Send style icon from image
@@ -63,8 +38,6 @@ interface TopBannerProps {
 }
 
 export default function TopBanner({ visible, onClose }: TopBannerProps) {
-  const closingDate = getClosingDate();
-
   if (!visible) return null;
 
   return (
@@ -232,17 +205,17 @@ export default function TopBanner({ visible, onClose }: TopBannerProps) {
               {/* Send icon + Text */}
               <div className="banner-item">
                 <BannerSendIcon fill="#ffffff" />
-                <span className="banner-text-bold">Limited Seats for Upcoming Cohort</span>
+                <span className="banner-text-bold">Free Live Webinar: Data, AI and Automation Careers</span>
               </div>
 
               {/* Stopwatch + Text */}
               <div className="banner-item banner-cohort-item">
                 <BannerStopwatchIcon fill="#ffffff" />
-                <span className="banner-text-medium">Applications Closing: {closingDate || "Calculating..."}</span>
+                <span className="banner-text-medium">Webinar Date: {WEBINAR_DATE}</span>
               </div>
 
               {/* Button */}
-              <a href="/contact" className="banner-cta-btn">Book Free Consultation</a>
+              <a href="/webinar" className="banner-cta-btn">Register Now</a>
             </div>
 
             <button className="banner-close-btn" onClick={onClose} aria-label="Close banner">

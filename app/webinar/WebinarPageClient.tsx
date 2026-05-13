@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect, useRef, FormEvent } from "react";
 import TopBanner from "@/components/layout/TopBanner";
 import Navbar from "@/components/layout/Navbar";
@@ -14,11 +15,11 @@ const GOLD = "#D4AF37";
 const DEEP = "#0a0f1e";
 
 /* ── webinar date (update as needed) ── */
-const WEBINAR_DATE = "Coming Soon";
-const WEBINAR_TIME = "Coming Soon";
+const WEBINAR_DATE = "16 May 2026";
+const WEBINAR_TIME = "1 PM BST";
 const SPEAKER_NAME = "Alok Pandey";
 const SPEAKER_TITLE = "Senior Data Analyst @ Stryker";
-const SPEAKER_AVATAR = "AP";
+const SPEAKER_PHOTO = "/mentor1.jpeg";
 const SPEAKER_BIO_POINTS = [
   "7 years of experience in data and analytics",
   "Focused on supply chain analytics and process optimization",
@@ -288,6 +289,8 @@ export default function WebinarPage() {
           margin: 0 auto 18px;
           border: 3px solid rgba(255,255,255,.15);
           font-size: 2rem; color: #fff; font-weight: 700;
+          position: relative; overflow: hidden;
+          box-shadow: 0 10px 30px rgba(0,0,0,.22);
         }
         .wb-hero-card-name {
           font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0 0 4px;
@@ -370,7 +373,7 @@ export default function WebinarPage() {
           display: flex; align-items: center; justify-content: center;
           font-size: 3.2rem; color: #fff; font-weight: 800;
           box-shadow: 0 8px 32px rgba(29,78,216,.2);
-          position: relative;
+          position: relative; overflow: hidden;
         }
         .wb-speaker-avatar::after {
           content: ''; position: absolute; inset: -4px;
@@ -619,7 +622,16 @@ export default function WebinarPage() {
           <div className="wb-hero-right">
             <div className="wb-hero-card">
               <div className="wb-hero-card-label">Your Speaker</div>
-              <div className="wb-hero-card-avatar">{SPEAKER_AVATAR}</div>
+              <div className="wb-hero-card-avatar">
+                <Image
+                  src={SPEAKER_PHOTO}
+                  alt={SPEAKER_NAME}
+                  fill
+                  sizes="88px"
+                  style={{ objectFit: "cover" }}
+                  priority
+                />
+              </div>
               <p className="wb-hero-card-name">{SPEAKER_NAME}</p>
               <p className="wb-hero-card-role">{SPEAKER_TITLE}</p>
               <div className="wb-hero-card-stats">
@@ -677,7 +689,15 @@ export default function WebinarPage() {
           </div>
 
           <div className={`wb-speaker-wrap wb-fade-up ${speakerVisible ? "wb-vis" : ""}`}>
-            <div className="wb-speaker-avatar">{SPEAKER_AVATAR}</div>
+            <div className="wb-speaker-avatar">
+              <Image
+                src={SPEAKER_PHOTO}
+                alt={SPEAKER_NAME}
+                fill
+                sizes="140px"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
             <div className="wb-speaker-info">
               <h3>{SPEAKER_NAME}</h3>
               <p className="wb-sp-role">{SPEAKER_TITLE}</p>
