@@ -54,6 +54,7 @@ export default function Footer() {
           <Link href="/terms" style={{ color: 'inherit', textDecoration: 'none', fontWeight: 500 }}>Terms & Conditions</Link>
         </div>
         <span style={{ fontSize: '0.9rem' }}>© {new Date().getFullYear()} Brit Institute. All rights reserved.</span>
+        <span style={{ fontSize: '0.85rem' }}>Brit Institute is a subsidiary of Learnify Ops.</span>
       </div>
     </footer>
   );
