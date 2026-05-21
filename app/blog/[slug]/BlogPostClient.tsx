@@ -13,6 +13,29 @@ const BLUE = "#1D4ED8";
 const GOLD = "#D4AF37";
 const DEEP = "#0a0f1e";
 
+const COURSE_LINKS: Record<string, { title: string; href: string; description: string }> = {
+  "data-analytics": {
+    title: "Data Analyst and Gen AI certification program",
+    href: "/courses/data-analytics",
+    description: "Build SQL, Power BI, Tableau, Python basics, and AI workflow skills for UK data analyst roles.",
+  },
+  "data-science": {
+    title: "Data Science & Machine Learning Certification Program",
+    href: "/courses/data-science",
+    description: "Move into Python, statistics, machine learning, and portfolio projects for data science careers.",
+  },
+  "ai-automation": {
+    title: "Agentic AI Certification Program",
+    href: "/courses/ai-automation",
+    description: "Learn practical AI automation systems, tools, and workflows for emerging AI specialist roles.",
+  },
+  "gen-ai": {
+    title: "Generative AI Certification Program",
+    href: "/courses/gen-ai",
+    description: "Master Gen AI tools and prompt-driven workflows for modern business and analytics work.",
+  },
+};
+
 /* ── reveal hook ── */
 function useReveal(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -267,6 +290,9 @@ export default function BlogPostPage() {
   }
 
   const related = getRelated(article);
+  const relatedCourses = (article.relatedCourseSlugs ?? [])
+    .map((courseSlug) => COURSE_LINKS[courseSlug])
+    .filter((course): course is (typeof COURSE_LINKS)[string] => Boolean(course));
 
   /* split content at midpoint for mid-CTA injection */
   const contentSections = article.content.split(/\n(?=## )/);
@@ -331,6 +357,42 @@ export default function BlogPostPage() {
         }
         .bp-content ul, .bp-content ol {
           padding-left: 20px; margin: 8px 0 16px;
+        }
+
+        /* course links */
+        .bp-course-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+          gap: 16px;
+        }
+        .bp-course-card {
+          display: flex; flex-direction: column; gap: 10px;
+          min-height: 190px;
+          background: #fff; border-radius: 16px; padding: 24px;
+          border: 1px solid rgba(29,78,216,.14);
+          box-shadow: 0 8px 30px rgba(29,78,216,.06);
+          color: inherit; text-decoration: none;
+          transition: transform .3s, border-color .3s, box-shadow .3s;
+        }
+        .bp-course-card:hover {
+          transform: translateY(-4px);
+          border-color: ${BLUE};
+          box-shadow: 0 14px 36px rgba(29,78,216,.12);
+        }
+        .bp-course-label {
+          color: ${BLUE}; font-size: .72rem; font-weight: 800;
+          text-transform: uppercase; letter-spacing: .08em;
+        }
+        .bp-course-title {
+          color: #111827; font-size: 1rem; font-weight: 800;
+          line-height: 1.35; margin: 0;
+        }
+        .bp-course-desc {
+          color: #6B7280; font-size: .88rem; line-height: 1.6;
+          margin: 0; flex: 1;
+        }
+        .bp-course-action {
+          color: ${BLUE}; font-size: .85rem; font-weight: 800;
         }
 
         /* related */
@@ -442,6 +504,32 @@ export default function BlogPostPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               {article.faqs.map((faq, i) => (
                 <FAQItem key={i} question={faq.question} answer={faq.answer} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── COURSE LINKS ── */}
+      {relatedCourses.length > 0 && (
+        <section style={{ paddingBottom: 64 }}>
+          <div style={{ maxWidth: 860, margin: "0 auto", padding: "0 24px" }}>
+            <div style={{ textAlign: "center", marginBottom: 28 }}>
+              <h2 style={{ fontSize: "1.5rem", fontWeight: 800, color: "#111827", margin: "0 0 8px" }}>
+                Recommended <span style={{ color: BLUE }}>Programmes</span>
+              </h2>
+              <p style={{ color: "#6B7280", fontSize: ".95rem", lineHeight: 1.6, margin: "0 auto", maxWidth: 560 }}>
+                Continue from this guide into a structured Brit Institute course built around UK career outcomes.
+              </p>
+            </div>
+            <div className="bp-course-grid">
+              {relatedCourses.map((course) => (
+                <Link key={course.href} href={course.href} className="bp-course-card">
+                  <span className="bp-course-label">Relevant course</span>
+                  <h3 className="bp-course-title">{course.title}</h3>
+                  <p className="bp-course-desc">{course.description}</p>
+                  <span className="bp-course-action">View programme →</span>
+                </Link>
               ))}
             </div>
           </div>

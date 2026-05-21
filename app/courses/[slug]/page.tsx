@@ -12,6 +12,7 @@ import BrochureDownloadButton from "./BrochureDownloadButton";
 import CourseLeadForm from "./CourseLeadForm";
 import CourseInvestmentTracker from "./CourseInvestmentTracker";
 import { coursesData } from "./courseData";
+import { BLOG_ARTICLES } from "@/app/blog/blogData";
 import { breadcrumbSchema, buildCourseSchema, buildMetadata } from "@/lib/seo";
 import { fetchCourseBySlug } from "@/lib/courses";
 import type { CourseRecord } from "@/lib/courses";
@@ -19,6 +20,27 @@ import { dataAnalyticsFaqItems, dataAnalyticsFaqPageSchema } from "@/lib/faqData
 
 const BROCHURE_HREF = "/brochure/Brit_Institute_Brochure_A4_HD-2.pdf";
 const BROCHURE_DOWNLOAD_NAME = "Brit_Institute_Data_Analytics_Brochure.pdf";
+const COURSE_RELATED_BLOG_SLUGS: Record<string, string[]> = {
+  "data-analytics": [
+    "how-to-become-data-analyst-uk",
+    "data-analyst-salary-uk-2026",
+    "python-vs-sql-data-analysts",
+  ],
+  "data-science": [
+    "how-to-start-career-data-science-uk",
+    "data-scientist-salary-uk-2026",
+    "data-analyst-vs-data-scientist",
+  ],
+  "ai-automation": [
+    "how-to-become-ai-specialist-uk",
+    "best-ai-tools-data-analysts-2026",
+  ],
+  "gen-ai": [
+    "best-ai-tools-data-analysts-2026",
+    "how-to-become-ai-specialist-uk",
+    "python-vs-sql-data-analysts",
+  ],
+};
 
 async function getCourse(slug: string): Promise<CourseRecord | null> {
   return fetchCourseBySlug(slug);
@@ -152,6 +174,9 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
     { name: richData?.seoTitle ?? course.title, path: coursePath },
   ]);
   const aggregateRating = hasCourseReviews ? richData!.reviews.aggregate : null;
+  const relatedBlogArticles = (COURSE_RELATED_BLOG_SLUGS[resolvedParams.slug] ?? [])
+    .map((blogSlug) => BLOG_ARTICLES.find((article) => article.slug === blogSlug))
+    .filter((article): article is (typeof BLOG_ARTICLES)[number] => Boolean(article));
 
   // Fallback points for backward compatibility
   const points = (course.desc || "")
@@ -462,6 +487,47 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                   ))}
                 </div>
               </section>
+
+              {relatedBlogArticles.length > 0 && (
+                <section className="rounded-3xl border border-blue-100 bg-white p-8 shadow-sm">
+                  <div className="mb-6">
+                    <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-700">
+                      Career guides
+                    </p>
+                    <h2 className="mt-2 text-2xl font-bold text-gray-900">
+                      Read before choosing this programme
+                    </h2>
+                    <p className="mt-3 max-w-2xl text-sm leading-7 text-gray-600">
+                      These Brit Institute guides explain the UK roles, salaries, tools, and learning path connected to this course.
+                    </p>
+                  </div>
+                  <div className="grid gap-4 md:grid-cols-3">
+                    {relatedBlogArticles.map((article) => (
+                      <Link
+                        key={article.slug}
+                        href={article.canonicalPath ?? `/blog/${article.slug}`}
+                        className="group rounded-2xl border border-gray-100 bg-gray-50 p-5 text-left transition-all hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-md"
+                      >
+                        <span
+                          className="inline-flex rounded-md px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] text-white"
+                          style={{ backgroundColor: article.color }}
+                        >
+                          {article.category}
+                        </span>
+                        <h3 className="mt-4 text-base font-bold leading-snug text-gray-900 group-hover:text-blue-700">
+                          {article.title}
+                        </h3>
+                        <p className="mt-3 text-sm leading-6 text-gray-600">
+                          {article.excerpt}
+                        </p>
+                        <span className="mt-4 inline-flex text-sm font-bold text-blue-700">
+                          Read guide →
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )}
 
               {/* Projects & Career Support */}
               <section className="grid md:grid-cols-2 gap-6">

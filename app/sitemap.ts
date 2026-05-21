@@ -48,7 +48,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }) satisfies MetadataRoute.Sitemap;
 
   const blogEntries = BLOG_ARTICLES.map((article) => ({
-    url: `${siteConfig.siteUrl}/blog/${article.slug}`,
+    url: `${siteConfig.siteUrl}${article.canonicalPath ?? `/blog/${article.slug}`}`,
     lastModified: new Date(article.updatedAt ?? article.publishedAt ?? "2026-04-13"),
     changeFrequency: "monthly",
     priority: article.featured ? 0.8 : 0.7,

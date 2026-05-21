@@ -29,6 +29,7 @@ export interface BlogArticle {
   midCta?: BlogCTA;
   bottomCta?: BlogCTA;
   relatedSlugs?: string[];
+  relatedCourseSlugs?: string[];
   author?: string;
   publishedAt?: string;
   updatedAt?: string;
@@ -68,17 +69,18 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "Learn the practical step-by-step path to becoming a data analyst in the UK, including skills, salaries, portfolios, and job strategy.",
     color: "#3B82F6",
     relatedSlugs: ["data-analyst-salary-uk-2026", "data-analyst-vs-data-scientist", "best-ai-tools-data-analysts-2026"],
+    relatedCourseSlugs: ["data-analytics"],
     midCta: {
       heading: "Start Your Data Analytics Career Today",
       text: "Explore a job-ready Data Analyst and Gen AI certification program designed for UK career transitions.",
       primaryLabel: "View Programme",
-      primaryHref: "/courses",
+      primaryHref: "/courses/data-analytics",
     },
     bottomCta: {
       heading: "Ready to Become a Data Analyst?",
       text: "Build practical skills, work on real projects, and prepare for job roles with structured training.",
-      primaryLabel: "Explore Courses",
-      primaryHref: "/courses",
+      primaryLabel: "Explore Data Analytics",
+      primaryHref: "/courses/data-analytics",
       secondaryLabel: "Book Free Consultation",
       secondaryHref: "/contact",
     },
@@ -216,17 +218,18 @@ If your goal is to transition quickly, structured learning often reduces trial a
       "Compare data analyst and data scientist careers in the UK, including tools, salaries, entry barriers, and role fit.",
     color: "#8B5CF6",
     relatedSlugs: ["how-to-become-data-analyst-uk", "data-analyst-salary-uk-2026", "best-ai-tools-data-analysts-2026"],
+    relatedCourseSlugs: ["data-analytics", "data-science"],
     midCta: {
       heading: "Not Sure Which Path is Right for You?",
       text: "Explore structured programmes designed for both data analytics and data science career paths.",
       primaryLabel: "View Courses",
-      primaryHref: "/courses",
+      primaryHref: "/courses/data-analytics",
     },
     bottomCta: {
       heading: "Start Your Career in Data with the Right Path",
       text: "Build practical skills, work on real projects, and choose a career path that fits your goals.",
       primaryLabel: "Explore Courses",
-      primaryHref: "/courses",
+      primaryHref: "/courses/data-science",
       secondaryLabel: "Book Free Consultation",
       secondaryHref: "/contact",
     },
@@ -347,17 +350,18 @@ Many professionals start as analysts and transition into data science later afte
       "See current data analyst salary ranges in the UK by experience, location, and industry, plus the skills that influence pay.",
     color: "#10B981",
     relatedSlugs: ["how-to-become-data-analyst-uk", "data-analyst-vs-data-scientist", "best-ai-tools-data-analysts-2026"],
+    relatedCourseSlugs: ["data-analytics"],
     midCta: {
       heading: "Want to Build These Skills?",
       text: "Explore a job-ready Data Analytics Course designed for UK career transitions.",
       primaryLabel: "View Programme",
-      primaryHref: "/courses",
+      primaryHref: "/courses/data-analytics",
     },
     bottomCta: {
       heading: "Start Your Career in Data Analytics",
       text: "Build in-demand skills, work on real projects, and prepare for data analyst roles in the UK.",
-      primaryLabel: "Explore Courses",
-      primaryHref: "/courses",
+      primaryLabel: "Explore Data Analytics",
+      primaryHref: "/courses/data-analytics",
       secondaryLabel: "Book Free Consultation",
       secondaryHref: "/contact",
     },
@@ -472,6 +476,7 @@ This makes data analytics one of the more stable and scalable career paths in th
     updatedAt: "2026-04-13",
     canonicalPath: "/blog/best-ai-tools-data-analysts-2026",
     color: "#F59E0B",
+    relatedCourseSlugs: ["data-analytics", "gen-ai"],
     content: `AI is rapidly changing the data analytics landscape. Here are the most impactful tools that every data analyst should know in 2026.
 
 ## 1. ChatGPT & Copilot for Data Analysis
@@ -513,6 +518,7 @@ Absolutely. Employers increasingly expect familiarity with AI-assisted tools. Th
     updatedAt: "2026-04-13",
     canonicalPath: "/blog/how-to-start-career-data-science-uk",
     color: "#3B82F6",
+    relatedCourseSlugs: ["data-science"],
     content: `Data science continues to be one of the most sought-after career paths in the UK. Here is a comprehensive guide to getting started.
 
 ## What is Data Science?
@@ -563,6 +569,7 @@ Data science roles in the UK typically pay £40,000–£80,000+, with London off
     updatedAt: "2026-04-13",
     canonicalPath: "/blog/is-data-analytics-good-career-uk",
     color: "#EF4444",
+    relatedCourseSlugs: ["data-analytics"],
     content: `If you are considering a career change or entering the job market, data analytics is one of the strongest options available in the UK today.
 
 ## Growing Demand
@@ -608,6 +615,7 @@ Yes — data analytics is an excellent career in the UK, particularly for those 
     updatedAt: "2026-04-13",
     canonicalPath: "/blog/python-vs-sql-data-analysts",
     color: "#F59E0B",
+    relatedCourseSlugs: ["data-analytics", "data-science"],
     content: `Both Python and SQL are essential for data analysts, but which should you learn first? Here is our recommendation.
 
 ## Start with SQL
@@ -654,6 +662,7 @@ Most UK data analyst job listings require SQL. About 60% also list Python as a p
     updatedAt: "2026-04-13",
     canonicalPath: "/blog/data-scientist-salary-uk-2026",
     color: "#10B981",
+    relatedCourseSlugs: ["data-science"],
     content: `Data science remains one of the highest-paying tech careers in the UK. Here is a comprehensive salary breakdown for 2026.
 
 ## National Overview
@@ -703,6 +712,7 @@ The average data scientist salary in the UK is approximately £52,000, with a wi
     updatedAt: "2026-04-13",
     canonicalPath: "/blog/how-to-become-ai-specialist-uk",
     color: "#3B82F6",
+    relatedCourseSlugs: ["ai-automation", "gen-ai"],
     content: `AI and automation are reshaping industries across the UK. Here is how to position yourself for a career in this rapidly growing field.
 
 ## What Does an AI Specialist Do?
