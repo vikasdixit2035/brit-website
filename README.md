@@ -41,13 +41,19 @@ The app now supports a dedicated chatbot surface on a subdomain while keeping th
 
 ### Environment variables
 
-Set these in the frontend runtime before building:
+Set these in the Next.js runtime before building. Keep AWS credentials server-side only; do not expose them with a `NEXT_PUBLIC_` prefix.
 
 ```bash
 NEXT_PUBLIC_SITE_URL=https://britinstitute.uk
 NEXT_PUBLIC_CHATBOT_SITE_URL=https://chat.britinstitute.uk
 NEXT_PUBLIC_SITE_NAME="Brit Institute"
 NEXT_PUBLIC_CHATBOT_SITE_NAME="Brit Institute Career Chatbot"
+AWS_REGION=eu-west-2
+AWS_ACCESS_KEY_ID=...
+AWS_SECRET_ACCESS_KEY=...
+SES_FROM_EMAIL=info@britinstitute.uk
+SES_TO_EMAIL=info@britinstitute.uk
+LEADS_API_URL=https://api.britinstitute.uk/api/leads
 ```
 
 ### Behavior
@@ -55,6 +61,7 @@ NEXT_PUBLIC_CHATBOT_SITE_NAME="Brit Institute Career Chatbot"
 - `britinstitute.uk` continues serving the full marketing site.
 - `chat.britinstitute.uk` rewrites to the standalone chatbot experience.
 - `https://api.britinstitute.uk/api/leads` remains the lead capture endpoint.
+- Course registration and brochure forms post through `/api/course-registration`, which saves the lead and sends an AWS SES notification. `SES_FROM_EMAIL` must be verified in the configured AWS SES region.
 
 ### Hostinger VPS checklist
 

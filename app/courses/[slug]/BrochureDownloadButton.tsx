@@ -57,11 +57,6 @@ export default function BrochureDownloadButton({
 
     try {
       setIsSubmitting(true);
-      const API_URL =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:4000/api/leads"
-          : "https://api.britinstitute.uk/api/leads";
-
       const payload = {
         name: formData.name.trim(),
         email: formData.email.trim(),
@@ -72,7 +67,7 @@ export default function BrochureDownloadButton({
         message: `Brochure download request: ${courseTitle}`,
       };
 
-      const res = await fetch(API_URL, {
+      const res = await fetch("/api/course-registration", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

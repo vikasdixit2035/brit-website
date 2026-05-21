@@ -25,10 +25,6 @@ export default function CourseLeadForm({ courseTitle }: { courseTitle: string })
     }
     
     try {
-      const API_URL = process.env.NODE_ENV === "development" 
-        ? "http://localhost:4000/api/leads" 
-        : "https://api.britinstitute.uk/api/leads";
-        
       const { phoneCountry, phone, ...rest } = formData;
       const payload = {
         ...rest,
@@ -36,7 +32,7 @@ export default function CourseLeadForm({ courseTitle }: { courseTitle: string })
         source: "Course Lead Form",
       };
 
-      const res = await fetch(API_URL, {
+      const res = await fetch("/api/course-registration", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
