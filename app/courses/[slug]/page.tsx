@@ -11,7 +11,10 @@ import Footer from "@/components/layout/Footer";
 import BrochureDownloadButton from "./BrochureDownloadButton";
 import CourseLeadForm from "./CourseLeadForm";
 import CourseInvestmentTracker from "./CourseInvestmentTracker";
+import AgenticAICurriculum from "./AgenticAICurriculum";
 import DataAnalyticsCurriculum from "./DataAnalyticsCurriculum";
+import DataScienceMLCurriculum from "./DataScienceMLCurriculum";
+import GenerativeAICurriculum from "./GenerativeAICurriculum";
 import { coursesData } from "./courseData";
 import { BLOG_ARTICLES } from "@/app/blog/blogData";
 import { breadcrumbSchema, buildCourseSchema, buildMetadata } from "@/lib/seo";
@@ -152,6 +155,9 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
 
   const coursePath = richData?.canonicalPath ?? `/courses/${resolvedParams.slug}`;
   const isDataAnalyticsCourse = resolvedParams.slug === "data-analytics";
+  const isAgenticAICourse = resolvedParams.slug === "ai-automation";
+  const isDataScienceCourse = resolvedParams.slug === "data-science";
+  const isGenerativeAICourse = resolvedParams.slug === "gen-ai";
   const hasCourseReviews =
     Boolean(richData?.reviews) &&
     richData!.reviews.items.length > 0 &&
@@ -412,12 +418,29 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                     <h2 className="text-2xl font-bold text-gray-900">Curriculum</h2>
                   </div>
 
-                  {isDataAnalyticsCourse ? (
+                  {isDataAnalyticsCourse || isAgenticAICourse || isDataScienceCourse || isGenerativeAICourse ? (
                     <div className="rounded-2xl border border-blue-100 bg-blue-50 p-5 shadow-sm">
                       <p className="text-sm font-semibold leading-7 text-blue-950">
-                        The full 26-week Data Analytics with GenAI curriculum is expanded below, including phase-by-phase topics, weekly labs, GenAI integration, and portfolio outcomes.
+                        {isDataAnalyticsCourse
+                          ? "The full 26-week Data Analytics with GenAI curriculum is expanded below, including phase-by-phase topics, weekly labs, GenAI integration, and portfolio outcomes."
+                          : isAgenticAICourse
+                            ? "The full 16-week Agentic AI curriculum is expanded below, including phase-by-phase topics, weekly labs, agent workflow design, and portfolio outcomes."
+                            : isDataScienceCourse
+                              ? "The full 48-week Data Science, Machine Learning and GenAI curriculum is expanded below, including phase-by-phase topics, weekly labs, ML projects, GenAI integration, and capstone outcomes."
+                              : "The full 12-week Generative AI curriculum is expanded below, including phase-by-phase topics, weekly labs, prompt systems, GenAI tools, workflow projects, and responsible AI outcomes."}
                       </p>
-                      <a href="#detailed-data-analytics-curriculum" className="mt-4 inline-flex rounded-xl bg-blue-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-800">
+                      <a
+                        href={
+                          isDataAnalyticsCourse
+                            ? "#detailed-data-analytics-curriculum"
+                            : isAgenticAICourse
+                              ? "#detailed-agentic-ai-curriculum"
+                              : isDataScienceCourse
+                                ? "#detailed-data-science-curriculum"
+                                : "#detailed-generative-ai-curriculum"
+                        }
+                        className="mt-4 inline-flex rounded-xl bg-blue-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-800"
+                      >
                         View detailed curriculum
                       </a>
                     </div>
@@ -503,6 +526,24 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
               {isDataAnalyticsCourse && (
                 <section id="detailed-data-analytics-curriculum" className="scroll-mt-28">
                   <DataAnalyticsCurriculum />
+                </section>
+              )}
+
+              {isAgenticAICourse && (
+                <section id="detailed-agentic-ai-curriculum" className="scroll-mt-28">
+                  <AgenticAICurriculum />
+                </section>
+              )}
+
+              {isDataScienceCourse && (
+                <section id="detailed-data-science-curriculum" className="scroll-mt-28">
+                  <DataScienceMLCurriculum />
+                </section>
+              )}
+
+              {isGenerativeAICourse && (
+                <section id="detailed-generative-ai-curriculum" className="scroll-mt-28">
+                  <GenerativeAICurriculum />
                 </section>
               )}
 

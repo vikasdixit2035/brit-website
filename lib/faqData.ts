@@ -76,7 +76,7 @@ export const dataAnalyticsFaqItems: FaqItem[] = [
   {
     question: "What is the best data analytics course in the UK for beginners?",
     answer:
-      "Brit Institute offers a beginner-friendly Data Analyst and Gen AI certification program that covers Excel, SQL, Power BI, Tableau, and Python from scratch. It includes hands-on projects and end-to-end career support tailored for the UK job market.",
+      "Brit Institute offers a beginner-friendly Data Analyst and Gen AI certification program that covers Excel, Power BI, SQL, Python, statistics, machine learning basics, and applied GenAI workflows from scratch. It includes hands-on projects and end-to-end career support tailored for the UK job market.",
   },
   {
     question: "How long is the data analytics course at Brit Institute?",
@@ -91,7 +91,7 @@ export const dataAnalyticsFaqItems: FaqItem[] = [
   {
     question: "What tools are taught in the data analytics course UK?",
     answer:
-      "The course covers Excel, SQL, Power BI, Tableau, Python (basic), and ChatGPT/Generative AI for data workflows — all tools actively used in UK data analyst job descriptions.",
+      "The course covers Excel, Power BI, SQL, Python, pandas, scikit-learn, OpenAI API workflows, GitHub, and responsible GenAI practices for modern data analyst work.",
   },
   {
     question: "Do I need a degree to join a data analytics course in the UK?",

@@ -414,17 +414,17 @@ export function educationalOrganizationSchema() {
             name: "Data Analyst and Gen AI Certification Program",
             url: absoluteUrl("/courses/data-analytics"),
             description:
-              "Master SQL, Power BI, Tableau, and AI tools to become a job-ready data analyst in the UK.",
+              "Master Excel, Power BI, SQL, Python, machine learning basics, and applied GenAI workflows to become a job-ready data analyst in the UK.",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Course",
-            name: "Data Science & Machine Learning Certification Program",
+            name: "Data Science, Machine Learning and Gen AI Certification Program",
             url: absoluteUrl("/courses/data-science"),
             description:
-              "Build real-world machine learning models and launch a data science career in the UK.",
+              "Learn Python, statistics, SQL, machine learning, deep learning, GenAI workflows, MLOps, deployment, and capstone delivery in the UK.",
           },
         },
         {
@@ -434,17 +434,17 @@ export function educationalOrganizationSchema() {
             name: "Agentic AI Certification Program",
             url: absoluteUrl("/courses/ai-automation"),
             description:
-              "Learn agentic AI tools and automation systems to build intelligent workflows in the UK.",
+              "Learn prompt engineering, Python AI APIs, RAG, vector search, function calling, agents, and workflow automation in the UK.",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Course",
-            name: "Generative AI Certificaation Program",
+            name: "Generative AI Certification Program",
             url: absoluteUrl("/courses/gen-ai"),
             description:
-              "Practical generative AI prompting, copilots, and workflow automation for UK professionals.",
+              "Learn prompt engineering, GenAI tools, AI copilots, structured outputs, document Q&A, workflow automation, and responsible AI practices in the UK.",
           },
         },
       ],

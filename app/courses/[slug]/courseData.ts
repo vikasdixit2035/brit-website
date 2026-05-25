@@ -138,30 +138,30 @@ export const coursesData: Record<string, CourseSeoData> = {
     }
   },
   "data-science": {
-    h1: "Data Science & Machine Learning Certification Program",
-    subheadline: "Build real-world machine learning models and become job-ready for data science roles in the UK.",
+    h1: "Data Science, Machine Learning and Gen AI Certification Program",
+    subheadline: "Build Python, statistics, SQL, machine learning, deep learning, GenAI, MLOps, and deployment skills through a 12-month portfolio-led programme.",
     cohort: "Starting Soon",
     duration: "12 months",
     canonicalPath: "/courses/data-science",
-    seoTitle: "Data Science & Machine Learning Certification Program",
-    seoDescription: "Learn machine learning, Python, model deployment, and portfolio-building through Brit Institute's data science course in the UK.",
+    seoTitle: "Data Science, Machine Learning and Gen AI Certification Program",
+    seoDescription: "Learn Python, statistics, SQL, machine learning, deep learning, GenAI workflows, MLOps, model deployment, and portfolio-building through Brit Institute's data science course in the UK.",
     ogImage: "/hero-illustration.png",
     updatedAt: "2026-04-13",
     trustLayer: {
       learnersTrained: SITE_STATS.learnersTrained,
       placedOrTransitioned: SITE_STATS.careerTransitions,
-      toolsUsed: "Industry-aligned ML projects"
+      toolsUsed: "Python, ML, deep learning, GenAI, MLOps, and capstone projects"
     },
     careerOutcomes: {
-      roles: ["Data Scientist", "Machine Learning Engineer", "Data Analyst (Advanced)"],
+      roles: ["Data Scientist", "Machine Learning Engineer", "AI Analyst", "Data Analyst (Advanced)"],
       salary: "£40,000 – £80,000+",
       demand: "High demand in AI, fintech, healthcare, SaaS"
     },
     isForYou: [
-      "Graduates targeting data science roles",
-      "Developers moving into machine learning",
-      "Analysts upgrading to ML",
-      "Anyone searching for a data science course UK with placement focus"
+      "Graduates targeting data science and machine learning roles",
+      "Developers moving into ML, GenAI, and applied AI product work",
+      "Analysts upgrading from dashboards to modelling, prediction, and deployment",
+      "Anyone searching for a data science course UK with portfolio and capstone focus"
     ],
     programmeOverview: {
       duration: "12 months",
@@ -169,21 +169,26 @@ export const coursesData: Record<string, CourseSeoData> = {
       level: "Intermediate"
     },
     curriculum: [
-      "Python for Data Science",
-      "Statistics & Data Modelling",
-      "Machine Learning Algorithms",
-      "Model Deployment"
+      "Python, Data Foundations and Visualisation",
+      "Statistics, SQL and Business Analytics",
+      "Machine Learning Foundations",
+      "Advanced ML, NLP and Deep Learning",
+      "Applied GenAI, LLMs and RAG",
+      "MLOps, Deployment, Capstone and Career Prep"
     ],
-    toolsCovered: ["Python", "Pandas", "NumPy", "Scikit-learn", "TensorFlow", "Jupyter"],
+    toolsCovered: ["Python", "Jupyter", "NumPy", "pandas", "SQL", "Power BI", "scikit-learn", "TensorFlow", "OpenAI API", "GitHub", "Streamlit / Flask"],
     projects: [
-      "Predictive models",
-      "Recommendation systems",
-      "ML deployment case"
+      "Exploratory Analysis Notebook",
+      "Prediction Model Benchmark",
+      "Customer or Behaviour Segmentation",
+      "Explainable ML Report",
+      "LLM Data Science Assistant",
+      "End-to-End Data Science Capstone"
     ],
     careerSupport: [
-      "Data science CV building",
-      "ML interview prep",
-      "GitHub portfolio guidance"
+      "Data science CV and LinkedIn positioning",
+      "ML, statistics, and project interview prep",
+      "GitHub portfolio and capstone review"
     ],
     pricing: {
       price: "£4,499",
@@ -220,29 +225,29 @@ export const coursesData: Record<string, CourseSeoData> = {
   },
   "ai-automation": {
     h1: "Agentic AI Certification Program",
-    subheadline: "Learn agentic AI tools and automation systems to build intelligent workflows and future-ready careers.",
+    subheadline: "Learn prompt systems, Python AI APIs, RAG, vector search, function calling, tool-based agents, and business automation workflows through portfolio-ready builds.",
     cohort: "Starting Soon",
     duration: "4 months",
     canonicalPath: "/courses/ai-automation",
     seoTitle: "Agentic AI Certification Program",
-    seoDescription: "Discover Brit Institute's practical agentic AI course in the UK focused on tools, workflows, automation systems, and career-ready projects.",
+    seoDescription: "Discover Brit Institute's practical Agentic AI Certification Program in the UK. Learn prompt engineering, Python AI APIs, RAG, vector databases, function calling, workflow automation, responsible AI, and career-ready projects.",
     ogImage: "/hero-illustration.png",
     updatedAt: "2026-04-13",
     trustLayer: {
       learnersTrained: SITE_STATS.learnersTrained,
       placedOrTransitioned: SITE_STATS.careerTransitions,
-      toolsUsed: "Real-world AI use cases"
+      toolsUsed: "RAG, AI APIs, vector search, agents, and workflow automation"
     },
     careerOutcomes: {
-      roles: ["AI Specialist", "Automation Consultant", "AI Operations Executive"],
+      roles: ["AI Specialist", "Automation Consultant", "AI Operations Executive", "AI Workflow Builder"],
       salary: "£35,000 – £75,000+",
       demand: "Growing demand across startups, agencies, enterprises"
     },
     isForYou: [
-      "Professionals exploring AI careers",
-      "Marketers/ops wanting automation",
-      "Beginners entering AI field",
-      "Anyone searching for an AI course UK for practical skills"
+      "Professionals exploring AI specialist and automation careers",
+      "Marketers, operators, analysts, and founders wanting practical AI workflows",
+      "Beginners who want to build assistants, agents, and automations step by step",
+      "Anyone searching for an Agentic AI course UK with portfolio-ready projects"
     ],
     programmeOverview: {
       duration: "4 months",
@@ -250,21 +255,26 @@ export const coursesData: Record<string, CourseSeoData> = {
       level: "Beginner-friendly"
     },
     curriculum: [
-      "AI Foundations",
-      "Generative AI Tools",
-      "Automation Systems",
-      "Workflow Design"
+      "AI and LLM Foundations",
+      "Prompt Engineering for Workflows",
+      "Python, APIs, and Structured Outputs",
+      "RAG, Embeddings, and Vector Databases",
+      "Function Calling and Agentic Workflows",
+      "Deployment, GitHub Portfolio, and Career Prep"
     ],
-    toolsCovered: ["ChatGPT", "Zapier", "Make", "AI APIs", "Automation tools"],
+    toolsCovered: ["ChatGPT", "OpenAI API", "Python", "JSON", "LangChain concepts", "ChromaDB / FAISS", "Zapier", "Make", "GitHub", "Streamlit / Flask"],
     projects: [
-      "AI workflow automation",
-      "Chatbot systems",
-      "Business automation setup"
+      "AI Use-Case Audit",
+      "Business Prompt Library",
+      "Structured Extraction Workflow",
+      "Policy or Knowledge Q&A Assistant",
+      "Business Automation System",
+      "Agentic AI Portfolio Pack"
     ],
     careerSupport: [
-      "AI portfolio building",
-      "Use-case based interviews",
-      "Freelance + job guidance"
+      "AI portfolio and GitHub project review",
+      "Use-case based interviews and project walkthroughs",
+      "Freelance, consulting, and job guidance"
     ],
     pricing: {
       price: "£1,999",
@@ -300,30 +310,30 @@ export const coursesData: Record<string, CourseSeoData> = {
     }
   },
   "gen-ai": {
-    h1: "Generative AI Certificaation Program",
-    subheadline: "Learn prompting, copilots, and real-world generative AI workflows you can use across business, operations, and content roles.",
+    h1: "Generative AI Certification Program",
+    subheadline: "Learn prompt engineering, GenAI tools, AI copilots, structured outputs, document Q&A, workflow automation, and responsible AI practices in 3 months.",
     cohort: "Starting Soon",
     duration: "3 months",
     canonicalPath: "/courses/gen-ai",
-    seoTitle: "Generative AI Certificaation Program",
-    seoDescription: "Explore Brit Institute's practical Generative AI in the UK covering prompting, copilots, AI workflows, and business-ready applications.",
+    seoTitle: "Generative AI Certification Program",
+    seoDescription: "Explore Brit Institute's practical 3-month Generative AI Certification Program in the UK covering prompt engineering, AI tools, copilots, structured outputs, document Q&A, workflow automation, responsible AI, and portfolio projects.",
     ogImage: "/hero-illustration.png",
     updatedAt: "2026-04-16",
     trustLayer: {
       learnersTrained: SITE_STATS.learnersTrained,
       placedOrTransitioned: SITE_STATS.careerTransitions,
-      toolsUsed: "Practical Gen AI workflows"
+      toolsUsed: "Prompt systems, AI copilots, document Q&A, automation, and responsible AI"
     },
     careerOutcomes: {
-      roles: ["AI Content Specialist", "Prompt Engineer", "AI Workflow Executive"],
+      roles: ["AI Content Specialist", "Prompt Engineer", "AI Workflow Executive", "AI Productivity Specialist"],
       salary: "£30,000 – £60,000+",
       demand: "Growing demand across startups, marketing, ops, and product teams"
     },
     isForYou: [
-      "Beginners exploring practical generative AI",
-      "Professionals who want to work faster with AI copilots",
-      "Founders and operators adopting AI workflows",
-      "Anyone searching for a Gen AI course with practical use cases"
+      "Beginners exploring practical generative AI for work and career growth",
+      "Professionals who want to work faster with AI copilots and prompt systems",
+      "Founders, operators, marketers, and support teams adopting AI workflows",
+      "Anyone searching for a 3-month Gen AI course with practical portfolio projects"
     ],
     programmeOverview: {
       duration: "3 months",
@@ -331,21 +341,26 @@ export const coursesData: Record<string, CourseSeoData> = {
       level: "Beginner-friendly"
     },
     curriculum: [
-      "Prompt Engineering Foundations",
-      "Generative AI Tools & Copilots",
-      "Content and Workflow Automation",
-      "Use Cases for Business Teams"
+      "Generative AI Foundations and Safe Use",
+      "Prompt Engineering and Business Prompt Systems",
+      "GenAI Tools, Multimodal Workflows and Copilots",
+      "Structured Outputs and Workflow Automation",
+      "RAG, Document Q&A and Knowledge Assistants",
+      "Responsible AI, Portfolio and Career Prep"
     ],
-    toolsCovered: ["ChatGPT", "Claude", "Gemini", "Perplexity", "NotebookLM"],
+    toolsCovered: ["ChatGPT", "Claude", "Gemini", "Perplexity", "NotebookLM", "Microsoft Copilot concepts", "Zapier / Make concepts", "Google Workspace / Microsoft 365"],
     projects: [
-      "AI research workflow",
-      "Content copilot setup",
-      "Business prompt library"
+      "AI Use-Case Map",
+      "Business Prompt Library",
+      "AI Research and Writing Workflow",
+      "Structured AI Workflow",
+      "Knowledge Assistant Prototype",
+      "Generative AI Portfolio Pack"
     ],
     careerSupport: [
-      "AI portfolio guidance",
-      "Prompt case-study review",
-      "Use-case based interview prep"
+      "Generative AI portfolio guidance",
+      "Prompt library and workflow case-study review",
+      "Use-case based interview prep and role positioning"
     ],
     pricing: {
       price: "£1,200",

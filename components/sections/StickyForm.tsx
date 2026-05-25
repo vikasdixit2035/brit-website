@@ -123,9 +123,9 @@ export default function StickyForm() {
             >
               <option value="" disabled>Course Interest*</option>
               <option value="Data Analyst and Gen AI Certification Program">Data Analyst and Gen AI Certification Program</option>
-              <option value="Data Science & Machine Learning Certification Program">Data Science & Machine Learning Certification Program</option>
+              <option value="Data Science, Machine Learning and Gen AI Certification Program">Data Science, Machine Learning and Gen AI Certification Program</option>
               <option value="Agentic AI Certification Program">Agentic AI Certification Program</option>
-              <option value="Generative AI Certificaation Program">Generative AI Certificaation Program</option>
+              <option value="Generative AI Certification Program">Generative AI Certification Program</option>
             </select>
             <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2">
               <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">

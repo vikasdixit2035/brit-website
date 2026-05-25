@@ -33,9 +33,9 @@ const COURSE_LINKS: Record<string, { title: string; href: string; description: s
     description: "Build SQL, Power BI, Tableau, Python basics, and AI workflow skills for UK data analyst roles.",
   },
   "data-science": {
-    title: "Data Science & Machine Learning Certification Program",
+    title: "Data Science, Machine Learning and Gen AI Certification Program",
     href: "/courses/data-science",
-    description: "Move into Python, statistics, machine learning, and portfolio projects for data science careers.",
+    description: "Move into Python, statistics, machine learning, GenAI workflows, MLOps, and capstone projects for data science careers.",
   },
   "ai-automation": {
     title: "Agentic AI Certification Program",
@@ -45,7 +45,7 @@ const COURSE_LINKS: Record<string, { title: string; href: string; description: s
   "gen-ai": {
     title: "Generative AI Certification Program",
     href: "/courses/gen-ai",
-    description: "Master Gen AI tools and prompt-driven workflows for modern business and analytics work.",
+    description: "Master prompt engineering, GenAI tools, copilots, structured outputs, document Q&A, and responsible AI workflows.",
   },
 };
 
