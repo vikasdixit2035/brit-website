@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import {
   Eye, ChevronRight, CheckCircle2, Briefcase,
   Clock, Layers, ArrowRight, Check, MonitorPlay, Zap,
-  TrendingUp, Target, Users, BookOpen, Terminal, Sparkles, Quote
+  TrendingUp, Target, Users, BookOpen, Terminal, Sparkles, Quote, Database
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -44,6 +44,48 @@ const COURSE_RELATED_BLOG_SLUGS: Record<string, string[]> = {
     "how-to-become-ai-specialist-uk",
     "python-vs-sql-data-analysts",
   ],
+};
+
+const TOOL_LOGOS: Record<string, { src?: string; accent: string; fallback: string }> = {
+  Excel: {
+    src: "https://cdn.simpleicons.org/microsoftexcel/217346",
+    accent: "bg-emerald-50 text-emerald-700",
+    fallback: "XL",
+  },
+  "Power BI": {
+    src: "https://cdn.simpleicons.org/powerbi/F2C811",
+    accent: "bg-yellow-50 text-yellow-700",
+    fallback: "BI",
+  },
+  SQL: {
+    accent: "bg-sky-50 text-sky-700",
+    fallback: "SQL",
+  },
+  Python: {
+    src: "https://cdn.simpleicons.org/python/3776AB",
+    accent: "bg-blue-50 text-blue-700",
+    fallback: "Py",
+  },
+  pandas: {
+    src: "https://cdn.simpleicons.org/pandas/150458",
+    accent: "bg-violet-50 text-violet-700",
+    fallback: "pd",
+  },
+  "scikit-learn": {
+    src: "https://cdn.simpleicons.org/scikitlearn/F7931E",
+    accent: "bg-orange-50 text-orange-700",
+    fallback: "sk",
+  },
+  "OpenAI API": {
+    src: "https://cdn.simpleicons.org/openai/111827",
+    accent: "bg-gray-100 text-gray-800",
+    fallback: "AI",
+  },
+  GitHub: {
+    src: "https://cdn.simpleicons.org/github/181717",
+    accent: "bg-zinc-100 text-zinc-800",
+    fallback: "GH",
+  },
 };
 
 async function getCourse(slug: string): Promise<CourseRecord | null> {
@@ -103,6 +145,32 @@ function DiamondIcon() {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="#10B981" stroke="#059669" strokeWidth="2" className="mt-1 flex-shrink-0">
       <polygon points="12 3 21 12 12 21 3 12 12 3"></polygon>
     </svg>
+  );
+}
+
+function ToolLogo({ tool }: { tool: string }) {
+  const logo = TOOL_LOGOS[tool];
+
+  if (tool === "SQL") {
+    return (
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-sky-700">
+        <Database className="h-5 w-5" aria-hidden="true" />
+      </span>
+    );
+  }
+
+  if (logo?.src) {
+    return (
+      <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${logo.accent}`}>
+        <img src={logo.src} alt={`${tool} logo`} className="h-5 w-5 object-contain" />
+      </span>
+    );
+  }
+
+  return (
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-xs font-extrabold text-gray-700">
+      {logo?.fallback ?? tool.slice(0, 2).toUpperCase()}
+    </span>
   );
 }
 
@@ -211,7 +279,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
       )}
       <Navbar hasBanner={false} />
 
-      <main className="pt-28 pb-20 max-w-[1200px] mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 lg:gap-16">
+      <main className="pt-28 pb-20 max-w-[1200px] xl:max-w-[1380px] 2xl:max-w-[1580px] mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 lg:gap-14">
 
         {/* Left Column Content */}
         <div className="pt-2">
@@ -514,10 +582,11 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                   </div>
                   <h2 className="text-2xl font-bold text-gray-900">Tools Covered</h2>
                 </div>
-                <div className="flex flex-wrap gap-3">
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
                   {richData.toolsCovered.map((tool: string, idx: number) => (
-                    <div key={idx} className="bg-white border border-gray-200 text-gray-800 px-5 py-2.5 rounded-xl font-semibold shadow-sm hover:border-purple-400 hover:text-purple-700 transition-all cursor-default">
-                      {tool}
+                    <div key={idx} className="flex min-h-16 items-center gap-3 rounded-2xl border border-gray-200 bg-white px-4 py-3 shadow-sm transition-all hover:-translate-y-0.5 hover:border-purple-300 hover:shadow-md">
+                      <ToolLogo tool={tool} />
+                      <span className="text-sm font-bold leading-tight text-gray-900">{tool}</span>
                     </div>
                   ))}
                 </div>
