@@ -219,7 +219,7 @@ export default function LogoStrip() {
   return (
     <section
       ref={revealRef}
-      className="relative overflow-hidden bg-[#F8FAFC] py-12 font-sans text-slate-900"
+      className="relative overflow-hidden bg-[#F8FAFC] py-14 font-sans text-slate-900 md:py-16"
     >
       <style>{`
         .logo-marquee-wrap::before,
@@ -228,7 +228,7 @@ export default function LogoStrip() {
           position: absolute;
           top: 0;
           z-index: 2;
-          width: min(12vw, 150px);
+          width: min(14vw, 180px);
           height: 100%;
           pointer-events: none;
         }
@@ -246,16 +246,23 @@ export default function LogoStrip() {
         .scrolling-track-left,
         .scrolling-track-right {
           display: flex;
+          align-items: center;
           width: max-content;
           will-change: transform;
         }
 
+        .logo-row {
+          display: flex;
+          overflow: hidden;
+          padding-block: 2px;
+        }
+
         .scrolling-track-left {
-          animation: scrollLeft 72s linear infinite;
+          animation: scrollLeft 82s linear infinite;
         }
 
         .scrolling-track-right {
-          animation: scrollRight 72s linear infinite;
+          animation: scrollRight 82s linear infinite;
         }
 
         .scrolling-track-left:hover,
@@ -275,17 +282,17 @@ export default function LogoStrip() {
 
         .logo-box {
           background: rgba(255, 255, 255, 0.9);
-          border: 1px solid rgba(148, 163, 184, 0.18);
+          border: 1px solid rgba(148, 163, 184, 0.22);
           border-radius: 12px;
-          height: 58px;
-          width: 166px;
+          height: 66px;
+          width: 184px;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 0 8px;
-          padding: 12px 14px;
+          margin: 0 12px;
+          padding: 15px 20px;
           flex-shrink: 0;
-          box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
+          box-shadow: 0 12px 30px rgba(15, 23, 42, 0.055);
           backdrop-filter: blur(8px);
           transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
@@ -308,9 +315,23 @@ export default function LogoStrip() {
         .logo-box:hover img {
           transform: scale(1.05);
         }
+
+        @media (max-width: 767px) {
+          .logo-marquee-wrap::before,
+          .logo-marquee-wrap::after {
+            width: 64px;
+          }
+
+          .logo-box {
+            height: 60px;
+            width: 156px;
+            margin: 0 8px;
+            padding: 13px 16px;
+          }
+        }
       `}</style>
 
-      <div className="relative z-10 mx-auto mb-7 flex max-w-[1400px] flex-col gap-5 px-6 md:px-10 lg:flex-row lg:items-end lg:justify-between lg:px-14">
+      <div className="relative z-10 mx-auto mb-9 flex max-w-[1400px] flex-col gap-5 px-6 md:mb-10 md:px-10 lg:flex-row lg:items-end lg:justify-between lg:px-14">
         <div className="max-w-2xl">
           <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.24em] text-[var(--gold-700)]">
             Recruiting Partners
@@ -329,8 +350,8 @@ export default function LogoStrip() {
         </Link>
       </div>
 
-      <div className="logo-marquee-wrap relative flex flex-col gap-4">
-        <div style={{ display: "flex", overflow: "hidden" }}>
+      <div className="logo-marquee-wrap relative flex flex-col gap-5 md:gap-6">
+        <div className="logo-row">
           <div className="scrolling-track-left" aria-hidden="true">
             {legacyTrack.map((partner, i) => (
               <LogoCard key={`left-${partner.alt}-${i}`} partner={partner} />
@@ -338,7 +359,7 @@ export default function LogoStrip() {
           </div>
         </div>
 
-        <div style={{ display: "flex", overflow: "hidden" }}>
+        <div className="logo-row">
           <div className="scrolling-track-right" aria-hidden="true">
             {localTrackOne.map((partner, i) => (
               <LogoCard key={`middle-${partner.alt}-${i}`} partner={partner} />
@@ -346,7 +367,7 @@ export default function LogoStrip() {
           </div>
         </div>
 
-        <div style={{ display: "flex", overflow: "hidden" }}>
+        <div className="logo-row">
           <div className="scrolling-track-left" aria-hidden="true">
             {localTrackTwo.map((partner, i) => (
               <LogoCard key={`bottom-${partner.alt}-${i}`} partner={partner} />
@@ -355,8 +376,8 @@ export default function LogoStrip() {
         </div>
       </div>
 
-      <div className="mx-auto mt-8 max-w-[1400px] px-6 md:px-10 lg:px-14">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "16px" }}>
+      <div className="mx-auto mt-12 max-w-[1400px] px-6 md:mt-14 md:px-10 lg:px-14">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "18px" }}>
           {placementCards.map((card) => (
             <StatCard key={card.metric} card={card} />
           ))}

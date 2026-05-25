@@ -168,21 +168,21 @@ export function AboutTrust() {
           </p>
 
           <h2 className="max-w-3xl text-3xl font-extrabold tracking-tight md:text-5xl">
-            Practical learning for serious UK career growth.
+            Career-focused learning built for the UK digital economy.
           </h2>
 
           <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-            Brit Institute helps learners move from confusion to career clarity
-            with live learning, mentor guidance, real projects, and practical
-            tools employers actually ask for.
+            Brit Institute combines live expert-led training, mentor-reviewed
+            projects, and practical career support to help learners move with
+            confidence towards Data, AI, and technology roles in the UK.
           </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             {[
-              "Industry-led sessions",
-              "Personalised guidance",
-              "Career-focused projects",
-              "UK job-readiness support",
+              "Expert-led live sessions",
+              "Personalised mentor support",
+              "Portfolio-ready projects",
+              "UK career readiness",
             ].map((item) => (
               <div
                 key={item}
@@ -201,10 +201,10 @@ export function AboutTrust() {
               <div className="mb-5 flex items-center justify-between gap-4 border-b border-white/10 pb-4">
                 <div>
                   <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-[var(--gold-400)]">
-                    Learner cockpit
+                    Career progress dashboard
                   </p>
                   <h3 className="mt-2 text-xl font-black">
-                    Career readiness tracker
+                    Learner readiness overview
                   </h3>
                 </div>
 
@@ -215,10 +215,10 @@ export function AboutTrust() {
 
               <div className="grid gap-3 sm:grid-cols-2">
                 {[
-                  ["Mentor reviews", "92% complete"],
-                  ["Portfolio projects", "4 submitted"],
-                  ["Interview prep", "3 sessions"],
-                  ["Applications", "18 tracked"],
+                  ["Mentor feedback", "92% reviewed"],
+                  ["Portfolio projects", "4 completed"],
+                  ["Interview preparation", "3 sessions completed"],
+                  ["Career applications", "18 tracked"],
                 ].map(([label, value]) => (
                   <div
                     key={label}
@@ -234,7 +234,7 @@ export function AboutTrust() {
                       <div
                         className="h-2 rounded-full bg-[var(--gold-400)]"
                         style={{
-                          width: label === "Applications" ? "68%" : "84%",
+                          width: label === "Career applications" ? "68%" : "84%",
                         }}
                       />
                     </div>
@@ -245,9 +245,9 @@ export function AboutTrust() {
               <div className="mt-4 grid gap-3 sm:grid-cols-4">
                 {[
                   ["150+", "partners"],
-                  ["4.8/5", "rating"],
-                  ["847+", "trained"],
-                  ["Live", "mentor"],
+                  ["4.8/5", "learner rating"],
+                  ["847+", "learners trained"],
+                  ["Live", "mentor support"],
                 ].map(([value, label]) => (
                   <div
                     key={label}

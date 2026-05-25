@@ -9,7 +9,7 @@ import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import LogoStrip from "@/components/sections/LogoStrip";
 import PainPoints from "@/components/sections/PainPoints";
-import Solution from "@/components/sections/Solution";
+// import Solution from "@/components/sections/Solution";
 import Outcomes from "@/components/sections/Outcomes";
 import Testimonials from "@/components/sections/Testimonials";
 import IndustryExperts from "@/components/sections/IndustryExperts";
@@ -49,7 +49,7 @@ export default function Home() {
       <PainPoints />
 
       {/* 3. Solution */}
-      <Solution />
+      {/* <Solution /> */}
 
       {/* What learners get */}
       <BenefitsGrid />
@@ -58,13 +58,13 @@ export default function Home() {
       <Outcomes />
 
       {/* Career outcomes and salary clarity */}
-      <CareerOutcomes />
+      {/* <CareerOutcomes /> */}
 
       {/* Curriculum preview */}
-      <CurriculumSection />
+      {/* <CurriculumSection /> */}
 
       {/* Portfolio projects */}
-      <Projects />
+      {/* <Projects /> */}
 
       {/* 5. Proof (Testimonials) */}
       <Testimonials />
