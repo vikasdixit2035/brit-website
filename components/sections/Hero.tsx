@@ -87,7 +87,7 @@ export default function HeroSection() {
         {/* --- RIGHT VISUAL CONTENT --- */}
         <div className="relative z-[1] mt-10 flex w-full flex-1 justify-center lg:mt-0 lg:justify-end">
           <div className="hero-visual-grid relative h-[430px] w-full max-w-[680px] overflow-hidden lg:h-[560px] xl:max-w-[760px]">
-            <div className="absolute left-1/2 top-1/2 z-[1] h-[360px] w-[360px] -translate-x-1/2 -translate-y-1/2 sm:h-[430px] sm:w-[430px] lg:h-[520px] lg:w-[520px] xl:h-[560px] xl:w-[560px]">
+            <div className="absolute left-[56%] top-[44%] z-[1] h-[360px] w-[360px] -translate-x-1/2 -translate-y-1/2 sm:h-[430px] sm:w-[430px] lg:h-[520px] lg:w-[520px] xl:h-[560px] xl:w-[560px]">
               <HeroGlobe />
             </div>
             {HERO_ROLE_BADGES.map((badge) => (
@@ -125,8 +125,8 @@ export default function HeroSection() {
           background:
             linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-            radial-gradient(circle at 72% 12%, rgba(88, 41, 146, 0.16), transparent 42%),
-            radial-gradient(circle at 50% 55%, rgba(8, 16, 59, 0.92), rgba(6, 7, 11, 0.92) 68%);
+            radial-gradient(circle at 72% 12%, rgba(88, 41, 146, 0.08), transparent 42%),
+            #000;
           background-size: 64px 64px, 64px 64px, 100% 100%, 100% 100%;
         }
       `}</style>

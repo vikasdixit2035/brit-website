@@ -207,7 +207,7 @@ function Globe() {
   }, [landAlphaTexture, highlightedTexture, bordersTexture]);
 
   return (
-    <group ref={globeRef} rotation={[0.4, 0, 0]}>
+    <group ref={globeRef} position={[0.08, 0.08, 0]} rotation={[0.4, 0, 0]}>
       <mesh>
         <sphereGeometry args={[1, 128, 128]} />
         <meshStandardMaterial color="#20286B" flatShading />
@@ -281,7 +281,11 @@ function Globe() {
 export default function HeroGlobe() {
   return (
     <div aria-hidden="true" className="pointer-events-none h-full w-full">
-      <Canvas camera={{ position: [0, 0, 3], fov: 45 }}>
+      <Canvas
+        camera={{ position: [0, 0, 3], fov: 45 }}
+        gl={{ alpha: true, antialias: true }}
+        style={{ background: "transparent" }}
+      >
         <ambientLight intensity={0.8} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
         <Globe />
