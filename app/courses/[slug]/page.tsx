@@ -11,6 +11,7 @@ import Footer from "@/components/layout/Footer";
 import BrochureDownloadButton from "./BrochureDownloadButton";
 import CourseLeadForm from "./CourseLeadForm";
 import CourseInvestmentTracker from "./CourseInvestmentTracker";
+import DataAnalyticsCurriculum from "./DataAnalyticsCurriculum";
 import { coursesData } from "./courseData";
 import { BLOG_ARTICLES } from "@/app/blog/blogData";
 import { breadcrumbSchema, buildCourseSchema, buildMetadata } from "@/lib/seo";
@@ -411,16 +412,27 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                     <h2 className="text-2xl font-bold text-gray-900">Curriculum</h2>
                   </div>
 
-                  <div className="space-y-4">
-                    {richData.curriculum.map((item: string, idx: number) => (
-                      <div key={idx} className="flex items-center gap-4 bg-white p-4 rounded-xl border border-gray-100 shadow-sm hover:border-blue-200 transition-colors">
-                        <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm shrink-0">
-                          {idx + 1}
+                  {isDataAnalyticsCourse ? (
+                    <div className="rounded-2xl border border-blue-100 bg-blue-50 p-5 shadow-sm">
+                      <p className="text-sm font-semibold leading-7 text-blue-950">
+                        The full 26-week Data Analytics with GenAI curriculum is expanded below, including phase-by-phase topics, weekly labs, GenAI integration, and portfolio outcomes.
+                      </p>
+                      <a href="#detailed-data-analytics-curriculum" className="mt-4 inline-flex rounded-xl bg-blue-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-800">
+                        View detailed curriculum
+                      </a>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {richData.curriculum.map((item: string, idx: number) => (
+                        <div key={idx} className="flex items-center gap-4 bg-white p-4 rounded-xl border border-gray-100 shadow-sm hover:border-blue-200 transition-colors">
+                          <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm shrink-0">
+                            {idx + 1}
+                          </div>
+                          <span className="font-semibold text-gray-800">{item}</span>
                         </div>
-                        <span className="font-semibold text-gray-800">{item}</span>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Quick Stats Sidebar */}
@@ -487,6 +499,12 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                   ))}
                 </div>
               </section>
+
+              {isDataAnalyticsCourse && (
+                <section id="detailed-data-analytics-curriculum" className="scroll-mt-28">
+                  <DataAnalyticsCurriculum />
+                </section>
+              )}
 
               {relatedBlogArticles.length > 0 && (
                 <section className="rounded-3xl border border-blue-100 bg-white p-8 shadow-sm">

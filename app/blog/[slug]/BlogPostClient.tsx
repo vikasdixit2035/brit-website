@@ -28,7 +28,7 @@ const DEEP = "#0a0f1e";
 
 const COURSE_LINKS: Record<string, { title: string; href: string; description: string }> = {
   "data-analytics": {
-    title: "Data Analyst and Gen AI certification program",
+    title: "Data Analyst and Gen AI Certification Program",
     href: "/courses/data-analytics",
     description: "Build SQL, Power BI, Tableau, Python basics, and AI workflow skills for UK data analyst roles.",
   },

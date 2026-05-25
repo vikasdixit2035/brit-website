@@ -52,19 +52,19 @@ export interface CourseSeoData {
 
 export const coursesData: Record<string, CourseSeoData> = {
   "data-analytics": {
-    h1: "Data Analyst and Gen AI certification program",
-    subheadline: "Master SQL, Power BI, Tableau, dashboards, and AI tools through a practical data analytics course built for UK data analyst roles.",
+    h1: "Data Analyst and Gen AI Certification Program",
+    subheadline: "Master Excel, Power BI, SQL, Python, statistics, machine learning basics, and applied GenAI workflows through a practical programme built for UK data analyst roles.",
     cohort: "Starting Soon",
     duration: "6 months",
     canonicalPath: "/courses/data-analytics",
-    seoTitle: "Data Analyst and Gen AI certification program",
-    seoDescription: "Join Brit Institute's practical data analytics course in the UK. Learn Excel, SQL, Power BI, Tableau, Python basics, Gen AI workflows, projects, and career support.",
+    seoTitle: "Data Analyst and Gen AI Certification Program",
+    seoDescription: "Join Brit Institute's practical Data Analyst and Applied GenAI certification plan in the UK. Learn Excel, Power BI, SQL, Python, statistics, ML basics, GenAI workflows, portfolio projects, and career support.",
     ogImage: "/hero-illustration.png",
     updatedAt: "2026-04-13",
     trustLayer: {
       learnersTrained: SITE_STATS.learnersTrained,
       placedOrTransitioned: SITE_STATS.careerTransitions,
-      toolsUsed: "Tools used in real UK data analyst jobs"
+      toolsUsed: "Excel, Power BI, SQL, Python, ML basics, and GenAI workflows"
     },
     careerOutcomes: {
       roles: ["Data Analyst", "Business Analyst", "Reporting Analyst"],
@@ -74,7 +74,7 @@ export const coursesData: Record<string, CourseSeoData> = {
     isForYou: [
       "Non-tech professionals switching to data analytics",
       "Beginners starting a data analytics career",
-      "Excel users upgrading to modern tools",
+      "Excel users upgrading to Power BI, SQL, Python, and AI-enabled workflows",
       "Anyone searching for a data analytics course UK with job-focused projects"
     ],
     programmeOverview: {
@@ -83,16 +83,21 @@ export const coursesData: Record<string, CourseSeoData> = {
       level: "Beginner-friendly"
     },
     curriculum: [
-      "Data Analysis Foundations",
-      "Excel to SQL Transition",
-      "Power BI / Tableau Dashboards",
-      "Generative AI for Data Workflows"
+      "Excel for Data Analysis",
+      "Power BI Dashboards and Semantic Models",
+      "SQL and Advanced SQL",
+      "Python with Applied GenAI Integration",
+      "Statistics, Probability, and Decision Memos",
+      "Machine Learning Basics and Responsible AI"
     ],
-    toolsCovered: ["Excel", "SQL", "Power BI", "Tableau", "Python (basic)", "ChatGPT"],
+    toolsCovered: ["Excel", "Power BI", "SQL", "Python", "pandas", "scikit-learn", "OpenAI API", "GitHub"],
     projects: [
-      "Sales dashboard",
-      "Business reporting system",
-      "AI-assisted data insights"
+      "Operations KPI Tracker",
+      "Executive BI Dashboard",
+      "SQL Business Case Pack",
+      "Analyst Copilot Mini-App",
+      "Decision Memo",
+      "Prediction or Segmentation Prototype"
     ],
     careerSupport: [
       "CV tailored for UK data analyst jobs",
