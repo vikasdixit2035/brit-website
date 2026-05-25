@@ -14,14 +14,11 @@ import Outcomes from "@/components/sections/Outcomes";
 import Testimonials from "@/components/sections/Testimonials";
 import IndustryExperts from "@/components/sections/IndustryExperts";
 import Programs from "@/components/sections/Programs";
-import CurriculumSection from "@/components/sections/CurriculumSection";
-import Projects from "@/components/sections/Projects";
 import NextCohort from "@/components/sections/NextCohort";
 import {
   AboutTrust,
   BenefitsGrid,
   BlogAndContact,
-  CareerOutcomes,
   CertificateAndChooser,
   PlacementJourney,
 } from "@/components/sections/EngagementSections";
@@ -54,6 +51,9 @@ export default function Home() {
       {/* What learners get */}
       <BenefitsGrid />
 
+      {/* Certificate and course chooser */}
+      <CertificateAndChooser />
+
       {/* 4. Outcomes */}
       <Outcomes />
 
@@ -77,9 +77,6 @@ export default function Home() {
 
       {/* 7. Programme Snapshot */}
       <Programs />
-
-      {/* Certificate and course chooser */}
-      <CertificateAndChooser />
 
       {/* Cohort urgency */}
       <NextCohort />
