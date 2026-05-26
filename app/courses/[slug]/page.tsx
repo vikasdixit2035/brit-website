@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   Eye, ChevronRight, CheckCircle2, Briefcase,
   Clock, Layers, ArrowRight, Check, MonitorPlay, Zap,
-  TrendingUp, Target, Users, BookOpen, Terminal, Sparkles, Quote, Database,
-  FileSpreadsheet, ChartColumn, CodeXml, Table2, BrainCircuit, Bot, GitBranch
+  TrendingUp, Target, Users, BookOpen, Terminal, Sparkles, Quote, Database
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -54,47 +54,15 @@ const TRUST_AVATARS = [
   { src: "/testimonials/meera-iyer.jpg", alt: "Meera Iyer" },
 ];
 
-const TOOL_LOGOS: Record<string, { icon: typeof Database; accent: string; fallback: string }> = {
-  Excel: {
-    icon: FileSpreadsheet,
-    accent: "bg-emerald-50 text-emerald-700",
-    fallback: "XL",
-  },
-  "Power BI": {
-    icon: ChartColumn,
-    accent: "bg-yellow-50 text-yellow-700",
-    fallback: "BI",
-  },
-  SQL: {
-    icon: Database,
-    accent: "bg-sky-50 text-sky-700",
-    fallback: "SQL",
-  },
-  Python: {
-    icon: CodeXml,
-    accent: "bg-blue-50 text-blue-700",
-    fallback: "Py",
-  },
-  pandas: {
-    icon: Table2,
-    accent: "bg-violet-50 text-violet-700",
-    fallback: "pd",
-  },
-  "scikit-learn": {
-    icon: BrainCircuit,
-    accent: "bg-orange-50 text-orange-700",
-    fallback: "sk",
-  },
-  "OpenAI API": {
-    icon: Bot,
-    accent: "bg-gray-100 text-gray-800",
-    fallback: "AI",
-  },
-  GitHub: {
-    icon: GitBranch,
-    accent: "bg-zinc-100 text-zinc-800",
-    fallback: "GH",
-  },
+const TOOL_LOGOS: Record<string, { icon: () => ReactNode; accent: string; fallback: string }> = {
+  Excel: { icon: ExcelLogo, accent: "bg-emerald-50", fallback: "XL" },
+  "Power BI": { icon: PowerBILogo, accent: "bg-yellow-50", fallback: "BI" },
+  SQL: { icon: SqlLogo, accent: "bg-sky-50", fallback: "SQL" },
+  Python: { icon: PythonLogo, accent: "bg-blue-50", fallback: "Py" },
+  pandas: { icon: PandasLogo, accent: "bg-violet-50", fallback: "pd" },
+  "scikit-learn": { icon: ScikitLearnLogo, accent: "bg-orange-50", fallback: "sk" },
+  "OpenAI API": { icon: OpenAILogo, accent: "bg-gray-100", fallback: "AI" },
+  GitHub: { icon: GitHubLogo, accent: "bg-zinc-100", fallback: "GH" },
 };
 
 async function getCourse(slug: string): Promise<CourseRecord | null> {
@@ -157,6 +125,93 @@ function DiamondIcon() {
   );
 }
 
+function ExcelLogo() {
+  return (
+    <svg viewBox="0 0 32 32" className="h-6 w-6" aria-hidden="true">
+      <rect x="12" y="5" width="15" height="22" rx="2" fill="#21A366" />
+      <path d="M12 8h12v4H12zM12 14h12v4H12zM12 20h12v4H12z" fill="#fff" opacity=".45" />
+      <path d="M4 9.5 14 7v18L4 22.5z" fill="#107C41" />
+      <path d="m6.6 14 2.1 3-2.3 3h2.1l1.2-1.9 1.2 1.9h2.2l-2.3-3.1 2.1-2.9h-2l-1.1 1.7L8.7 14z" fill="#fff" />
+    </svg>
+  );
+}
+
+function PowerBILogo() {
+  return (
+    <svg viewBox="0 0 32 32" className="h-6 w-6" aria-hidden="true">
+      <rect x="5" y="15" width="5" height="11" rx="2" fill="#F2C811" />
+      <rect x="13" y="10" width="5" height="16" rx="2" fill="#F6D64A" />
+      <rect x="21" y="5" width="5" height="21" rx="2" fill="#E5A100" />
+    </svg>
+  );
+}
+
+function SqlLogo() {
+  return (
+    <svg viewBox="0 0 32 32" className="h-6 w-6" aria-hidden="true">
+      <ellipse cx="16" cy="8" rx="10" ry="4" fill="#3B82F6" />
+      <path d="M6 8v12c0 2.2 4.5 4 10 4s10-1.8 10-4V8" fill="#60A5FA" />
+      <path d="M6 14c0 2.2 4.5 4 10 4s10-1.8 10-4M6 20c0 2.2 4.5 4 10 4s10-1.8 10-4" fill="none" stroke="#DBEAFE" strokeWidth="1.8" />
+      <ellipse cx="16" cy="8" rx="10" ry="4" fill="none" stroke="#1D4ED8" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
+function PythonLogo() {
+  return (
+    <svg viewBox="0 0 32 32" className="h-6 w-6" aria-hidden="true">
+      <path d="M16 4c-5 0-7 1.4-7 4.2V12h8.4c1.8 0 3.2 1.4 3.2 3.2v2.4h3.2c2.8 0 4.2-2 4.2-6S26.6 5 23.8 5H17V4z" fill="#3776AB" />
+      <path d="M16 28c5 0 7-1.4 7-4.2V20h-8.4a3.2 3.2 0 0 1-3.2-3.2v-2.4H8.2c-2.8 0-4.2 2-4.2 6S5.4 27 8.2 27H15v1z" fill="#FFD43B" />
+      <circle cx="12" cy="8" r="1.2" fill="#fff" />
+      <circle cx="20" cy="24" r="1.2" fill="#664E00" />
+    </svg>
+  );
+}
+
+function PandasLogo() {
+  return (
+    <svg viewBox="0 0 32 32" className="h-6 w-6" aria-hidden="true">
+      <rect x="7" y="5" width="4" height="22" rx="1" fill="#150458" />
+      <rect x="14" y="5" width="4" height="8" rx="1" fill="#E70488" />
+      <rect x="14" y="17" width="4" height="10" rx="1" fill="#150458" />
+      <rect x="21" y="5" width="4" height="22" rx="1" fill="#150458" />
+    </svg>
+  );
+}
+
+function ScikitLearnLogo() {
+  return (
+    <svg viewBox="0 0 32 32" className="h-6 w-6" aria-hidden="true">
+      <circle cx="12" cy="12" r="5" fill="#F89939" />
+      <circle cx="20" cy="20" r="6" fill="#3499CD" />
+      <circle cx="22" cy="9" r="3" fill="#F89939" />
+      <path d="M12 12h10M15 15l5 5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" opacity=".8" />
+    </svg>
+  );
+}
+
+function OpenAILogo() {
+  return (
+    <svg viewBox="0 0 32 32" className="h-6 w-6" aria-hidden="true">
+      <g fill="none" stroke="#111827" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M16 5.2a6 6 0 0 1 5.7 4.2 6 6 0 0 1 4.9 8.7 6 6 0 0 1-5.1 8.6 6 6 0 0 1-10.1.2 6 6 0 0 1-5.2-8.8 6 6 0 0 1 4.2-8.8A6 6 0 0 1 16 5.2z" />
+        <path d="M21.7 9.4 16 12.7l-5.6-3.4M26.6 18.1 21 14.9v-5.5M21.5 26.7V20l5.1-1.9M11.4 26.9l5.6-3.3 4.5 3.1M6.2 18.1l5.8 3.3v5.5M10.4 9.3V16l-4.2 2.1" />
+      </g>
+    </svg>
+  );
+}
+
+function GitHubLogo() {
+  return (
+    <svg viewBox="0 0 32 32" className="h-6 w-6" aria-hidden="true">
+      <path
+        fill="#181717"
+        d="M16 4.4A11.8 11.8 0 0 0 12.3 27c.6.1.8-.3.8-.6v-2.1c-3.4.7-4.1-1.4-4.1-1.4-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 .1.8 2.1 3.5 1.5.1-.8.4-1.4.8-1.7-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C21.5 8.8 22.5 9 22.5 9c.6 1.6.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.2.9 2.4v2.7c0 .3.2.7.8.6A11.8 11.8 0 0 0 16 4.4z"
+      />
+    </svg>
+  );
+}
+
 function ToolLogo({ tool }: { tool: string }) {
   const logo = TOOL_LOGOS[tool];
   const Icon = logo?.icon;
@@ -164,7 +219,7 @@ function ToolLogo({ tool }: { tool: string }) {
   if (Icon) {
     return (
       <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${logo.accent}`}>
-        <Icon className="h-5 w-5" aria-hidden="true" />
+        <Icon />
       </span>
     );
   }

@@ -3,7 +3,7 @@
 // --- Configuration & Helpers ---
 const BRAND_BLUE = "#1D4ED8";
 const BRAND_GOLD = "#D4AF37";
-const WEBINAR_DATE = "16th May 2026";
+const UPCOMING_BATCH_DATE = "30th May 2026";
 
 // --- Private Helper Icons for Top Banner ---
 // Paper plane / Send style icon from image
@@ -205,17 +205,17 @@ export default function TopBanner({ visible, onClose }: TopBannerProps) {
               {/* Send icon + Text */}
               <div className="banner-item">
                 <BannerSendIcon fill="#ffffff" />
-                <span className="banner-text-bold">Free Live Webinar: Data, AI and Automation Careers</span>
+                <span className="banner-text-bold">Upcoming Batch: Data, AI and Automation Careers</span>
               </div>
 
               {/* Stopwatch + Text */}
               <div className="banner-item banner-cohort-item">
                 <BannerStopwatchIcon fill="#ffffff" />
-                <span className="banner-text-medium">Webinar Date: {WEBINAR_DATE}</span>
+                <span className="banner-text-medium">Batch Date: {UPCOMING_BATCH_DATE}</span>
               </div>
 
               {/* Button */}
-              <a href="/webinar" className="banner-cta-btn">Register Now</a>
+              <a href="/apply" className="banner-cta-btn">Apply Now</a>
             </div>
 
             <button className="banner-close-btn" onClick={onClose} aria-label="Close banner">

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -420,23 +421,15 @@ export function CertificateAndChooser() {
             </span>
           </div>
 
-          <div className="rounded-md border border-[var(--gold-400)]/35 bg-white p-7 text-slate-950">
-            <div className="text-xs font-black uppercase tracking-[0.3em] text-slate-500">
-              Brit Institute
-            </div>
-
-            <h3 className="mt-8 text-3xl font-black">
-              Professional Certificate
-            </h3>
-
-            <p className="mt-4 text-sm leading-7 text-slate-600">
-              Awarded for completing practical projects, mentor-reviewed
-              assignments, and career-readiness milestones.
-            </p>
-
-            <div className="mt-10 border-t border-slate-200 pt-5 text-sm font-bold text-slate-700">
-              AI & Data Career Programme
-            </div>
+          <div className="overflow-hidden rounded-md border border-[var(--gold-400)]/35 bg-white text-slate-950 shadow-inner">
+            <Image
+              src="/certificate-preview.svg"
+              alt="Brit Institute certificate of completion preview"
+              width={1280}
+              height={900}
+              className="h-auto w-full"
+              priority={false}
+            />
           </div>
 
           <Link
