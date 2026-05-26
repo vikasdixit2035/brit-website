@@ -32,7 +32,7 @@ export const faqItems: FaqItem[] = [
   {
     question: "Which tools and roles will I learn?",
     answer:
-      "Data Analytics tools: Excel / Google Sheets, SQL, Power BI / Tableau, Python, Statistics, and Business Analysis.\n\nData Analytics roles: Data Analyst, Business Analyst, Reporting Analyst, and Junior Data Consultant.\n\nAgentic AI tools: Python and AI APIs, Prompt Engineering, Autonomous AI Agents, Workflow Automation, and real-world AI implementations.\n\nAgentic AI roles: AI Analyst, AI Automation Specialist, Junior AI Engineer, and AI Solutions Associate.",
+      "Data Analytics tools: Excel / Google Sheets, SQL, Power BI / Tableau, Python, Statistics, and Business Analysis.\n\nData Analytics roles: Data Analyst, Business Analyst, Financial Analytics, Healthcare Analytics, and Junior Data Consultant.\n\nAgentic AI tools: Python and AI APIs, Prompt Engineering, Autonomous AI Agents, Workflow Automation, and real-world AI implementations.\n\nAgentic AI roles: AI Analyst, AI Automation Specialist, Junior AI Engineer, and AI Solutions Associate.",
   },
   {
     question: "Are industry projects included?",
@@ -76,12 +76,12 @@ export const dataAnalyticsFaqItems: FaqItem[] = [
   {
     question: "What is the best data analytics course in the UK for beginners?",
     answer:
-      "Brit Institute offers a beginner-friendly Data Analyst and Gen AI certification program that covers Excel, Power BI, SQL, Python, statistics, machine learning basics, and applied GenAI workflows from scratch. It includes hands-on projects and end-to-end career support tailored for the UK job market.",
+      "Brit Institute offers a beginner-friendly Data Analytics and Gen AI certification program that covers Excel, Power BI, SQL, Python, statistics, machine learning basics, and applied GenAI workflows from scratch. It includes hands-on projects and end-to-end career support tailored for the UK job market.",
   },
   {
     question: "How long is the data analytics course at Brit Institute?",
     answer:
-      "The Data Analyst and Gen AI certification program is 6 months long, with live online classes, recorded sessions, and mentored projects throughout.",
+      "The Data Analytics and Gen AI certification program is 6 months long, with live online classes, recorded sessions, and mentored projects throughout.",
   },
   {
     question: "What salary can I expect after completing a data analytics course in the UK?",
@@ -106,7 +106,7 @@ export const dataAnalyticsFaqItems: FaqItem[] = [
   {
     question: "How much does the data analytics course cost in the UK?",
     answer:
-      "The Data Analyst and Gen AI certification program is priced at £3,499. EMI payment options are available, and eligible learners may qualify for Pay After Placement arrangements.",
+      "The Data Analytics and Gen AI certification program is priced at £3,499. EMI payment options are available, and eligible learners may qualify for Pay After Placement arrangements.",
   },
 ];
 

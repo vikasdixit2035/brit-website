@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   Eye, ChevronRight, CheckCircle2, Briefcase,
   Clock, Layers, ArrowRight, Check, MonitorPlay, Zap,
-  TrendingUp, Target, Users, BookOpen, Terminal, Sparkles, Quote, Database
+  TrendingUp, Target, Users, BookOpen, Terminal, Sparkles, Quote, Database,
+  FileSpreadsheet, ChartColumn, CodeXml, Table2, BrainCircuit, Bot, GitBranch
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -46,43 +48,50 @@ const COURSE_RELATED_BLOG_SLUGS: Record<string, string[]> = {
   ],
 };
 
-const TOOL_LOGOS: Record<string, { src?: string; accent: string; fallback: string }> = {
+const TRUST_AVATARS = [
+  { src: "/testimonials/emma-thompson.webp", alt: "Emma Thompson" },
+  { src: "/testimonials/james-walker.webp", alt: "James Walker" },
+  { src: "/testimonials/meera-iyer.jpg", alt: "Meera Iyer" },
+];
+
+const TOOL_LOGOS: Record<string, { icon: typeof Database; accent: string; fallback: string }> = {
   Excel: {
-    src: "https://cdn.simpleicons.org/microsoftexcel/217346",
+    icon: FileSpreadsheet,
     accent: "bg-emerald-50 text-emerald-700",
     fallback: "XL",
   },
   "Power BI": {
-    src: "https://cdn.simpleicons.org/powerbi/F2C811",
+    icon: ChartColumn,
     accent: "bg-yellow-50 text-yellow-700",
     fallback: "BI",
   },
   SQL: {
+    icon: Database,
     accent: "bg-sky-50 text-sky-700",
     fallback: "SQL",
   },
   Python: {
-    src: "https://cdn.simpleicons.org/python/3776AB",
+    icon: CodeXml,
     accent: "bg-blue-50 text-blue-700",
     fallback: "Py",
   },
   pandas: {
-    src: "https://cdn.simpleicons.org/pandas/150458",
+    icon: Table2,
     accent: "bg-violet-50 text-violet-700",
     fallback: "pd",
   },
   "scikit-learn": {
-    src: "https://cdn.simpleicons.org/scikitlearn/F7931E",
+    icon: BrainCircuit,
     accent: "bg-orange-50 text-orange-700",
     fallback: "sk",
   },
   "OpenAI API": {
-    src: "https://cdn.simpleicons.org/openai/111827",
+    icon: Bot,
     accent: "bg-gray-100 text-gray-800",
     fallback: "AI",
   },
   GitHub: {
-    src: "https://cdn.simpleicons.org/github/181717",
+    icon: GitBranch,
     accent: "bg-zinc-100 text-zinc-800",
     fallback: "GH",
   },
@@ -150,19 +159,12 @@ function DiamondIcon() {
 
 function ToolLogo({ tool }: { tool: string }) {
   const logo = TOOL_LOGOS[tool];
+  const Icon = logo?.icon;
 
-  if (tool === "SQL") {
-    return (
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-sky-700">
-        <Database className="h-5 w-5" aria-hidden="true" />
-      </span>
-    );
-  }
-
-  if (logo?.src) {
+  if (Icon) {
     return (
       <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${logo.accent}`}>
-        <img src={logo.src} alt={`${tool} logo`} className="h-5 w-5 object-contain" />
+        <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
     );
   }
@@ -295,6 +297,13 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
 
           {/* 1. Hero Section */}
           <header className="mb-12">
+            {isDataAnalyticsCourse && (
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-50 px-3.5 py-1.5 text-sm font-extrabold text-purple-700 shadow-sm">
+                <Sparkles className="h-4 w-4 text-amber-500" aria-hidden="true" />
+                AI enabled
+              </div>
+            )}
+
             <h1 className="text-4xl md:text-5xl leading-[1.2] font-extrabold text-gray-900 mb-5 tracking-tight">
               {richData ? richData.h1 : course.title}
             </h1>
@@ -320,12 +329,15 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
             {/* Social Proof / Trust Layer */}
             <div className="flex flex-wrap md:flex-nowrap items-center gap-4 bg-white shadow-sm p-2 pr-6 rounded-full border border-gray-200/60 w-max max-w-full">
               <div className="flex -space-x-3 ml-2 flex-shrink-0">
-                {["AL", "RP", "SK"].map((initials) => (
-                  <span
-                    key={initials}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-gradient-to-br from-blue-600 to-indigo-600 text-xs font-bold text-white shadow-sm"
-                  >
-                    {initials}
+                {TRUST_AVATARS.map((avatar) => (
+                  <span key={avatar.src} className="relative block h-10 w-10 overflow-hidden rounded-full border-2 border-white bg-gray-100 shadow-sm">
+                    <Image
+                      src={avatar.src}
+                      alt={avatar.alt}
+                      fill
+                      sizes="40px"
+                      className="object-cover"
+                    />
                   </span>
                 ))}
               </div>
@@ -451,9 +463,20 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                   <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
                     <Users className="w-6 h-6 text-blue-500 mb-4" />
                     <div className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-3">Industry Demand</div>
-                    <p className="text-gray-700 text-sm leading-relaxed font-medium">
-                      {richData.careerOutcomes.demand}
-                    </p>
+                    {Array.isArray(richData.careerOutcomes.demand) ? (
+                      <ul className="grid grid-cols-2 gap-2">
+                        {richData.careerOutcomes.demand.map((industry: string) => (
+                          <li key={industry} className="flex items-start gap-2 text-sm font-medium text-gray-700">
+                            <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue-500" />
+                            {industry}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="text-gray-700 text-sm leading-relaxed font-medium">
+                        {richData.careerOutcomes.demand}
+                      </p>
+                    )}
                   </div>
                 </div>
               </section>
@@ -461,7 +484,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
               {/* Is This Course For You */}
               <section className="bg-white rounded-3xl p-8 md:p-10 border border-gray-100 shadow-sm relative overflow-hidden">
                 <div className="absolute -right-10 -top-10 w-40 h-40 bg-yellow-50 rounded-full blur-3xl"></div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-8 relative z-10">Is This Course For You?</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-8 relative z-10">Is This Right Fit For You?</h2>
                 <div className="grid sm:grid-cols-2 gap-x-8 gap-y-6 relative z-10">
                   {richData.isForYou.map((item: string, idx: number) => (
                     <div key={idx} className="flex gap-4 items-start group">

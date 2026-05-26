@@ -285,7 +285,7 @@ export default function DataAnalyticsCurriculum() {
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.14em] text-amber-300">UK job-ready certification plan</p>
             <h2 className="mt-3 text-3xl font-extrabold leading-tight md:text-4xl">
-              Data Analyst and Applied GenAI Certification
+              Data Analytics and Applied GenAI Certification
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-300">
               A six-month weekend programme built around Excel, Power BI, SQL, Python, statistics, machine learning, and AI-assisted analyst workflows. Learners finish with portfolio evidence for junior data analyst, BI analyst, reporting analyst, operations analyst, and data insight roles.

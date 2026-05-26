@@ -411,7 +411,7 @@ export function educationalOrganizationSchema() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Course",
-            name: "Data Analyst and Gen AI Certification Program",
+            name: "Data Analytics and Gen AI Certification Program",
             url: absoluteUrl("/courses/data-analytics"),
             description:
               "Master Excel, Power BI, SQL, Python, machine learning basics, and applied GenAI workflows to become a job-ready data analyst in the UK.",

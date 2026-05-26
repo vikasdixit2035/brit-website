@@ -18,7 +18,7 @@ export interface CourseSeoData {
   careerOutcomes: {
     roles: string[];
     salary: string;
-    demand: string;
+    demand: string | string[];
   };
   isForYou: string[];
   programmeOverview: {
@@ -52,13 +52,13 @@ export interface CourseSeoData {
 
 export const coursesData: Record<string, CourseSeoData> = {
   "data-analytics": {
-    h1: "Data Analyst and Gen AI Certification Program",
+    h1: "Data Analytics and Gen AI Certification Program",
     subheadline: "Master Excel, Power BI, SQL, Python, statistics, machine learning basics, and applied GenAI workflows through a practical programme built for UK data analyst roles.",
     cohort: "Starting Soon",
     duration: "6 months",
     canonicalPath: "/courses/data-analytics",
-    seoTitle: "Data Analyst and Gen AI Certification Program",
-    seoDescription: "Join Brit Institute's practical Data Analyst and Applied GenAI certification plan in the UK. Learn Excel, Power BI, SQL, Python, statistics, ML basics, GenAI workflows, portfolio projects, and career support.",
+    seoTitle: "Data Analytics and Gen AI Certification Program",
+    seoDescription: "Join Brit Institute's practical Data Analytics and Applied GenAI certification plan in the UK. Learn Excel, Power BI, SQL, Python, statistics, ML basics, GenAI workflows, portfolio projects, and career support.",
     ogImage: "/hero-illustration.png",
     updatedAt: "2026-04-13",
     trustLayer: {
@@ -67,9 +67,9 @@ export const coursesData: Record<string, CourseSeoData> = {
       toolsUsed: "Excel, Power BI, SQL, Python, ML basics, and GenAI workflows"
     },
     careerOutcomes: {
-      roles: ["Data Analyst", "Business Analyst", "Reporting Analyst"],
+      roles: ["Data Analyst", "Business Analyst", "Financial Analytics", "Healthcare Analytics"],
       salary: "£28,000 – £55,000+",
-      demand: "Strong demand across finance, retail, SaaS, consulting"
+      demand: ["Finance", "Retail", "SaaS", "Consulting", "IT", "Healthcare"]
     },
     isForYou: [
       "Non-tech professionals switching to data analytics",
@@ -102,7 +102,10 @@ export const coursesData: Record<string, CourseSeoData> = {
     careerSupport: [
       "CV tailored for UK data analyst jobs",
       "Interview prep",
-      "Portfolio review"
+      "Portfolio review",
+      "LinkedIn optimisation",
+      "Mock interview sessions",
+      "Targeted job application support"
     ],
     pricing: {
       price: "£3,499",

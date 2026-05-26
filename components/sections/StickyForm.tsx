@@ -122,7 +122,7 @@ export default function StickyForm() {
               className="w-full appearance-none rounded-xl border border-white/20 bg-black/40 px-4 py-4 text-sm text-white outline-none focus:border-[#D4AF37] transition-colors [&>option]:text-black"
             >
               <option value="" disabled>Course Interest*</option>
-              <option value="Data Analyst and Gen AI Certification Program">Data Analyst and Gen AI Certification Program</option>
+              <option value="Data Analytics and Gen AI Certification Program">Data Analytics and Gen AI Certification Program</option>
               <option value="Data Science, Machine Learning and Gen AI Certification Program">Data Science, Machine Learning and Gen AI Certification Program</option>
               <option value="Agentic AI Certification Program">Agentic AI Certification Program</option>
               <option value="Generative AI Certification Program">Generative AI Certification Program</option>

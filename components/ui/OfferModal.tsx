@@ -294,7 +294,7 @@ export default function OfferModal({ isOpen, onClose }: OfferModalProps) {
                 }}
               >
                 <option value="">Select an option</option>
-                <option value="Data Analyst and Gen AI Certification Program">Data Analyst and Gen AI Certification Program</option>
+                <option value="Data Analytics and Gen AI Certification Program">Data Analytics and Gen AI Certification Program</option>
                 <option value="Data Science, Machine Learning and Gen AI Certification Program">Data Science, Machine Learning and Gen AI Certification Program</option>
                 <option value="Agentic AI Certification Program">Agentic AI Certification Program</option>
                 <option value="Generative AI Certification Program">Generative AI Certification Program</option>
