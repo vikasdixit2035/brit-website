@@ -102,8 +102,8 @@ const programmes = [
     "Best for professionals who want to automate workflows with modern AI tools.",
   ],
   [
-    "Full Stack Development",
-    "Best for learners who want to build web apps and software products.",
+    "Generative AI",
+    "Best for learners who want to build practical AI workflows, prompts, and portfolio projects.",
   ],
 ];
 
