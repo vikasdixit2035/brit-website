@@ -568,7 +568,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                     <div className="rounded-2xl border border-blue-100 bg-blue-50 p-5 shadow-sm">
                       <p className="text-sm font-semibold leading-7 text-blue-950">
                         {isDataAnalyticsCourse
-                          ? "The full 26-week Data Analytics with GenAI curriculum is expanded below, including phase-by-phase topics, weekly labs, GenAI integration, and portfolio outcomes."
+                          ? "The full 26-week Data Analytics with AI curriculum is expanded below, including phase-by-phase topics, weekly labs, AI integration, and portfolio outcomes."
                           : isAgenticAICourse
                             ? "The full 16-week Agentic AI curriculum is expanded below, including phase-by-phase topics, weekly labs, agent workflow design, and portfolio outcomes."
                             : isDataScienceCourse

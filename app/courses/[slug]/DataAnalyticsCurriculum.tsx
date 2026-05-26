@@ -19,7 +19,7 @@ const moduleBalance = [
   { name: "Excel", weeks: "3 weeks", hours: "12 live hours", note: "Analyst essentials for day-one productivity" },
   { name: "Power BI", weeks: "5 weeks", hours: "20 live hours", note: "High visibility skill in UK analyst hiring" },
   { name: "SQL + Advanced SQL", weeks: "5 weeks", hours: "20 live hours", note: "Querying, joining, transforming, and explaining data" },
-  { name: "Python + AI Integration", weeks: "7 weeks", hours: "28 live hours", note: "Automation, GenAI, APIs, and analyst tooling" },
+  { name: "Python + AI Integration", weeks: "7 weeks", hours: "28 live hours", note: "Automation, AI, APIs, and analyst tooling" },
   { name: "Statistics", weeks: "2 weeks", hours: "8 live hours", note: "Interpretation for decisions, not academic overload" },
   { name: "Machine Learning", weeks: "4 weeks", hours: "16 live hours", note: "Predictive and segmentation literacy for junior roles" },
 ];
@@ -125,9 +125,9 @@ const phaseCards = [
   },
   {
     phase: "Phase 4",
-    title: "Applied Machine Learning & Responsible GenAI",
+    title: "Applied Machine Learning & Responsible AI",
     description:
-      "Learn enough ML to frame practical predictive problems, evaluate models, explain limits, and use GenAI responsibly in analytics work.",
+      "Learn enough ML to frame practical predictive problems, evaluate models, explain limits, and use AI responsibly in analytics work.",
     icon: BrainCircuit,
     accent: "text-amber-700",
     bg: "bg-amber-50",
@@ -204,7 +204,7 @@ const weekPlan = [
   ["15", "pandas CSV/Excel I/O and DataFrames", "Missing values, types, grouping, aggregations", "Clean analysis-ready dataset"],
   ["16", "Merge, join, concat, reshape, dates", "Exploratory charts and story-first commentary", "Build exploratory notebook"],
   ["17", "Reusable code and analyst automation", "APIs, JSON, environment variables, packages", "Automate data pull or report prep"],
-  ["18", "GenAI for analysts and API basics", "Structured outputs for reliable JSON insights", "Generate structured KPI summary"],
+  ["18", "AI for analysts and API basics", "Structured outputs for reliable JSON insights", "Generate structured KPI summary"],
   ["19", "Function calling and tool workflows", "Embeddings, semantic search, document Q&A", "Add retrieval or tool-calling feature"],
   ["20", "End-to-end analyst copilot build lab", "Demo day and feedback", "Submit Analyst Copilot Mini-App"],
   ["21", "Data types, spread, distributions, outliers", "Probability, sampling, bias, confidence intervals", "Begin statistical decision memo"],
@@ -234,7 +234,7 @@ const portfolioProjects = [
   {
     title: "Analyst Copilot Mini-App",
     proof: "Notebook or app, prompt templates, structured JSON example, and governance note",
-    outcome: "Automate analysis and use GenAI responsibly in workflows",
+    outcome: "Automate analysis and use AI responsibly in workflows",
   },
   {
     title: "Decision Memo",
@@ -285,13 +285,13 @@ export default function DataAnalyticsCurriculum() {
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.14em] text-amber-300">UK job-ready certification plan</p>
             <h2 className="mt-3 text-3xl font-extrabold leading-tight md:text-4xl">
-              Data Analytics and Applied GenAI Certification
+              Data Analytics and Applied AI Certification
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-300">
               A six-month weekend programme built around Excel, Power BI, SQL, Python, statistics, machine learning, and AI-assisted analyst workflows. Learners finish with portfolio evidence for junior data analyst, BI analyst, reporting analyst, operations analyst, and data insight roles.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              {["26 weeks", "104 guided hours", "6 portfolio projects", "GenAI in every module"].map((item) => (
+              {["26 weeks", "104 guided hours", "6 portfolio projects", "AI in every module"].map((item) => (
                 <span key={item} className="rounded-md border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold text-white">
                   {item}
                 </span>
@@ -342,7 +342,7 @@ export default function DataAnalyticsCurriculum() {
       <section>
         <SectionHeading
           eyebrow="Detailed syllabus"
-          title="Five phases with GenAI embedded from the first week."
+          title="Five phases with AI embedded from the first week."
           description="The course is not a separate AI add-on. Learners use AI safely inside Excel, Power BI, SQL, Python, statistics, ML, documentation, and career preparation."
         />
         <div className="space-y-6">
@@ -382,7 +382,7 @@ export default function DataAnalyticsCurriculum() {
                         <div className="mt-4 rounded-md border border-blue-100 bg-blue-50 p-4">
                           <div className="mb-2 flex items-center gap-2 text-sm font-extrabold text-blue-800">
                             <Sparkles className="h-4 w-4" />
-                            GenAI integration
+                            {track.title === "Power BI" ? "GenAI integration" : "AI integration"}
                           </div>
                           <p className="text-sm leading-6 text-blue-950">{track.genAi}</p>
                         </div>
