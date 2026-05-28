@@ -14,7 +14,7 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import TopBanner from "@/components/layout/TopBanner";
 import Footer from "@/components/layout/Footer";
-import { SITE_EMAIL, SITE_PHONE_UK } from "@/lib/site";
+import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_PHONE_UK } from "@/lib/site";
 import type { CourseRecord } from "@/lib/courses";
 
 const COURSE_STYLES: Record<string, {
@@ -407,7 +407,7 @@ export default function PricingPageClient({ courses }: PricingPageClientProps) {
                 href={`tel:${SITE_PHONE_UK}`}
                 className="flex items-center justify-center gap-2 rounded-2xl border border-white/10 px-5 py-3.5 text-sm font-semibold text-white/85 transition hover:bg-white/5"
               >
-                <Phone className="h-4 w-4" /> {SITE_PHONE_UK}
+                <Phone className="h-4 w-4" /> {SITE_PHONE_DISPLAY}
               </a>
               <a
                 href={`mailto:${SITE_EMAIL}`}

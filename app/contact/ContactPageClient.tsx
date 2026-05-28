@@ -5,7 +5,7 @@ import TopBanner from "@/components/layout/TopBanner";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { trackLead } from "@/lib/analytics";
-import { SITE_ADDRESS_LINES, SITE_EMAIL, SITE_PHONE_UK } from "@/lib/site";
+import { SITE_ADDRESS_LINES, SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_PHONE_UK } from "@/lib/site";
 
 export default function ContactPage() {
   const [banner, setBanner] = useState(true);
@@ -104,7 +104,7 @@ export default function ContactPage() {
 
                   <div style={{ fontSize: "0.85rem", fontWeight: 600, color: "#111827", marginBottom: "4px" }}>United Kingdom</div>
                   <div style={{ fontWeight: 600, fontSize: "0.95rem" }}>
-                    <a href={`tel:${SITE_PHONE_UK}`} style={{ color: "#10B981", textDecoration: "none" }}>{SITE_PHONE_UK}</a>
+                    <a href={`tel:${SITE_PHONE_UK}`} style={{ color: "#10B981", textDecoration: "none" }}>{SITE_PHONE_DISPLAY}</a>
                   </div>
                 </div>
               </div>

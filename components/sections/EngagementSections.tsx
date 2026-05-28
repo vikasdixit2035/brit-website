@@ -23,7 +23,7 @@ import {
   UserCheck,
 } from "lucide-react";
 import useReveal from "@/hooks/useReveal";
-import { SITE_ADDRESS_SHORT, SITE_EMAIL, SITE_PHONE_UK } from "@/lib/site";
+import { SITE_ADDRESS_SHORT, SITE_EMAIL, SITE_PHONE_DISPLAY } from "@/lib/site";
 
 const benefits = [
   {
@@ -594,7 +594,7 @@ export function BlogAndContact() {
           <div className="mt-7 grid gap-4">
             {[
               { icon: Mail, text: SITE_EMAIL },
-              { icon: Phone, text: SITE_PHONE_UK },
+              { icon: Phone, text: SITE_PHONE_DISPLAY },
               { icon: MapPin, text: SITE_ADDRESS_SHORT },
             ].map((item) => {
               const Icon = item.icon;

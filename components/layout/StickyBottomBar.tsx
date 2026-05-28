@@ -1,5 +1,7 @@
 "use client";
 
+import { SITE_PHONE_DISPLAY, SITE_PHONE_UK } from "@/lib/site";
+
 export default function StickyBottomBar() {
   return (
     <>
@@ -111,8 +113,8 @@ export default function StickyBottomBar() {
           </span>
           <span className="sticky-bottom-bar__divider">|</span>
           <span className="sticky-bottom-bar__text">Call Us at</span>
-          <a href="tel:+447520664011" className="sticky-bottom-bar__phone">
-            +447520664011
+          <a href={`tel:${SITE_PHONE_UK}`} className="sticky-bottom-bar__phone">
+            {SITE_PHONE_DISPLAY}
           </a>
           <span className="sticky-bottom-bar__text">or</span>
           <a href="/contact" className="sticky-bottom-bar__cta">

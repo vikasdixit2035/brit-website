@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { SITE_ADDRESS_LINES, SITE_EMAIL, SITE_PHONE_UK } from "@/lib/site";
+import { SITE_ADDRESS_LINES, SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_PHONE_UK } from "@/lib/site";
 
 export default function Footer() {
   return (
@@ -37,7 +37,7 @@ export default function Footer() {
           <ul>
             <li><a href="/contact" style={{ color: 'var(--gray-500)' }}>Contact Us</a></li>
             <li><a href={`mailto:${SITE_EMAIL}`} style={{ color: 'var(--gray-500)' }}>{SITE_EMAIL}</a></li>
-            <li><a href={`tel:${SITE_PHONE_UK}`} style={{ color: 'var(--gray-500)' }}>{SITE_PHONE_UK}</a></li>
+            <li><a href={`tel:${SITE_PHONE_UK}`} style={{ color: 'var(--gray-500)' }}>{SITE_PHONE_DISPLAY}</a></li>
             <li>
               <address style={{ color: 'var(--gray-500)', lineHeight: 1.6, fontStyle: 'normal' }}>
                 {SITE_ADDRESS_LINES.map((line) => (
