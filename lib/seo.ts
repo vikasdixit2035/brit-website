@@ -214,6 +214,7 @@ export function siteNavigationSchema() {
   const navItems = [
     { name: "About Brit Institute", url: "/about" },
     { name: "Courses", url: "/courses" },
+    { name: "Placement Support", url: "/placement" },
     { name: "Pricing", url: "/pricing" },
     { name: "Reviews", url: "/reviews" },
     { name: "Resources", url: "/resources" },
@@ -238,6 +239,7 @@ export function siteNavigationSchemaForSite(siteConfig: SiteConfig) {
   const navItems = [
     { name: "About Brit Institute", url: "/about" },
     { name: "Courses", url: "/courses" },
+    { name: "Placement Support", url: "/placement" },
     { name: "Pricing", url: "/pricing" },
     { name: "Reviews", url: "/reviews" },
     { name: "Resources", url: "/resources" },

@@ -2,20 +2,16 @@ import { MAIN_SITE_NAME, MAIN_SITE_URL } from "@/lib/siteConfig";
 
 export const SITE_URL = MAIN_SITE_URL;
 export const SITE_NAME = MAIN_SITE_NAME;
-export const SITE_EMAIL = "info@britinstitute.uk";
-export const SITE_PHONE_UK_LOCAL = "02034321901";
-export const SITE_PHONE_UK = "+442034321901";
-export const SITE_PHONE_DISPLAY = `${SITE_PHONE_UK_LOCAL} (or ${SITE_PHONE_UK} outside the UK)`;
+export const SITE_EMAIL = "admissions@britinstitute.co.uk";
+export const SITE_PHONE_UK_LOCAL = "020 1234 5678";
+export const SITE_PHONE_UK = "+442012345678";
+export const SITE_PHONE_DISPLAY = "+44 (0) 20 1234 5678";
 export const SITE_ADDRESS_LINES = [
-  "Office 7084",
-  "58 Peregrine Road",
-  "Hainault",
-  "Ilford",
-  "Essex",
-  "IG6 3SZ",
+  "London",
+  "United Kingdom",
 ] as const;
 export const SITE_ADDRESS = SITE_ADDRESS_LINES.join(", ");
-export const SITE_ADDRESS_SHORT = "Office 7084, 58 Peregrine Road, Hainault, Ilford, Essex, IG6 3SZ";
+export const SITE_ADDRESS_SHORT = "London, United Kingdom";
 
 export const SITE_STATS = {
   learnersTrained: "10,000+",

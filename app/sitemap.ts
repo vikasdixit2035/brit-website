@@ -24,6 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/about",
     "/contact",
     "/courses",
+    "/placement",
     "/pricing",
     "/reviews",
     "/resources",
@@ -37,7 +38,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticEntries = staticRoutes.map((path) => {
     let priority = 0.7;
     if (path === "/") priority = 1.0;
-    else if (["/about", "/contact", "/courses", "/pricing"].includes(path)) priority = 0.9;
+    else if (["/about", "/contact", "/courses", "/placement", "/pricing"].includes(path)) priority = 0.9;
     
     return {
       url: `${siteConfig.siteUrl}${path}`,
