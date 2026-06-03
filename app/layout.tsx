@@ -13,7 +13,10 @@ import {
 
 import GlobalUI from "@/components/layout/GlobalUI";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
-import GoogleTagManager from "@/components/analytics/GoogleTagManager";
+import {
+  GoogleTagManagerHead,
+  GoogleTagManagerNoScript,
+} from "@/components/analytics/GoogleTagManager";
 import MetaPixel from "@/components/analytics/MetaPixel";
 import {
   educationalOrganizationSchema,
@@ -116,6 +119,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
+        <GoogleTagManagerHead />
         <OrganizationSchema siteConfig={siteConfig} />
         <script
           type="application/ld+json"
@@ -133,7 +137,7 @@ export default async function RootLayout({
         )}
       </head>
       <body>
-        <GoogleTagManager />
+        <GoogleTagManagerNoScript />
         <MetaPixel />
         <GlobalUI />
         {children}
