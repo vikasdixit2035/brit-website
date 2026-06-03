@@ -165,6 +165,7 @@ export default function PaymentCheckout({
   const [isApplyingCoupon, setIsApplyingCoupon] = useState(false);
   const [paypalReady, setPaypalReady] = useState(false);
   const [isPayLaterVisible, setIsPayLaterVisible] = useState(false);
+  const [payLaterUnavailable, setPayLaterUnavailable] = useState(false);
   const [config, setConfig] = useState<PaymentConfig | null>(null);
   const [error, setError] = useState("");
   const [couponCode, setCouponCode] = useState("");
@@ -191,6 +192,7 @@ export default function PaymentCheckout({
     setAppliedCoupon(null);
     setCouponMessage("");
     setIsPayLaterVisible(false);
+    setPayLaterUnavailable(false);
     setError("");
   }, [isCheckoutOpen]);
 
@@ -243,6 +245,7 @@ export default function PaymentCheckout({
     paypalContainerRef.current.innerHTML = "";
     payLaterContainerRef.current.innerHTML = "";
     setIsPayLaterVisible(false);
+    setPayLaterUnavailable(false);
 
     const createOrder = async () => {
       const response = await apiRequest<{ id: string }>("/api/payments/paypal/order", {
@@ -312,6 +315,7 @@ export default function PaymentCheckout({
       });
 
       if (!(payLaterButton.isEligible?.() ?? true)) {
+        setPayLaterUnavailable(true);
         return;
       }
 
@@ -321,6 +325,7 @@ export default function PaymentCheckout({
         .catch((err) => {
           console.error("PayPal Pay Later render failed:", err);
           setIsPayLaterVisible(false);
+          setPayLaterUnavailable(true);
         });
     }
   }, [appliedCoupon?.code, courseSlug, isCheckoutOpen, payLaterAmountEligible, paypalReady]);
@@ -566,7 +571,7 @@ export default function PaymentCheckout({
                 <div ref={paypalContainerRef} className={paypalReady ? "min-h-12" : "hidden"} />
               </div>
 
-              <div className={paypalReady && (!payLaterAmountEligible || isPayLaterVisible) ? "" : "hidden"}>
+              <div className={paypalReady ? "" : "hidden"}>
                 <div className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-700">
                   <Wallet className="h-4 w-4 text-indigo-700" />
                   PayPal Pay Later
@@ -576,6 +581,11 @@ export default function PaymentCheckout({
                   <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-600">
                     PayPal Pay Later is available only for eligible GBP totals from{" "}
                     {formatAmount(payLaterMinAmount, "GBP")} to {formatAmount(payLaterMaxAmount, "GBP")}. Current total: {displayAmount}.
+                  </div>
+                )}
+                {payLaterAmountEligible && payLaterUnavailable && (
+                  <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-600">
+                    This total is eligible, but PayPal Pay Later is not available for this buyer or PayPal account right now.
                   </div>
                 )}
               </div>
