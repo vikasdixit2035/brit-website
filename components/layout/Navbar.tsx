@@ -50,6 +50,7 @@ const NAV_RIGHT_LINKS: NavLink[] = [
   { href: "/webinar", label: "Webinar" },
   { href: "/blog", label: "Blog" },
   { href: "/pricing", label: "Pricing" },
+  { href: "/pay", label: "Pay Fees" },
   { href: HOME_FAQ_HREF, label: "FAQ" },
   { href: "/careers", label: "Careers" },
 ];

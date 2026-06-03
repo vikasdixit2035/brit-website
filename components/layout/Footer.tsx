@@ -29,6 +29,7 @@ export default function Footer() {
             <li><Link href="/about" style={{ color: 'var(--gray-500)' }}>About Us</Link></li>
             <li><Link href="/#proof" style={{ color: 'var(--gray-500)' }}>Success Stories</Link></li>
             <li><Link href="/blog" style={{ color: 'var(--gray-500)' }}>Blog</Link></li>
+            <li><Link href="/pay" style={{ color: 'var(--gray-500)' }}>Pay Fees</Link></li>
             <li><Link href="/careers" style={{ color: 'var(--gray-500)' }}>Careers</Link></li>
           </ul>
         </div>

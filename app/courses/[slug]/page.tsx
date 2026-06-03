@@ -13,6 +13,7 @@ import Footer from "@/components/layout/Footer";
 import BrochureDownloadButton from "./BrochureDownloadButton";
 import CourseLeadForm from "./CourseLeadForm";
 import CourseInvestmentTracker from "./CourseInvestmentTracker";
+import PaymentCheckout from "./PaymentCheckout";
 import AgenticAICurriculum from "./AgenticAICurriculum";
 import DataAnalyticsCurriculum from "./DataAnalyticsCurriculum";
 import DataScienceMLCurriculum from "./DataScienceMLCurriculum";
@@ -279,6 +280,8 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
   }
 
   const coursePath = richData?.canonicalPath ?? `/courses/${resolvedParams.slug}`;
+  const paymentAmount = course.price || Number(schemaPrice(richData?.pricing.price ?? "")) || 0;
+  const paymentCurrency = course.currency ?? "GBP";
   const isDataAnalyticsCourse = resolvedParams.slug === "data-analytics";
   const isAgenticAICourse = resolvedParams.slug === "ai-automation";
   const isDataScienceCourse = resolvedParams.slug === "data-science";
@@ -476,6 +479,12 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row items-center gap-4 pb-4 border-b border-gray-100">
+                <PaymentCheckout
+                  courseSlug={resolvedParams.slug}
+                  courseTitle={course.title}
+                  amount={paymentAmount}
+                  currency={paymentCurrency}
+                />
                 <button className="w-full sm:w-auto px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white rounded-xl font-bold text-[16px] transition-all shadow-md flex items-center justify-center gap-2 hover:-translate-y-0.5">
                   Apply Now <ArrowRight className="w-5 h-5" />
                 </button>
@@ -630,8 +639,8 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                   <CourseInvestmentTracker
                     courseTitle={course.title}
                     courseSlug={resolvedParams.slug}
-                    price={course.price || richData.pricing.price}
-                    currency={course.currency ?? "GBP"}
+                    price={paymentAmount || richData.pricing.price}
+                    currency={paymentCurrency}
                   >
                     <h3 className="text-sm font-bold text-emerald-800 uppercase tracking-wider mb-2 flex items-center gap-2">
                       <Zap className="w-4 h-4" /> Course Investment
@@ -649,6 +658,13 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                       </span>
                     )}
                   </CourseInvestmentTracker>
+                  <PaymentCheckout
+                    courseSlug={resolvedParams.slug}
+                    courseTitle={course.title}
+                    amount={paymentAmount}
+                    currency={paymentCurrency}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-700 px-6 py-4 text-[16px] font-bold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-blue-800"
+                  />
                 </div>
               </section>
 

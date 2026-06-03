@@ -403,6 +403,12 @@ export default function PricingPageClient({ courses }: PricingPageClientProps) {
               >
                 Talk to Admissions <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
+              <Link
+                href="/pay"
+                className="inline-flex w-full items-center justify-center rounded-2xl border border-[#E4BE3B]/60 bg-[#E4BE3B] px-5 py-3.5 text-sm font-bold text-slate-950 transition hover:bg-[#f0cc55]"
+              >
+                Pay Custom Amount <CreditCard className="ml-2 h-4 w-4" />
+              </Link>
               <a
                 href={`tel:${SITE_PHONE_UK}`}
                 className="flex items-center justify-center gap-2 rounded-2xl border border-white/10 px-5 py-3.5 text-sm font-semibold text-white/85 transition hover:bg-white/5"

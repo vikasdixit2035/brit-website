@@ -1,0 +1,614 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { AlertCircle, CheckCircle2, CreditCard, Loader2, ShieldCheck, Wallet, X } from "lucide-react";
+
+type PaymentCheckoutProps = {
+  courseSlug: string;
+  courseTitle: string;
+  amount: number;
+  currency?: string | null;
+  className?: string;
+  label?: string;
+};
+
+type PaymentConfig = {
+  razorpayKeyId: string;
+  paypalClientId: string;
+  paypalCurrency: string;
+  paypalEnvironment?: "sandbox" | "live";
+  paypalPayLaterMinAmount?: number;
+  paypalPayLaterMaxAmount?: number;
+  paymentLinks?: {
+    razorpayPaymentPageUrl?: string;
+    paypalMeUrl?: string;
+  };
+};
+
+type ApiResponse<T> = {
+  success: boolean;
+  message?: string;
+  data: T;
+};
+
+type RazorpayOrder = {
+  keyId: string;
+  orderId: string;
+  amount: number;
+  currency: string;
+};
+
+type AppliedCoupon = {
+  code: string;
+  description: string;
+  discountType: "fixed" | "percentage";
+  discountValue: number;
+  discountAmount: number;
+  originalAmount: number;
+  finalAmount: number;
+  currency: string;
+};
+
+type PayPalApproveData = {
+  orderID: string;
+};
+
+type PayPalButtonConfig = {
+  style?: Record<string, string | number>;
+  fundingSource?: string;
+  createOrder: () => Promise<string>;
+  onApprove: (data: PayPalApproveData) => Promise<void>;
+  onError: (error: unknown) => void;
+  onCancel: () => void;
+};
+
+declare global {
+  interface Window {
+    Razorpay?: new (options: Record<string, unknown>) => { open: () => void };
+    paypal?: {
+      FUNDING: {
+        PAYPAL: string;
+        PAYLATER: string;
+      };
+      Buttons: (options: PayPalButtonConfig) => {
+        isEligible?: () => boolean;
+        render: (selector: HTMLElement) => Promise<void>;
+      };
+    };
+  }
+}
+
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE_URL ??
+  (process.env.NODE_ENV === "development" ? "http://localhost:4000" : "https://api.britinstitute.uk");
+const DEFAULT_RAZORPAY_COUNTRY_CODE = "+44";
+
+function formatAmount(amount: number, currency = "GBP") {
+  return new Intl.NumberFormat("en-GB", {
+    style: "currency",
+    currency,
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
+async function apiRequest<T>(path: string, init?: RequestInit): Promise<ApiResponse<T>> {
+  const response = await fetch(`${API_BASE_URL}${path}`, {
+    headers: {
+      "Content-Type": "application/json",
+      ...init?.headers,
+    },
+    ...init,
+  });
+  const payload = (await response.json().catch(() => null)) as ApiResponse<T> | null;
+
+  if (!response.ok || !payload?.success) {
+    throw new Error(payload?.message || "Payment request failed");
+  }
+
+  return payload;
+}
+
+function loadExternalScript(src: string, id: string) {
+  return new Promise<boolean>((resolve) => {
+    const existingScript = document.getElementById(id) as HTMLScriptElement | null;
+    if (existingScript) {
+      const requestedSrc = new URL(src, window.location.href).href;
+      if (existingScript.src === requestedSrc) {
+        resolve(true);
+        return;
+      }
+
+      existingScript.remove();
+      if (id === "paypal-js-sdk") {
+        window.paypal = undefined;
+      }
+    }
+
+    const script = document.createElement("script");
+    script.id = id;
+    script.src = src;
+    script.async = true;
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+}
+
+function buildPayPalSdkUrl(config: PaymentConfig) {
+  const params = new URLSearchParams({
+    "client-id": config.paypalClientId,
+    currency: config.paypalCurrency || "GBP",
+    intent: "capture",
+    components: "buttons,messages",
+    "enable-funding": "paylater",
+  });
+
+  if (config.paypalEnvironment !== "live") {
+    params.set("buyer-country", "GB");
+  }
+
+  return `https://www.paypal.com/sdk/js?${params.toString()}`;
+}
+
+export default function PaymentCheckout({
+  courseSlug,
+  courseTitle,
+  amount,
+  currency = "GBP",
+  className,
+  label = "Pay Now",
+}: PaymentCheckoutProps) {
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+  const [isRazorpayLoading, setIsRazorpayLoading] = useState(false);
+  const [isPayPalLoading, setIsPayPalLoading] = useState(false);
+  const [isApplyingCoupon, setIsApplyingCoupon] = useState(false);
+  const [paypalReady, setPaypalReady] = useState(false);
+  const [payLaterUnavailable, setPayLaterUnavailable] = useState(false);
+  const [config, setConfig] = useState<PaymentConfig | null>(null);
+  const [error, setError] = useState("");
+  const [couponCode, setCouponCode] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(null);
+  const [couponMessage, setCouponMessage] = useState("");
+  const paypalContainerRef = useRef<HTMLDivElement | null>(null);
+  const payLaterContainerRef = useRef<HTMLDivElement | null>(null);
+
+  const checkoutAmount = appliedCoupon?.finalAmount ?? amount;
+  const checkoutCurrency = appliedCoupon?.currency ?? currency ?? "GBP";
+  const displayAmount = formatAmount(checkoutAmount, checkoutCurrency);
+  const originalDisplayAmount = formatAmount(amount, currency ?? "GBP");
+  const payLaterMinAmount = config?.paypalPayLaterMinAmount ?? 30;
+  const payLaterMaxAmount = config?.paypalPayLaterMaxAmount ?? 2000;
+  const payLaterAmountEligible =
+    checkoutCurrency === "GBP" &&
+    checkoutAmount >= payLaterMinAmount &&
+    checkoutAmount <= payLaterMaxAmount;
+
+  useEffect(() => {
+    if (isCheckoutOpen) return;
+
+    setCouponCode("");
+    setAppliedCoupon(null);
+    setCouponMessage("");
+    setPayLaterUnavailable(false);
+    setError("");
+  }, [isCheckoutOpen]);
+
+  useEffect(() => {
+    if (!isCheckoutOpen) return;
+
+    let isMounted = true;
+
+    async function loadPaymentConfig() {
+      try {
+        setError("");
+        setIsPayPalLoading(true);
+        const response = await apiRequest<PaymentConfig>("/api/payments/config");
+        if (!isMounted) return;
+        setConfig(response.data);
+
+        if (response.data.paypalClientId) {
+          const scriptLoaded = await loadExternalScript(
+            buildPayPalSdkUrl(response.data),
+            "paypal-js-sdk"
+          );
+          if (isMounted) {
+            setPaypalReady(scriptLoaded);
+            if (!scriptLoaded) {
+              setError("PayPal could not be loaded. Please try again.");
+            }
+          }
+        }
+      } catch (err) {
+        if (isMounted) {
+          setError(err instanceof Error ? err.message : "Payment setup failed");
+        }
+      } finally {
+        if (isMounted) {
+          setIsPayPalLoading(false);
+        }
+      }
+    }
+
+    loadPaymentConfig();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isCheckoutOpen]);
+
+  useEffect(() => {
+    if (!isCheckoutOpen || !paypalReady || !paypalContainerRef.current || !payLaterContainerRef.current || !window.paypal) return;
+
+    paypalContainerRef.current.innerHTML = "";
+    payLaterContainerRef.current.innerHTML = "";
+    setPayLaterUnavailable(false);
+
+    const createOrder = async () => {
+      const response = await apiRequest<{ id: string }>("/api/payments/paypal/order", {
+        method: "POST",
+        body: JSON.stringify({ courseSlug, couponCode: appliedCoupon?.code }),
+      });
+      return response.data.id;
+    };
+
+    const onApprove = async (data: PayPalApproveData) => {
+      const response = await apiRequest<{ provider: string; orderId: string; captureId: string }>(
+        "/api/payments/paypal/capture",
+        {
+          method: "POST",
+          body: JSON.stringify({ courseSlug, orderID: data.orderID, couponCode: appliedCoupon?.code }),
+        }
+      );
+
+      if (response.success) {
+        setIsCheckoutOpen(false);
+        setIsSuccessOpen(true);
+      }
+    };
+
+    const onError = (err: unknown) => {
+      console.error("PayPal payment failed:", err);
+      setError("PayPal payment failed. Please try again.");
+    };
+
+    const onCancel = () => {
+      setError("PayPal payment was cancelled.");
+    };
+
+    const baseStyle = {
+      layout: "vertical",
+      shape: "rect",
+      height: 48,
+    };
+
+    const paypalButton = window.paypal.Buttons({
+      fundingSource: window.paypal.FUNDING.PAYPAL,
+      style: {
+        ...baseStyle,
+        label: "paypal",
+      },
+      createOrder,
+      onApprove,
+      onError,
+      onCancel,
+    });
+
+    paypalButton
+      .render(paypalContainerRef.current)
+      .catch((err) => {
+        console.error("PayPal render failed:", err);
+        setError("PayPal button could not be displayed.");
+      });
+
+    if (payLaterAmountEligible) {
+      const payLaterButton = window.paypal.Buttons({
+        fundingSource: window.paypal.FUNDING.PAYLATER,
+        style: baseStyle,
+        createOrder,
+        onApprove,
+        onError,
+        onCancel,
+      });
+
+      if (!(payLaterButton.isEligible?.() ?? true)) {
+        setPayLaterUnavailable(true);
+        return;
+      }
+
+      payLaterButton
+        .render(payLaterContainerRef.current)
+        .catch((err) => {
+          console.error("PayPal Pay Later render failed:", err);
+          setPayLaterUnavailable(true);
+        });
+    }
+  }, [appliedCoupon?.code, courseSlug, isCheckoutOpen, payLaterAmountEligible, paypalReady]);
+
+  const applyCoupon = async () => {
+    const code = couponCode.trim().toUpperCase();
+    if (!code) {
+      setCouponMessage("Enter a coupon code.");
+      return;
+    }
+
+    try {
+      setError("");
+      setCouponMessage("");
+      setIsApplyingCoupon(true);
+      const response = await apiRequest<AppliedCoupon>("/api/payments/coupons/validate", {
+        method: "POST",
+        body: JSON.stringify({ courseSlug, couponCode: code }),
+      });
+
+      setAppliedCoupon(response.data);
+      setCouponCode(response.data.code);
+      setCouponMessage(`Coupon applied: ${formatAmount(response.data.discountAmount, response.data.currency)} off.`);
+    } catch (err) {
+      setAppliedCoupon(null);
+      setCouponMessage(err instanceof Error ? err.message : "Coupon could not be applied.");
+    } finally {
+      setIsApplyingCoupon(false);
+    }
+  };
+
+  const removeCoupon = () => {
+    setAppliedCoupon(null);
+    setCouponCode("");
+    setCouponMessage("");
+  };
+
+  const startRazorpayPayment = async () => {
+    try {
+      setError("");
+      setIsRazorpayLoading(true);
+      const scriptLoaded = await loadExternalScript(
+        "https://checkout.razorpay.com/v1/checkout.js",
+        "razorpay-checkout-js"
+      );
+
+      if (!scriptLoaded || !window.Razorpay) {
+        throw new Error("Razorpay could not be loaded. Please try again.");
+      }
+
+      const response = await apiRequest<RazorpayOrder>("/api/payments/razorpay/order", {
+        method: "POST",
+        body: JSON.stringify({ courseSlug, couponCode: appliedCoupon?.code }),
+      });
+
+      const order = response.data;
+      const razorpay = new window.Razorpay({
+        key: order.keyId,
+        amount: order.amount,
+        currency: order.currency,
+        name: "Brit Institute",
+        description: courseTitle,
+        order_id: order.orderId,
+        prefill: {
+          contact: DEFAULT_RAZORPAY_COUNTRY_CODE,
+        },
+        theme: { color: "#1D4ED8" },
+        modal: {
+          ondismiss: () => setIsRazorpayLoading(false),
+        },
+        handler: async (paymentResponse: {
+          razorpay_order_id: string;
+          razorpay_payment_id: string;
+          razorpay_signature: string;
+        }) => {
+          try {
+            const verifyResponse = await apiRequest<{ provider: string; orderId: string; paymentId: string }>(
+              "/api/payments/razorpay/verify",
+              {
+                method: "POST",
+                body: JSON.stringify({ courseSlug, couponCode: appliedCoupon?.code, ...paymentResponse }),
+              }
+            );
+
+            if (verifyResponse.success) {
+              setIsCheckoutOpen(false);
+              setIsSuccessOpen(true);
+            }
+          } catch (err) {
+            setError(err instanceof Error ? err.message : "Payment verification failed.");
+          } finally {
+            setIsRazorpayLoading(false);
+          }
+        },
+      });
+
+      razorpay.open();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Razorpay payment failed.");
+      setIsRazorpayLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={(event) => {
+          event.stopPropagation();
+          setIsCheckoutOpen(true);
+        }}
+        className={
+          className ??
+          "w-full sm:w-auto px-8 py-4 bg-blue-700 hover:bg-blue-800 text-white rounded-xl font-bold text-[16px] transition-all shadow-md flex items-center justify-center gap-2 hover:-translate-y-0.5"
+        }
+      >
+        <CreditCard className="h-5 w-5" />
+        {label}
+      </button>
+
+      {isCheckoutOpen && (
+        <div className="fixed inset-0 z-[1100] flex items-center justify-center bg-gray-950/65 px-4 py-6 backdrop-blur-sm">
+          <div className="w-full max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
+            <div className="flex items-start justify-between gap-4 border-b border-gray-100 px-6 py-5">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Secure checkout</p>
+                <h2 className="mt-2 text-xl font-extrabold leading-snug text-gray-900">{courseTitle}</h2>
+                <p className="mt-1 text-sm font-semibold text-gray-600">
+                  Total amount:{" "}
+                  {appliedCoupon && (
+                    <span className="mr-2 text-gray-400 line-through">{originalDisplayAmount}</span>
+                  )}
+                  <span className="text-gray-900">{displayAmount}</span>
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsCheckoutOpen(false)}
+                className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gray-100 text-gray-600 transition hover:bg-gray-200 hover:text-gray-900"
+                aria-label="Close payment modal"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <div className="space-y-5 px-6 py-6">
+              <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4">
+                <div className="flex items-start gap-3">
+                  <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-blue-700" />
+                  <p className="text-sm font-medium leading-6 text-blue-950">
+                    Choose Razorpay or PayPal. Your course fee is created on the server and confirmed only after payment verification.
+                  </p>
+                </div>
+              </div>
+
+
+              <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+                <label htmlFor={`coupon-${courseSlug}`} className="text-sm font-bold text-gray-900">
+                  Coupon code
+                </label>
+                <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+                  <input
+                    id={`coupon-${courseSlug}`}
+                    type="text"
+                    value={couponCode}
+                    disabled={Boolean(appliedCoupon)}
+                    onChange={(event) => {
+                      setCouponCode(event.target.value.toUpperCase());
+                      setCouponMessage("");
+                    }}
+                    placeholder="Enter coupon code"
+                    className="min-h-12 flex-1 rounded-xl border border-gray-200 bg-white px-4 text-sm font-semibold text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 disabled:bg-gray-100"
+                  />
+                  <button
+                    type="button"
+                    onClick={appliedCoupon ? removeCoupon : applyCoupon}
+                    disabled={isApplyingCoupon}
+                    className="min-h-12 rounded-xl bg-blue-700 px-5 text-sm font-bold text-white transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:bg-gray-300"
+                  >
+                    {isApplyingCoupon ? (
+                      <span className="inline-flex items-center gap-2">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Checking
+                      </span>
+                    ) : appliedCoupon ? (
+                      "Remove"
+                    ) : (
+                      "Apply"
+                    )}
+                  </button>
+                </div>
+                {couponMessage && (
+                  <p className={`mt-2 text-xs font-semibold ${appliedCoupon ? "text-emerald-700" : "text-red-600"}`}>
+                    {couponMessage}
+                  </p>
+                )}
+                {appliedCoupon && (
+                  <div className="mt-3 rounded-xl border border-emerald-100 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800">
+                    {appliedCoupon.description}. New total: {displayAmount}
+                  </div>
+                )}
+              </div>
+
+              {error && (
+                <div className="flex items-start gap-3 rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                  <span>{error}</span>
+                </div>
+              )}
+
+              <div className="grid gap-3">
+                <button
+                  type="button"
+                  onClick={startRazorpayPayment}
+                  disabled={isRazorpayLoading || Boolean(config && !config.razorpayKeyId)}
+                  className="flex min-h-14 w-full items-center justify-center gap-3 rounded-xl bg-gray-900 px-5 py-3 text-base font-bold text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:bg-gray-300"
+                >
+                  {isRazorpayLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <CreditCard className="h-5 w-5" />}
+                  Pay with Razorpay
+                </button>
+
+                {config && !config.razorpayKeyId && (
+                  <p className="text-xs font-medium text-gray-500">Razorpay key is not configured on the backend.</p>
+                )}
+              </div>
+
+              <div>
+                <div className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-700">
+                  <Wallet className="h-4 w-4 text-blue-700" />
+                  PayPal
+                </div>
+                {isPayPalLoading && (
+                  <div className="flex h-14 items-center justify-center rounded-xl border border-gray-200 bg-gray-50 text-sm font-semibold text-gray-600">
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Loading PayPal
+                  </div>
+                )}
+                {!isPayPalLoading && config && !config.paypalClientId && (
+                  <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-600">
+                    PayPal client ID is not configured on the backend.
+                  </div>
+                )}
+                <div ref={paypalContainerRef} className={paypalReady ? "min-h-12" : "hidden"} />
+              </div>
+
+              <div>
+                <div className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-700">
+                  <Wallet className="h-4 w-4 text-indigo-700" />
+                  PayPal Pay Later
+                </div>
+                <div ref={payLaterContainerRef} className={paypalReady && payLaterAmountEligible && !payLaterUnavailable ? "min-h-12" : "hidden"} />
+                {paypalReady && !payLaterAmountEligible && (
+                  <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-600">
+                    PayPal Pay Later is available only for eligible GBP totals from{" "}
+                    {formatAmount(payLaterMinAmount, "GBP")} to {formatAmount(payLaterMaxAmount, "GBP")}. Current total: {displayAmount}.
+                  </div>
+                )}
+                {paypalReady && payLaterAmountEligible && payLaterUnavailable && (
+                  <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-600">
+                    This total is eligible, but PayPal Pay Later is not available for this buyer or PayPal account right now.
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isSuccessOpen && (
+        <div className="fixed inset-0 z-[1200] flex items-center justify-center bg-gray-950/65 px-4 py-6 backdrop-blur-sm">
+          <div className="w-full max-w-md rounded-2xl border border-emerald-100 bg-white p-8 text-center shadow-2xl">
+            <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-emerald-50 text-emerald-600">
+              <CheckCircle2 className="h-9 w-9" />
+            </div>
+            <h2 className="mt-5 text-2xl font-extrabold text-gray-900">Payment successful</h2>
+            <p className="mt-3 text-sm leading-6 text-gray-600">
+              Your payment for {courseTitle} has been completed successfully. Our team will contact you with the next steps.
+            </p>
+            <button
+              type="button"
+              onClick={() => setIsSuccessOpen(false)}
+              className="mt-6 w-full rounded-xl bg-emerald-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-emerald-700"
+            >
+              Done
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

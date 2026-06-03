@@ -1,0 +1,1085 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Brit Institute logo Brit Institute" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - img "Brit Institute logo" [ref=e7]
+          - generic [ref=e8]: Brit Institute
+        - generic [ref=e9]:
+          - button "Courses" [ref=e11] [cursor=pointer]:
+            - text: Courses
+            - img [ref=e12]
+          - link "About" [ref=e14] [cursor=pointer]:
+            - /url: /about
+          - link "Placement" [ref=e15] [cursor=pointer]:
+            - /url: /placement
+          - link "Resources" [ref=e16] [cursor=pointer]:
+            - /url: /resources
+          - link "Webinar" [ref=e17] [cursor=pointer]:
+            - /url: /webinar
+          - link "Blog" [ref=e18] [cursor=pointer]:
+            - /url: /blog
+          - link "Pricing" [ref=e19] [cursor=pointer]:
+            - /url: /pricing
+          - link "FAQ" [ref=e20] [cursor=pointer]:
+            - /url: /#faq
+          - link "Careers" [ref=e21] [cursor=pointer]:
+            - /url: /careers
+          - link "Book Free Consultation" [ref=e22] [cursor=pointer]:
+            - /url: /contact
+    - main [ref=e23]:
+      - generic [ref=e24]:
+        - navigation [ref=e25]:
+          - link "Home" [ref=e26] [cursor=pointer]:
+            - /url: /
+          - img [ref=e27]
+          - link "Courses" [ref=e29] [cursor=pointer]:
+            - /url: /courses
+          - img [ref=e30]
+          - generic [ref=e32]: Data Analytics and Gen AI Certification Program
+        - generic [ref=e33]:
+          - generic [ref=e34]:
+            - img [ref=e35]
+            - text: AI enabled
+          - heading "Data Analytics and Gen AI Certification Program" [level=1] [ref=e38]
+          - paragraph [ref=e39]: Master Excel, Power BI, SQL, Python, statistics, machine learning basics, and applied GenAI workflows through a practical programme built for UK data analyst roles.
+          - generic [ref=e40]:
+            - generic [ref=e41]:
+              - img [ref=e42]
+              - text: "Cohort: Starting Soon"
+            - generic [ref=e45]:
+              - img [ref=e46]
+              - text: "Duration: 6 months"
+          - generic [ref=e50]:
+            - generic [ref=e51]:
+              - img "Emma Thompson" [ref=e53]
+              - img "James Walker" [ref=e55]
+              - img "Meera Iyer" [ref=e57]
+            - generic [ref=e58]: 10,000+ Trained
+            - generic [ref=e59]: 85% Placed
+            - generic [ref=e60]:
+              - img [ref=e61]
+              - text: Excel, Power BI, SQL, Python, ML basics, and GenAI workflows
+          - generic [ref=e65]:
+            - generic [ref=e66]:
+              - paragraph [ref=e67]: Learner Reviews
+              - generic [ref=e68]:
+                - generic [ref=e69]: "4.9"
+                - generic [ref=e70]:
+                  - generic [ref=e71]:
+                    - img [ref=e72]
+                    - img [ref=e74]
+                    - img [ref=e76]
+                    - img [ref=e78]
+                    - img [ref=e80]
+                  - paragraph [ref=e82]: Based on 42 first-party learner reviews
+            - paragraph [ref=e83]: These ratings come from learner feedback published on this page and are mirrored in the course structured data for search engines.
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - button "Pay Now" [ref=e86]:
+              - img [ref=e87]
+              - text: Pay Now
+            - button "Apply Now" [ref=e89]:
+              - text: Apply Now
+              - img [ref=e90]
+            - button "Download Brochure" [ref=e92]:
+              - text: Download Brochure
+              - img [ref=e93]
+          - generic [ref=e96]:
+            - generic [ref=e97]:
+              - img [ref=e99]
+              - heading "Career Outcomes" [level=2] [ref=e102]
+            - generic [ref=e103]:
+              - generic [ref=e104]:
+                - img [ref=e105]
+                - generic [ref=e109]: Target Roles
+                - list [ref=e110]:
+                  - listitem [ref=e111]:
+                    - img [ref=e112]
+                    - text: Data Analyst
+                  - listitem [ref=e114]:
+                    - img [ref=e115]
+                    - text: Business Analyst
+                  - listitem [ref=e117]:
+                    - img [ref=e118]
+                    - text: Financial Analytics
+                  - listitem [ref=e120]:
+                    - img [ref=e121]
+                    - text: Healthcare Analytics
+              - generic [ref=e123]:
+                - img [ref=e124]
+                - generic [ref=e127]: Average Salary (UK)
+                - generic [ref=e128]: £28,000 – £55,000+
+                - paragraph [ref=e129]: Post-completion
+              - generic [ref=e130]:
+                - img [ref=e131]
+                - generic [ref=e136]: Industry Demand
+                - list [ref=e137]:
+                  - listitem [ref=e138]:
+                    - img [ref=e139]
+                    - text: Finance
+                  - listitem [ref=e141]:
+                    - img [ref=e142]
+                    - text: Retail
+                  - listitem [ref=e144]:
+                    - img [ref=e145]
+                    - text: SaaS
+                  - listitem [ref=e147]:
+                    - img [ref=e148]
+                    - text: Consulting
+                  - listitem [ref=e150]:
+                    - img [ref=e151]
+                    - text: IT
+                  - listitem [ref=e153]:
+                    - img [ref=e154]
+                    - text: Healthcare
+          - generic [ref=e156]:
+            - heading "Is This Right Fit For You?" [level=2] [ref=e158]
+            - generic [ref=e159]:
+              - generic [ref=e160]:
+                - img [ref=e162]
+                - generic [ref=e165]: Non-tech professionals switching to data analytics
+              - generic [ref=e166]:
+                - img [ref=e168]
+                - generic [ref=e171]: Beginners starting a data analytics career
+              - generic [ref=e172]:
+                - img [ref=e174]
+                - generic [ref=e177]: Excel users upgrading to Power BI, SQL, Python, and AI-enabled workflows
+              - generic [ref=e178]:
+                - img [ref=e180]
+                - generic [ref=e183]: Anyone searching for a data analytics course UK with job-focused projects
+          - generic [ref=e184]:
+            - generic [ref=e185]:
+              - generic [ref=e186]:
+                - img [ref=e188]
+                - heading "Curriculum" [level=2] [ref=e190]
+              - generic [ref=e191]:
+                - paragraph [ref=e192]: The full 26-week Data Analytics with AI curriculum is expanded below, including phase-by-phase topics, weekly labs, AI integration, and portfolio outcomes.
+                - link "View detailed curriculum" [ref=e193] [cursor=pointer]:
+                  - /url: "#detailed-data-analytics-curriculum"
+            - generic [ref=e194]:
+              - generic [ref=e195]:
+                - heading "Overview" [level=3] [ref=e196]:
+                  - img [ref=e197]
+                  - text: Overview
+                - generic [ref=e200]:
+                  - generic [ref=e201]:
+                    - generic [ref=e202]: Duration
+                    - generic [ref=e203]: 6 months
+                  - generic [ref=e204]:
+                    - generic [ref=e205]: Format
+                    - generic [ref=e206]: Live + hands-on
+                  - generic [ref=e207]:
+                    - generic [ref=e208]: Level
+                    - generic [ref=e209]: Beginner-friendly
+              - button "View course investment for Data Analytics and Gen AI Certification Program" [ref=e210] [cursor=pointer]:
+                - heading "Course Investment" [level=3] [ref=e211]:
+                  - img [ref=e212]
+                  - text: Course Investment
+                - generic [ref=e214]: £3,499
+                - generic [ref=e215]: EMI Available
+              - button "Pay Now" [ref=e216]:
+                - img [ref=e217]
+                - text: Pay Now
+          - generic [ref=e219]:
+            - generic [ref=e220]:
+              - img [ref=e222]
+              - heading "Tools Covered" [level=2] [ref=e224]
+            - generic [ref=e225]:
+              - generic [ref=e226]:
+                - img [ref=e228]
+                - generic [ref=e233]: Excel
+              - generic [ref=e234]:
+                - img [ref=e236]
+                - generic [ref=e240]: Power BI
+              - generic [ref=e241]:
+                - img [ref=e243]
+                - generic [ref=e248]: SQL
+              - generic [ref=e249]:
+                - img [ref=e251]
+                - generic [ref=e256]: Python
+              - generic [ref=e257]:
+                - img [ref=e259]
+                - generic [ref=e264]: pandas
+              - generic [ref=e265]:
+                - img [ref=e267]
+                - generic [ref=e272]: scikit-learn
+              - generic [ref=e273]:
+                - img [ref=e275]
+                - generic [ref=e279]: OpenAI API
+              - generic [ref=e280]:
+                - img [ref=e282]
+                - generic [ref=e284]: GitHub
+          - generic [ref=e286]:
+            - generic [ref=e288]:
+              - generic [ref=e289]:
+                - paragraph [ref=e290]: UK job-ready certification plan
+                - heading "Data Analytics and Applied AI Certification" [level=2] [ref=e291]
+                - paragraph [ref=e292]: A six-month weekend programme built around Excel, Power BI, SQL, Python, statistics, machine learning, and AI-assisted analyst workflows. Learners finish with portfolio evidence for junior data analyst, BI analyst, reporting analyst, operations analyst, and data insight roles.
+                - generic [ref=e293]:
+                  - generic [ref=e294]: 26 weeks
+                  - generic [ref=e295]: 104 guided hours
+                  - generic [ref=e296]: 6 portfolio projects
+                  - generic [ref=e297]: AI in every module
+              - generic [ref=e298]:
+                - generic [ref=e299]:
+                  - img [ref=e301]
+                  - heading "Entry-level readiness" [level=3] [ref=e305]
+                  - paragraph [ref=e306]: Junior analyst, BI, reporting, operations, and people/data insight roles
+                - generic [ref=e307]:
+                  - img [ref=e309]
+                  - heading "Career acceleration" [level=3] [ref=e312]
+                  - paragraph [ref=e313]: For professionals adding analytics and AI to an existing domain
+                - generic [ref=e314]:
+                  - img [ref=e316]
+                  - heading "Responsible AI" [level=3] [ref=e319]
+                  - paragraph [ref=e320]: Redaction, accountability, transparency, accuracy, fairness, and security
+            - generic [ref=e321]:
+              - generic [ref=e322]:
+                - paragraph [ref=e323]: Recommended curriculum balance
+                - heading "Spend the most time where UK analyst demand is strongest." [level=2] [ref=e324]
+                - paragraph [ref=e325]: Excel and statistics stay focused and practical. Power BI, SQL, Python, automation, and AI-enabled workflows get the deeper build time because they create the strongest day-to-day evidence for hiring conversations.
+              - generic [ref=e326]:
+                - generic [ref=e327]:
+                  - generic [ref=e328]:
+                    - heading "Excel" [level=3] [ref=e329]
+                    - generic [ref=e330]: 3 weeks
+                  - paragraph [ref=e331]: 12 live hours
+                  - paragraph [ref=e332]: Analyst essentials for day-one productivity
+                - generic [ref=e333]:
+                  - generic [ref=e334]:
+                    - heading "Power BI" [level=3] [ref=e335]
+                    - generic [ref=e336]: 5 weeks
+                  - paragraph [ref=e337]: 20 live hours
+                  - paragraph [ref=e338]: High visibility skill in UK analyst hiring
+                - generic [ref=e339]:
+                  - generic [ref=e340]:
+                    - heading "SQL + Advanced SQL" [level=3] [ref=e341]
+                    - generic [ref=e342]: 5 weeks
+                  - paragraph [ref=e343]: 20 live hours
+                  - paragraph [ref=e344]: Querying, joining, transforming, and explaining data
+                - generic [ref=e345]:
+                  - generic [ref=e346]:
+                    - heading "Python + AI Integration" [level=3] [ref=e347]
+                    - generic [ref=e348]: 7 weeks
+                  - paragraph [ref=e349]: 28 live hours
+                  - paragraph [ref=e350]: Automation, AI, APIs, and analyst tooling
+                - generic [ref=e351]:
+                  - generic [ref=e352]:
+                    - heading "Statistics" [level=3] [ref=e353]
+                    - generic [ref=e354]: 2 weeks
+                  - paragraph [ref=e355]: 8 live hours
+                  - paragraph [ref=e356]: Interpretation for decisions, not academic overload
+                - generic [ref=e357]:
+                  - generic [ref=e358]:
+                    - heading "Machine Learning" [level=3] [ref=e359]
+                    - generic [ref=e360]: 4 weeks
+                  - paragraph [ref=e361]: 16 live hours
+                  - paragraph [ref=e362]: Predictive and segmentation literacy for junior roles
+            - generic [ref=e363]:
+              - generic [ref=e364]:
+                - paragraph [ref=e365]: Detailed syllabus
+                - heading "Five phases with AI embedded from the first week." [level=2] [ref=e366]
+                - paragraph [ref=e367]: The course is not a separate AI add-on. Learners use AI safely inside Excel, Power BI, SQL, Python, statistics, ML, documentation, and career preparation.
+              - generic [ref=e368]:
+                - article [ref=e369]:
+                  - generic [ref=e370]:
+                    - generic [ref=e371]:
+                      - img [ref=e373]
+                      - paragraph [ref=e376]: Phase 1
+                      - heading "Data Foundations & Visualization" [level=3] [ref=e377]
+                      - paragraph [ref=e378]: Build a practical foundation in spreadsheet analytics, clean reporting, dashboard thinking, and business storytelling.
+                    - generic [ref=e379]:
+                      - generic [ref=e380]:
+                        - generic [ref=e381]:
+                          - generic [ref=e382]:
+                            - heading "Excel for Data Analysis" [level=4] [ref=e383]
+                            - paragraph [ref=e384]: Weeks 1-3
+                          - generic [ref=e385]: "Project: Operations KPI Tracker"
+                        - generic [ref=e386]:
+                          - generic [ref=e387]:
+                            - img [ref=e388]
+                            - generic [ref=e391]: Workbook structure, data types, tables, sorting, filtering, and validation
+                          - generic [ref=e392]:
+                            - img [ref=e393]
+                            - generic [ref=e396]: Cleaning messy spreadsheets, conditional formatting, and reporting standards
+                          - generic [ref=e397]:
+                            - img [ref=e398]
+                            - generic [ref=e401]: IF/IFS, SUMIFS, COUNTIFS, AVERAGEIFS, XLOOKUP, text and date functions
+                          - generic [ref=e402]:
+                            - img [ref=e403]
+                            - generic [ref=e406]: PivotTables, PivotCharts, basic dashboards, and Power Query in Excel
+                        - generic [ref=e407]:
+                          - generic [ref=e408]:
+                            - img [ref=e409]
+                            - text: AI integration
+                          - paragraph [ref=e412]: Use AI to explain formulas, suggest cleanup steps, draft metric definitions, summarize insights, and write a stakeholder-ready memo after redacting sensitive data.
+                      - generic [ref=e413]:
+                        - generic [ref=e414]:
+                          - generic [ref=e415]:
+                            - heading "Power BI" [level=4] [ref=e416]
+                            - paragraph [ref=e417]: Weeks 4-8
+                          - generic [ref=e418]: "Project: Executive BI Dashboard"
+                        - generic [ref=e419]:
+                          - generic [ref=e420]:
+                            - img [ref=e421]
+                            - generic [ref=e424]: Data connections, profiling, Power Query, null/error handling, merge and append
+                          - generic [ref=e425]:
+                            - img [ref=e426]
+                            - generic [ref=e429]: Star schema, relationships, date table, semantic model design, and refresh logic
+                          - generic [ref=e430]:
+                            - img [ref=e431]
+                            - generic [ref=e434]: DAX basics, measures vs calculated columns, CALCULATE, filter context, and time intelligence
+                          - generic [ref=e435]:
+                            - img [ref=e436]
+                            - generic [ref=e439]: KPI design, drillthrough, tooltips, accessibility, publishing, workspaces, and row-level security
+                        - generic [ref=e440]:
+                          - generic [ref=e441]:
+                            - img [ref=e442]
+                            - text: GenAI integration
+                          - paragraph [ref=e445]: Use AI to draft report requirements, KPI definitions, DAX explanations, dashboard narratives, QA checklists, and stakeholder summaries.
+                - article [ref=e446]:
+                  - generic [ref=e447]:
+                    - generic [ref=e448]:
+                      - img [ref=e450]
+                      - paragraph [ref=e454]: Phase 2
+                      - heading "Analytical Tools & Techniques" [level=3] [ref=e455]
+                      - paragraph [ref=e456]: Move from dashboard users to analysts who can query databases, validate outputs, and explain evidence with statistical reasoning.
+                    - generic [ref=e457]:
+                      - generic [ref=e458]:
+                        - generic [ref=e459]:
+                          - generic [ref=e460]:
+                            - heading "SQL and Advanced SQL" [level=4] [ref=e461]
+                            - paragraph [ref=e462]: Weeks 9-13
+                          - generic [ref=e463]: "Project: SQL Business Case Pack"
+                        - generic [ref=e464]:
+                          - generic [ref=e465]:
+                            - img [ref=e466]
+                            - generic [ref=e469]: Database concepts, tables, keys, SELECT, WHERE, ORDER BY, GROUP BY, HAVING, and CASE
+                          - generic [ref=e470]:
+                            - img [ref=e471]
+                            - generic [ref=e474]: Joins, unions, subqueries, CTEs, views, record validation, and data-cleaning SQL
+                          - generic [ref=e475]:
+                            - img [ref=e476]
+                            - generic [ref=e479]: Window functions, ranking, running totals, lag/lead, string functions, and date functions
+                          - generic [ref=e480]:
+                            - img [ref=e481]
+                            - generic [ref=e484]: Optimization basics, indexes, EXPLAIN/ANALYZE, SQL style, and documentation
+                        - generic [ref=e485]:
+                          - generic [ref=e486]:
+                            - img [ref=e487]
+                            - text: AI integration
+                          - paragraph [ref=e490]: Use AI to draft query skeletons, explain joins, convert business questions into SQL, review readability, and validate results without blindly trusting generated queries.
+                      - generic [ref=e491]:
+                        - generic [ref=e492]:
+                          - generic [ref=e493]:
+                            - heading "Statistics and Probability" [level=4] [ref=e494]
+                            - paragraph [ref=e495]: Weeks 21-22
+                          - generic [ref=e496]: "Project: Decision Memo"
+                        - generic [ref=e497]:
+                          - generic [ref=e498]:
+                            - img [ref=e499]
+                            - generic [ref=e502]: Data types, mean, median, mode, variance, spread, distributions, and outliers
+                          - generic [ref=e503]:
+                            - img [ref=e504]
+                            - generic [ref=e507]: Percentiles, probability basics, sampling, bias, confidence intervals, and risk
+                          - generic [ref=e508]:
+                            - img [ref=e509]
+                            - generic [ref=e512]: Hypothesis testing, p-values, statistical significance, and business significance
+                          - generic [ref=e513]:
+                            - img [ref=e514]
+                            - generic [ref=e517]: Correlation vs causation, regression interpretation, and A/B test thinking
+                        - generic [ref=e518]:
+                          - generic [ref=e519]:
+                            - img [ref=e520]
+                            - text: AI integration
+                          - paragraph [ref=e523]: Use AI to translate statistical output into plain English, check interpretation wording, and prepare stakeholder-facing explanations after learners compute and verify results.
+                - article [ref=e524]:
+                  - generic [ref=e525]:
+                    - generic [ref=e526]:
+                      - img [ref=e528]
+                      - paragraph [ref=e532]: Phase 3
+                      - heading "Python, Automation & AI Workflows" [level=3] [ref=e533]
+                      - paragraph [ref=e534]: "Use Python as the analyst automation layer: clean data, work with files and APIs, create notebooks, and build AI-assisted workflows."
+                    - generic [ref=e536]:
+                      - generic [ref=e537]:
+                        - generic [ref=e538]:
+                          - heading "Python with AI Integration" [level=4] [ref=e539]
+                          - paragraph [ref=e540]: Weeks 14-20
+                        - generic [ref=e541]: "Project: Analyst Copilot Mini-App"
+                      - generic [ref=e542]:
+                        - generic [ref=e543]:
+                          - img [ref=e544]
+                          - generic [ref=e547]: Python fundamentals, Jupyter notebooks, variables, control flow, functions, file handling, lists, and dictionaries
+                        - generic [ref=e548]:
+                          - img [ref=e549]
+                          - generic [ref=e552]: pandas I/O, filtering, grouping, aggregation, missing values, joins, reshaping, date/time handling, and visualization
+                        - generic [ref=e553]:
+                          - img [ref=e554]
+                          - generic [ref=e557]: Reusable scripts, automation patterns, APIs, JSON, environment variables, and notebook storytelling
+                        - generic [ref=e558]:
+                          - img [ref=e559]
+                          - generic [ref=e562]: OpenAI API basics, prompt design, structured outputs, function calling, embeddings, and document search
+                      - generic [ref=e563]:
+                        - generic [ref=e564]:
+                          - img [ref=e565]
+                          - text: AI integration
+                        - paragraph [ref=e568]: Build workflows that turn raw data into KPI calculations, structured JSON summaries, SQL helpers, document Q&A, and reviewed business insight outputs.
+                - article [ref=e569]:
+                  - generic [ref=e570]:
+                    - generic [ref=e571]:
+                      - img [ref=e573]
+                      - paragraph [ref=e585]: Phase 4
+                      - heading "Applied Machine Learning & Responsible AI" [level=3] [ref=e586]
+                      - paragraph [ref=e587]: Learn enough ML to frame practical predictive problems, evaluate models, explain limits, and use AI responsibly in analytics work.
+                    - generic [ref=e588]:
+                      - generic [ref=e589]:
+                        - generic [ref=e590]:
+                          - generic [ref=e591]:
+                            - heading "Machine Learning Basics" [level=4] [ref=e592]
+                            - paragraph [ref=e593]: Weeks 23-26
+                          - generic [ref=e594]: "Project: Prediction or Segmentation Prototype"
+                        - generic [ref=e595]:
+                          - generic [ref=e596]:
+                            - img [ref=e597]
+                            - generic [ref=e600]: ML workflow, problem framing, supervised vs unsupervised learning, train/test split, and leakage
+                          - generic [ref=e601]:
+                            - img [ref=e602]
+                            - generic [ref=e605]: Preprocessing, encoding, scaling, pipelines, regression, classification, and clustering
+                          - generic [ref=e606]:
+                            - img [ref=e607]
+                            - generic [ref=e610]: Confusion matrix, MAE/RMSE, precision, recall, F1, overfitting, and model comparison
+                          - generic [ref=e611]:
+                            - img [ref=e612]
+                            - generic [ref=e615]: Feature importance, explainability, model bias, model cards, and when not to use ML
+                        - generic [ref=e616]:
+                          - generic [ref=e617]:
+                            - img [ref=e618]
+                            - text: AI integration
+                          - paragraph [ref=e621]: Use AI to compare algorithms, generate model cards, explain feature trade-offs, summarize model limits, and present results to non-technical stakeholders.
+                      - generic [ref=e622]:
+                        - generic [ref=e623]:
+                          - generic [ref=e624]:
+                            - heading "Git, GitHub and AI Governance" [level=4] [ref=e625]
+                            - paragraph [ref=e626]: Embedded throughout
+                          - generic [ref=e627]: "Project: Portfolio Repository + AI-Use Declaration"
+                        - generic [ref=e628]:
+                          - generic [ref=e629]:
+                            - img [ref=e630]
+                            - generic [ref=e633]: Git basics, GitHub repositories, branch workflow, README writing, and project documentation
+                          - generic [ref=e634]:
+                            - img [ref=e635]
+                            - generic [ref=e638]: Prompt templates, structured outputs, retrieval notes, validation logs, and human review checkpoints
+                          - generic [ref=e639]:
+                            - img [ref=e640]
+                            - generic [ref=e643]: Data minimization, redaction, transparency, fairness, security, accuracy, and individual rights
+                          - generic [ref=e644]:
+                            - img [ref=e645]
+                            - generic [ref=e648]: Clear declarations of where AI was used, what was verified, and what limitations remain
+                        - generic [ref=e649]:
+                          - generic [ref=e650]:
+                            - img [ref=e651]
+                            - text: AI integration
+                          - paragraph [ref=e654]: "Learners document AI usage like professionals: data provided, outputs generated, human checks completed, and governance risks still open."
+                - article [ref=e655]:
+                  - generic [ref=e656]:
+                    - generic [ref=e657]:
+                      - img [ref=e659]
+                      - paragraph [ref=e662]: Phase 5
+                      - heading "Career Acceleration & Professional Excellence" [level=3] [ref=e663]
+                      - paragraph [ref=e664]: Convert course work into employability proof with a targeted CV, LinkedIn and GitHub profile, interview practice, and portfolio storytelling.
+                    - generic [ref=e666]:
+                      - generic [ref=e667]:
+                        - generic [ref=e668]:
+                          - heading "Career Services and Interview Prep" [level=4] [ref=e669]
+                          - paragraph [ref=e670]: Final portfolio sprint
+                        - generic [ref=e671]: "Project: Hiring-Ready Portfolio Pack"
+                      - generic [ref=e672]:
+                        - generic [ref=e673]:
+                          - img [ref=e674]
+                          - generic [ref=e677]: Resume building, cover letter writing, and role-specific tailoring for UK job descriptions
+                        - generic [ref=e678]:
+                          - img [ref=e679]
+                          - generic [ref=e682]: LinkedIn and GitHub optimization with clear project summaries and documented repositories
+                        - generic [ref=e683]:
+                          - img [ref=e684]
+                          - generic [ref=e687]: Communication skills, interview etiquette, project walkthroughs, and stakeholder explanation practice
+                        - generic [ref=e688]:
+                          - img [ref=e689]
+                          - generic [ref=e692]: Aptitude preparation kit, mock interviews, salary conversation prep, and final portfolio review
+                      - generic [ref=e693]:
+                        - generic [ref=e694]:
+                          - img [ref=e695]
+                          - text: AI integration
+                        - paragraph [ref=e698]: Use AI to draft and refine role-specific CV bullets, interview answers, LinkedIn summaries, and project narratives while keeping claims accurate and evidence-based.
+            - generic [ref=e699]:
+              - generic [ref=e700]:
+                - paragraph [ref=e701]: Week-by-week teaching plan
+                - heading "Saturday concepts, Sunday labs, portfolio progress every week." [level=2] [ref=e702]
+                - paragraph [ref=e703]: "Each weekend has a clear rhythm: Saturday introduces the concepts and live demos; Sunday turns that learning into guided labs, project work, and AI-in-workflow practice."
+              - generic [ref=e705]:
+                - generic [ref=e706]:
+                  - generic [ref=e707]: Week
+                  - generic [ref=e708]: Saturday class
+                  - generic [ref=e709]: Sunday class
+                  - generic [ref=e710]: Project milestone
+                - generic [ref=e711]:
+                  - generic [ref=e712]: Week 1
+                  - generic [ref=e713]: UK analyst role, workflow, Excel hygiene
+                  - generic [ref=e714]: Data types, validation, cleanup, safe AI use
+                  - generic [ref=e715]: Start Excel project dataset and data dictionary
+                - generic [ref=e716]:
+                  - generic [ref=e717]: Week 2
+                  - generic [ref=e718]: IF/IFS, SUMIFS, COUNTIFS, percentages
+                  - generic [ref=e719]: XLOOKUP, text/date functions, AI formula review
+                  - generic [ref=e720]: Build KPI calculation sheet
+                - generic [ref=e721]:
+                  - generic [ref=e722]: Week 3
+                  - generic [ref=e723]: PivotTables, charts, dashboard layout
+                  - generic [ref=e724]: Power Query in Excel and AI insight memo
+                  - generic [ref=e725]: Submit Operations KPI Tracker
+                - generic [ref=e726]:
+                  - generic [ref=e727]: Week 4
+                  - generic [ref=e728]: Power BI orientation and connections
+                  - generic [ref=e729]: Power Query transformations and refresh logic
+                  - generic [ref=e730]: Start BI dataset cleanup
+                - generic [ref=e731]:
+                  - generic [ref=e732]: Week 5
+                  - generic [ref=e733]: Data modeling, facts, dimensions, relationships
+                  - generic [ref=e734]: DAX basics, measures, filter context, CALCULATE
+                  - generic [ref=e735]: Build base semantic model
+                - generic [ref=e736]:
+                  - generic [ref=e737]: Week 6
+                  - generic [ref=e738]: DAX KPIs, time intelligence, trends
+                  - generic [ref=e739]: Visual best practices, slicers, drillthrough
+                  - generic [ref=e740]: Add KPI measures and first report page
+                - generic [ref=e741]:
+                  - generic [ref=e742]: Week 7
+                  - generic [ref=e743]: Dashboard storytelling and accessibility
+                  - generic [ref=e744]: Publishing, refresh, RLS, AI narration QA
+                  - generic [ref=e745]: Add role-based report and executive summary
+                - generic [ref=e746]:
+                  - generic [ref=e747]: Week 8
+                  - generic [ref=e748]: Power BI guided build lab
+                  - generic [ref=e749]: Project presentation and feedback
+                  - generic [ref=e750]: Submit Executive BI Dashboard
+                - generic [ref=e751]:
+                  - generic [ref=e752]: Week 9
+                  - generic [ref=e753]: SQL tables, keys, SELECT, WHERE
+                  - generic [ref=e754]: GROUP BY, HAVING, aggregates, CASE
+                  - generic [ref=e755]: Explore case-study schema
+                - generic [ref=e756]:
+                  - generic [ref=e757]: Week 10
+                  - generic [ref=e758]: Joins and business meaning
+                  - generic [ref=e759]: Subqueries, set operations, validation
+                  - generic [ref=e760]: Write multi-table business queries
+                - generic [ref=e761]:
+                  - generic [ref=e762]: Week 11
+                  - generic [ref=e763]: CTEs and staged transformations
+                  - generic [ref=e764]: Window functions, ranks, running totals
+                  - generic [ref=e765]: Build advanced analysis queries
+                - generic [ref=e766]:
+                  - generic [ref=e767]: Week 12
+                  - generic [ref=e768]: String/date/conditional SQL functions
+                  - generic [ref=e769]: Views, optimization, indexes, EXPLAIN
+                  - generic [ref=e770]: Improve and tune one query set
+                - generic [ref=e771]:
+                  - generic [ref=e772]: Week 13
+                  - generic [ref=e773]: AI-assisted SQL and documentation
+                  - generic [ref=e774]: SQL challenge lab and project review
+                  - generic [ref=e775]: Submit SQL Business Case Pack
+                - generic [ref=e776]:
+                  - generic [ref=e777]: Week 14
+                  - generic [ref=e778]: Python environment, Jupyter, basics
+                  - generic [ref=e779]: Functions, loops, collections, file handling
+                  - generic [ref=e780]: Start Python notebook template
+                - generic [ref=e781]:
+                  - generic [ref=e782]: Week 15
+                  - generic [ref=e783]: pandas CSV/Excel I/O and DataFrames
+                  - generic [ref=e784]: Missing values, types, grouping, aggregations
+                  - generic [ref=e785]: Clean analysis-ready dataset
+                - generic [ref=e786]:
+                  - generic [ref=e787]: Week 16
+                  - generic [ref=e788]: Merge, join, concat, reshape, dates
+                  - generic [ref=e789]: Exploratory charts and story-first commentary
+                  - generic [ref=e790]: Build exploratory notebook
+                - generic [ref=e791]:
+                  - generic [ref=e792]: Week 17
+                  - generic [ref=e793]: Reusable code and analyst automation
+                  - generic [ref=e794]: APIs, JSON, environment variables, packages
+                  - generic [ref=e795]: Automate data pull or report prep
+                - generic [ref=e796]:
+                  - generic [ref=e797]: Week 18
+                  - generic [ref=e798]: AI for analysts and API basics
+                  - generic [ref=e799]: Structured outputs for reliable JSON insights
+                  - generic [ref=e800]: Generate structured KPI summary
+                - generic [ref=e801]:
+                  - generic [ref=e802]: Week 19
+                  - generic [ref=e803]: Function calling and tool workflows
+                  - generic [ref=e804]: Embeddings, semantic search, document Q&A
+                  - generic [ref=e805]: Add retrieval or tool-calling feature
+                - generic [ref=e806]:
+                  - generic [ref=e807]: Week 20
+                  - generic [ref=e808]: End-to-end analyst copilot build lab
+                  - generic [ref=e809]: Demo day and feedback
+                  - generic [ref=e810]: Submit Analyst Copilot Mini-App
+                - generic [ref=e811]:
+                  - generic [ref=e812]: Week 21
+                  - generic [ref=e813]: Data types, spread, distributions, outliers
+                  - generic [ref=e814]: Probability, sampling, bias, confidence intervals
+                  - generic [ref=e815]: Begin statistical decision memo
+                - generic [ref=e816]:
+                  - generic [ref=e817]: Week 22
+                  - generic [ref=e818]: Hypothesis testing and significance
+                  - generic [ref=e819]: Correlation, regression, A/B readout, AI memo QA
+                  - generic [ref=e820]: Submit Decision Memo
+                - generic [ref=e821]:
+                  - generic [ref=e822]: Week 23
+                  - generic [ref=e823]: ML framing, train/test split, leakage
+                  - generic [ref=e824]: Preprocessing, encoding, scaling, pipelines
+                  - generic [ref=e825]: Prepare ML-ready dataset
+                - generic [ref=e826]:
+                  - generic [ref=e827]: Week 24
+                  - generic [ref=e828]: Regression workshop and evaluation
+                  - generic [ref=e829]: Classification, confusion matrix, precision/recall/F1
+                  - generic [ref=e830]: Compare two baseline models
+                - generic [ref=e831]:
+                  - generic [ref=e832]: Week 25
+                  - generic [ref=e833]: Clustering and segmentation
+                  - generic [ref=e834]: Feature importance, explainability, bias
+                  - generic [ref=e835]: Choose final model and write findings
+                - generic [ref=e836]:
+                  - generic [ref=e837]: Week 26
+                  - generic [ref=e838]: Final ML build lab and model card
+                  - generic [ref=e839]: Portfolio presentation and interview defense
+                  - generic [ref=e840]: Submit Prediction or Segmentation Prototype
+            - generic [ref=e841]:
+              - generic [ref=e842]:
+                - paragraph [ref=e843]: Portfolio outcomes
+                - heading "Six module projects, one hiring-ready evidence pack." [level=2] [ref=e844]
+                - paragraph [ref=e845]: The certificate should not end with only quizzes. Every module creates a concrete submission that shows practical ability, communication, validation, and responsible AI use.
+              - generic [ref=e846]:
+                - article [ref=e847]:
+                  - generic [ref=e848]:
+                    - img [ref=e850]
+                    - generic [ref=e853]:
+                      - heading "Operations KPI Tracker" [level=3] [ref=e854]
+                      - paragraph [ref=e855]: Clean messy files, calculate KPIs, and report clearly
+                  - paragraph [ref=e856]: Excel workbook, cleaned tabs, formula sheets, Pivot dashboard, and insight memo
+                - article [ref=e857]:
+                  - generic [ref=e858]:
+                    - img [ref=e860]
+                    - generic [ref=e863]:
+                      - heading "Executive BI Dashboard" [level=3] [ref=e864]
+                      - paragraph [ref=e865]: Model data, build dashboards, and communicate to stakeholders
+                  - paragraph [ref=e866]: PBIX file, semantic model, DAX measures, screenshots or published report, and walkthrough
+                - article [ref=e867]:
+                  - generic [ref=e868]:
+                    - img [ref=e870]
+                    - generic [ref=e873]:
+                      - heading "SQL Business Case Pack" [level=3] [ref=e874]
+                      - paragraph [ref=e875]: Answer business questions from structured data with readable SQL
+                  - paragraph [ref=e876]: .sql scripts, query notes, output screenshots, and tuning note
+                - article [ref=e877]:
+                  - generic [ref=e878]:
+                    - img [ref=e880]
+                    - generic [ref=e883]:
+                      - heading "Analyst Copilot Mini-App" [level=3] [ref=e884]
+                      - paragraph [ref=e885]: Automate analysis and use AI responsibly in workflows
+                  - paragraph [ref=e886]: Notebook or app, prompt templates, structured JSON example, and governance note
+                - article [ref=e887]:
+                  - generic [ref=e888]:
+                    - img [ref=e890]
+                    - generic [ref=e893]:
+                      - heading "Decision Memo" [level=3] [ref=e894]
+                      - paragraph [ref=e895]: Interpret evidence rather than only calculate formulas
+                  - paragraph [ref=e896]: Written recommendation, calculations, charts, and uncertainty explanation
+                - article [ref=e897]:
+                  - generic [ref=e898]:
+                    - img [ref=e900]
+                    - generic [ref=e903]:
+                      - heading "Prediction or Segmentation Prototype" [level=3] [ref=e904]
+                      - paragraph [ref=e905]: Frame an ML problem, evaluate a model, and explain limits
+                  - paragraph [ref=e906]: Notebook, metrics summary, feature explanation, model card, and stakeholder summary
+              - generic [ref=e907]:
+                - generic [ref=e908]:
+                  - img [ref=e909]
+                  - heading "Required submission pattern" [level=3] [ref=e912]
+                - generic [ref=e913]:
+                  - generic [ref=e914]: Business problem
+                  - generic [ref=e915]: Data source description
+                  - generic [ref=e916]: Cleaning log
+                  - generic [ref=e917]: Analysis steps
+                  - generic [ref=e918]: Output or dashboard
+                  - generic [ref=e919]: Recommendation
+                  - generic [ref=e920]: Limitations
+                  - generic [ref=e921]: AI-use declaration
+            - generic [ref=e922]:
+              - generic [ref=e923]:
+                - img [ref=e925]
+                - heading "Teach Excel tightly" [level=3] [ref=e927]
+                - paragraph [ref=e928]: Keep Excel focused on tables, formulas, lookups, PivotTables, dashboards, and Power Query basics rather than adding VBA into the core path.
+              - generic [ref=e929]:
+                - img [ref=e931]
+                - heading "Make statistics practical" [level=3] [ref=e934]
+                - paragraph [ref=e935]: Use statistics for interpretation, evidence, risk, and avoiding misleading recommendations rather than turning it into a theory block.
+              - generic [ref=e936]:
+                - img [ref=e938]
+                - heading "Keep the stack consistent" [level=3] [ref=e942]
+                - paragraph [ref=e943]: Use one SQL dialect, one Python lab stack, GitHub repositories, pandas, scikit-learn, notebooks, and repeatable project documentation.
+            - generic [ref=e945]:
+              - generic [ref=e946]:
+                - img [ref=e948]
+                - heading "Simple course promise" [level=2] [ref=e950]
+              - paragraph [ref=e951]: Teach the fundamentals just enough, then spend most of the six months on Power BI, SQL, Python, and AI-powered analyst workflows, with a project in every module and a portfolio outcome every month.
+          - generic [ref=e952]:
+            - generic [ref=e953]:
+              - paragraph [ref=e954]: Career guides
+              - heading "Read before choosing this programme" [level=2] [ref=e955]
+              - paragraph [ref=e956]: These Brit Institute guides explain the UK roles, salaries, tools, and learning path connected to this course.
+            - generic [ref=e957]:
+              - link "How to Become How to Become a Data Analyst in the UK (Step-by-Step Guide) A practical roadmap for breaking into data analytics — from learning core tools to landing your first role in the UK job market. Read guide →" [ref=e958] [cursor=pointer]:
+                - /url: /blog/how-to-become-data-analyst-uk
+                - generic [ref=e959]: How to Become
+                - heading "How to Become a Data Analyst in the UK (Step-by-Step Guide)" [level=3] [ref=e960]
+                - paragraph [ref=e961]: A practical roadmap for breaking into data analytics — from learning core tools to landing your first role in the UK job market.
+                - generic [ref=e962]: Read guide →
+              - link "Salary Insights Data Analyst Salary in the UK (2026 Guide) Comprehensive breakdown of data analyst salaries across UK cities, industries, and experience levels. Read guide →" [ref=e963] [cursor=pointer]:
+                - /url: /blog/data-analyst-salary-uk-2026
+                - generic [ref=e964]: Salary Insights
+                - heading "Data Analyst Salary in the UK (2026 Guide)" [level=3] [ref=e965]
+                - paragraph [ref=e966]: Comprehensive breakdown of data analyst salaries across UK cities, industries, and experience levels.
+                - generic [ref=e967]: Read guide →
+              - 'link "Tools & Skills Python vs SQL: Which Should Data Analysts Learn First? A practical comparison to help you decide whether to start with Python or SQL on your data analytics journey. Read guide →" [ref=e968] [cursor=pointer]':
+                - /url: /blog/python-vs-sql-data-analysts
+                - generic [ref=e969]: Tools & Skills
+                - 'heading "Python vs SQL: Which Should Data Analysts Learn First?" [level=3] [ref=e970]'
+                - paragraph [ref=e971]: A practical comparison to help you decide whether to start with Python or SQL on your data analytics journey.
+                - generic [ref=e972]: Read guide →
+          - generic [ref=e973]:
+            - generic [ref=e974]:
+              - heading "Hands-On Projects" [level=2] [ref=e975]
+              - list [ref=e976]:
+                - listitem [ref=e977]:
+                  - img [ref=e979]
+                  - generic [ref=e983]: Operations KPI Tracker
+                - listitem [ref=e984]:
+                  - img [ref=e986]
+                  - generic [ref=e990]: Executive BI Dashboard
+                - listitem [ref=e991]:
+                  - img [ref=e993]
+                  - generic [ref=e997]: SQL Business Case Pack
+                - listitem [ref=e998]:
+                  - img [ref=e1000]
+                  - generic [ref=e1004]: Analyst Copilot Mini-App
+                - listitem [ref=e1005]:
+                  - img [ref=e1007]
+                  - generic [ref=e1011]: Decision Memo
+                - listitem [ref=e1012]:
+                  - img [ref=e1014]
+                  - generic [ref=e1018]: Prediction or Segmentation Prototype
+            - generic [ref=e1019]:
+              - heading "Career Support" [level=2] [ref=e1020]
+              - list [ref=e1021]:
+                - listitem [ref=e1022]:
+                  - img [ref=e1024]
+                  - generic [ref=e1026]: CV tailored for UK data analyst jobs
+                - listitem [ref=e1027]:
+                  - img [ref=e1029]
+                  - generic [ref=e1031]: Interview prep
+                - listitem [ref=e1032]:
+                  - img [ref=e1034]
+                  - generic [ref=e1036]: Portfolio review
+                - listitem [ref=e1037]:
+                  - img [ref=e1039]
+                  - generic [ref=e1041]: LinkedIn optimisation
+                - listitem [ref=e1042]:
+                  - img [ref=e1044]
+                  - generic [ref=e1046]: Mock interview sessions
+                - listitem [ref=e1047]:
+                  - img [ref=e1049]
+                  - generic [ref=e1051]: Targeted job application support
+          - generic [ref=e1052]:
+            - generic [ref=e1053]:
+              - img [ref=e1055]
+              - generic [ref=e1058]:
+                - heading "Learner Reviews" [level=2] [ref=e1059]
+                - paragraph [ref=e1060]: 4.9 / 5 average from 42 published learner reviews
+            - generic [ref=e1061]:
+              - article [ref=e1062]:
+                - generic [ref=e1063]:
+                  - generic [ref=e1064]:
+                    - heading "Priya Sharma" [level=3] [ref=e1065]
+                    - paragraph [ref=e1066]: Published 14 Feb 2026
+                  - generic [ref=e1067]:
+                    - generic [ref=e1068]:
+                      - img [ref=e1069]
+                      - img [ref=e1071]
+                      - img [ref=e1073]
+                      - img [ref=e1075]
+                      - img [ref=e1077]
+                    - paragraph [ref=e1079]: 5.0 / 5
+                - paragraph [ref=e1080]: The analytics projects felt practical from week one. I used the dashboard work in interviews and moved into a reporting-focused analyst role with much more confidence.
+              - article [ref=e1081]:
+                - generic [ref=e1082]:
+                  - generic [ref=e1083]:
+                    - heading "James Okonkwo" [level=3] [ref=e1084]
+                    - paragraph [ref=e1085]: Published 29 Jan 2026
+                  - generic [ref=e1086]:
+                    - generic [ref=e1087]:
+                      - img [ref=e1088]
+                      - img [ref=e1090]
+                      - img [ref=e1092]
+                      - img [ref=e1094]
+                      - img [ref=e1096]
+                    - paragraph [ref=e1098]: 5.0 / 5
+                - paragraph [ref=e1099]: I joined with Excel experience only and left comfortable with SQL, Tableau, and presenting insights. The mentor feedback on my portfolio was especially useful.
+              - article [ref=e1100]:
+                - generic [ref=e1101]:
+                  - generic [ref=e1102]:
+                    - heading "Amina Begum" [level=3] [ref=e1103]
+                    - paragraph [ref=e1104]: Published 8 Dec 2025
+                  - generic [ref=e1105]:
+                    - generic [ref=e1106]:
+                      - img [ref=e1107]
+                      - img [ref=e1109]
+                      - img [ref=e1111]
+                      - img [ref=e1113]
+                      - img [ref=e1115]
+                    - paragraph [ref=e1117]: 4.8 / 5
+                - paragraph [ref=e1118]: The live support and structured roadmap helped me balance study with work. I could see how each module connected to real analyst tasks in UK job descriptions.
+          - generic [ref=e1119]:
+            - generic [ref=e1120]:
+              - paragraph [ref=e1121]: Data Analytics Course UK FAQ
+              - heading "Common questions about studying data analytics in the UK" [level=2] [ref=e1122]
+            - generic [ref=e1123]:
+              - group [ref=e1124]:
+                - generic "Is Brit Institute's data analytics course available in the UK? +" [ref=e1125] [cursor=pointer]:
+                  - generic [ref=e1126]: Is Brit Institute's data analytics course available in the UK?
+                  - generic [ref=e1127]: +
+              - group [ref=e1128]:
+                - generic "What is the best data analytics course in the UK for beginners? +" [ref=e1129] [cursor=pointer]:
+                  - generic [ref=e1130]: What is the best data analytics course in the UK for beginners?
+                  - generic [ref=e1131]: +
+              - group [ref=e1132]:
+                - generic "How long is the data analytics course at Brit Institute? +" [ref=e1133] [cursor=pointer]:
+                  - generic [ref=e1134]: How long is the data analytics course at Brit Institute?
+                  - generic [ref=e1135]: +
+              - group [ref=e1136]:
+                - generic "What salary can I expect after completing a data analytics course in the UK? +" [ref=e1137] [cursor=pointer]:
+                  - generic [ref=e1138]: What salary can I expect after completing a data analytics course in the UK?
+                  - generic [ref=e1139]: +
+              - group [ref=e1140]:
+                - generic "What tools are taught in the data analytics course UK? +" [ref=e1141] [cursor=pointer]:
+                  - generic [ref=e1142]: What tools are taught in the data analytics course UK?
+                  - generic [ref=e1143]: +
+              - group [ref=e1144]:
+                - generic "Do I need a degree to join a data analytics course in the UK? +" [ref=e1145] [cursor=pointer]:
+                  - generic [ref=e1146]: Do I need a degree to join a data analytics course in the UK?
+                  - generic [ref=e1147]: +
+              - group [ref=e1148]:
+                - generic "Does the data analytics course include job placement support? +" [ref=e1149] [cursor=pointer]:
+                  - generic [ref=e1150]: Does the data analytics course include job placement support?
+                  - generic [ref=e1151]: +
+              - group [ref=e1152]:
+                - generic "How much does the data analytics course cost in the UK? +" [ref=e1153] [cursor=pointer]:
+                  - generic [ref=e1154]: How much does the data analytics course cost in the UK?
+                  - generic [ref=e1155]: +
+          - generic [ref=e1157]:
+            - heading "Ready to transform your career?" [level=2] [ref=e1158]
+            - paragraph [ref=e1159]: Join hundreds of professionals who have accelerated their journey with us.
+            - generic [ref=e1160]:
+              - button "Apply Now" [ref=e1161]:
+                - text: Apply Now
+                - img [ref=e1162]
+              - button "Book Consultation" [ref=e1164]
+      - complementary [ref=e1165]:
+        - generic [ref=e1166]:
+          - generic [ref=e1168]:
+            - generic [ref=e1169]:
+              - heading "Talk to an Expert" [level=3] [ref=e1170]
+              - paragraph [ref=e1171]: Fill in the details to get started
+            - generic [ref=e1172]:
+              - textbox "Full Name*" [ref=e1174]
+              - textbox "Email Id*" [ref=e1176]
+              - generic [ref=e1177]:
+                - generic [ref=e1178]:
+                  - combobox [ref=e1179]:
+                    - option "🇬🇧 +44" [selected]
+                    - option "🇮🇪 +353"
+                    - option "🇺🇸 +1"
+                    - option "🇦🇺 +61"
+                    - option "🇳🇿 +64"
+                    - option "🇮🇳 +91"
+                    - option "🇵🇰 +92"
+                    - option "🇧🇩 +880"
+                    - option "🇱🇰 +94"
+                    - option "🇳🇵 +977"
+                    - option "🇦🇪 +971"
+                    - option "🇸🇦 +966"
+                    - option "🇶🇦 +974"
+                    - option "🇧🇭 +973"
+                    - option "🇴🇲 +968"
+                    - option "🇪🇬 +20"
+                    - option "🇿🇦 +27"
+                    - option "🇳🇬 +234"
+                    - option "🇰🇪 +254"
+                    - option "🇬🇷 +30"
+                    - option "🇳🇱 +31"
+                    - option "🇧🇪 +32"
+                    - option "🇫🇷 +33"
+                    - option "🇪🇸 +34"
+                    - option "🇮🇹 +39"
+                    - option "🇷🇴 +40"
+                    - option "🇨🇭 +41"
+                    - option "🇦🇹 +43"
+                    - option "🇩🇰 +45"
+                    - option "🇸🇪 +46"
+                    - option "🇳🇴 +47"
+                    - option "🇵🇱 +48"
+                    - option "🇩🇪 +49"
+                    - option "🇧🇾 +50"
+                    - option "🇵🇪 +51"
+                    - option "🇲🇽 +52"
+                    - option "🇧🇷 +55"
+                    - option "🇲🇾 +60"
+                    - option "🇸🇬 +65"
+                    - option "🇹🇭 +66"
+                    - option "🇯🇵 +81"
+                    - option "🇰🇷 +82"
+                    - option "🇨🇳 +86"
+                    - option "🇹🇷 +90"
+                    - option "🇮🇩 +62"
+                    - option "🇵🇭 +63"
+                  - generic:
+                    - img
+                - textbox "Phone*" [ref=e1180]
+              - generic [ref=e1181]:
+                - generic [ref=e1182]: Purpose*
+                - combobox [ref=e1183] [cursor=pointer]:
+                  - option "Select an option" [selected]
+                  - option "Career Change"
+                  - option "Upskilling"
+                  - option "Placement Assistance"
+                - generic:
+                  - img
+              - generic [ref=e1184]:
+                - checkbox "I agree to Brit Institute's Terms & Conditions and Privacy Policy." [ref=e1185] [cursor=pointer]
+                - generic [ref=e1186] [cursor=pointer]:
+                  - text: I agree to Brit Institute's
+                  - link "Terms & Conditions" [ref=e1187]:
+                    - /url: /terms
+                  - text: and
+                  - link "Privacy Policy" [ref=e1188]:
+                    - /url: /privacy-policy
+                  - text: .
+              - button "Submit →" [ref=e1189]:
+                - text: Submit
+                - generic [ref=e1190]: →
+          - generic [ref=e1191]:
+            - generic [ref=e1192]:
+              - generic [ref=e1193]:
+                - img [ref=e1194]
+                - generic [ref=e1196]: Trustpilot
+              - generic [ref=e1197]:
+                - img [ref=e1199]
+                - img [ref=e1202]
+                - img [ref=e1205]
+                - img [ref=e1208]
+                - img [ref=e1211]
+              - generic [ref=e1213]: 4.8/5 Rating
+            - generic [ref=e1214]:
+              - generic [ref=e1215]:
+                - generic [ref=e1216]: G
+                - generic [ref=e1217]: o
+                - generic [ref=e1218]: o
+                - generic [ref=e1219]: g
+                - generic [ref=e1220]: l
+                - generic [ref=e1221]: e
+              - generic [ref=e1222]:
+                - img [ref=e1223]
+                - img [ref=e1225]
+                - img [ref=e1227]
+                - img [ref=e1229]
+                - img [ref=e1231]
+              - generic [ref=e1233]: 4.9/5 Rating
+    - contentinfo [ref=e1234]:
+      - generic [ref=e1235]:
+        - generic [ref=e1236]:
+          - generic [ref=e1237]:
+            - img "Brit Institute logo" [ref=e1238]
+            - text: Brit Institute
+          - paragraph [ref=e1239]: Industry-led AI & Data Analytics programs, designed for the UK job market.
+        - generic [ref=e1240]:
+          - heading "Programs" [level=4] [ref=e1241]
+          - list [ref=e1242]:
+            - listitem [ref=e1243]:
+              - link "Data Analytics and Gen AI Certification Program" [ref=e1244] [cursor=pointer]:
+                - /url: /courses/data-analytics
+            - listitem [ref=e1245]:
+              - link "Data Science, Machine Learning and Gen AI Certification Program" [ref=e1246] [cursor=pointer]:
+                - /url: /courses/data-science
+            - listitem [ref=e1247]:
+              - link "Agentic AI Certification Program" [ref=e1248] [cursor=pointer]:
+                - /url: /courses/ai-automation
+            - listitem [ref=e1249]:
+              - link "Generative AI Certification Program" [ref=e1250] [cursor=pointer]:
+                - /url: /courses/gen-ai
+            - listitem [ref=e1251]:
+              - link "View All Courses" [ref=e1252] [cursor=pointer]:
+                - /url: /courses
+        - generic [ref=e1253]:
+          - heading "Company" [level=4] [ref=e1254]
+          - list [ref=e1255]:
+            - listitem [ref=e1256]:
+              - link "About Us" [ref=e1257] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e1258]:
+              - link "Success Stories" [ref=e1259] [cursor=pointer]:
+                - /url: /#proof
+            - listitem [ref=e1260]:
+              - link "Blog" [ref=e1261] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e1262]:
+              - link "Careers" [ref=e1263] [cursor=pointer]:
+                - /url: /careers
+        - generic [ref=e1264]:
+          - heading "Contact" [level=4] [ref=e1265]
+          - list [ref=e1266]:
+            - listitem [ref=e1267]:
+              - link "Contact Us" [ref=e1268] [cursor=pointer]:
+                - /url: /contact
+            - listitem [ref=e1269]:
+              - link "admissions@britinstitute.uk" [ref=e1270] [cursor=pointer]:
+                - /url: mailto:admissions@britinstitute.uk
+            - listitem [ref=e1271]:
+              - link "+44 (0) 20 1234 5678" [ref=e1272] [cursor=pointer]:
+                - /url: tel:+442012345678
+            - listitem [ref=e1273]:
+              - generic [ref=e1274]:
+                - generic [ref=e1275]: London
+                - generic [ref=e1276]: United Kingdom
+      - generic [ref=e1277]:
+        - generic [ref=e1278]:
+          - link "Privacy Policy" [ref=e1279] [cursor=pointer]:
+            - /url: /privacy-policy
+          - link "Terms & Conditions" [ref=e1280] [cursor=pointer]:
+            - /url: /terms
+        - generic [ref=e1281]: © 2026 Brit Institute. All rights reserved.
+        - generic [ref=e1282]: Brit Institute is a subsidiary of Learnify Ops.
+  - button "Open career chatbot" [ref=e1283]:
+    - img [ref=e1284]
+  - link "Chat with us on WhatsApp" [ref=e1286] [cursor=pointer]:
+    - /url: https://wa.me/447520664011?text=Hi!%20I'd%20like%20to%20know%20more%20about%20the%20courses.
+    - img [ref=e1287]
+  - generic [ref=e1290]:
+    - generic [ref=e1291]: 🎓
+    - generic [ref=e1292]: Need Help? Get Career Guidance
+    - generic [ref=e1293]: "|"
+    - generic [ref=e1294]: Call Us at
+    - link "+44 (0) 20 1234 5678" [ref=e1295] [cursor=pointer]:
+      - /url: tel:+442012345678
+    - generic [ref=e1296]: or
+    - link "BOOK FREE CONSULTATION »" [ref=e1297] [cursor=pointer]:
+      - /url: /contact

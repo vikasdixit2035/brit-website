@@ -428,7 +428,7 @@ export default function PlacementPageClient() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-950/10">
                     <Mail className="h-5 w-5" />
                   </div>
-                  <span className="font-bold">admissions@britinstitute.co.uk</span>
+                  <span className="font-bold">admissions@britinstitute.uk</span>
                 </div>
                 <div className="flex items-center gap-4 text-slate-900">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-950/10">
