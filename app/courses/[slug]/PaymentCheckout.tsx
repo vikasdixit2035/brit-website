@@ -139,7 +139,7 @@ function buildPayPalSdkUrl(config: PaymentConfig) {
     "client-id": config.paypalClientId,
     currency: config.paypalCurrency || "GBP",
     intent: "capture",
-    components: "buttons,messages",
+    components: "buttons,messages,funding-eligibility",
     "enable-funding": "paylater",
   });
 
@@ -164,7 +164,7 @@ export default function PaymentCheckout({
   const [isPayPalLoading, setIsPayPalLoading] = useState(false);
   const [isApplyingCoupon, setIsApplyingCoupon] = useState(false);
   const [paypalReady, setPaypalReady] = useState(false);
-  const [payLaterUnavailable, setPayLaterUnavailable] = useState(false);
+  const [isPayLaterVisible, setIsPayLaterVisible] = useState(false);
   const [config, setConfig] = useState<PaymentConfig | null>(null);
   const [error, setError] = useState("");
   const [couponCode, setCouponCode] = useState("");
@@ -177,8 +177,8 @@ export default function PaymentCheckout({
   const checkoutCurrency = appliedCoupon?.currency ?? currency ?? "GBP";
   const displayAmount = formatAmount(checkoutAmount, checkoutCurrency);
   const originalDisplayAmount = formatAmount(amount, currency ?? "GBP");
-  const payLaterMinAmount = config?.paypalPayLaterMinAmount ?? 30;
-  const payLaterMaxAmount = config?.paypalPayLaterMaxAmount ?? 2000;
+  const payLaterMinAmount = config?.paypalPayLaterMinAmount ?? 20;
+  const payLaterMaxAmount = config?.paypalPayLaterMaxAmount ?? 3000;
   const payLaterAmountEligible =
     checkoutCurrency === "GBP" &&
     checkoutAmount >= payLaterMinAmount &&
@@ -190,7 +190,7 @@ export default function PaymentCheckout({
     setCouponCode("");
     setAppliedCoupon(null);
     setCouponMessage("");
-    setPayLaterUnavailable(false);
+    setIsPayLaterVisible(false);
     setError("");
   }, [isCheckoutOpen]);
 
@@ -242,7 +242,7 @@ export default function PaymentCheckout({
 
     paypalContainerRef.current.innerHTML = "";
     payLaterContainerRef.current.innerHTML = "";
-    setPayLaterUnavailable(false);
+    setIsPayLaterVisible(false);
 
     const createOrder = async () => {
       const response = await apiRequest<{ id: string }>("/api/payments/paypal/order", {
@@ -312,15 +312,15 @@ export default function PaymentCheckout({
       });
 
       if (!(payLaterButton.isEligible?.() ?? true)) {
-        setPayLaterUnavailable(true);
         return;
       }
 
+      setIsPayLaterVisible(true);
       payLaterButton
         .render(payLaterContainerRef.current)
         .catch((err) => {
           console.error("PayPal Pay Later render failed:", err);
-          setPayLaterUnavailable(true);
+          setIsPayLaterVisible(false);
         });
     }
   }, [appliedCoupon?.code, courseSlug, isCheckoutOpen, payLaterAmountEligible, paypalReady]);
@@ -566,21 +566,16 @@ export default function PaymentCheckout({
                 <div ref={paypalContainerRef} className={paypalReady ? "min-h-12" : "hidden"} />
               </div>
 
-              <div>
+              <div className={paypalReady && (!payLaterAmountEligible || isPayLaterVisible) ? "" : "hidden"}>
                 <div className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-700">
                   <Wallet className="h-4 w-4 text-indigo-700" />
                   PayPal Pay Later
                 </div>
-                <div ref={payLaterContainerRef} className={paypalReady && payLaterAmountEligible && !payLaterUnavailable ? "min-h-12" : "hidden"} />
-                {paypalReady && !payLaterAmountEligible && (
+                <div ref={payLaterContainerRef} className={isPayLaterVisible ? "min-h-12" : "hidden"} />
+                {!payLaterAmountEligible && (
                   <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-600">
                     PayPal Pay Later is available only for eligible GBP totals from{" "}
                     {formatAmount(payLaterMinAmount, "GBP")} to {formatAmount(payLaterMaxAmount, "GBP")}. Current total: {displayAmount}.
-                  </div>
-                )}
-                {paypalReady && payLaterAmountEligible && payLaterUnavailable && (
-                  <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-600">
-                    This total is eligible, but PayPal Pay Later is not available for this buyer or PayPal account right now.
                   </div>
                 )}
               </div>
