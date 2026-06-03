@@ -47,7 +47,6 @@ const NAV_RIGHT_LINKS: NavLink[] = [
   { href: "/about", label: "About" },
   { href: "/placement", label: "Placement" },
   { href: "/resources", label: "Resources" },
-  { href: "/webinar", label: "Webinar" },
   { href: "/blog", label: "Blog" },
   { href: "/pricing", label: "Pricing" },
   { href: "/pay", label: "Pay Fees" },
