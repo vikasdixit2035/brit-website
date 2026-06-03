@@ -69,6 +69,7 @@ declare global {
       FUNDING: {
         PAYPAL: string;
         PAYLATER: string;
+        CREDIT?: string;
       };
       Buttons: (options: PayPalButtonConfig) => {
         isEligible?: () => boolean;
@@ -140,7 +141,7 @@ function buildPayPalSdkUrl(config: PaymentConfig) {
     currency: config.paypalCurrency || "GBP",
     intent: "capture",
     components: "buttons,messages,funding-eligibility",
-    "enable-funding": "paylater",
+    "enable-funding": "paylater,credit",
   });
 
   if (config.paypalEnvironment !== "live") {
@@ -305,28 +306,38 @@ export default function PaymentCheckout({
       });
 
     if (payLaterAmountEligible) {
-      const payLaterButton = window.paypal.Buttons({
-        fundingSource: window.paypal.FUNDING.PAYLATER,
-        style: baseStyle,
-        createOrder,
-        onApprove,
-        onError,
-        onCancel,
+      const payLaterFundingSources = [
+        window.paypal.FUNDING.PAYLATER,
+        window.paypal.FUNDING.CREDIT,
+      ].filter(Boolean);
+      let renderedPayLaterButton = false;
+
+      payLaterFundingSources.forEach((fundingSource) => {
+        const payLaterButton = window.paypal!.Buttons({
+          fundingSource,
+          style: baseStyle,
+          createOrder,
+          onApprove,
+          onError,
+          onCancel,
+        });
+
+        if (!(payLaterButton.isEligible?.() ?? true)) {
+          return;
+        }
+
+        renderedPayLaterButton = true;
+        setIsPayLaterVisible(true);
+        payLaterButton
+          .render(payLaterContainerRef.current!)
+          .catch((err) => {
+            console.error("PayPal Pay Later render failed:", err);
+          });
       });
 
-      if (!(payLaterButton.isEligible?.() ?? true)) {
+      if (!renderedPayLaterButton) {
         setPayLaterUnavailable(true);
-        return;
       }
-
-      setIsPayLaterVisible(true);
-      payLaterButton
-        .render(payLaterContainerRef.current)
-        .catch((err) => {
-          console.error("PayPal Pay Later render failed:", err);
-          setIsPayLaterVisible(false);
-          setPayLaterUnavailable(true);
-        });
     }
   }, [appliedCoupon?.code, courseSlug, isCheckoutOpen, payLaterAmountEligible, paypalReady]);
 
