@@ -69,6 +69,7 @@ declare global {
       FUNDING: {
         PAYPAL: string;
         PAYLATER: string;
+        CARD?: string;
         CREDIT?: string;
       };
       Buttons: (options: PayPalButtonConfig) => {
@@ -140,8 +141,8 @@ function buildPayPalSdkUrl(config: PaymentConfig) {
     "client-id": config.paypalClientId,
     currency: config.paypalCurrency || "GBP",
     intent: "capture",
-    components: "buttons,messages,funding-eligibility",
-    "enable-funding": "paylater,credit",
+    components: "buttons,funding-eligibility",
+    "enable-funding": "paylater,credit,card",
   });
 
   if (config.paypalEnvironment !== "live") {
@@ -165,7 +166,10 @@ export default function PaymentCheckout({
   const [isPayPalLoading, setIsPayPalLoading] = useState(false);
   const [isApplyingCoupon, setIsApplyingCoupon] = useState(false);
   const [paypalReady, setPaypalReady] = useState(false);
-  const [isPayLaterVisible, setIsPayLaterVisible] = useState(false);
+  const [isCardChecking, setIsCardChecking] = useState(false);
+  const [isCardRendered, setIsCardRendered] = useState(false);
+  const [isPayLaterChecking, setIsPayLaterChecking] = useState(false);
+  const [isPayLaterRendered, setIsPayLaterRendered] = useState(false);
   const [payLaterUnavailable, setPayLaterUnavailable] = useState(false);
   const [config, setConfig] = useState<PaymentConfig | null>(null);
   const [error, setError] = useState("");
@@ -173,15 +177,16 @@ export default function PaymentCheckout({
   const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(null);
   const [couponMessage, setCouponMessage] = useState("");
   const paypalContainerRef = useRef<HTMLDivElement | null>(null);
+  const cardContainerRef = useRef<HTMLDivElement | null>(null);
   const payLaterContainerRef = useRef<HTMLDivElement | null>(null);
 
   const checkoutAmount = appliedCoupon?.finalAmount ?? amount;
   const checkoutCurrency = appliedCoupon?.currency ?? currency ?? "GBP";
   const displayAmount = formatAmount(checkoutAmount, checkoutCurrency);
   const originalDisplayAmount = formatAmount(amount, currency ?? "GBP");
-  const payLaterMinAmount = config?.paypalPayLaterMinAmount ?? 20;
-  const payLaterMaxAmount = config?.paypalPayLaterMaxAmount ?? 3000;
-  const payLaterAmountEligible =
+  const payLaterMinAmount = config?.paypalPayLaterMinAmount ?? 30;
+  const payLaterMaxAmount = config?.paypalPayLaterMaxAmount ?? 2000;
+  const isPayLaterAmountEligible =
     checkoutCurrency === "GBP" &&
     checkoutAmount >= payLaterMinAmount &&
     checkoutAmount <= payLaterMaxAmount;
@@ -192,7 +197,10 @@ export default function PaymentCheckout({
     setCouponCode("");
     setAppliedCoupon(null);
     setCouponMessage("");
-    setIsPayLaterVisible(false);
+    setIsCardChecking(false);
+    setIsCardRendered(false);
+    setIsPayLaterChecking(false);
+    setIsPayLaterRendered(false);
     setPayLaterUnavailable(false);
     setError("");
   }, [isCheckoutOpen]);
@@ -241,11 +249,24 @@ export default function PaymentCheckout({
   }, [isCheckoutOpen]);
 
   useEffect(() => {
-    if (!isCheckoutOpen || !paypalReady || !paypalContainerRef.current || !payLaterContainerRef.current || !window.paypal) return;
+    if (
+      !isCheckoutOpen ||
+      !paypalReady ||
+      !paypalContainerRef.current ||
+      !cardContainerRef.current ||
+      !payLaterContainerRef.current ||
+      !window.paypal
+    ) return;
+
+    let isCancelled = false;
 
     paypalContainerRef.current.innerHTML = "";
+    cardContainerRef.current.innerHTML = "";
     payLaterContainerRef.current.innerHTML = "";
-    setIsPayLaterVisible(false);
+    setIsCardChecking(true);
+    setIsCardRendered(false);
+    setIsPayLaterChecking(isPayLaterAmountEligible);
+    setIsPayLaterRendered(false);
     setPayLaterUnavailable(false);
 
     const createOrder = async () => {
@@ -305,41 +326,97 @@ export default function PaymentCheckout({
         setError("PayPal button could not be displayed.");
       });
 
-    if (payLaterAmountEligible) {
-      const payLaterFundingSources = [
-        window.paypal.FUNDING.PAYLATER,
-        window.paypal.FUNDING.CREDIT,
-      ].filter(Boolean);
-      let renderedPayLaterButton = false;
-
-      payLaterFundingSources.forEach((fundingSource) => {
-        const payLaterButton = window.paypal!.Buttons({
-          fundingSource,
-          style: baseStyle,
-          createOrder,
-          onApprove,
-          onError,
-          onCancel,
-        });
-
-        if (!(payLaterButton.isEligible?.() ?? true)) {
-          return;
-        }
-
-        renderedPayLaterButton = true;
-        setIsPayLaterVisible(true);
-        payLaterButton
-          .render(payLaterContainerRef.current!)
-          .catch((err) => {
-            console.error("PayPal Pay Later render failed:", err);
+    const cardFundingSource = window.paypal.FUNDING.CARD;
+    const cardRenderResult = cardFundingSource
+      ? (() => {
+          const cardButton = window.paypal!.Buttons({
+            fundingSource: cardFundingSource,
+            style: baseStyle,
+            createOrder,
+            onApprove,
+            onError,
+            onCancel,
           });
+
+          if (!(cardButton.isEligible?.() ?? true)) {
+            return Promise.resolve(false);
+          }
+
+          return cardButton
+            .render(cardContainerRef.current!)
+            .then(() => true)
+            .catch((err) => {
+              console.error("PayPal card render failed:", err);
+              return false;
+            });
+        })()
+      : Promise.resolve(false);
+
+    cardRenderResult.then((isRendered) => {
+      if (isCancelled) return;
+      setIsCardRendered(isRendered);
+      setIsCardChecking(false);
+    });
+
+    const payLaterFundingSources = isPayLaterAmountEligible
+      ? [
+          window.paypal.FUNDING.PAYLATER,
+          window.paypal.FUNDING.CREDIT,
+        ].filter(Boolean)
+      : [];
+
+    const payLaterRenderResults = payLaterFundingSources.map((fundingSource, index) => {
+      const buttonContainer = document.createElement("div");
+      if (index > 0) {
+        buttonContainer.className = "mt-2";
+      }
+      payLaterContainerRef.current!.appendChild(buttonContainer);
+
+      const payLaterButton = window.paypal!.Buttons({
+        fundingSource,
+        style: baseStyle,
+        createOrder,
+        onApprove,
+        onError,
+        onCancel,
       });
 
-      if (!renderedPayLaterButton) {
-        setPayLaterUnavailable(true);
+      if (!(payLaterButton.isEligible?.() ?? true)) {
+        return Promise.resolve(false);
       }
-    }
-  }, [appliedCoupon?.code, courseSlug, isCheckoutOpen, payLaterAmountEligible, paypalReady]);
+
+      return payLaterButton
+        .render(buttonContainer)
+        .then(() => true)
+        .catch((err) => {
+          console.error("PayPal Pay Later render failed:", err);
+          return false;
+        });
+    });
+
+    const payLaterRenderResult = payLaterRenderResults.length
+      ? Promise.all(payLaterRenderResults).then((results) => results.some(Boolean))
+      : Promise.resolve(false);
+
+    payLaterRenderResult.then((didRenderPayLater) => {
+      if (isCancelled) return;
+      setIsPayLaterRendered(didRenderPayLater);
+      setPayLaterUnavailable(isPayLaterAmountEligible && !didRenderPayLater);
+      setIsPayLaterChecking(false);
+    });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [
+    appliedCoupon?.code,
+    checkoutAmount,
+    checkoutCurrency,
+    courseSlug,
+    isCheckoutOpen,
+    isPayLaterAmountEligible,
+    paypalReady,
+  ]);
 
   const applyCoupon = async () => {
     const code = couponCode.trim().toUpperCase();
@@ -582,23 +659,50 @@ export default function PaymentCheckout({
                 <div ref={paypalContainerRef} className={paypalReady ? "min-h-12" : "hidden"} />
               </div>
 
-              <div className={paypalReady ? "" : "hidden"}>
+              <div
+                className={
+                  paypalReady &&
+                  (isPayLaterChecking ||
+                    isPayLaterRendered ||
+                    payLaterUnavailable ||
+                    !isPayLaterAmountEligible)
+                    ? ""
+                    : "hidden"
+                }
+              >
                 <div className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-700">
                   <Wallet className="h-4 w-4 text-indigo-700" />
                   PayPal Pay Later
                 </div>
-                <div ref={payLaterContainerRef} className={isPayLaterVisible ? "min-h-12" : "hidden"} />
-                {!payLaterAmountEligible && (
-                  <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-600">
-                    PayPal Pay Later is available only for eligible GBP totals from{" "}
-                    {formatAmount(payLaterMinAmount, "GBP")} to {formatAmount(payLaterMaxAmount, "GBP")}. Current total: {displayAmount}.
+                {isPayLaterChecking && (
+                  <div className="flex h-14 items-center justify-center rounded-xl border border-gray-200 bg-gray-50 text-sm font-semibold text-gray-600">
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Loading PayPal Pay Later
                   </div>
                 )}
-                {payLaterAmountEligible && payLaterUnavailable && (
+                <div ref={payLaterContainerRef} className={isPayLaterRendered ? "min-h-12" : "hidden"} />
+                {!isPayLaterAmountEligible && (
                   <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-600">
-                    This total is eligible, but PayPal Pay Later is not available for this buyer or PayPal account right now.
+                    PayPal Pay Later is available for eligible GBP totals from{" "}
+                    {formatAmount(payLaterMinAmount, "GBP")} to {formatAmount(payLaterMaxAmount, "GBP")}. Current total:{" "}
+                    {displayAmount}.
                   </div>
                 )}
+                {isPayLaterAmountEligible && payLaterUnavailable && (
+                  <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-600">
+                    PayPal Pay Later is not available for this buyer or PayPal account right now.
+                  </div>
+                )}
+              </div>
+
+              <div className={paypalReady && (isCardChecking || isCardRendered) ? "" : "hidden"}>
+                {isCardChecking && (
+                  <div className="flex h-14 items-center justify-center rounded-xl border border-gray-200 bg-gray-50 text-sm font-semibold text-gray-600">
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Loading card payment
+                  </div>
+                )}
+                <div ref={cardContainerRef} className={isCardRendered ? "min-h-12" : "hidden"} />
               </div>
             </div>
           </div>
