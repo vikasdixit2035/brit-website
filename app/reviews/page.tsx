@@ -2,11 +2,17 @@ import ReviewsPageClient from "@/app/reviews/ReviewsPageClient";
 import { buildMetadata, organizationSchema } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Learner Reviews and Success Stories",
+  title: "Recent Batch Reviews and Learner Video Testimonials",
   description:
-    "Read learner stories, programme reviews, and transition journeys from Brit Institute students building careers in AI and data.",
+    "Watch learner video testimonials by completed Brit Institute batch and read written reviews from recent AI, data analytics, and data science cohorts.",
   path: "/reviews",
-  keywords: ["Brit Institute reviews", "data course reviews UK", "AI training testimonials UK"],
+  keywords: [
+    "Brit Institute reviews",
+    "recent learner testimonials",
+    "AI and data batch reviews",
+    "data course reviews UK",
+    "AI training testimonials UK",
+  ],
 });
 
 export default function ReviewsPage() {

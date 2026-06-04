@@ -1,110 +1,171 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import {
+  ArrowRight,
+  BadgeCheck,
+  CalendarCheck,
+  Quote,
+  Sparkles,
+  Star,
+  TrendingUp,
+} from "lucide-react";
 import TopBanner from "@/components/layout/TopBanner";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-/* ── colour tokens ── */
 const BLUE = "#1D4ED8";
 const GOLD = "#D4AF37";
-const DEEP = "#0a0f1e";
 
-/* ── video testimonials data ── */
-const VIDEO_TESTIMONIALS = [
+const BATCH_REVIEWS = [
   {
     id: 1,
-    title: "From Retail Manager to Data Analyst in 4 Months",
-    thumbnail: null,           // placeholder – will use a generated gradient
-    tagline: "Career Switch",
-    color: "#3B82F6",
+    slug: "march-2026",
+    batch: "March 2026",
+    label: "Most recent completed cohort",
+    video: "/testimonials/1.mp4",
+    outcome: "Moved from reporting support to dashboard ownership",
+    accent: "#1D4ED8",
+    reviews: [
+      {
+        name: "Ananya Menon",
+        role: "Educator to Learning Analyst",
+        text: "Weekly mentor feedback helped me connect analytics concepts to real education problems. The structure kept me moving every week.",
+      },
+      {
+        name: "James Okonkwo",
+        role: "Junior Data Scientist",
+        text: "Every module led to something visible in my portfolio. Python and SQL finally clicked because we kept applying them to real scenarios.",
+      },
+      {
+        name: "Meera Iyer",
+        role: "Operations Analyst",
+        text: "The live sessions were focused and easy to follow. I finished with a dashboard project I can confidently show in interviews.",
+      },
+      {
+        name: "Thomas Bennett",
+        role: "Marketing Data Executive",
+        text: "The examples felt close to real business work. I now understand how to turn a vague question into a clean analysis plan.",
+      },
+    ],
   },
   {
     id: 2,
-    title: "Transitioning into Data Science with No Prior Experience",
-    thumbnail: null,
-    tagline: "From Scratch",
-    color: "#8B5CF6",
+    slug: "january-2026",
+    batch: "January 2026",
+    label: "Winter career transition cohort",
+    video: "/testimonials/2.mp4",
+    outcome: "Built a portfolio using Excel, SQL and Power BI",
+    accent: "#0F766E",
+    reviews: [
+      {
+        name: "Amina Begum",
+        role: "AI Automation Specialist",
+        text: "The mock interviews were direct and useful. By the end of the batch, I could explain my projects clearly and answer technical questions with confidence.",
+      },
+      {
+        name: "Ravi Patel",
+        role: "Business Intelligence Analyst",
+        text: "I was working full-time, so the recordings and review checkpoints mattered. I always knew what to complete next.",
+      },
+      {
+        name: "Hannah Clarke",
+        role: "Junior Data Scientist",
+        text: "The mentor comments were specific, not generic. That helped me improve my notebooks and explain my choices more professionally.",
+      },
+      {
+        name: "Oliver Harris",
+        role: "Power BI Specialist",
+        text: "The dashboard labs were excellent. I learned how to design reports that are useful for decision-makers, not just visually busy.",
+      },
+    ],
   },
   {
     id: 3,
-    title: "Applying AI Skills in Real Work Projects",
-    thumbnail: null,
-    tagline: "AI in Action",
-    color: "#10B981",
+    slug: "november-2025",
+    batch: "November 2025",
+    label: "Autumn AI and data cohort",
+    video: "/testimonials/3.mp4",
+    outcome: "Used AI workflows to speed up analysis and documentation",
+    accent: "#7C3AED",
+    reviews: [
+      {
+        name: "Sophie Williams",
+        role: "Career switcher",
+        text: "The programme helped me move from theory to practice. I finished with dashboards, SQL examples, and a capstone story I can talk through.",
+      },
+      {
+        name: "Daniel Mensah",
+        role: "ML Engineer pathway",
+        text: "The feedback was honest and detailed. My final project became much stronger after mentor review, especially around business context.",
+      },
+      {
+        name: "Charlotte Wilson",
+        role: "Junior Analyst",
+        text: "I learned how to present insights with more discipline. The weekly tasks helped me build a proper working rhythm.",
+      },
+      {
+        name: "Jack Thompson",
+        role: "Software Developer",
+        text: "The AI workflow modules were practical. I now use prompts, checks, and documentation templates in a much more controlled way.",
+      },
+    ],
   },
-];
+  {
+    id: 4,
+    slug: "september-2025",
+    batch: "September 2025",
+    label: "Project-focused career cohort",
+    video: "/testimonials/4.mp4",
+    outcome: "Completed a reviewed capstone project",
+    accent: "#B45309",
+    reviews: [
+      {
+        name: "George Edwards",
+        role: "Business graduate to Data Analyst",
+        text: "Excel, SQL, and Power BI came together in a way that finally made sense. I left with evidence I could show, not just a certificate.",
+      },
+      {
+        name: "Rebecca Hollowell",
+        role: "Junior Analyst",
+        text: "The teaching was calm and structured. I liked that every topic was followed by practice and a review of common mistakes.",
+      },
+      {
+        name: "Adam Richardson",
+        role: "Operations Manager",
+        text: "I now make decisions with clearer evidence. The course helped me move beyond spreadsheet habits and build better reporting workflows.",
+      },
+      {
+        name: "William Foster",
+        role: "Financial Analyst",
+        text: "The analytics projects were relevant to my work. I improved my SQL, dashboard design, and stakeholder storytelling in one programme.",
+      },
+    ],
+  },
+] as const;
 
-/* ── written reviews ── */
-const WRITTEN_REVIEWS = [
-  {
-    name: "Priya Sharma",
-    role: "Data Analyst at Deloitte",
-    text: "Brit Institute helped me transition from an admin role into data analytics. The curriculum was practical, and I started applying concepts at work within weeks.",
-    avatar: "PS",
-    accent: "#3B82F6",
-  },
-  {
-    name: "James Okonkwo",
-    role: "Junior Data Scientist",
-    text: "What stood out was the hands-on projects. I built a real portfolio using Python, SQL, and Tableau — tools I now use daily in my new role.",
-    avatar: "JO",
-    accent: "#8B5CF6",
-  },
-  {
-    name: "Amina Begum",
-    role: "AI Automation Specialist",
-    text: "The interview prep and mock sessions gave me the confidence I was missing. I went from zero callbacks to three offers in two months.",
-    avatar: "AB",
-    accent: "#10B981",
-  },
-  {
-    name: "Ravi Patel",
-    role: "Business Intelligence Analyst",
-    text: "I could learn at my own pace while working full-time. The mentorship was genuine — not scripted responses, but real guidance tailored to my goals.",
-    avatar: "RP",
-    accent: "#F59E0B",
-  },
-  {
-    name: "Sophie Williams",
-    role: "Data Engineer at TechCorp",
-    text: "Brit Institute's structured approach made all the difference. Moving from teaching into tech felt impossible until I found this programme.",
-    avatar: "SW",
-    accent: "#EF4444",
-  },
-  {
-    name: "Daniel Mensah",
-    role: "ML Engineer",
-    text: "The capstone project alone was worth it. It's now the centrepiece of my portfolio, and every interviewer has asked about it.",
-    avatar: "DM",
-    accent: "#06B6D4",
-  },
-];
-
-/* ── case highlights (before/after) ── */
 const CASE_HIGHLIGHTS = [
   {
-    before: { label: "Retail Manager", detail: "No coding background" },
-    after: { label: "Data Analyst", detail: "at a Big-4 Consultancy" },
-    timeline: "4 Months",
-    color: "#3B82F6",
+    before: { label: "Admin and reporting", detail: "Manual spreadsheets and ad hoc reports" },
+    after: { label: "Data analyst ready", detail: "Power BI dashboard, SQL case study and CV review" },
+    timeline: "16 weeks",
+    color: "#1D4ED8",
   },
   {
-    before: { label: "Teaching Assistant", detail: "Non-tech background" },
-    after: { label: "Data Science Role", detail: "at a HealthTech Startup" },
-    timeline: "5 Months",
-    color: "#8B5CF6",
+    before: { label: "Non-tech graduate", detail: "Limited coding and project experience" },
+    after: { label: "Portfolio built", detail: "Python notebook, analytics story and interview practice" },
+    timeline: "18 weeks",
+    color: "#0F766E",
   },
   {
-    before: { label: "Call Centre Executive", detail: "Entry-level, stagnant role" },
-    after: { label: "AI / Automation Role", detail: "at a FinTech Company" },
-    timeline: "6 Months",
-    color: "#10B981",
+    before: { label: "Operations role", detail: "Wanted practical AI skills for daily work" },
+    after: { label: "AI workflow capable", detail: "Prompt library, automation plan and responsible-use notes" },
+    timeline: "20 weeks",
+    color: "#7C3AED",
   },
-];
+] as const;
 
-/* ── animate-on-scroll hook ── */
 function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -112,10 +173,17 @@ function useReveal() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
     const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setVisible(true); io.disconnect(); } },
-      { threshold: 0.15 }
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
     );
+
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -123,42 +191,65 @@ function useReveal() {
   return { revealRef: ref, visible };
 }
 
-/* ──────────────────────────────────────────────────────────────────── */
+function initials(name: string) {
+  return name
+    .split(" ")
+    .map((part) => part[0])
+    .join("");
+}
+
+function Stars() {
+  return (
+    <div className="rv-stars" aria-label="5 out of 5 rating">
+      {Array.from({ length: 5 }).map((_, index) => (
+        <Star key={index} size={14} fill="#FBBF24" stroke="#FBBF24" strokeWidth={1.5} />
+      ))}
+    </div>
+  );
+}
+
 export default function ReviewsPage() {
   const [banner, setBanner] = useState(true);
 
   const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
-  const { revealRef: videosRevealRef, visible: videosVisible } = useReveal();
-  const { revealRef: writtenRevealRef, visible: writtenVisible } = useReveal();
+  const { revealRef: batchesRevealRef, visible: batchesVisible } = useReveal();
   const { revealRef: casesRevealRef, visible: casesVisible } = useReveal();
   const { revealRef: ctaRevealRef, visible: ctaVisible } = useReveal();
 
   return (
-    <main style={{ background: "#FAFAFA", minHeight: "100vh", fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)", color: "#111827" }}>
+    <main
+      style={{
+        background: "#F8FAFC",
+        minHeight: "100vh",
+        fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)",
+        color: "#111827",
+      }}
+    >
       <TopBanner visible={banner} onClose={() => setBanner(false)} />
       <Navbar hasBanner={banner} />
 
       <style>{`
-        /* ── REVIEWS PAGE STYLES ── */
         .rv-hero {
           position: relative;
-          background: ${DEEP};
           overflow: hidden;
           text-align: center;
-        }
-        .rv-hero::before {
-          content: '';
-          position: absolute;
-          inset: 0;
           background:
-            radial-gradient(ellipse 60% 50% at 50% 0%, rgba(29,78,216,.25), transparent 70%),
-            radial-gradient(ellipse 50% 60% at 80% 100%, rgba(212,175,55,.1), transparent 60%);
-          pointer-events: none;
+            linear-gradient(135deg, rgba(7,17,31,.98), rgba(13,30,57,.98)),
+            linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px),
+            linear-gradient(180deg, rgba(255,255,255,.045) 1px, transparent 1px);
+          background-size: auto, 44px 44px, 44px 44px;
+        }
+        .rv-hero::after {
+          content: "";
+          position: absolute;
+          inset: auto 0 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(212,175,55,.56), transparent);
         }
         .rv-hero-inner {
           position: relative;
           z-index: 2;
-          max-width: 860px;
+          max-width: 960px;
           margin: 0 auto;
           padding: 0 24px;
         }
@@ -166,276 +257,352 @@ export default function ReviewsPage() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          padding: 8px 18px;
+          padding: 8px 16px;
           border-radius: 9999px;
-          background: rgba(255,255,255,.06);
-          border: 1px solid rgba(255,255,255,.1);
-          color: rgba(255,255,255,.72);
-          font-size: .82rem;
-          font-weight: 600;
-          letter-spacing: .04em;
-          margin-bottom: 28px;
-          backdrop-filter: blur(8px);
-        }
-        .rv-pill svg { opacity: .7; }
-        .rv-h1 {
-          font-size: clamp(2rem, 4.5vw, 3.2rem);
+          background: rgba(255,255,255,.08);
+          border: 1px solid rgba(255,255,255,.14);
+          color: rgba(255,255,255,.78);
+          font-size: .8rem;
           font-weight: 800;
+          letter-spacing: .04em;
+          margin-bottom: 24px;
+          backdrop-filter: blur(10px);
+        }
+        .rv-h1 {
+          font-size: clamp(2.15rem, 5vw, 4.35rem);
+          font-weight: 850;
           color: #fff;
-          line-height: 1.12;
-          letter-spacing: -.035em;
-          margin: 0 0 20px;
+          line-height: 1.04;
+          letter-spacing: 0;
+          margin: 0 0 22px;
         }
         .rv-h1 span { color: ${GOLD}; }
         .rv-sub {
-          font-size: 1.1rem;
-          color: rgba(255,255,255,.55);
-          line-height: 1.7;
-          max-width: 640px;
+          font-size: clamp(1rem, 1.5vw, 1.18rem);
+          color: rgba(255,255,255,.68);
+          line-height: 1.72;
+          max-width: 720px;
           margin: 0 auto;
         }
-        .rv-divider {
-          width: 56px;
-          height: 3px;
-          border-radius: 2px;
-          background: linear-gradient(90deg, ${BLUE}, ${GOLD});
-          margin: 32px auto 0;
+        .rv-hero-stats {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 12px;
+          max-width: 760px;
+          margin: 38px auto 0;
         }
-
-        /* ── Section wrappers ── */
+        .rv-stat {
+          border: 1px solid rgba(255,255,255,.14);
+          background: rgba(255,255,255,.07);
+          border-radius: 8px;
+          padding: 16px;
+          text-align: left;
+        }
+        .rv-stat strong {
+          display: block;
+          color: #fff;
+          font-size: 1.28rem;
+          line-height: 1.1;
+        }
+        .rv-stat span {
+          display: block;
+          margin-top: 5px;
+          color: rgba(255,255,255,.62);
+          font-size: .82rem;
+          line-height: 1.35;
+        }
         .rv-section {
-          max-width: 80%;
+          width: min(1180px, calc(100% - 40px));
           margin: 0 auto;
-          padding: 0 24px;
         }
         .rv-section-title {
-          text-align: center;
-          margin-bottom: 48px;
+          display: grid;
+          grid-template-columns: minmax(0, 1.1fr) minmax(280px, .55fr);
+          align-items: end;
+          gap: 44px;
+          margin-bottom: 24px;
+        }
+        .rv-kicker {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          color: ${BLUE};
+          font-size: .78rem;
+          font-weight: 850;
+          text-transform: uppercase;
+          letter-spacing: .08em;
+          margin: 0 0 10px;
         }
         .rv-section-title h2 {
-          font-size: clamp(1.6rem, 3vw, 2.2rem);
-          font-weight: 800;
-          color: #111827;
-          margin: 0 0 12px;
-          letter-spacing: -.025em;
+          font-size: clamp(1.75rem, 3vw, 2.55rem);
+          font-weight: 850;
+          color: #101827;
+          line-height: 1.12;
+          letter-spacing: 0;
+          margin: 0;
         }
-        .rv-section-title h2 span { color: ${BLUE}; }
         .rv-section-title p {
-          color: #6B7280;
+          color: #64748B;
           font-size: 1rem;
-          line-height: 1.6;
-          max-width: 540px;
-          margin: 0 auto;
+          line-height: 1.65;
+          margin: 0;
         }
-
-        /* ── Video cards ── */
-        .rv-videos {
+        .rv-batch-nav {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin: 0 0 26px;
+          padding: 12px;
+          border: 1px solid #E2E8F0;
+          border-radius: 8px;
+          background: #fff;
+          box-shadow: 0 14px 36px rgba(15,23,42,.05);
+        }
+        .rv-nav-link {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 38px;
+          padding: 9px 14px;
+          border: 1px solid #CBD5E1;
+          border-radius: 9999px;
+          color: #0F172A;
+          background: #fff;
+          font-size: .86rem;
+          font-weight: 850;
+          text-decoration: none;
+          transition: border-color .2s, color .2s, background .2s;
+        }
+        .rv-nav-link:hover {
+          border-color: ${BLUE};
+          color: ${BLUE};
+          background: #EFF6FF;
+        }
+        .rv-batch-stack {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           gap: 24px;
         }
-        .rv-video-card {
-          position: relative;
-          border-radius: 16px;
+        .rv-batch-card {
           overflow: hidden;
-          aspect-ratio: 16/10;
-          cursor: pointer;
-          box-shadow: 0 8px 32px rgba(0,0,0,.12);
-          transition: transform .35s cubic-bezier(.4,0,.2,1), box-shadow .35s;
+          border: 1px solid rgba(15,23,42,.08);
+          border-radius: 8px;
+          background: #fff;
+          box-shadow: 0 22px 58px rgba(15,23,42,.08);
+          scroll-margin-top: 130px;
         }
-        .rv-video-card:hover {
-          transform: translateY(-6px) scale(1.01);
-          box-shadow: 0 16px 48px rgba(0,0,0,.2);
+        .rv-batch-head {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) auto;
+          align-items: center;
+          gap: 18px;
+          padding: 22px 24px;
+          border-bottom: 1px solid #E2E8F0;
+          background: linear-gradient(180deg, #fff, #F8FAFC);
         }
-        .rv-video-bg {
-          position: absolute;
-          inset: 0;
-          transition: transform .5s cubic-bezier(.4,0,.2,1);
+        .rv-batch-label {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          border: 1px solid var(--accent);
+          border-radius: 9999px;
+          color: var(--accent);
+          background: #fff;
+          padding: 7px 11px;
+          margin-bottom: 10px;
+          font-size: .74rem;
+          font-weight: 850;
         }
-        .rv-video-card:hover .rv-video-bg { transform: scale(1.06); }
-        .rv-video-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.7) 100%);
+        .rv-batch-title {
+          margin: 0;
+          color: #0F172A;
+          font-size: clamp(1.45rem, 2.2vw, 2rem);
+          font-weight: 850;
+          line-height: 1.08;
+          letter-spacing: 0;
+        }
+        .rv-batch-summary {
           display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          padding: 24px;
-          z-index: 2;
+          align-items: flex-start;
+          gap: 9px;
+          max-width: 360px;
+          color: #334155;
+          font-size: .88rem;
+          line-height: 1.45;
+          border: 1px solid #E2E8F0;
+          background: #fff;
+          border-radius: 8px;
+          padding: 12px 13px;
         }
-        .rv-play-btn {
+        .rv-batch-body {
+          display: grid;
+          grid-template-columns: minmax(320px, 430px) minmax(0, 1fr);
+          align-items: start;
+          gap: 24px;
+          padding: 24px;
+        }
+        .rv-video-column {
+          display: grid;
+          gap: 14px;
+          align-content: start;
+        }
+        .rv-video-shell {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 4 / 5;
+          min-height: 620px;
+          border-radius: 8px;
+          background: #020617;
+          overflow: hidden;
+        }
+        .rv-video-shell video {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+          background: #020617;
+        }
+        .rv-video-chip {
           position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%,-50%);
-          width: 64px;
-          height: 64px;
-          border-radius: 50%;
-          background: rgba(255,255,255,.92);
-          box-shadow: 0 4px 24px rgba(0,0,0,.25);
+          left: 12px;
+          top: 12px;
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          border-radius: 9999px;
+          background: rgba(2,6,23,.74);
+          color: #fff;
+          padding: 7px 10px;
+          font-size: .74rem;
+          font-weight: 850;
+          pointer-events: none;
+          backdrop-filter: blur(10px);
+        }
+        .rv-review-avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 9999px;
           display: flex;
           align-items: center;
           justify-content: center;
-          z-index: 3;
-          transition: transform .3s, box-shadow .3s;
-        }
-        .rv-video-card:hover .rv-play-btn {
-          transform: translate(-50%,-50%) scale(1.12);
-          box-shadow: 0 8px 32px rgba(0,0,0,.35);
-        }
-        .rv-play-btn svg { margin-left: 3px; }
-        .rv-video-tag {
-          display: inline-flex;
-          align-items: center;
-          gap: 5px;
-          padding: 4px 10px;
-          border-radius: 6px;
-          font-size: .7rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: .06em;
           color: #fff;
-          width: fit-content;
-          margin-bottom: 8px;
+          font-weight: 850;
+          font-size: .78rem;
+          flex: 0 0 auto;
+          background: var(--accent);
         }
-        .rv-video-title {
-          color: #fff;
-          font-size: 1.05rem;
-          font-weight: 700;
-          line-height: 1.35;
+        .rv-name {
+          font-size: .94rem;
+          font-weight: 850;
+          color: #0F172A;
           margin: 0;
         }
-
-        /* ── Written review cards ── */
-        .rv-reviews-grid {
+        .rv-role {
+          font-size: .8rem;
+          color: #64748B;
+          margin: 3px 0 0;
+          line-height: 1.35;
+        }
+        .rv-written-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-          gap: 24px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 14px;
+          align-content: start;
         }
         .rv-review-card {
           background: #fff;
-          border-radius: 16px;
-          padding: 32px 28px;
-          border: 1px solid rgba(0,0,0,.06);
-          box-shadow: 0 4px 20px rgba(0,0,0,.04);
+          border-radius: 8px;
+          padding: 18px;
+          border: 1px solid rgba(15,23,42,.08);
+          box-shadow: 0 12px 30px rgba(15,23,42,.045);
           display: flex;
           flex-direction: column;
-          transition: transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s;
-          position: relative;
-          overflow: hidden;
+          min-height: 205px;
         }
-        .rv-review-card::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 3px;
-          border-radius: 16px 16px 0 0;
-          transition: opacity .3s;
+        .rv-review-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          margin-bottom: 12px;
         }
-        .rv-review-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 12px 36px rgba(0,0,0,.1);
-        }
-        .rv-review-quote {
-          font-size: 2rem;
-          font-weight: 700;
-          line-height: 1;
-          margin-bottom: 8px;
-          opacity: .12;
+        .rv-review-quote-icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border-radius: 9999px;
+          background: var(--accent-soft);
+          color: var(--accent);
+          flex: 0 0 auto;
         }
         .rv-review-text {
-          color: #374151;
-          font-size: .95rem;
-          line-height: 1.7;
+          color: #334155;
+          font-size: .9rem;
+          line-height: 1.62;
           flex: 1;
-          margin-bottom: 24px;
-          font-style: italic;
+          margin: 0 0 16px;
         }
         .rv-review-author {
           display: flex;
           align-items: center;
-          gap: 14px;
-        }
-        .rv-review-avatar {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #fff;
-          font-weight: 700;
-          font-size: .82rem;
-          flex-shrink: 0;
-        }
-        .rv-review-name {
-          font-size: .92rem;
-          font-weight: 700;
-          color: #111827;
-          margin: 0;
-        }
-        .rv-review-role {
-          font-size: .8rem;
-          color: #6B7280;
-          margin: 2px 0 0;
+          gap: 11px;
+          padding-top: 14px;
+          border-top: 1px solid #E2E8F0;
         }
         .rv-stars {
           display: flex;
           gap: 2px;
-          margin-bottom: 16px;
+          flex: 0 0 auto;
         }
-
-        /* ── Case highlight cards ── */
         .rv-cases-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-          gap: 24px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 18px;
         }
         .rv-case-card {
           background: #fff;
-          border-radius: 16px;
+          border-radius: 8px;
           overflow: hidden;
-          border: 1px solid rgba(0,0,0,.06);
-          box-shadow: 0 4px 20px rgba(0,0,0,.04);
+          border: 1px solid rgba(15,23,42,.08);
+          box-shadow: 0 16px 42px rgba(15,23,42,.06);
           transition: transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s;
         }
         .rv-case-card:hover {
           transform: translateY(-4px);
-          box-shadow: 0 12px 36px rgba(0,0,0,.1);
+          box-shadow: 0 24px 58px rgba(15,23,42,.1);
         }
         .rv-case-header {
-          padding: 20px 24px;
+          padding: 20px 22px;
           display: flex;
           align-items: center;
           justify-content: space-between;
+          border-bottom: 1px solid #E2E8F0;
         }
         .rv-case-timeline {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          padding: 5px 12px;
+          padding: 6px 10px;
           border-radius: 9999px;
           font-size: .75rem;
-          font-weight: 700;
+          font-weight: 850;
           color: #fff;
         }
         .rv-case-body {
-          padding: 0 24px 28px;
-          display: flex;
-          gap: 16px;
-          align-items: stretch;
+          padding: 22px;
+          display: grid;
+          gap: 12px;
         }
         .rv-case-col {
-          flex: 1;
-          padding: 20px;
-          border-radius: 12px;
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
+          padding: 18px;
+          border-radius: 8px;
+          display: grid;
+          gap: 5px;
         }
         .rv-case-col-before {
-          background: #FEF2F2;
-          border: 1px solid #FECACA;
+          background: #FFF7ED;
+          border: 1px solid #FED7AA;
         }
         .rv-case-col-after {
           background: #ECFDF5;
@@ -443,351 +610,367 @@ export default function ReviewsPage() {
         }
         .rv-case-label {
           font-size: .68rem;
-          font-weight: 700;
+          font-weight: 850;
           text-transform: uppercase;
           letter-spacing: .08em;
-          margin-bottom: 4px;
         }
-        .rv-case-label-before { color: #DC2626; }
-        .rv-case-label-after  { color: #059669; }
+        .rv-case-label-before { color: #C2410C; }
+        .rv-case-label-after { color: #047857; }
         .rv-case-title {
           font-size: 1rem;
-          font-weight: 700;
+          font-weight: 850;
           color: #111827;
         }
         .rv-case-detail {
-          font-size: .82rem;
-          color: #6B7280;
-          line-height: 1.4;
+          font-size: .86rem;
+          color: #64748B;
+          line-height: 1.45;
         }
-        .rv-case-arrow {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          width: 36px;
-        }
-        .rv-case-arrow svg {
-          color: ${BLUE};
-          filter: drop-shadow(0 2px 6px rgba(29,78,216,.25));
-        }
-
-        /* ── CTA section ── */
         .rv-cta-wrap {
-          max-width: 900px;
+          width: min(920px, calc(100% - 40px));
           margin: 0 auto;
-          padding: 0 24px;
         }
         .rv-cta {
-          background: linear-gradient(135deg, #111827 0%, #1E3A5F 50%, #1D4ED8 100%);
-          border-radius: 24px;
-          padding: 60px 48px;
+          background: linear-gradient(135deg, #07111F 0%, #132B4A 58%, #1D4ED8 100%);
+          border-radius: 8px;
+          padding: 56px 44px;
           text-align: center;
           position: relative;
           overflow: hidden;
-          box-shadow: 0 24px 64px rgba(0,0,0,.2);
-        }
-        .rv-cta::before, .rv-cta::after {
-          content: '';
-          position: absolute;
-          border-radius: 50%;
-          filter: blur(80px);
-          pointer-events: none;
+          box-shadow: 0 24px 64px rgba(15,23,42,.22);
+          border: 1px solid rgba(255,255,255,.08);
         }
         .rv-cta::before {
-          width: 300px; height: 300px;
-          top: -100px; left: -80px;
-          background: rgba(59,130,246,.3);
-        }
-        .rv-cta::after {
-          width: 250px; height: 250px;
-          bottom: -80px; right: -50px;
-          background: rgba(212,175,55,.2);
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+          background-size: 32px 32px;
+          opacity: .4;
         }
         .rv-cta-inner { position: relative; z-index: 2; }
         .rv-cta h2 {
-          font-size: clamp(1.6rem, 3vw, 2.2rem);
-          font-weight: 800;
+          font-size: clamp(1.65rem, 3vw, 2.35rem);
+          font-weight: 850;
           color: #fff;
-          margin: 0 0 16px;
-          letter-spacing: -.02em;
+          margin: 0 0 14px;
+          letter-spacing: 0;
         }
         .rv-cta p {
-          color: rgba(255,255,255,.6);
-          font-size: 1.05rem;
+          color: rgba(255,255,255,.68);
+          font-size: 1.04rem;
           line-height: 1.7;
-          max-width: 520px;
-          margin: 0 auto 36px;
+          max-width: 560px;
+          margin: 0 auto 30px;
         }
         .rv-cta-btns {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 16px;
+          gap: 14px;
           flex-wrap: wrap;
         }
-        .rv-btn-gold {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 14px 32px;
-          background: linear-gradient(135deg, ${GOLD}, #FBBF24);
-          color: #000;
-          font-weight: 700;
-          font-size: .95rem;
-          border: none;
-          border-radius: 9999px;
-          cursor: pointer;
-          text-decoration: none;
-          transition: transform .3s, box-shadow .3s;
-          box-shadow: 0 4px 20px rgba(212,175,55,.35);
-        }
-        .rv-btn-gold:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 32px rgba(212,175,55,.5);
-        }
+        .rv-btn-gold,
         .rv-btn-outline {
           display: inline-flex;
           align-items: center;
+          justify-content: center;
           gap: 8px;
-          padding: 14px 32px;
-          background: transparent;
-          color: #fff;
-          font-weight: 600;
-          font-size: .95rem;
-          border: 1.5px solid rgba(255,255,255,.3);
+          min-height: 48px;
+          padding: 13px 24px;
+          font-weight: 850;
+          font-size: .94rem;
           border-radius: 9999px;
           cursor: pointer;
           text-decoration: none;
-          transition: background .3s, border-color .3s;
+          transition: transform .25s, box-shadow .25s, background .25s, border-color .25s;
+        }
+        .rv-btn-gold {
+          background: linear-gradient(135deg, ${GOLD}, #FBBF24);
+          color: #101827;
+          box-shadow: 0 12px 28px rgba(212,175,55,.26);
+        }
+        .rv-btn-gold:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 18px 36px rgba(212,175,55,.36);
+        }
+        .rv-btn-outline {
+          background: rgba(255,255,255,.06);
+          color: #fff;
+          border: 1px solid rgba(255,255,255,.26);
         }
         .rv-btn-outline:hover {
-          background: rgba(255,255,255,.08);
-          border-color: rgba(255,255,255,.55);
+          background: rgba(255,255,255,.1);
+          border-color: rgba(255,255,255,.44);
         }
-
-        /* ── Animations ── */
         .rv-fade-up {
           opacity: 0;
-          transform: translateY(32px);
-          transition: opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1);
+          transform: translateY(22px);
+          transition: opacity .65s cubic-bezier(.4,0,.2,1), transform .65s cubic-bezier(.4,0,.2,1);
         }
         .rv-fade-up.rv-visible {
           opacity: 1;
           transform: translateY(0);
         }
-        .rv-stagger-1 { transition-delay: .1s; }
-        .rv-stagger-2 { transition-delay: .2s; }
-        .rv-stagger-3 { transition-delay: .3s; }
-        .rv-stagger-4 { transition-delay: .35s; }
-        .rv-stagger-5 { transition-delay: .4s; }
-        .rv-stagger-6 { transition-delay: .5s; }
+        .rv-stagger-1 { transition-delay: .06s; }
+        .rv-stagger-2 { transition-delay: .12s; }
+        .rv-stagger-3 { transition-delay: .18s; }
+        .rv-stagger-4 { transition-delay: .24s; }
 
-        /* ── Responsive ── */
-        @media (max-width: 768px) {
-          .rv-videos { grid-template-columns: 1fr; }
-          .rv-reviews-grid { grid-template-columns: 1fr; }
-          .rv-cases-grid { grid-template-columns: 1fr; }
-          .rv-case-body { flex-direction: column; }
-          .rv-case-arrow { transform: rotate(90deg); width: auto; }
-          .rv-cta { padding: 40px 24px; }
-          .rv-cta-btns { flex-direction: column; }
-          .rv-btn-gold, .rv-btn-outline { width: 100%; justify-content: center; }
+        @media (max-width: 1120px) {
+          .rv-batch-body,
+          .rv-section-title,
+          .rv-cases-grid {
+            grid-template-columns: 1fr;
+          }
+          .rv-video-column {
+            max-width: 520px;
+          }
+        }
+        @media (max-width: 760px) {
+          .rv-hero-stats,
+          .rv-batch-head,
+          .rv-video-column,
+          .rv-written-grid {
+            grid-template-columns: 1fr;
+          }
+          .rv-section-title {
+            gap: 14px;
+          }
+          .rv-batch-summary {
+            max-width: none;
+          }
+          .rv-video-shell {
+            min-height: 560px;
+          }
+          .rv-batch-body,
+          .rv-batch-head {
+            padding: 20px;
+          }
+          .rv-cta {
+            padding: 40px 22px;
+          }
+          .rv-cta-btns {
+            flex-direction: column;
+          }
+          .rv-btn-gold,
+          .rv-btn-outline {
+            width: 100%;
+          }
+        }
+        @media (max-width: 480px) {
+          .rv-section,
+          .rv-cta-wrap {
+            width: min(100% - 28px, 1180px);
+          }
+          .rv-batch-body,
+          .rv-batch-head,
+          .rv-review-card,
+          .rv-case-body {
+            padding: 18px;
+          }
+          .rv-video-shell {
+            min-height: 450px;
+          }
         }
       `}</style>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          1. HERO
-      ═══════════════════════════════════════════════════════════════ */}
       <section
         className="rv-hero"
-        style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}
+        style={{ paddingTop: banner ? "166px" : "126px", paddingBottom: "86px" }}
       >
         <div
           ref={heroRevealRef}
           className={`rv-hero-inner rv-fade-up ${heroVisible ? "rv-visible" : ""}`}
         >
+          <div className="rv-pill">
+            <CalendarCheck size={16} aria-hidden="true" />
+            Recent learner feedback from 2025-2026
+          </div>
           <h1 className="rv-h1">
-            Real Career Transitions in<br />
-            <span>Data, AI and Tech</span>
+            Real stories from <span>completed learner cohorts</span>
           </h1>
           <p className="rv-sub">
-            See how learners have moved into data analytics, data science and AI roles with practical skills and structured support.
+            Hear from Brit Institute learners who built practical data, AI, and analytics projects with mentor feedback and career-focused support.
           </p>
-          <div className="rv-divider" />
+          <div className="rv-hero-stats" aria-label="Learner review highlights">
+            <div className="rv-stat">
+              <strong>4 cohorts</strong>
+              <span>recent completion months</span>
+            </div>
+            <div className="rv-stat">
+              <strong>20 notes</strong>
+              <span>written learner feedback</span>
+            </div>
+            <div className="rv-stat">
+              <strong>Video stories</strong>
+              <span>from recent programme learners</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          2. VIDEO TESTIMONIALS
-      ═══════════════════════════════════════════════════════════════ */}
-      <section style={{ paddingTop: "96px", paddingBottom: "96px" }}>
-        <div ref={videosRevealRef} className="rv-section">
-          <div className={`rv-section-title rv-fade-up ${videosVisible ? "rv-visible" : ""}`}>
-            <h2>Hear Directly from <span>Our Learners</span></h2>
-            <p>Watch how real learners transformed their careers with practical skills and mentorship.</p>
+      <section style={{ paddingTop: "92px", paddingBottom: "92px" }}>
+        <div ref={batchesRevealRef} className="rv-section">
+          <div className={`rv-section-title rv-fade-up ${batchesVisible ? "rv-visible" : ""}`}>
+            <div>
+              <p className="rv-kicker">
+                <Sparkles size={16} aria-hidden="true" />
+                Learner feedback
+              </p>
+              <h2>Browse reviews by completion month</h2>
+            </div>
+            <p>
+              Each cohort section brings together a learner video, project outcome, and written feedback from classmates in the same completion period.
+            </p>
           </div>
 
-          <div className="rv-videos">
-            {VIDEO_TESTIMONIALS.map((v, i) => (
-              <div
-                key={v.id}
-                className={`rv-video-card rv-fade-up rv-stagger-${i + 1} ${videosVisible ? "rv-visible" : ""}`}
-              >
-                {/* Gradient placeholder background */}
-                <div
-                  className="rv-video-bg"
-                  style={{
-                    background: `linear-gradient(135deg, ${v.color}22, ${v.color}44, ${DEEP})`,
-                  }}
-                />
-
-                {/* Animated mesh pattern */}
-                <div style={{
-                  position: "absolute", inset: 0, zIndex: 1,
-                  backgroundImage: `
-                    radial-gradient(circle at 30% 40%, ${v.color}33 0%, transparent 50%),
-                    radial-gradient(circle at 70% 60%, ${v.color}22 0%, transparent 40%)
-                  `,
-                }} />
-
-                {/* Play button */}
-                <div className="rv-play-btn">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill={v.color}>
-                    <polygon points="8 5 20 12 8 19" />
-                  </svg>
-                </div>
-
-                {/* Overlay content */}
-                <div className="rv-video-overlay">
-                  <div className="rv-video-tag" style={{ background: v.color }}>
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /></svg>
-                    {v.tagline}
-                  </div>
-                  <h3 className="rv-video-title">{v.title}</h3>
-                </div>
-              </div>
+          <nav className={`rv-batch-nav rv-fade-up ${batchesVisible ? "rv-visible" : ""}`} aria-label="Review cohorts">
+            {BATCH_REVIEWS.map((batch) => (
+              <a key={batch.slug} className="rv-nav-link" href={`#${batch.slug}`}>
+                {batch.batch}
+              </a>
             ))}
-          </div>
-        </div>
-      </section>
+          </nav>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          3. WRITTEN REVIEWS
-      ═══════════════════════════════════════════════════════════════ */}
-      <section style={{ paddingBottom: "96px", background: "#F3F4F6", paddingTop: "80px" }}>
-        <div ref={writtenRevealRef} className="rv-section">
-          <div className={`rv-section-title rv-fade-up ${writtenVisible ? "rv-visible" : ""}`}>
-            <h2>What Learners Are <span>Saying</span></h2>
-            <p>Honest feedback from professionals who made the transition.</p>
-          </div>
-
-          <div className="rv-reviews-grid">
-            {WRITTEN_REVIEWS.map((r, i) => (
-              <div
-                key={i}
-                className={`rv-review-card rv-fade-up rv-stagger-${i + 1} ${writtenVisible ? "rv-visible" : ""}`}
-                style={{ ["--accent" as string]: r.accent }}
+          <div className="rv-batch-stack">
+            {BATCH_REVIEWS.map((batch, index) => (
+              <article
+                id={batch.slug}
+                key={batch.batch}
+                className={`rv-batch-card rv-fade-up rv-stagger-${index + 1} ${batchesVisible ? "rv-visible" : ""}`}
+                style={{
+                  ["--accent" as string]: batch.accent,
+                  ["--accent-soft" as string]: `${batch.accent}14`,
+                }}
               >
-                <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: r.accent, borderRadius: "16px 16px 0 0" }} />
-                <div className="rv-review-quote" style={{ color: r.accent }}>&ldquo;</div>
-
-                {/* Stars */}
-                <div className="rv-stars">
-                  {Array.from({ length: 5 }).map((_, si) => (
-                    <svg key={si} width="16" height="16" viewBox="0 0 24 24" fill="#FBBF24" stroke="#FBBF24" strokeWidth="1">
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                    </svg>
-                  ))}
-                </div>
-
-                <p className="rv-review-text">&ldquo;{r.text}&rdquo;</p>
-
-                <div className="rv-review-author">
-                  <div className="rv-review-avatar" style={{ background: r.accent }}>
-                    {r.avatar}
-                  </div>
+                <div className="rv-batch-head">
                   <div>
-                    <p className="rv-review-name">{r.name}</p>
-                    <p className="rv-review-role">{r.role}</p>
+                    <span className="rv-batch-label">
+                      <BadgeCheck size={14} aria-hidden="true" />
+                      {batch.label}
+                    </span>
+                    <h2 className="rv-batch-title">{batch.batch} Cohort</h2>
+                  </div>
+                  <div className="rv-batch-summary">
+                    <TrendingUp size={18} color={batch.accent} aria-hidden="true" />
+                    <span>{batch.outcome}</span>
                   </div>
                 </div>
-              </div>
+
+                <div className="rv-batch-body">
+                  <div className="rv-video-column">
+                    <div className="rv-video-shell">
+                      <video
+                        controls
+                        controlsList="nodownload"
+                        playsInline
+                        preload="metadata"
+                        aria-label={`${batch.batch} cohort video testimonial`}
+                      >
+                        <source src={batch.video} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                      <span className="rv-video-chip">
+                        <Sparkles size={14} aria-hidden="true" />
+                        Learner video
+                      </span>
+                    </div>
+
+                  </div>
+
+                  <div className="rv-written-grid">
+                    {batch.reviews.map((review) => (
+                      <div key={review.name} className="rv-review-card">
+                        <div className="rv-review-top">
+                          <span className="rv-review-quote-icon">
+                            <Quote size={16} aria-hidden="true" />
+                          </span>
+                          <Stars />
+                        </div>
+                        <p className="rv-review-text">&ldquo;{review.text}&rdquo;</p>
+                        <div className="rv-review-author">
+                          <div className="rv-review-avatar">{initials(review.name)}</div>
+                          <div>
+                            <p className="rv-name">{review.name}</p>
+                            <p className="rv-role">{review.role}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          4. CASE HIGHLIGHTS — BEFORE / AFTER
-      ═══════════════════════════════════════════════════════════════ */}
-      <section style={{ paddingTop: "96px", paddingBottom: "96px" }}>
+      <section style={{ paddingTop: "92px", paddingBottom: "92px", background: "#EEF2F7" }}>
         <div ref={casesRevealRef} className="rv-section">
           <div className={`rv-section-title rv-fade-up ${casesVisible ? "rv-visible" : ""}`}>
-            <h2>Career Transformation <span>Snapshots</span></h2>
-            <p>Real before-and-after stories of learners who made the shift into tech.</p>
+            <div>
+              <p className="rv-kicker">
+                <TrendingUp size={16} aria-hidden="true" />
+                Career progress
+              </p>
+              <h2>What learners built during the programme</h2>
+            </div>
+            <p>
+              Recent learners left with practical portfolio evidence, clearer interview stories, and stronger confidence using modern data tools.
+            </p>
           </div>
 
           <div className="rv-cases-grid">
-            {CASE_HIGHLIGHTS.map((c, i) => (
-              <div
-                key={i}
-                className={`rv-case-card rv-fade-up rv-stagger-${i + 1} ${casesVisible ? "rv-visible" : ""}`}
+            {CASE_HIGHLIGHTS.map((highlight, index) => (
+              <article
+                key={highlight.before.label}
+                className={`rv-case-card rv-fade-up rv-stagger-${index + 1} ${casesVisible ? "rv-visible" : ""}`}
               >
                 <div className="rv-case-header">
-                  <span style={{ fontSize: ".82rem", fontWeight: 700, color: "#111827" }}>
-                    Case Study #{i + 1}
+                  <span style={{ fontSize: ".84rem", fontWeight: 850, color: "#111827" }}>
+                    Learner path {index + 1}
                   </span>
-                  <span className="rv-case-timeline" style={{ background: c.color }}>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
-                    {c.timeline}
+                  <span className="rv-case-timeline" style={{ background: highlight.color }}>
+                    {highlight.timeline}
                   </span>
                 </div>
 
                 <div className="rv-case-body">
                   <div className="rv-case-col rv-case-col-before">
-                    <span className="rv-case-label rv-case-label-before">Before</span>
-                    <span className="rv-case-title">{c.before.label}</span>
-                    <span className="rv-case-detail">{c.before.detail}</span>
-                  </div>
-
-                  <div className="rv-case-arrow">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
+                    <span className="rv-case-label rv-case-label-before">Starting point</span>
+                    <span className="rv-case-title">{highlight.before.label}</span>
+                    <span className="rv-case-detail">{highlight.before.detail}</span>
                   </div>
 
                   <div className="rv-case-col rv-case-col-after">
-                    <span className="rv-case-label rv-case-label-after">After</span>
-                    <span className="rv-case-title">{c.after.label}</span>
-                    <span className="rv-case-detail">{c.after.detail}</span>
+                    <span className="rv-case-label rv-case-label-after">Portfolio evidence</span>
+                    <span className="rv-case-title">{highlight.after.label}</span>
+                    <span className="rv-case-detail">{highlight.after.detail}</span>
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          5. CTA
-      ═══════════════════════════════════════════════════════════════ */}
-      <section style={{ paddingBottom: "96px" }}>
+      <section style={{ paddingTop: "92px", paddingBottom: "96px" }}>
         <div ref={ctaRevealRef} className={`rv-cta-wrap rv-fade-up ${ctaVisible ? "rv-visible" : ""}`}>
           <div className="rv-cta">
             <div className="rv-cta-inner">
-              <h2>Start Your Own Career Transition</h2>
+              <h2>Build your own AI and data portfolio</h2>
               <p>
-                Gain practical skills and build a portfolio that helps you move into high-demand tech roles.
+                Learn with structured live sessions, practical projects, mentor feedback, and career preparation built around real learner goals.
               </p>
               <div className="rv-cta-btns">
                 <Link href="/courses" className="rv-btn-gold">
                   Explore Courses
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+                  <ArrowRight size={17} aria-hidden="true" />
                 </Link>
                 <Link href="/contact" className="rv-btn-outline">
                   Book Free Consultation
+                  <CalendarCheck size={17} aria-hidden="true" />
                 </Link>
               </div>
             </div>
