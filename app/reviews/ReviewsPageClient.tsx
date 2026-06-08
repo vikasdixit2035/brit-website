@@ -24,7 +24,7 @@ const BATCH_REVIEWS = [
     slug: "march-2026",
     batch: "March 2026",
     label: "Most recent completed cohort",
-    video: "/testimonials/1.mp4",
+    videos: ["/testimonials/1.mp4", "/testimonials/2.mp4"],
     outcome: "Moved from reporting support to dashboard ownership",
     accent: "#1D4ED8",
     reviews: [
@@ -55,7 +55,7 @@ const BATCH_REVIEWS = [
     slug: "january-2026",
     batch: "January 2026",
     label: "Winter career transition cohort",
-    video: "/testimonials/2.mp4",
+    videos: ["/testimonials/3.mp4", "/testimonials/4.mp4"],
     outcome: "Built a portfolio using Excel, SQL and Power BI",
     accent: "#0F766E",
     reviews: [
@@ -86,7 +86,7 @@ const BATCH_REVIEWS = [
     slug: "november-2025",
     batch: "November 2025",
     label: "Autumn AI and data cohort",
-    video: "/testimonials/3.mp4",
+    videos: ["/testimonials/5.MP4", "/testimonials/6.MP4"],
     outcome: "Used AI workflows to speed up analysis and documentation",
     accent: "#7C3AED",
     reviews: [
@@ -117,7 +117,7 @@ const BATCH_REVIEWS = [
     slug: "september-2025",
     batch: "September 2025",
     label: "Project-focused career cohort",
-    video: "/testimonials/4.mp4",
+    videos: ["/testimonials/7.MP4", "/testimonials/8.MP4"],
     outcome: "Completed a reviewed capstone project",
     accent: "#B45309",
     reviews: [
@@ -312,7 +312,7 @@ export default function ReviewsPage() {
           line-height: 1.35;
         }
         .rv-section {
-          width: min(1180px, calc(100% - 40px));
+          width: min(1280px, calc(100% - 40px));
           margin: 0 auto;
         }
         .rv-section-title {
@@ -435,21 +435,24 @@ export default function ReviewsPage() {
         }
         .rv-batch-body {
           display: grid;
-          grid-template-columns: minmax(320px, 430px) minmax(0, 1fr);
-          align-items: start;
+          grid-template-columns: minmax(400px, 600px) minmax(0, 1fr);
+          align-items: stretch;
           gap: 24px;
           padding: 24px;
         }
         .rv-video-column {
           display: grid;
-          gap: 14px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-auto-rows: 1fr;
+          gap: 12px;
           align-content: start;
+          height: 100%;
         }
         .rv-video-shell {
           position: relative;
           width: 100%;
-          aspect-ratio: 4 / 5;
-          min-height: 620px;
+          height: 100%;
+          min-height: 510px;
           border-radius: 8px;
           background: #020617;
           overflow: hidden;
@@ -723,8 +726,17 @@ export default function ReviewsPage() {
           .rv-cases-grid {
             grid-template-columns: 1fr;
           }
+          .rv-batch-body {
+            align-items: start;
+          }
           .rv-video-column {
-            max-width: 520px;
+            max-width: 640px;
+            height: auto;
+          }
+          .rv-video-shell {
+            aspect-ratio: 9 / 16;
+            height: auto;
+            min-height: 0;
           }
         }
         @media (max-width: 760px) {
@@ -739,9 +751,6 @@ export default function ReviewsPage() {
           }
           .rv-batch-summary {
             max-width: none;
-          }
-          .rv-video-shell {
-            min-height: 560px;
           }
           .rv-batch-body,
           .rv-batch-head {
@@ -761,16 +770,13 @@ export default function ReviewsPage() {
         @media (max-width: 480px) {
           .rv-section,
           .rv-cta-wrap {
-            width: min(100% - 28px, 1180px);
+            width: min(100% - 28px, 1280px);
           }
           .rv-batch-body,
           .rv-batch-head,
           .rv-review-card,
           .rv-case-body {
             padding: 18px;
-          }
-          .rv-video-shell {
-            min-height: 450px;
           }
         }
       `}</style>
@@ -799,11 +805,11 @@ export default function ReviewsPage() {
               <span>recent completion months</span>
             </div>
             <div className="rv-stat">
-              <strong>20 notes</strong>
+              <strong>16 notes</strong>
               <span>written learner feedback</span>
             </div>
             <div className="rv-stat">
-              <strong>Video stories</strong>
+              <strong>8 videos</strong>
               <span>from recent programme learners</span>
             </div>
           </div>
@@ -821,7 +827,7 @@ export default function ReviewsPage() {
               <h2>Browse reviews by completion month</h2>
             </div>
             <p>
-              Each cohort section brings together a learner video, project outcome, and written feedback from classmates in the same completion period.
+              Each cohort section brings together learner videos, project outcome, and written feedback from classmates in the same completion period.
             </p>
           </div>
 
@@ -860,23 +866,24 @@ export default function ReviewsPage() {
 
                 <div className="rv-batch-body">
                   <div className="rv-video-column">
-                    <div className="rv-video-shell">
-                      <video
-                        controls
-                        controlsList="nodownload"
-                        playsInline
-                        preload="metadata"
-                        aria-label={`${batch.batch} cohort video testimonial`}
-                      >
-                        <source src={batch.video} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                      <span className="rv-video-chip">
-                        <Sparkles size={14} aria-hidden="true" />
-                        Learner video
-                      </span>
-                    </div>
-
+                    {batch.videos.map((video, videoIndex) => (
+                      <div key={video} className="rv-video-shell">
+                        <video
+                          controls
+                          controlsList="nodownload"
+                          playsInline
+                          preload="metadata"
+                          aria-label={`${batch.batch} cohort video testimonial ${videoIndex + 1}`}
+                        >
+                          <source src={video} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+                        <span className="rv-video-chip">
+                          <Sparkles size={14} aria-hidden="true" />
+                          Learner video {videoIndex + 1}
+                        </span>
+                      </div>
+                    ))}
                   </div>
 
                   <div className="rv-written-grid">
