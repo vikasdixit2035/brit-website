@@ -31,6 +31,7 @@ import {
 import TopBanner from "@/components/layout/TopBanner";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { SITE_PHONE_DISPLAY } from "@/lib/site";
 
 // --- Data Constants ---
 const stats = [
@@ -434,7 +435,7 @@ export default function PlacementPageClient() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-950/10">
                     <Phone className="h-5 w-5" />
                   </div>
-                  <span className="font-bold">+44 (0) 20 1234 5678</span>
+                  <span className="font-bold">{SITE_PHONE_DISPLAY}</span>
                 </div>
                 <div className="flex items-center gap-4 text-slate-900">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-950/10">

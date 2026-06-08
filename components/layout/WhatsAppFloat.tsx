@@ -1,7 +1,8 @@
 "use client";
 
+import { SITE_WHATSAPP_NUMBER } from "@/lib/site";
+
 export default function WhatsAppFloat() {
-  const whatsappNumber = "447520664011";
   const defaultMessage = "Hi! I'd like to know more about the courses.";
 
   return (
@@ -41,7 +42,7 @@ export default function WhatsAppFloat() {
       `}</style>
 
       <a
-        href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`}
+        href={`https://wa.me/${SITE_WHATSAPP_NUMBER}?text=${encodeURIComponent(defaultMessage)}`}
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-float"
