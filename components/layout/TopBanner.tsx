@@ -3,7 +3,7 @@
 // --- Configuration & Helpers ---
 const BRAND_BLUE = "#1D4ED8";
 const BRAND_GOLD = "#D4AF37";
-const UPCOMING_BATCH_DATE = "6th June 2026";
+const UPCOMING_BATCH_DATE = "20th June 2026, 4th July 2026";
 
 // --- Private Helper Icons for Top Banner ---
 // Paper plane / Send style icon from image
@@ -211,7 +211,7 @@ export default function TopBanner({ visible, onClose }: TopBannerProps) {
               {/* Stopwatch + Text */}
               <div className="banner-item banner-cohort-item">
                 <BannerStopwatchIcon fill="#ffffff" />
-                <span className="banner-text-medium">Batch Date: {UPCOMING_BATCH_DATE}</span>
+                <span className="banner-text-medium">Upcoming batches : {UPCOMING_BATCH_DATE}</span>
               </div>
 
               {/* Button */}
