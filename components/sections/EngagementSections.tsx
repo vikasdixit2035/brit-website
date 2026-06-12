@@ -423,7 +423,7 @@ export function CertificateAndChooser() {
 
           <div className="overflow-hidden rounded-md border border-[var(--gold-400)]/35 bg-white text-slate-950 shadow-inner">
             <Image
-              src="/certificate.png"
+              src="/certificate-signed.png"
               alt="Brit Institute certificate of completion preview"
               width={1280}
               height={900}
