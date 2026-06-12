@@ -181,7 +181,7 @@ function useReveal() {
           io.disconnect();
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.01, rootMargin: "0px 0px -8% 0px" }
     );
 
     io.observe(el);
@@ -817,8 +817,11 @@ export default function ReviewsPage() {
       </section>
 
       <section style={{ paddingTop: "92px", paddingBottom: "92px" }}>
-        <div ref={batchesRevealRef} className="rv-section">
-          <div className={`rv-section-title rv-fade-up ${batchesVisible ? "rv-visible" : ""}`}>
+        <div className="rv-section">
+          <div
+            ref={batchesRevealRef}
+            className={`rv-section-title rv-fade-up ${batchesVisible ? "rv-visible" : ""}`}
+          >
             <div>
               <p className="rv-kicker">
                 <Sparkles size={16} aria-hidden="true" />
@@ -914,8 +917,11 @@ export default function ReviewsPage() {
       </section>
 
       <section style={{ paddingTop: "92px", paddingBottom: "92px", background: "#EEF2F7" }}>
-        <div ref={casesRevealRef} className="rv-section">
-          <div className={`rv-section-title rv-fade-up ${casesVisible ? "rv-visible" : ""}`}>
+        <div className="rv-section">
+          <div
+            ref={casesRevealRef}
+            className={`rv-section-title rv-fade-up ${casesVisible ? "rv-visible" : ""}`}
+          >
             <div>
               <p className="rv-kicker">
                 <TrendingUp size={16} aria-hidden="true" />
