@@ -68,15 +68,22 @@ export async function POST(request: Request) {
   }
 
   if (!leadResponse.ok) {
+    const responseBody = await leadResponse.text().catch(() => "");
+    console.error("Course registration API rejected the lead:", {
+      status: leadResponse.status,
+      responseBody,
+    });
     return NextResponse.json({ error: "Failed to save registration." }, { status: 502 });
   }
+
+  let notificationSent = true;
 
   try {
     await sendCourseRegistrationEmail(payload);
   } catch (error) {
+    notificationSent = false;
     console.error("Failed to send course registration email:", error);
-    return NextResponse.json({ error: "Registration saved, but email delivery failed." }, { status: 502 });
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, notificationSent });
 }
