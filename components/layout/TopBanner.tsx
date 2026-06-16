@@ -1,7 +1,7 @@
 "use client";
 
 // --- Configuration & Helpers ---
-const BRAND_BLUE = "#1D4ED8";
+const BRAND_BLUE = "#24101F";
 const BRAND_GOLD = "#D4AF37";
 const UPCOMING_BATCH_DATE = "20th June 2026, 4th July 2026";
 
@@ -62,7 +62,7 @@ export default function TopBanner({ visible, onClose }: TopBannerProps) {
 
         /* --- Top Banner --- */
         .banner-bar {
-          background: ${BRAND_BLUE};
+          background: linear-gradient(90deg, ${BRAND_BLUE}, #3a1831 58%, #d95700);
           width: 100%;
           min-height: 40px;
           padding: 6px 0;
