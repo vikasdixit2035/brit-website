@@ -32,7 +32,7 @@ const COURSE_RELATED_BLOG_SLUGS: Record<string, string[]> = {
   "data-analytics": [
     "how-to-become-data-analyst-uk",
     "data-analyst-salary-uk-2026",
-    "python-vs-sql-data-analysts",
+    "python-vs-sql-data-analysts-learn-first",
   ],
   "data-science": [
     "how-to-start-career-data-science-uk",
@@ -46,7 +46,7 @@ const COURSE_RELATED_BLOG_SLUGS: Record<string, string[]> = {
   "gen-ai": [
     "best-ai-tools-data-analysts-2026",
     "how-to-become-ai-specialist-uk",
-    "python-vs-sql-data-analysts",
+    "python-vs-sql-data-analysts-learn-first",
   ],
 };
 

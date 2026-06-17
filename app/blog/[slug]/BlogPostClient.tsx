@@ -38,7 +38,8 @@ const ARTICLE_IMAGES: Record<string, string> = {
   "best-ai-tools-data-analysts-2026": "/genai-Photoroom.png",
   "how-to-start-career-data-science-uk": "/ds-ml-Photoroom.png",
   "is-data-analytics-good-career-uk": "/hero1.png",
-  "python-vs-sql-data-analysts": "/hero2.png",
+  "python-vs-sql-data-analysts-learn-first": "/hero2.png",
+  "sql-interview-questions-data-analysts": "/da-Photoroom.webp",
   "data-scientist-salary-uk-2026": "/ds-ml-Photoroom.png",
   "how-to-become-ai-specialist-uk": "/agentic-ai-Photoroom.png",
 };
@@ -137,6 +138,28 @@ function renderContent(content: string) {
 
     if (!trimmed) {
       i += 1;
+      continue;
+    }
+
+    if (trimmed.startsWith("```") || trimmed.startsWith("~~~")) {
+      const fence = trimmed.slice(0, 3);
+      const language = trimmed.slice(3).trim();
+      const codeLines: string[] = [];
+      i += 1;
+
+      while (i < lines.length && !lines[i].trimStart().startsWith(fence)) {
+        codeLines.push(lines[i]);
+        i += 1;
+      }
+
+      if (i < lines.length) i += 1;
+
+      elements.push(
+        <pre key={key++} className="bp-code-block">
+          {language && <span className="bp-code-language">{language}</span>}
+          <code>{codeLines.join("\n")}</code>
+        </pre>,
+      );
       continue;
     }
 
@@ -899,6 +922,35 @@ export default function BlogPostPage() {
         }
         .bp-table tr:last-child td {
           border-bottom: 0;
+        }
+        .bp-code-block {
+          position: relative;
+          overflow-x: auto;
+          margin: 22px 0 30px;
+          padding: 42px 18px 18px;
+          border-radius: 8px;
+          border: 1px solid rgba(36,16,31,.16);
+          background: #1d171b;
+          color: #f8f1e7;
+          box-shadow: 0 16px 42px rgba(36,16,31,.12);
+        }
+        .bp-code-block code {
+          display: block;
+          min-width: max-content;
+          font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+          font-size: .88rem;
+          line-height: 1.7;
+          white-space: pre;
+        }
+        .bp-code-language {
+          position: absolute;
+          top: 12px;
+          left: 18px;
+          color: ${GOLD};
+          font-size: .72rem;
+          font-weight: 900;
+          letter-spacing: .12em;
+          text-transform: uppercase;
         }
         .bp-cta-wrap {
           margin: 36px 0;
