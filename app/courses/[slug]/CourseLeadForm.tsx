@@ -66,7 +66,7 @@ export default function CourseLeadForm({ courseTitle }: { courseTitle: string })
     <div className="bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] p-8 sticky top-28 border border-gray-100">
       <div className="mb-6">
         <h3 className="text-2xl font-bold text-gray-900 mb-1">
-          Talk to an <span className="text-[#10B981]">Expert</span>
+          Book Free <span className="text-[#10B981]">Counselling</span>
         </h3>
         <p className="text-sm text-gray-500">Fill in the details to get started</p>
       </div>

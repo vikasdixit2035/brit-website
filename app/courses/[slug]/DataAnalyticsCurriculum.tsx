@@ -3,7 +3,6 @@ import {
   BrainCircuit,
   BriefcaseBusiness,
   CalendarDays,
-  CheckCircle2,
   Code2,
   Database,
   FileSpreadsheet,
@@ -14,6 +13,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+import CoursePhaseSyllabus from "./CoursePhaseSyllabus";
 
 const moduleBalance = [
   { name: "Excel", weeks: "3 weeks", hours: "12 live hours", note: "Analyst essentials for day-one productivity" },
@@ -345,55 +345,10 @@ export default function DataAnalyticsCurriculum() {
           title="Five phases with AI embedded from the first week."
           description="The course is not a separate AI add-on. Learners use AI safely inside Excel, Power BI, SQL, Python, statistics, ML, documentation, and career preparation."
         />
-        <div className="space-y-6">
-          {phaseCards.map((phase) => {
-            const Icon = phase.icon;
-            return (
-              <article key={phase.phase} className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm md:p-7">
-                <div className="mb-6 grid gap-5 lg:grid-cols-[0.75fr_1.25fr]">
-                  <div>
-                    <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-md ${phase.bg} ${phase.accent}`}>
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <p className={`text-sm font-bold uppercase tracking-[0.14em] ${phase.accent}`}>{phase.phase}</p>
-                    <h3 className="mt-2 text-2xl font-extrabold leading-tight text-gray-950">{phase.title}</h3>
-                    <p className="mt-3 text-sm leading-6 text-gray-600">{phase.description}</p>
-                  </div>
-                  <div className="grid gap-4">
-                    {phase.tracks.map((track) => (
-                      <div key={track.title} className="rounded-xl border border-slate-200 bg-slate-50 p-5">
-                        <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                          <div>
-                            <h4 className="text-lg font-extrabold text-gray-950">{track.title}</h4>
-                            <p className="mt-1 text-sm font-bold text-slate-500">{track.duration}</p>
-                          </div>
-                          <span className="rounded-md bg-white px-3 py-2 text-xs font-bold text-slate-700 shadow-sm">
-                            Project: {track.project}
-                          </span>
-                        </div>
-                        <div className="grid gap-3 sm:grid-cols-2">
-                          {track.items.map((item) => (
-                            <div key={item} className="flex items-start gap-3 rounded-md bg-white p-3">
-                              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-                              <span className="text-sm leading-6 text-gray-700">{item}</span>
-                            </div>
-                          ))}
-                        </div>
-                        <div className="mt-4 rounded-md border border-blue-100 bg-blue-50 p-4">
-                          <div className="mb-2 flex items-center gap-2 text-sm font-extrabold text-blue-800">
-                            <Sparkles className="h-4 w-4" />
-                            {track.title === "Power BI" ? "GenAI integration" : "AI integration"}
-                          </div>
-                          <p className="text-sm leading-6 text-blue-950">{track.genAi}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+        <CoursePhaseSyllabus
+          phases={phaseCards}
+          getAiLabel={(trackTitle) => (trackTitle === "Power BI" ? "GenAI integration" : "AI integration")}
+        />
       </section>
 
       <section>

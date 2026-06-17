@@ -22,9 +22,9 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { BLOG_ARTICLES, BlogArticle, BlogCTA } from "../blogData";
 
-const BLUE = "#1D4ED8";
+const BLUE = "#D95700";
 const GOLD = "#D4AF37";
-const DEEP = "#0a0f1e";
+const DEEP = "#24101F";
 
 const COURSE_LINKS: Record<string, { title: string; href: string; description: string }> = {
   "data-analytics": {
@@ -793,7 +793,7 @@ export default function BlogPostPage() {
           pointer-events: none;
         }
         .bp-cta-mid {
-          background: linear-gradient(135deg, ${BLUE}, #2563EB 55%, #111827);
+          background: linear-gradient(135deg, ${BLUE}, #F5C242 55%, #24101F);
         }
         .bp-cta-bottom {
           background: linear-gradient(135deg, #111827, #1E3A5F 48%, ${BLUE});

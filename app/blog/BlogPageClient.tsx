@@ -9,9 +9,9 @@ import { trackLead } from "@/lib/analytics";
 import { BLOG_ARTICLES, BLOG_CATEGORIES } from "./blogData";
 
 /* ── tokens ── */
-const BLUE = "#1D4ED8";
+const BLUE = "#D95700";
 const GOLD = "#D4AF37";
-const DEEP = "#0a0f1e";
+const DEEP = "#24101F";
 
 const ARTICLES_PER_PAGE = 6;
 
@@ -89,7 +89,7 @@ export default function BlogPage() {
   };
 
   return (
-    <main style={{ background: "#FAFAFA", minHeight: "100vh", fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)", color: "#111827" }}>
+    <main style={{ background: "#F7F3EA", minHeight: "100vh", fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)", color: "#241A1F" }}>
       <TopBanner visible={banner} onClose={() => setBanner(false)} />
       <Navbar hasBanner={banner} />
 
@@ -101,8 +101,8 @@ export default function BlogPage() {
         .bl-hero::before {
           content: ''; position: absolute; inset: 0;
           background:
-            radial-gradient(ellipse 60% 50% at 50% 0%, rgba(29,78,216,.22), transparent 65%),
-            radial-gradient(ellipse 45% 45% at 20% 80%, rgba(139,92,246,.14), transparent 55%),
+            radial-gradient(ellipse 60% 50% at 50% 0%, rgba(217,87,0,.22), transparent 65%),
+            radial-gradient(ellipse 45% 45% at 20% 80%, rgba(116,109,92,.18), transparent 55%),
             radial-gradient(ellipse 40% 40% at 85% 70%, rgba(212,175,55,.1), transparent 50%);
           pointer-events: none;
         }
@@ -140,7 +140,7 @@ export default function BlogPage() {
         .bl-section-title { text-align: center; margin-bottom: 40px; }
         .bl-section-title h2 {
           font-size: clamp(1.5rem, 2.8vw, 2rem);
-          font-weight: 800; color: #111827; margin: 0 0 10px; letter-spacing: -.02em;
+          font-weight: 800; color: #241A1F; margin: 0 0 10px; letter-spacing: -.02em;
         }
         .bl-section-title h2 span { color: ${BLUE}; }
         .bl-section-title p {
@@ -207,7 +207,7 @@ export default function BlogPage() {
           width: fit-content; margin-bottom: 12px; color: #fff;
         }
         .bl-featured-title {
-          font-size: 1.05rem; font-weight: 700; color: #111827;
+          font-size: 1.05rem; font-weight: 700; color: #241A1F;
           line-height: 1.35; margin: 0 0 10px; flex: 1;
         }
         .bl-featured-excerpt {
@@ -250,7 +250,7 @@ export default function BlogPage() {
           color: #fff; width: fit-content; margin-bottom: 14px;
         }
         .bl-article-title {
-          font-size: 1rem; font-weight: 700; color: #111827;
+          font-size: 1rem; font-weight: 700; color: #241A1F;
           line-height: 1.4; margin: 0 0 10px;
         }
         .bl-article-excerpt {
@@ -291,7 +291,7 @@ export default function BlogPage() {
 
         /* ── mid CTA ── */
         .bl-mid-cta {
-          background: linear-gradient(135deg, #111827, #1E3A5F, ${BLUE});
+          background: linear-gradient(135deg, #24101F, #160914, ${BLUE});
           border-radius: 20px; padding: 48px 40px; text-align: center;
           position: relative; overflow: hidden;
           box-shadow: 0 16px 48px rgba(0,0,0,.15);
@@ -331,7 +331,7 @@ export default function BlogPage() {
           background: linear-gradient(90deg, ${BLUE}, ${GOLD});
         }
         .bl-nl-wrap h2 {
-          font-size: 1.3rem; font-weight: 800; color: #111827; margin: 0 0 8px;
+          font-size: 1.3rem; font-weight: 800; color: #241A1F; margin: 0 0 8px;
         }
         .bl-nl-wrap > p {
           font-size: .92rem; color: #6B7280; margin: 0 0 24px; line-height: 1.5;
@@ -342,7 +342,7 @@ export default function BlogPage() {
         .bl-nl-input {
           flex: 1; padding: 13px 16px;
           border: 1.5px solid #E5E7EB; border-radius: 10px;
-          font-size: .92rem; color: #111827; background: #FAFAFA;
+          font-size: .92rem; color: #241A1F; background: #F7F3EA;
           font-family: inherit; outline: none;
           transition: border-color .2s, box-shadow .2s;
         }
@@ -354,7 +354,7 @@ export default function BlogPage() {
         .bl-nl-input::placeholder { color: #9CA3AF; }
         .bl-nl-btn {
           padding: 13px 24px;
-          background: linear-gradient(135deg, ${BLUE}, #2563EB);
+          background: linear-gradient(135deg, ${BLUE}, #F5C242);
           color: #fff; font-weight: 700; font-size: .9rem;
           border: none; border-radius: 10px; cursor: pointer;
           font-family: inherit; white-space: nowrap;

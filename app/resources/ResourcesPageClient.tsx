@@ -9,9 +9,9 @@ import { trackLead } from "@/lib/analytics";
 import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 
 /* ── colour tokens ── */
-const BLUE = "#1D4ED8";
+const BLUE = "#D95700";
 const GOLD = "#D4AF37";
-const DEEP = "#0a0f1e";
+const DEEP = "#24101F";
 
 /* ── resource data ── */
 const RESOURCES = [
@@ -21,7 +21,7 @@ const RESOURCES = [
     desc: "Understand salary ranges, hiring trends, and role expectations across industries.",
     cta: "Download Report",
     type: "Report",
-    color: "#3B82F6",
+    color: "#D95700",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" />
@@ -34,7 +34,7 @@ const RESOURCES = [
     desc: "A step-by-step roadmap to move into data analyst roles with no prior experience.",
     cta: "Download Guide",
     type: "Guide",
-    color: "#8B5CF6",
+    color: "#746D5C",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
@@ -47,7 +47,7 @@ const RESOURCES = [
     desc: "Explore how AI is transforming roles and where new opportunities are emerging.",
     cta: "Download Report",
     type: "Report",
-    color: "#10B981",
+    color: "#7C9A4F",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="4" y="4" width="16" height="16" rx="2" /><rect x="9" y="9" width="6" height="6" /><line x1="9" y1="1" x2="9" y2="4" /><line x1="15" y1="1" x2="15" y2="4" /><line x1="9" y1="20" x2="9" y2="23" /><line x1="15" y1="20" x2="15" y2="23" />
@@ -60,7 +60,7 @@ const RESOURCES = [
     desc: "Learn the skills, tools, and progression path for data science roles.",
     cta: "Download Guide",
     type: "Guide",
-    color: "#F59E0B",
+    color: "#F5C242",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.14" />
@@ -161,7 +161,7 @@ export default function ResourcesPage() {
   const selectedResource = RESOURCES.find((r) => r.id === selected);
 
   return (
-    <main style={{ background: "#FAFAFA", minHeight: "100vh", fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)", color: "#111827" }}>
+    <main style={{ background: "#F7F3EA", minHeight: "100vh", fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)", color: "#241A1F" }}>
       <TopBanner visible={banner} onClose={() => setBanner(false)} />
       <Navbar hasBanner={banner} />
 
@@ -176,8 +176,8 @@ export default function ResourcesPage() {
         .rs-hero::before {
           content: ''; position: absolute; inset: 0;
           background:
-            radial-gradient(ellipse 60% 50% at 30% 90%, rgba(139,92,246,.18), transparent 60%),
-            radial-gradient(ellipse 50% 55% at 70% 15%, rgba(59,130,246,.2), transparent 55%),
+            radial-gradient(ellipse 60% 50% at 30% 90%, rgba(217,87,0,.18), transparent 60%),
+            radial-gradient(ellipse 50% 55% at 70% 15%, rgba(245,194,66,.16), transparent 55%),
             radial-gradient(ellipse 40% 40% at 50% 50%, rgba(212,175,55,.08), transparent 50%);
           pointer-events: none;
         }
@@ -230,7 +230,7 @@ export default function ResourcesPage() {
         .rs-section-title { text-align: center; margin-bottom: 48px; }
         .rs-section-title h2 {
           font-size: clamp(1.6rem, 3vw, 2.2rem);
-          font-weight: 800; color: #111827; margin: 0 0 12px; letter-spacing: -.025em;
+          font-weight: 800; color: #241A1F; margin: 0 0 12px; letter-spacing: -.025em;
         }
         .rs-section-title h2 span { color: ${BLUE}; }
         .rs-section-title p {
@@ -313,7 +313,7 @@ export default function ResourcesPage() {
         /* selected glow ring */
         .rs-card.rs-selected {
           border-color: ${BLUE};
-          box-shadow: 0 0 0 3px rgba(29,78,216,.18), 0 16px 48px rgba(0,0,0,.1);
+          box-shadow: 0 0 0 3px rgba(217,87,0,.18), 0 16px 48px rgba(0,0,0,.1);
         }
 
         /* ── download form ── */
@@ -343,7 +343,7 @@ export default function ResourcesPage() {
         }
         .rs-form-selected {
           display: flex; align-items: center; gap: 10px;
-          background: #EFF6FF; border: 1px solid #BFDBFE;
+          background: #F7F3EA; border: 1px solid #DED6C8;
           border-radius: 10px; padding: 14px 16px;
           margin-bottom: 24px;
         }
@@ -353,7 +353,7 @@ export default function ResourcesPage() {
           flex-shrink: 0; color: #fff;
         }
         .rs-form-selected-title {
-          font-size: .88rem; font-weight: 600; color: #1E40AF;
+          font-size: .88rem; font-weight: 600; color: #C45118;
           line-height: 1.35;
         }
         .rs-field {
@@ -374,13 +374,13 @@ export default function ResourcesPage() {
         }
         .rs-input:focus {
           border-color: ${BLUE};
-          box-shadow: 0 0 0 3px rgba(29,78,216,.1);
+          box-shadow: 0 0 0 3px rgba(217,87,0,.1);
           background: #fff;
         }
         .rs-input::placeholder { color: #9CA3AF; }
         .rs-submit {
           width: 100%; padding: 14px;
-          background: linear-gradient(135deg, ${BLUE}, #2563EB);
+          background: linear-gradient(135deg, ${BLUE}, #F5C242);
           color: #fff; font-weight: 700; font-size: .95rem;
           border: none; border-radius: 10px; cursor: pointer;
           font-family: inherit;
@@ -390,7 +390,7 @@ export default function ResourcesPage() {
         }
         .rs-submit:hover:not(:disabled) {
           transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(29,78,216,.3);
+          box-shadow: 0 8px 24px rgba(217,87,0,.3);
         }
         .rs-submit:disabled {
           opacity: .65; cursor: not-allowed;
@@ -450,7 +450,7 @@ export default function ResourcesPage() {
         /* ── CTA ── */
         .rs-cta-wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
         .rs-cta {
-          background: linear-gradient(135deg, #111827 0%, #1E3A5F 50%, ${BLUE} 100%);
+          background: linear-gradient(135deg, #24101F 0%, #160914 50%, ${BLUE} 100%);
           border-radius: 24px; padding: 60px 48px; text-align: center;
           position: relative; overflow: hidden;
           box-shadow: 0 24px 64px rgba(0,0,0,.2);
@@ -459,7 +459,7 @@ export default function ResourcesPage() {
           content: ''; position: absolute; border-radius: 50%;
           filter: blur(80px); pointer-events: none;
         }
-        .rs-cta::before { width: 280px; height: 280px; top: -100px; left: -80px; background: rgba(139,92,246,.25); }
+        .rs-cta::before { width: 280px; height: 280px; top: -100px; left: -80px; background: rgba(217,87,0,.25); }
         .rs-cta::after  { width: 240px; height: 240px; bottom: -80px; right: -50px; background: rgba(212,175,55,.2); }
         .rs-cta-inner { position: relative; z-index: 2; }
         .rs-cta h2 { font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 800; color: #fff; margin: 0 0 16px; }
@@ -722,9 +722,9 @@ export default function ResourcesPage() {
 
           <div className="rs-extra-grid">
             {[
-              { icon: "📹", title: "Free Masterclass", desc: "Watch an intro session on data analytics and AI careers.", accent: "#3B82F6", href: "#masterclass" },
-              { icon: "📊", title: "Career Quiz", desc: "Find out which data or AI career path fits you best.", accent: "#8B5CF6", href: "/careers" },
-              { icon: "💬", title: "Free Consultation", desc: "Book a 1-on-1 call with our career guidance team.", accent: "#10B981", href: "/contact" },
+              { icon: "▶", title: "Free Masterclass", desc: "Watch an intro session on data analytics and AI careers.", accent: "#D95700", href: "#masterclass" },
+              { icon: "↗", title: "Career Quiz", desc: "Find out which data or AI career path fits you best.", accent: "#746D5C", href: "/careers" },
+              { icon: "✓", title: "Free Consultation", desc: "Book a 1-on-1 call with our career guidance team.", accent: "#7C9A4F", href: "/contact" },
               { icon: "📖", title: "Course Catalogue", desc: "Browse all available programmes and certifications.", accent: "#F59E0B", href: "/courses" },
             ].map((item, i) => (
               <Link href={item.href} key={i} style={{ textDecoration: "none" }}>

@@ -111,17 +111,17 @@ export default function PlacementPageClient() {
   if (!isMounted) return null;
 
   return (
-    <main className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-[#d4af37] selection:text-slate-950">
+    <main className="min-h-screen bg-[#f7f3ea] font-sans text-[#241a1f] selection:bg-[#d4af37] selection:text-[#24101f]">
       <TopBanner visible={banner} onClose={() => setBanner(false)} />
       <Navbar hasBanner={banner} />
 
       {/* --- HERO SECTION --- */}
       <section 
-        className="relative overflow-hidden bg-[#040d1f] text-white"
+        className="relative overflow-hidden bg-[#24101f] text-white"
         style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "100px" }}
       >
         <div className="absolute inset-0 z-0 opacity-40">
-          <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-blue-600/20 blur-[120px]" />
+          <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-[#d95700]/20 blur-[120px]" />
           <div className="absolute bottom-0 left-10 h-[400px] w-[400px] rounded-full bg-[#d4af37]/15 blur-[100px]" />
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
         </div>
@@ -170,7 +170,7 @@ export default function PlacementPageClient() {
                 <div className="space-y-4">
                   {[
                     { label: "Portfolio Strength", val: "Strong", color: "bg-emerald-500", width: "90%" },
-                    { label: "CV Optimization", val: "Reviewed", color: "bg-blue-500", width: "100%" },
+                    { label: "CV Optimization", val: "Reviewed", color: "bg-[#d95700]", width: "100%" },
                     { label: "Interview Prep", val: "In Progress", color: "bg-[#d4af37]", width: "65%" },
                   ].map((item, i) => (
                     <div key={i} className="space-y-2">
@@ -205,8 +205,8 @@ export default function PlacementPageClient() {
         >
           {stats.map((item, i) => (
             <div key={i} className="flex flex-col items-center justify-center border-slate-100 p-4 text-center last:border-0 md:border-r">
-              <item.icon className="mb-3 h-6 w-6 text-blue-600" />
-              <div className="text-2xl font-black text-slate-900">{item.value}</div>
+              <item.icon className="mb-3 h-6 w-6 text-[#d95700]" />
+              <div className="text-2xl font-black text-[#241a1f]">{item.value}</div>
               <div className="mt-1 text-xs font-bold uppercase tracking-wide text-slate-500">{item.label}</div>
             </div>
           ))}
@@ -216,7 +216,7 @@ export default function PlacementPageClient() {
       {/* --- INTERACTIVE ROADMAP --- */}
       <section id="roadmap" className="mx-auto max-w-7xl px-6 py-24">
         <div className="mb-16 text-center">
-          <h2 className="text-4xl font-black tracking-tight text-slate-900">The 6-Step Transformation</h2>
+          <h2 className="text-4xl font-black tracking-tight text-[#241a1f]">The 6-Step Transformation</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">A systematic, predictable pathway designed to remove the guesswork from your job search.</p>
         </div>
 
@@ -229,15 +229,15 @@ export default function PlacementPageClient() {
                   key={index}
                   onClick={() => setActiveStep(index)}
                   className={`group relative flex items-center gap-4 rounded-xl p-4 text-left transition-all ${
-                    isActive ? "bg-blue-600 shadow-lg" : "hover:bg-slate-100"
+                    isActive ? "bg-[#d95700] shadow-lg" : "hover:bg-[#f0eadf]"
                   }`}
                 >
-                  <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg ${isActive ? "bg-white/20 text-white" : "bg-white text-blue-600 shadow-sm"}`}>
+                  <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg ${isActive ? "bg-white/20 text-white" : "bg-white text-[#d95700] shadow-sm"}`}>
                     <step.icon className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className={`font-bold ${isActive ? "text-white" : "text-slate-900"}`}>{step.title}</h3>
-                    <p className={`text-sm ${isActive ? "text-blue-100" : "text-slate-500"}`}>{step.text}</p>
+                    <h3 className={`font-bold ${isActive ? "text-white" : "text-[#241a1f]"}`}>{step.title}</h3>
+                    <p className={`text-sm ${isActive ? "text-white/75" : "text-[#6f665c]"}`}>{step.text}</p>
                   </div>
                   {isActive && (
                     <motion.div layoutId="active-indicator" className="absolute right-4 text-white">
@@ -292,11 +292,11 @@ export default function PlacementPageClient() {
       <section className="bg-slate-100 py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-16 text-center">
-            <h2 className="text-4xl font-black tracking-tight text-slate-900">Learner Success Stories</h2>
+            <h2 className="text-4xl font-black tracking-tight text-[#241a1f]">Learner Success Stories</h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">Real outcomes from dedicated learners who followed the framework.</p>
             <Link
               href="/reviews"
-              className="mt-8 inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-sm font-black text-white shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-xl"
+              className="mt-8 inline-flex items-center justify-center gap-2 rounded-lg bg-[#d95700] px-6 py-3 text-sm font-black text-white shadow-lg shadow-[#d95700]/20 transition-all hover:-translate-y-0.5 hover:bg-[#c45118] hover:shadow-xl"
             >
               View All Reviews
               <ArrowRight className="h-4 w-4" />
@@ -319,8 +319,8 @@ export default function PlacementPageClient() {
                     <Image src={story.image} alt={story.name} width={56} height={56} className="object-cover" />
                   </div>
                   <div>
-                    <h3 className="font-black text-slate-900">{story.name}</h3>
-                    <p className="text-sm font-bold text-blue-600">{story.role}</p>
+                    <h3 className="font-black text-[#241a1f]">{story.name}</h3>
+                    <p className="text-sm font-bold text-[#d95700]">{story.role}</p>
                     <p className="text-xs text-slate-500">{story.company}</p>
                   </div>
                 </div>
@@ -341,7 +341,7 @@ export default function PlacementPageClient() {
             
             {/* Companies Actively Hiring */}
             <div>
-              <h2 className="mb-2 text-3xl font-black tracking-tight text-slate-900">Industries Actively Hiring</h2>
+              <h2 className="mb-2 text-3xl font-black tracking-tight text-[#241a1f]">Industries Actively Hiring</h2>
               <p className="mb-8 text-slate-600">Our learners research and target high-growth roles across these major sectors in the UK.</p>
               
               <div className="grid grid-cols-2 gap-4">
@@ -349,12 +349,12 @@ export default function PlacementPageClient() {
                   <motion.div 
                     key={i}
                     whileHover={{ scale: 1.02 }}
-                    className="flex flex-col items-start rounded-xl border border-slate-200 bg-slate-50 p-6"
+                    className="flex flex-col items-start rounded-xl border border-[#ded6c8] bg-[#f7f3ea] p-6"
                   >
-                    <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
+                    <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[#f0eadf] text-[#d95700]">
                       <company.icon className="h-5 w-5" />
                     </div>
-                    <h3 className="text-sm font-black text-slate-900">{company.name}</h3>
+                    <h3 className="text-sm font-black text-[#241a1f]">{company.name}</h3>
                     <p className="mt-1 text-xs text-slate-500">{company.desc}</p>
                   </motion.div>
                 ))}
@@ -362,7 +362,7 @@ export default function PlacementPageClient() {
             </div>
 
             {/* Hiring Partners Approach */}
-            <div className="rounded-3xl bg-[#040d1f] p-8 text-white shadow-2xl lg:p-12">
+            <div className="rounded-3xl bg-[#24101f] p-8 text-white shadow-2xl lg:p-12">
               <Handshake className="mb-6 h-10 w-10 text-[#d4af37]" />
               <h2 className="mb-4 text-3xl font-black">Our Hiring Partners Approach</h2>
               <p className="mb-8 text-slate-300">We collaborate with employers looking for validated talent. Our candidates don't just have certificates; they have enterprise-grade project evidence.</p>
@@ -387,7 +387,7 @@ export default function PlacementPageClient() {
       </section>
 
       {/* --- ALUMNI NETWORK --- */}
-      <section className="bg-[#040d1f] py-24 text-white">
+      <section className="bg-[#24101f] py-24 text-white">
         <div className="mx-auto max-w-7xl px-6 text-center">
           <Network className="mx-auto mb-6 h-12 w-12 text-[#d4af37]" />
           <h2 className="text-4xl font-black tracking-tight">The Alumni Advantage</h2>
@@ -453,27 +453,27 @@ export default function PlacementPageClient() {
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-1">
                     <label className="text-xs font-bold text-slate-500">First Name</label>
-                    <input type="text" className="w-full rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600" placeholder="John" />
+                    <input type="text" className="w-full rounded-lg border border-[#ded6c8] bg-[#f7f3ea] p-3 text-sm focus:border-[#d95700] focus:outline-none focus:ring-1 focus:ring-[#d95700]" placeholder="John" />
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-bold text-slate-500">Last Name</label>
-                    <input type="text" className="w-full rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600" placeholder="Doe" />
+                    <input type="text" className="w-full rounded-lg border border-[#ded6c8] bg-[#f7f3ea] p-3 text-sm focus:border-[#d95700] focus:outline-none focus:ring-1 focus:ring-[#d95700]" placeholder="Doe" />
                   </div>
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-500">Email Address</label>
-                  <input type="email" className="w-full rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600" placeholder="john@example.com" />
+                  <input type="email" className="w-full rounded-lg border border-[#ded6c8] bg-[#f7f3ea] p-3 text-sm focus:border-[#d95700] focus:outline-none focus:ring-1 focus:ring-[#d95700]" placeholder="john@example.com" />
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-500">Target Role</label>
-                  <select className="w-full rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600">
+                  <select className="w-full rounded-lg border border-[#ded6c8] bg-[#f7f3ea] p-3 text-sm focus:border-[#d95700] focus:outline-none focus:ring-1 focus:ring-[#d95700]">
                     <option>Data Analyst</option>
                     <option>Power BI Developer</option>
                     <option>Operations Analyst</option>
                     <option>AI/Automation Specialist</option>
                   </select>
                 </div>
-                <button type="submit" className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 p-4 text-sm font-black text-white transition-colors hover:bg-blue-700">
+                <button type="submit" className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-[#d95700] p-4 text-sm font-black text-white transition-colors hover:bg-[#c45118]">
                   Book Free Consultation <ArrowRight className="h-4 w-4" />
                 </button>
               </form>

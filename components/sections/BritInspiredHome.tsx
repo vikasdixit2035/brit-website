@@ -443,7 +443,7 @@ function CohortCTA() {
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Link href="/apply" className="btn-gold lg">Apply Now</Link>
-          <Link href="/contact" className="btn-outline btn-outline-white">Talk to Advisor</Link>
+          <Link href="/contact" className="btn-outline btn-outline-white">Book Free Counselling</Link>
         </div>
       </div>
     </section>

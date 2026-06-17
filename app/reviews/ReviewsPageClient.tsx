@@ -15,7 +15,7 @@ import TopBanner from "@/components/layout/TopBanner";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-const BLUE = "#1D4ED8";
+const BLUE = "#D95700";
 const GOLD = "#D4AF37";
 
 const BATCH_REVIEWS = [
@@ -26,7 +26,7 @@ const BATCH_REVIEWS = [
     label: "Most recent completed cohort",
     videos: ["/testimonials/1.mp4", "/testimonials/2.mp4"],
     outcome: "Moved from reporting support to dashboard ownership",
-    accent: "#1D4ED8",
+    accent: "#D95700",
     reviews: [
       {
         name: "Ananya Menon",
@@ -57,7 +57,7 @@ const BATCH_REVIEWS = [
     label: "Winter career transition cohort",
     videos: ["/testimonials/3.mp4", "/testimonials/4.mp4"],
     outcome: "Built a portfolio using Excel, SQL and Power BI",
-    accent: "#0F766E",
+    accent: "#7C9A4F",
     reviews: [
       {
         name: "Amina Begum",
@@ -88,7 +88,7 @@ const BATCH_REVIEWS = [
     label: "Autumn AI and data cohort",
     videos: ["/testimonials/5.MP4", "/testimonials/6.MP4"],
     outcome: "Used AI workflows to speed up analysis and documentation",
-    accent: "#7C3AED",
+    accent: "#746D5C",
     reviews: [
       {
         name: "Sophie Williams",
@@ -119,7 +119,7 @@ const BATCH_REVIEWS = [
     label: "Project-focused career cohort",
     videos: ["/testimonials/7.MP4", "/testimonials/8.MP4"],
     outcome: "Completed a reviewed capstone project",
-    accent: "#B45309",
+    accent: "#C45118",
     reviews: [
       {
         name: "George Edwards",
@@ -150,19 +150,19 @@ const CASE_HIGHLIGHTS = [
     before: { label: "Admin and reporting", detail: "Manual spreadsheets and ad hoc reports" },
     after: { label: "Data analyst ready", detail: "Power BI dashboard, SQL case study and CV review" },
     timeline: "16 weeks",
-    color: "#1D4ED8",
+    color: "#D95700",
   },
   {
     before: { label: "Non-tech graduate", detail: "Limited coding and project experience" },
     after: { label: "Portfolio built", detail: "Python notebook, analytics story and interview practice" },
     timeline: "18 weeks",
-    color: "#0F766E",
+    color: "#7C9A4F",
   },
   {
     before: { label: "Operations role", detail: "Wanted practical AI skills for daily work" },
     after: { label: "AI workflow capable", detail: "Prompt library, automation plan and responsible-use notes" },
     timeline: "20 weeks",
-    color: "#7C3AED",
+    color: "#746D5C",
   },
 ] as const;
 
@@ -219,10 +219,10 @@ export default function ReviewsPage() {
   return (
     <main
       style={{
-        background: "#F8FAFC",
+        background: "#F7F3EA",
         minHeight: "100vh",
         fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)",
-        color: "#111827",
+        color: "#241A1F",
       }}
     >
       <TopBanner visible={banner} onClose={() => setBanner(false)} />
@@ -234,7 +234,7 @@ export default function ReviewsPage() {
           overflow: hidden;
           text-align: center;
           background:
-            linear-gradient(135deg, rgba(7,17,31,.98), rgba(13,30,57,.98)),
+            linear-gradient(135deg, rgba(36,16,31,.98), rgba(22,9,20,.98)),
             linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px),
             linear-gradient(180deg, rgba(255,255,255,.045) 1px, transparent 1px);
           background-size: auto, 44px 44px, 44px 44px;
@@ -336,7 +336,7 @@ export default function ReviewsPage() {
         .rv-section-title h2 {
           font-size: clamp(1.75rem, 3vw, 2.55rem);
           font-weight: 850;
-          color: #101827;
+          color: #241A1F;
           line-height: 1.12;
           letter-spacing: 0;
           margin: 0;
@@ -376,7 +376,7 @@ export default function ReviewsPage() {
         .rv-nav-link:hover {
           border-color: ${BLUE};
           color: ${BLUE};
-          background: #EFF6FF;
+          background: #F7F3EA;
         }
         .rv-batch-stack {
           display: grid;
@@ -622,7 +622,7 @@ export default function ReviewsPage() {
         .rv-case-title {
           font-size: 1rem;
           font-weight: 850;
-          color: #111827;
+          color: #241A1F;
         }
         .rv-case-detail {
           font-size: .86rem;
@@ -634,7 +634,7 @@ export default function ReviewsPage() {
           margin: 0 auto;
         }
         .rv-cta {
-          background: linear-gradient(135deg, #07111F 0%, #132B4A 58%, #1D4ED8 100%);
+          background: linear-gradient(135deg, #24101F 0%, #160914 58%, #D95700 100%);
           border-radius: 8px;
           padding: 56px 44px;
           text-align: center;
@@ -941,7 +941,7 @@ export default function ReviewsPage() {
                 className={`rv-case-card rv-fade-up rv-stagger-${index + 1} ${casesVisible ? "rv-visible" : ""}`}
               >
                 <div className="rv-case-header">
-                  <span style={{ fontSize: ".84rem", fontWeight: 850, color: "#111827" }}>
+                  <span style={{ fontSize: ".84rem", fontWeight: 850, color: "#241A1F" }}>
                     Learner path {index + 1}
                   </span>
                   <span className="rv-case-timeline" style={{ background: highlight.color }}>
