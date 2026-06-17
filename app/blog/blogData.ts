@@ -52,22 +52,22 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   /* ── FEATURED ── */
   {
     slug: "how-to-become-data-analyst-uk",
-    title: "How to Become a Data Analyst in the UK (Step-by-Step Guide)",
+    title: "How to Start a Career in Data Analytics (UK Guide)",
     excerpt:
-      "A practical roadmap for breaking into data analytics — from learning core tools to landing your first role in the UK job market.",
-    category: "How to Become",
-    categorySlug: "how-to",
+      "A practical roadmap for beginners, career switchers, and working professionals who want to become job-ready for UK data analyst roles.",
+    category: "Beginner Guides",
+    categorySlug: "beginner-guides",
     featured: true,
     date: "2 Apr 2026",
-    readTime: "12 min read",
+    readTime: "18 min read",
     author: "Brit Institute",
     publishedAt: "2026-04-02",
-    updatedAt: "2026-04-13",
+    updatedAt: "2026-06-17",
     canonicalPath: "/blog/how-to-become-data-analyst-uk",
-    seoTitle: "How to Become a Data Analyst in the UK",
+    seoTitle: "How to Start a Career in Data Analytics in the UK",
     seoDescription:
-      "Learn the practical step-by-step path to becoming a data analyst in the UK, including skills, salaries, portfolios, and job strategy.",
-    color: "#3B82F6",
+      "Follow a practical UK data analytics career roadmap covering Excel, SQL, Power BI, portfolio projects, CV preparation, interviews, AI tools, and entry-level role targets.",
+    color: "#D95700",
     relatedSlugs: ["data-analyst-salary-uk-2026", "data-analyst-vs-data-scientist", "best-ai-tools-data-analysts-2026"],
     relatedCourseSlugs: ["data-analytics"],
     midCta: {
@@ -98,125 +98,540 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         answer: "Typically 3–6 months with focused learning and hands-on projects. Structured programmes can accelerate this timeline significantly compared to self-learning.",
       },
     ],
-    content: `Looking to start a career as a data analyst in the UK? You're not alone. With businesses increasingly relying on data-driven decisions, demand for data analysts across industries like finance, retail, and technology continues to grow.
+    content: `Starting a career in data analytics can feel confusing when every job description asks for different tools, different experience levels, and different technical skills.
 
-The good news is that you don't need a traditional tech background to enter this field. What you do need is a clear roadmap, the right skills, and practical experience.
+The good news is that you do not need to learn everything at once. Most successful beginners start with a clear foundation: Excel, data cleaning, SQL, dashboards, business understanding, and a small portfolio of practical projects.
 
-This guide breaks down exactly how to become a data analyst in the UK, step by step.
+This guide explains how to move step by step from beginner level to job-ready level for UK data analyst roles.
 
-## What Does a Data Analyst Do?
+## Is Data Analytics a Good Career Path for Beginners?
 
-A data analyst works with data to identify patterns, generate insights, and support decision-making within a business.
+Data analytics is one of the most practical entry points into the technology and business world because it combines problem-solving, reporting, communication, and digital tools.
 
-Typical responsibilities include:
-- Cleaning and organising raw data
-- Analysing datasets using tools like Excel, SQL, or Python
-- Creating dashboards and reports
-- Communicating insights to stakeholders
+Unlike some advanced technical roles, entry-level data analyst positions do not always require deep programming or machine learning knowledge. Many beginner roles focus on working with spreadsheets, databases, dashboards, and business reports.
 
-## Skills Required to Become a Data Analyst in the UK
+Data analytics may be a good path for you if you enjoy:
+- Working with numbers and information
+- Finding patterns in data
+- Solving business problems
+- Creating reports and dashboards
+- Explaining insights clearly
+- Using tools such as Excel, SQL, and Power BI
+- Improving decisions through evidence
 
-To land a data analyst role, you need a mix of technical and practical skills.
+A data analyst does not just create charts. A good analyst helps a business understand what is happening, why it is happening, and what action should be taken next.
 
-### Core Skills:
-- Data analysis and interpretation
-- Excel (advanced functions, pivot tables)
-- SQL for querying databases
-- Data visualisation (Power BI or Tableau)
+## What Does a Data Analyst Actually Do?
 
-### Optional but Valuable:
-- Python for data analysis
+A Data Analyst works with raw information and turns it into useful business insight.
+
+In a real job, this may include:
+- Collecting data from spreadsheets, systems, or databases
+- Cleaning and organising messy data
+- Writing SQL queries to extract information
+- Creating reports and dashboards
+- Tracking business KPIs
+- Finding trends, gaps, and opportunities
+- Explaining results to managers or teams
+- Supporting better business decisions
+
+For example, a Data Analyst may help a retail company understand which products are selling best, help a marketing team measure campaign performance, or help an operations team identify delays and inefficiencies.
+
+## The Beginner-Friendly Career Roadmap
+
+### Step 1: Understand the Role Before Learning Tools
+
+Many beginners make the mistake of jumping straight into tools without understanding the job.
+
+Before learning Excel, SQL, Power BI, or Python, you should understand what businesses expect from a Data Analyst.
+
+A beginner Data Analyst should be able to answer questions like:
+- What happened in the business?
+- Which numbers changed?
+- Why did they change?
+- Which department or product is affected?
+- What trend can we see?
+- What decision can this analysis support?
+
+This business-thinking mindset makes your technical skills more valuable.
+
+### Step 2: Build a Strong Excel Foundation
+
+Excel is still widely used in UK businesses. Even companies using advanced tools often rely on Excel for reporting, quick analysis, data cleaning, and business communication.
+
+As a beginner, Excel helps you understand the basics of data before moving into databases and dashboards.
+
+You should become confident with:
+- Sorting and filtering
+- Data cleaning
+- IF formulas
+- XLOOKUP or VLOOKUP
+- Pivot tables
+- Charts
+- Conditional formatting
+- Basic KPI reports
+- Data validation
+- Removing duplicates
+- Working with messy datasets
+
+Your goal is not just to know Excel formulas. Your goal is to use Excel to answer business questions.
+
+### Step 3: Learn SQL for Working with Databases
+
+SQL is one of the most important skills for Data Analyst roles because businesses store data in databases.
+
+Excel is useful for smaller datasets, but SQL helps you extract and analyse larger business data.
+
+You should learn:
+- SELECT
+- WHERE
+- ORDER BY
+- GROUP BY
+- COUNT, SUM, AVG
+- INNER JOIN
+- LEFT JOIN
+- CASE WHEN
+- Date functions
+- Basic subqueries
+- Aggregations by month, product, customer, or region
+
+A strong beginner should be able to write queries that answer questions such as:
+- How many customers purchased last month?
+- Which products generated the most revenue?
+- Which region had the highest sales?
+- How many users became inactive?
+- Which orders are delayed?
+
+SQL gives you the confidence to work with real business data.
+
+### Step 4: Learn Power BI or Tableau for Dashboards
+
+Dashboards are important because they help businesses monitor performance visually.
+
+For UK entry-level roles, Power BI is especially useful because many organisations use Microsoft tools. Tableau is also valuable, especially in analytics, consulting, and enterprise environments.
+
+You should learn how to:
+- Import data
+- Clean and transform data
+- Create relationships between tables
+- Build charts and KPI cards
+- Create filters and slicers
+- Design executive dashboards
+- Use basic DAX in Power BI
+- Create simple calculated measures
+- Make dashboards readable and business-focused
+
+A good dashboard should not simply look colourful. It should help the user understand performance quickly.
+
+### Step 5: Learn Basic Statistics and Business Metrics
+
+You do not need advanced mathematics at the beginning, but you should understand basic statistics and business metrics.
+
+Useful topics include:
+- Average
+- Median
+- Percentage change
+- Growth rate
+- Trend analysis
+- Correlation basics
+- Outliers
+- Conversion rate
+- Customer retention
+- Revenue
+- Profit margin
+- Cost
+- Forecasting basics
+
+This helps you explain what numbers mean instead of only showing them.
+
+### Step 6: Build Portfolio Projects
+
+A portfolio is one of the most important parts of your career transition.
+
+Many beginners say, "I have completed a course." A stronger candidate says, "I have built projects that show how I solve business problems."
+
+Your portfolio should include practical, business-style projects.
+
+Recommended beginner portfolio projects:
+- Sales performance dashboard
+- HR analytics dashboard
+- Customer behaviour analysis
+- Marketing campaign report
+- Finance KPI dashboard
+- SQL business case study
+- Operations performance analysis
+- Data cleaning project
+- Power BI executive dashboard
+- Python data cleaning project
+
+Each project should clearly explain:
+- The business problem
+- The dataset used
+- The cleaning steps
+- The analysis performed
+- The dashboard or report created
+- The insights found
+- The recommendation or business impact
+
+A good portfolio makes your CV stronger and gives you something real to discuss in interviews.
+
+## Recommended 90-Day Roadmap
+
+### Days 1-15: Excel and Data Cleaning
+
+Focus on understanding spreadsheets, cleaning data, creating formulas, using pivot tables, and building basic reports.
+
+By the end of this stage, you should be able to take a messy dataset and turn it into a clean report.
+
+### Days 16-35: SQL Foundations
+
+Learn how to extract and summarise data from databases.
+
+Practise queries using business examples such as sales, customers, orders, employees, products, and payments.
+
+By the end of this stage, you should be able to write basic and intermediate SQL queries confidently.
+
+### Days 36-55: Dashboarding with Power BI
+
+Learn how to import data, create relationships, design visuals, and build dashboards.
+
+Focus on clean design, useful KPIs, and business storytelling.
+
+By the end of this stage, you should have at least one complete Power BI dashboard.
+
+### Days 56-70: Business Projects
+
+Start building portfolio projects using realistic datasets.
+
+Choose projects from different business areas such as sales, HR, finance, marketing, or operations.
+
+By the end of this stage, you should have two to three portfolio-ready projects.
+
+### Days 71-80: CV, LinkedIn, and Project Documentation
+
+Turn your learning into a professional profile.
+
+Prepare:
+- A data-focused CV
+- A clear LinkedIn headline
+- A project portfolio section
+- Short project summaries
+- Dashboard screenshots
+- SQL case study explanations
+
+Your profile should show what you can do, not only what you studied.
+
+### Days 81-90: Interview and Job Application Preparation
+
+Start preparing for entry-level roles.
+
+Practise explaining:
+- Your projects
+- Your dashboard decisions
+- Your SQL queries
+- Your data cleaning steps
+- Your insights
+- Your career transition story
+
+Begin applying to suitable roles and track your applications carefully.
+
+## Entry-Level Roles to Target in the UK
+
+Many beginners only search for "Data Analyst" and miss other suitable roles.
+
+You can also search for:
+- Junior Data Analyst
+- Trainee Data Analyst
+- Reporting Analyst
+- Business Intelligence Analyst
+- Power BI Analyst
+- SQL Analyst
+- MI Analyst
+- Data Quality Analyst
+- Operations Analyst
+- Marketing Analyst
+- Finance Data Analyst
+- Customer Insight Analyst
+- Performance Analyst
+- Data Support Analyst
+
+These roles can help you enter the data field and build experience.
+
+## What Skills Should You Learn First?
+
+### Beginner foundation
+
+- Excel
+- Data cleaning
+- Business KPIs
+- Charts and reports
 - Basic statistics
-- Understanding of business metrics
 
-Employers in the UK often prioritise practical ability over theory, which means projects matter more than certificates.
+### Employability skills
 
-## Data Analyst Salary in the UK
+- SQL
+- Power BI
+- Dashboard design
+- Data storytelling
+- Business problem-solving
 
-Salaries vary based on experience and location.
+### Career growth skills
 
-- **Entry-level:** £28,000 – £35,000
-- **Mid-level:** £35,000 – £50,000
-- **Senior roles:** £50,000+
+- Python
+- Automation
+- Advanced SQL
+- Forecasting
+- AI tools
+- Cloud data basics
+- Machine learning fundamentals
 
-London and major tech hubs tend to offer higher salaries, but remote opportunities are increasing across the UK.
+Do not try to learn everything together. Build the foundation first, then add advanced skills gradually.
 
-## Step-by-Step Roadmap to Become a Data Analyst
+## What UK Employers Look For
 
-### Step 1 – Learn Core Tools
+Employers want more than tool knowledge.
 
-Start with Excel and SQL. These are the foundation of most data analyst roles in the UK.
-
-### Step 2 – Learn Data Visualisation
-
-Tools like Power BI or Tableau are widely used for reporting and dashboards.
-
-### Step 3 – Work on Real Projects
-
-This is where most learners fail. Instead of just learning concepts:
+A strong beginner candidate should be able to:
+- Clean messy data
+- Use Excel confidently
+- Write SQL queries
 - Build dashboards
-- Analyse datasets
-- Solve real-world problems
+- Explain insights clearly
+- Understand business metrics
+- Present projects professionally
+- Communicate with non-technical people
+- Show evidence of practical learning
 
-### Step 4 – Build a Portfolio
+The best candidates are not always those who know the most software. The best candidates are those who can use data to solve real business problems.
 
-Create a portfolio that showcases:
-- Projects
-- Dashboards
-- Case studies
+## Common Beginner Mistakes
 
-Employers care about what you can do, not what you've watched.
+### Mistake 1: Learning too many tools at once
 
-### Step 5 – Apply Strategically
+Trying to learn Excel, SQL, Power BI, Python, machine learning, cloud tools, and AI together can become overwhelming.
 
-Apply for:
-- Junior Data Analyst roles
-- Internship roles
-- Entry-level analytics positions
+Start with the tools needed for entry-level roles, then grow step by step.
 
-Tailor your CV based on projects and skills.
+### Mistake 2: Watching tutorials without building projects
 
-## Best Way to Learn Data Analytics in the UK
+Tutorials are useful, but employers want proof of practical ability.
 
-There are two main paths:
+For every major skill you learn, build something with it.
 
-### Self-Learning
-- Flexible
-- Low cost
-- But lacks structure and accountability
+### Mistake 3: Making dashboards without business insight
 
-### Structured Programmes
-- Clear roadmap
-- Real-world projects
-- Career support
+A dashboard should not only look attractive. It should answer business questions.
 
-If your goal is to transition quickly, structured learning often reduces trial and error.
+Always ask: What decision can this dashboard support?
 
-## Common Mistakes to Avoid
+### Mistake 4: Ignoring SQL
 
-- Learning tools without building projects
-- Relying only on certificates
-- Applying without a portfolio
-- Not understanding business context`,
+Many beginners focus only on visual dashboards. SQL is often the skill that separates stronger candidates from weaker candidates.
+
+### Mistake 5: Having a generic CV
+
+A data analyst CV should show tools, projects, business problems, and measurable outcomes.
+
+### Mistake 6: Not practising project explanation
+
+In interviews, you must explain your work clearly. A good project becomes powerful only when you can explain what you did and why it matters.
+
+## How to Build a Strong Data Analyst Portfolio
+
+A strong portfolio should be simple, clear, and business-focused.
+
+Each project should include:
+- Project title
+- Business problem
+- Dataset description
+- Tools used
+- Cleaning steps
+- Analysis performed
+- Dashboard or report screenshots
+- Key insights
+- Final recommendation
+
+Example project structure:
+
+### Sales Performance Analysis
+
+Business problem: Understand monthly sales trends and identify top-performing products and regions.
+
+Tools used: Excel, SQL, Power BI
+
+Analysis performed: Cleaned sales data, calculated revenue and profit metrics, identified best-selling products, compared regional performance, and created a dashboard for management review.
+
+Key insight: Revenue was concentrated in a small number of products and regions, showing where the business should focus marketing and stock planning.
+
+## How to Prepare Your CV for Data Analyst Roles
+
+Your CV should make your practical skills visible quickly.
+
+Include:
+- Technical skills
+- Portfolio projects
+- Business analysis experience
+- Tools used
+- Relevant achievements
+- Education and certifications
+- Career transition summary
+
+Instead of writing:
+
+"Completed Power BI course"
+
+Write:
+
+"Built a Power BI sales dashboard using cleaned sales data, KPI cards, monthly trend analysis, and product-level performance reporting."
+
+This sounds stronger because it shows practical output.
+
+## How to Prepare for Data Analyst Interviews
+
+Interviewers may ask both technical and practical questions.
+
+You should prepare for questions such as:
+- How do you clean messy data?
+- What is the difference between INNER JOIN and LEFT JOIN?
+- How do you handle missing values?
+- How do you choose the right chart?
+- How do you explain a dashboard to a manager?
+- What KPIs would you track for a sales team?
+- Tell me about a data project you completed.
+- What insight did you find in your project?
+- How would you improve the dashboard further?
+
+The best way to prepare is to practise explaining your own projects clearly.
+
+## Can You Become a Data Analyst Without Experience?
+
+Yes, but you need to replace lack of work experience with proof of practical ability.
+
+If you do not have professional data experience, your portfolio becomes more important.
+
+You can show ability through:
+- Realistic projects
+- Clean dashboards
+- SQL case studies
+- Data cleaning examples
+- Business explanations
+- GitHub or portfolio links
+- LinkedIn project posts
+- Mock business reports
+
+Employers may not expect beginners to know everything, but they do expect evidence of effort, clarity, and practical learning.
+
+## When Should You Learn Python?
+
+Python is useful, but it does not need to be your first priority if you are completely new.
+
+For entry-level Data Analyst roles, Excel, SQL, and Power BI usually provide a stronger starting point.
+
+Learn Python after you understand:
+- Data cleaning
+- Tables and columns
+- Business KPIs
+- SQL queries
+- Dashboarding
+- Basic analysis
+
+Python becomes more useful when you want to automate tasks, analyse larger datasets, clean data faster, or move towards data science.
+
+## How AI Tools Are Changing Data Analytics
+
+AI tools are changing how analysts work, but they are not removing the need for human judgement.
+
+A modern Data Analyst should know how to use AI tools to:
+- Summarise data
+- Generate SQL drafts
+- Explain formulas
+- Document projects
+- Create dashboard ideas
+- Automate repetitive work
+- Improve productivity
+- Support business analysis
+
+However, AI output must be checked carefully. Employers still need analysts who understand data quality, business context, and responsible decision-making.
+
+## The Brit Institute Learning Approach
+
+Brit Institute helps learners move from beginner level to job-ready level through a structured and practical learning journey.
+
+The focus is not only on tools. The focus is on building confidence, practical projects, portfolio evidence, and career readiness.
+
+Learners develop skills across:
+- Excel
+- SQL
+- Power BI
+- Data cleaning
+- Business analysis
+- Dashboard creation
+- Python basics
+- AI tools
+- Portfolio projects
+- CV and interview preparation
+
+The aim is to help learners understand data, build useful projects, and explain their work professionally.
+
+## Your Data Analytics Career Roadmap
+
+### Phase 1: Learn the basics
+
+Understand data, spreadsheets, cleaning, formulas, and simple reports.
+
+### Phase 2: Learn databases
+
+Use SQL to extract, filter, join, and summarise data.
+
+### Phase 3: Build dashboards
+
+Create Power BI dashboards that show KPIs, trends, and business performance.
+
+### Phase 4: Build portfolio projects
+
+Create practical projects using realistic business datasets.
+
+### Phase 5: Prepare for the job market
+
+Improve your CV, LinkedIn, project explanation, and interview confidence.
+
+### Phase 6: Keep growing
+
+Add Python, automation, AI tools, advanced SQL, and industry-specific knowledge.
+
+## Start Your Data Analytics Career with a Clear Plan
+
+You do not need to master everything before starting. You need the right sequence, consistent practice, practical projects, and guidance.
+
+A strong beginner does not become job-ready by collecting certificates alone. They become job-ready by building proof of skill.
+
+If you are starting from zero, changing careers, or looking to upgrade your professional profile, Brit Institute can help you choose the right pathway and build a practical roadmap into data analytics.
+
+## Start Your Journey
+
+- Explore Data Analytics Programme
+- Book a Free Career Guidance Call
+- Download Curriculum
+- Speak to a Career Advisor`,
   },
   {
     slug: "data-analyst-vs-data-scientist",
     title: "Data Analyst vs Data Scientist: Which Career is Right in the UK?",
     excerpt:
-      "Understand the key differences in skills, salary, and career trajectory between data analysts and data scientists in the UK.",
+      "A practical guide for beginners, career switchers, and professionals choosing between data analytics and data science in the UK.",
     category: "Career Comparisons",
     categorySlug: "comparisons",
     featured: true,
     date: "28 Mar 2026",
-    readTime: "10 min read",
+    readTime: "16 min read",
     author: "Brit Institute",
     publishedAt: "2026-03-28",
-    updatedAt: "2026-04-13",
+    updatedAt: "2026-06-17",
     canonicalPath: "/blog/data-analyst-vs-data-scientist",
     seoTitle: "Data Analyst vs Data Scientist in the UK",
     seoDescription:
-      "Compare data analyst and data scientist careers in the UK, including tools, salaries, entry barriers, and role fit.",
-    color: "#8B5CF6",
+      "Compare Data Analyst and Data Scientist careers in the UK, including responsibilities, tools, salary ranges, portfolios, interviews, and the best starting path.",
+    color: "#D95700",
     relatedSlugs: ["how-to-become-data-analyst-uk", "data-analyst-salary-uk-2026", "best-ai-tools-data-analysts-2026"],
     relatedCourseSlugs: ["data-analytics", "data-science"],
     midCta: {
@@ -247,89 +662,462 @@ If your goal is to transition quickly, structured learning often reduces trial a
         answer: "Data analyst roles are currently more accessible and widely available across industries. Data science roles are growing but typically require more specialised skills.",
       },
     ],
-    content: `If you're exploring a career in data, you've likely come across two common roles: data analyst and data scientist.
+    content: `Data Analyst and Data Scientist are two of the most popular career paths in the data industry. They sound similar, but the work, skill level, tools, salary expectations, and career journey can be very different.
 
-Both are in high demand across the UK, both involve working with data, and both offer strong salary potential. But they are not the same.
+If you are starting your data career in the UK, choosing the right path matters. Many learners jump directly into Data Science because it sounds more advanced, but for many beginners, Data Analytics is the more realistic and practical starting point.
 
-Choosing the wrong path early can slow you down. This guide breaks down the key differences between a data analyst and a data scientist, so you can decide which career aligns with your goals.
+This guide explains the difference clearly so you can decide which career path fits your background, confidence level, and long-term goals.
 
-## What is a Data Analyst?
+## The Simple Difference
 
-A data analyst focuses on interpreting data and turning it into actionable insights for business decisions.
+A Data Analyst focuses on understanding business performance and turning data into useful reports, dashboards, and insights.
 
-Typical Responsibilities:
-- Cleaning and organising datasets
-- Analysing trends using Excel or SQL
-- Creating dashboards (Power BI / Tableau)
-- Reporting insights to teams
+A Data Scientist focuses on using data, statistics, programming, machine learning, and advanced modelling to make predictions, build models, and solve complex problems.
 
-## What is a Data Scientist?
+In simple terms:
 
-A data scientist works on more complex data problems, often building predictive models and working with large datasets.
+### Data Analyst
 
-Typical Responsibilities:
-- Building machine learning models
-- Analysing complex datasets
-- Writing code in Python or R
-- Deploying models for real-world use
+Looks at what happened, why it happened, and what the business should do next.
 
-## Key Differences Between Data Analyst and Data Scientist
+### Data Scientist
 
-| Aspect | Data Analyst | Data Scientist |
-|--------|-------------|----------------|
-| Focus | Insights & reporting | Prediction & modelling |
-| Tools | Excel, SQL, BI tools | Python, ML frameworks |
-| Complexity | Moderate | High |
-| Entry Barrier | Lower | Higher |
+Uses data to predict what may happen, build models, and solve deeper analytical or technical problems.
 
-## Skills Required for Each Role in the UK
+Both roles are valuable. The right choice depends on where you are starting and what kind of work you want to do.
 
-### Data Analyst Skills:
-- Excel
-- SQL
-- Data visualisation
-- Business understanding
+## What Does a Data Analyst Do?
 
-### Data Scientist Skills:
-- Python programming
-- Statistics & probability
-- Machine learning
-- Data modelling
+A Data Analyst helps organisations understand their data and make better decisions.
 
-In the UK job market, data analyst roles are generally more accessible for beginners, while data science roles require deeper technical expertise.
+In a typical role, a Data Analyst may:
+- Clean and prepare data
+- Create Excel reports
+- Write SQL queries
+- Build Power BI or Tableau dashboards
+- Track KPIs
+- Analyse sales, customer, finance, HR, or operations data
+- Identify trends and performance gaps
+- Prepare management reports
+- Explain findings to non-technical teams
+
+The role is business-facing. A good Data Analyst is not only good with tools but also understands the question behind the numbers.
+
+For example, a Data Analyst may help a company answer:
+- Which products are performing best?
+- Why did sales drop last month?
+- Which customers are most valuable?
+- Which marketing campaign worked better?
+- Where are operational delays happening?
+- Which region needs attention?
+
+This role is a strong entry point for beginners because it focuses on practical tools, business reporting, and clear communication.
+
+## What Does a Data Scientist Do?
+
+A Data Scientist works with more complex data problems and often uses programming, statistics, machine learning, and modelling.
+
+In a typical role, a Data Scientist may:
+- Clean and analyse large datasets
+- Use Python or R for analysis
+- Build predictive models
+- Apply machine learning algorithms
+- Test model performance
+- Work with structured and unstructured data
+- Create forecasting models
+- Work with AI or automation systems
+- Communicate model results to business teams
+- Support product, risk, marketing, finance, or operations decisions
+
+For example, a Data Scientist may help a company answer:
+- Which customers are likely to leave?
+- What will sales look like next quarter?
+- Can we predict fraud risk?
+- Which users are most likely to buy?
+- Can we recommend the right product to each customer?
+- Can we automate classification or prediction tasks?
+
+This role usually requires stronger technical depth than a beginner Data Analyst role.
 
 ## Salary Comparison in the UK
 
-- **Data Analyst:** £28,000 – £55,000+
-- **Data Scientist:** £40,000 – £80,000+
+Salaries vary by location, company size, industry, experience, and technical depth.
 
-While data scientists earn more on average, the entry barrier is also higher.
+### Data Analyst
 
-## Which Career Should You Choose?
+Indicative UK salary range: £28,000 to £65,000
 
-### Choose Data Analyst if:
-- You're starting from a non-tech background
-- You want faster entry into the job market
-- You prefer working with dashboards and insights
+Data Analyst roles can start at entry level and grow into senior analyst, business intelligence, analytics manager, or data leadership roles.
 
-### Choose Data Scientist if:
-- You have a technical or programming background
-- You're interested in machine learning and modelling
-- You're comfortable with advanced mathematics
+### Data Scientist
 
-## Career Growth Path
+Indicative UK salary range: £32,000 to £82,500
 
-A common progression in the UK:
+Data Scientist roles often pay more at experienced levels because they require stronger programming, statistics, machine learning, and modelling skills.
 
-Data Analyst → Senior Analyst → Data Scientist
+Salary should not be the only deciding factor. A higher salary path may also require more preparation, stronger technical ability, and deeper project experience.
 
-Many professionals start as analysts and transition into data science later after gaining experience.
+## Skill Comparison
 
-## Common Mistakes When Choosing a Career
+### Data Analyst Skills
 
-- Choosing data science without understanding the complexity
-- Ignoring the importance of practical projects
-- Focusing only on salary instead of skill fit`,
+- Excel
+- SQL
+- Power BI or Tableau
+- Data cleaning
+- Dashboard design
+- Business KPIs
+- Basic statistics
+- Reporting
+- Data storytelling
+- Stakeholder communication
+
+### Data Scientist Skills
+
+- Python or R
+- Statistics
+- Machine learning
+- Data modelling
+- Feature engineering
+- Model evaluation
+- Data visualisation
+- SQL
+- Probability
+- Experimentation
+- AI and machine learning tools
+
+There is overlap between both roles. SQL, data cleaning, statistics, and communication are useful in both careers.
+
+The main difference is depth. Data Analysts focus more on reporting and business insight. Data Scientists focus more on modelling, prediction, and advanced analysis.
+
+## Tools Used in Each Role
+
+### Common Data Analyst Tools
+
+- Excel
+- SQL
+- Power BI
+- Tableau
+- Google Sheets
+- Looker Studio
+- Basic Python
+- CRM or business reporting tools
+
+### Common Data Scientist Tools
+
+- Python
+- R
+- Jupyter Notebook
+- SQL
+- Pandas
+- NumPy
+- Scikit-learn
+- TensorFlow or PyTorch
+- Cloud platforms
+- Machine learning workflows
+
+A beginner does not need to master every tool. The better approach is to learn the tools that match your target role.
+
+## Which Role Is Easier to Start With?
+
+For most beginners, Data Analytics is easier to start with.
+
+This is because entry-level Data Analyst roles often focus on:
+- Excel
+- SQL
+- Dashboards
+- Reports
+- Business metrics
+- Data cleaning
+- Communication
+
+These skills are practical, learnable, and easier to demonstrate through portfolio projects.
+
+Data Science usually requires more preparation because it involves:
+- Programming
+- Statistics
+- Machine learning
+- Mathematical thinking
+- Model building
+- Model evaluation
+- Larger and more complex datasets
+
+If you are starting from zero, Data Analytics is usually the better first step. You can later move towards Data Science once your foundation is strong.
+
+## Which Career Has Better Long-Term Growth?
+
+Both careers offer strong growth, but the direction is different.
+
+### Data Analyst Growth Path
+
+- Junior Data Analyst
+- Data Analyst
+- Senior Data Analyst
+- Business Intelligence Analyst
+- Analytics Lead
+- Analytics Manager
+- Data Manager
+
+This path is suitable for people who enjoy business problems, dashboards, reporting, communication, and decision support.
+
+### Data Scientist Growth Path
+
+- Junior Data Scientist
+- Data Scientist
+- Senior Data Scientist
+- Machine Learning Engineer
+- AI Engineer
+- Principal Data Scientist
+- Data Science Lead
+
+This path is suitable for people who enjoy coding, statistics, machine learning, experiments, modelling, and technical problem-solving.
+
+Neither path is automatically better. The right path depends on your strengths and interests.
+
+## Choose Data Analytics If You Prefer
+
+- Business problems
+- Dashboards
+- Reports
+- Excel and SQL
+- KPI tracking
+- Clear visual communication
+- Working with managers and teams
+- Practical decision-making
+- A beginner-friendly entry point
+
+Data Analytics is a good choice if you want to enter the data field through a practical route and build confidence step by step.
+
+## Choose Data Science If You Prefer
+
+- Coding
+- Statistics
+- Machine learning
+- Predictive modelling
+- Experimentation
+- AI systems
+- Complex datasets
+- Technical problem-solving
+- Mathematical thinking
+
+Data Science is a good choice if you enjoy deeper technical work and are ready to spend more time building programming and statistical skills.
+
+## Which Path Is Better for Career Switchers?
+
+For most career switchers, Data Analytics is the more realistic starting point.
+
+This is because you can connect your previous experience with analytics.
+
+For example:
+- A finance professional can move into finance analytics.
+- A marketing professional can move into marketing analytics.
+- An operations professional can move into operations analytics.
+- An HR professional can move into people analytics.
+- A sales professional can move into sales or revenue analytics.
+- A healthcare professional can move into healthcare data analysis.
+
+Your domain knowledge becomes an advantage when combined with Excel, SQL, dashboards, and business reporting.
+
+Data Science is still possible for career switchers, but it usually needs more time and deeper technical preparation.
+
+## Can a Data Analyst Become a Data Scientist Later?
+
+Yes. Many professionals start as Data Analysts and later move into Data Science.
+
+A common route is:
+- Learn Excel, SQL, and dashboards
+- Build business analytics projects
+- Gain confidence with real data
+- Learn Python
+- Study statistics and machine learning
+- Build predictive modelling projects
+- Apply for junior data science or analytics modelling roles
+
+Starting as a Data Analyst can give you strong business understanding, which is valuable later in Data Science.
+
+## Common Mistake: Choosing Data Science Too Early
+
+Many beginners choose Data Science because it sounds more advanced and higher paying.
+
+But if your foundation is weak, jumping into machine learning too early can become confusing.
+
+Before moving deeply into Data Science, you should be comfortable with:
+- Tables and datasets
+- Data cleaning
+- SQL
+- Business KPIs
+- Basic statistics
+- Charts and trends
+- Python basics
+- Analytical thinking
+
+Without these foundations, machine learning can feel theoretical and difficult to apply.
+
+## Common Mistake: Thinking Data Analytics Is Too Basic
+
+Some learners underestimate Data Analytics because it does not always sound as advanced as Data Science.
+
+In reality, strong Data Analysts are extremely valuable because businesses need people who can translate data into decisions.
+
+A good Data Analyst can help a business:
+- Improve revenue visibility
+- Reduce operational waste
+- Track performance
+- Understand customers
+- Improve reporting quality
+- Support management decisions
+- Find risks and opportunities
+
+Data Analytics is not just about making charts. It is about using data to improve business decisions.
+
+## Portfolio Comparison
+
+### Data Analyst Portfolio Projects
+
+- Sales dashboard
+- HR analytics report
+- Customer behaviour analysis
+- Marketing campaign dashboard
+- Finance KPI report
+- Operations performance tracker
+- SQL case study
+- Power BI executive dashboard
+
+These projects should show that you can clean data, analyse business performance, build dashboards, and explain insights.
+
+### Data Scientist Portfolio Projects
+
+- Customer churn prediction
+- Sales forecasting model
+- Recommendation system
+- Fraud detection model
+- Customer segmentation
+- Sentiment analysis
+- Machine learning classification project
+- Regression modelling project
+
+These projects should show that you can use Python, statistics, modelling, evaluation, and technical explanation.
+
+## Interview Difference
+
+### Data Analyst Interviews May Focus On
+
+- Excel formulas
+- SQL queries
+- Dashboard design
+- Data cleaning
+- KPIs
+- Business scenarios
+- Chart selection
+- Project explanation
+- Communication skills
+
+### Data Scientist Interviews May Focus On
+
+- Python
+- Statistics
+- Machine learning algorithms
+- Model evaluation
+- Feature engineering
+- Probability
+- Data structures
+- Experiments
+- Case studies
+- Technical problem-solving
+
+Both roles require communication, but Data Science interviews usually include deeper technical questioning.
+
+## 90-Day Beginner Recommendation
+
+If you are starting from zero, follow this order:
+
+### Days 1-20: Excel and data cleaning
+
+Understand tables, formulas, pivot tables, charts, and business reports.
+
+### Days 21-40: SQL
+
+Learn to extract, filter, join, and summarise business data.
+
+### Days 41-60: Power BI or Tableau
+
+Build dashboards using realistic datasets.
+
+### Days 61-75: Portfolio projects
+
+Create two to three business-focused analytics projects.
+
+### Days 76-90: CV, LinkedIn, and interview practice
+
+Prepare your profile, document your projects, and practise explaining your work.
+
+After this foundation, you can decide whether to continue towards Data Analyst roles or move deeper into Python, statistics, and Data Science.
+
+## Best Starting Path for Different Learners
+
+| Learner type | Recommended starting path |
+|--------------|---------------------------|
+| Complete beginner | Start with Data Analytics |
+| Non-technical career switcher | Start with Data Analytics and connect projects to your previous industry |
+| Graduate with strong maths or programming | Start with Data Analytics or move faster into Data Science |
+| Working professional | Use Data Analytics to improve your current job profile, then add Python or AI skills |
+| Software developer | Move into Python, data engineering, machine learning, or Data Science depending on interest |
+| Business professional | Data Analytics, Business Intelligence, or AI automation may be the best fit |
+
+## Data Analyst vs Data Scientist: Quick Comparison
+
+| Area | Data Analyst | Data Scientist |
+|------|--------------|----------------|
+| Main focus | Business insights, reports, dashboards | Prediction, modelling, machine learning |
+| Best first tools | Excel, SQL, Power BI | Python, SQL, statistics, machine learning |
+| Entry difficulty | More beginner-friendly | More technically demanding |
+| Output | Dashboards, reports, insights | Models, predictions, algorithms |
+| Communication style | Business and stakeholder communication | Technical and business communication |
+| Best for | Beginners, career switchers, business-focused learners | Learners with coding, statistics, and technical interest |
+
+## Final Recommendation
+
+If you are unsure, start with Data Analytics.
+
+It gives you the strongest foundation in data cleaning, SQL, dashboards, business metrics, and communication. These skills are useful in almost every data role.
+
+Once you build confidence, you can decide whether to remain in analytics, move into business intelligence, add Python, or progress towards Data Science.
+
+The best career decision is not always choosing the most advanced role. The best decision is choosing the path you can start, complete, demonstrate, and grow from.
+
+## The Brit Institute Learning Approach
+
+Brit Institute helps learners understand the difference between learning tools and becoming job-ready.
+
+Our practical training supports learners with:
+- Excel
+- SQL
+- Power BI
+- Data cleaning
+- Dashboard creation
+- Business analysis
+- Python basics
+- AI tools
+- Portfolio projects
+- CV preparation
+- Interview readiness
+
+Whether you want to become a Data Analyst first or move towards Data Science later, the right foundation can make your career journey clearer and more achievable.
+
+## Start With the Right Career Path
+
+Choosing between Data Analyst and Data Scientist should not be based only on salary or job title.
+
+It should be based on your current skill level, learning confidence, career goal, and the kind of work you enjoy.
+
+If you are unsure where to begin, start with the practical data analytics foundation and grow from there.
+
+## Start Your Journey
+
+- Explore Data Analytics Programme
+- Book a Free Career Guidance Call
+- Download Curriculum
+- Speak to a Career Advisor`,
   },
   {
     slug: "data-analyst-salary-uk-2026",

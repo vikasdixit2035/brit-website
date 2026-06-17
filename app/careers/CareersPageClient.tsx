@@ -17,7 +17,6 @@ import {
   MessageCircle,
   Route,
   Sparkles,
-  Target,
   UserCheck,
 } from "lucide-react";
 
@@ -203,50 +202,41 @@ export default function CareersPageClient() {
 function HeroSection({ banner }: { banner: boolean }) {
   return (
     <section
-      className="relative min-h-[760px] overflow-hidden bg-[#24101f] px-5 pb-16 text-white md:px-8 lg:px-12"
-      style={{ paddingTop: banner ? "168px" : "128px" }}
+      className="relative overflow-hidden px-5 text-center text-white md:px-8"
+      style={{
+        paddingTop: banner ? "166px" : "126px",
+        paddingBottom: "86px",
+        background:
+          "linear-gradient(135deg, rgba(36,16,31,.98), rgba(22,9,20,.98)), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(180deg, rgba(255,255,255,.045) 1px, transparent 1px)",
+        backgroundSize: "auto, 44px 44px, 44px 44px",
+      }}
     >
-      <DarkPattern />
-      <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(36,16,31,0.98)_0%,rgba(36,16,31,0.9)_46%,rgba(36,16,31,0.56)_100%)]" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-[linear-gradient(90deg,transparent,rgba(212,175,55,.56),transparent)]" />
 
-      <div className="relative z-10 mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-        <div>
-          <SectionLabel dark>Career clarity</SectionLabel>
-          <h1 className="mt-5 max-w-4xl text-5xl font-black leading-[0.95] tracking-tight md:text-7xl lg:text-[84px]">
-            Build a Career in Data, AI & Automation
-          </h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-white/75 md:text-lg">
-            Do not just learn tools. Build a route from your current background to practical projects, interview confidence, and the right UK career direction.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="/contact" className="btn-gold lg">
-              Book Free Career Guidance Call
-            </Link>
-            <Link href="/courses" className="btn-outline btn-outline-white">
-              Compare Programmes
-            </Link>
-          </div>
+      <div className="relative z-10 mx-auto max-w-[960px]">
+        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-[0.8rem] font-extrabold tracking-[0.04em] text-white/80 backdrop-blur">
+          <Route size={16} aria-hidden="true" />
+          Career guidance for data, AI and automation roles
         </div>
+        <h1 className="mx-auto max-w-4xl text-[2.15rem] font-black leading-[1.04] tracking-normal md:text-[4.35rem]">
+          Build a career in <span className="text-[#f5c242]">Data, AI and Automation</span>
+        </h1>
+        <p className="mx-auto mt-6 max-w-[720px] text-base leading-8 text-white/70 md:text-lg">
+          Map your route from your current background to practical projects, interview confidence, and the right UK career direction.
+        </p>
 
-        <div className="relative min-h-[430px] lg:min-h-[560px]">
-          <div className="absolute inset-x-0 bottom-0 mx-auto h-[430px] max-w-[620px] overflow-hidden rounded-b-none rounded-t-[220px] border border-white/10 bg-[#352338] shadow-[0_40px_90px_rgba(0,0,0,0.42)] md:h-[540px]">
-            <Image
-              src="/hero-person.png"
-              alt="Brit Institute learner preparing for data and AI careers"
-              fill
-              priority
-              className="object-cover object-center"
-              sizes="(max-width: 1024px) 92vw, 620px"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(36,16,31,0.86)_100%)]" />
+        <div className="mx-auto mt-10 grid max-w-[760px] gap-3 sm:grid-cols-3" aria-label="Career guidance highlights">
+          <div className="rounded-md border border-white/15 bg-white/[0.07] p-4 text-left">
+            <strong className="block text-xl leading-tight text-white">4 paths</strong>
+            <span className="mt-1 block text-sm leading-5 text-white/65">data, BI, science and AI routes</span>
           </div>
-          <div className="absolute bottom-8 left-0 max-w-[280px] rounded-md border border-white/15 bg-white px-5 py-4 text-[#24101f] shadow-2xl md:left-8">
-            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-[#c45118]">
-              <Target size={14} />
-              Guided route
-            </div>
-            <div className="mt-2 text-2xl font-black">Skills + proof + support</div>
-            <p className="mt-1 text-sm font-semibold text-[#6f665c]">A clearer way to move from learning to applications.</p>
+          <div className="rounded-md border border-white/15 bg-white/[0.07] p-4 text-left">
+            <strong className="block text-xl leading-tight text-white">Portfolio proof</strong>
+            <span className="mt-1 block text-sm leading-5 text-white/65">projects that make skills visible</span>
+          </div>
+          <div className="rounded-md border border-white/15 bg-white/[0.07] p-4 text-left">
+            <strong className="block text-xl leading-tight text-white">UK focused</strong>
+            <span className="mt-1 block text-sm leading-5 text-white/65">role guidance and interview support</span>
           </div>
         </div>
       </div>
