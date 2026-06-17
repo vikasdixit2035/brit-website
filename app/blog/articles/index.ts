@@ -9,9 +9,15 @@ import { pythonVsSqlDataAnalystsLearnFirst } from "./python-vs-sql-data-analysts
 import { dataScientistSalaryUk2026 } from "./data-scientist-salary-uk-2026";
 import { howToBecomeAiSpecialistUk } from "./how-to-become-ai-specialist-uk";
 import { sqlInterviewQuestionsDataAnalysts } from "./sql-interview-questions-data-analysts";
+import { dataAnalystCvGuideUk } from "./data-analyst-cv-guide-uk";
+import { dataAnalystMockInterviewChecklist } from "./data-analyst-mock-interview-checklist";
+import { dataAnalystCaseStudyInterviewQuestions } from "./data-analyst-case-study-interview-questions";
 import type { BlogArticle } from "../blogData";
 
 export const BLOG_ARTICLES: BlogArticle[] = [
+  dataAnalystCaseStudyInterviewQuestions,
+  dataAnalystMockInterviewChecklist,
+  dataAnalystCvGuideUk,
   sqlInterviewQuestionsDataAnalysts,
   howToBecomeDataAnalystUk,
   dataAnalyticsInterviewGuideUk,

@@ -40,6 +40,9 @@ const ARTICLE_IMAGES: Record<string, string> = {
   "is-data-analytics-good-career-uk": "/hero1.png",
   "python-vs-sql-data-analysts-learn-first": "/hero2.png",
   "sql-interview-questions-data-analysts": "/da-Photoroom.webp",
+  "data-analyst-cv-guide-uk": "/da-Photoroom.webp",
+  "data-analyst-mock-interview-checklist": "/da-Photoroom.webp",
+  "data-analyst-case-study-interview-questions": "/da-Photoroom.webp",
   "data-scientist-salary-uk-2026": "/ds-ml-Photoroom.png",
   "how-to-become-ai-specialist-uk": "/agentic-ai-Photoroom.png",
 };
