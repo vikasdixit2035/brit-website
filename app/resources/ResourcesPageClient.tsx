@@ -60,7 +60,7 @@ const RESOURCES: ResourceItem[] = [
     desc: "Explore how AI is transforming roles and where new opportunities are emerging.",
     cta: "Download Report",
     type: "Report",
-    downloadHref: "/resources_pdf/Brit_Institute_AI_Automation_in_the_UK_Career_Opportunities_Report.pdf",
+    downloadHref: "/resources_pdf/Brit_Institute_AI_Automation_UK_Career_Opportunities_Report.pdf",
     color: "#7C9A4F",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -74,7 +74,7 @@ const RESOURCES: ResourceItem[] = [
     desc: "Learn the skills, tools, and progression path for data science roles.",
     cta: "Download Guide",
     type: "Guide",
-    downloadHref: "/resources_pdf/Brit_Institute_Data_Science_Career_Path_Guide_UK_Edition.pdf",
+    downloadHref: "/resources_pdf/Brit_Institute_Data_Science_Machine_Learning_Career_Path_Guide_UK_Edition.pdf",
     color: "#F5C242",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
