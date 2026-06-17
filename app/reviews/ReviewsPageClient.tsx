@@ -208,6 +208,83 @@ function Stars() {
   );
 }
 
+type BatchReview = (typeof BATCH_REVIEWS)[number];
+
+function CohortReviewCard({ batch, index }: { batch: BatchReview; index: number }) {
+  const { revealRef, visible } = useReveal();
+  const direction = index % 2 === 0 ? "left" : "right";
+
+  return (
+    <article
+      ref={revealRef}
+      id={batch.slug}
+      className={`rv-batch-card rv-slide-reveal rv-slide-${direction} ${visible ? "rv-visible" : ""}`}
+      style={{
+        ["--accent" as string]: batch.accent,
+        ["--accent-soft" as string]: `${batch.accent}14`,
+      }}
+    >
+      <div className="rv-batch-head">
+        <div>
+          <span className="rv-batch-label">
+            <BadgeCheck size={14} aria-hidden="true" />
+            {batch.label}
+          </span>
+          <h2 className="rv-batch-title">{batch.batch} Cohort</h2>
+        </div>
+        <div className="rv-batch-summary">
+          <TrendingUp size={18} color={batch.accent} aria-hidden="true" />
+          <span>{batch.outcome}</span>
+        </div>
+      </div>
+
+      <div className="rv-batch-body">
+        <div className="rv-video-column">
+          {batch.videos.map((video, videoIndex) => (
+            <div key={video} className="rv-video-shell">
+              <video
+                controls
+                controlsList="nodownload"
+                playsInline
+                preload="metadata"
+                aria-label={`${batch.batch} cohort video testimonial ${videoIndex + 1}`}
+              >
+                <source src={video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <span className="rv-video-chip">
+                <Sparkles size={14} aria-hidden="true" />
+                Learner video {videoIndex + 1}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="rv-written-grid">
+          {batch.reviews.map((review) => (
+            <div key={review.name} className="rv-review-card">
+              <div className="rv-review-top">
+                <span className="rv-review-quote-icon">
+                  <Quote size={16} aria-hidden="true" />
+                </span>
+                <Stars />
+              </div>
+              <p className="rv-review-text">&ldquo;{review.text}&rdquo;</p>
+              <div className="rv-review-author">
+                <div className="rv-review-avatar">{initials(review.name)}</div>
+                <div>
+                  <p className="rv-name">{review.name}</p>
+                  <p className="rv-role">{review.role}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export default function ReviewsPage() {
   const [banner, setBanner] = useState(true);
 
@@ -715,6 +792,24 @@ export default function ReviewsPage() {
           opacity: 1;
           transform: translateY(0);
         }
+        .rv-slide-reveal {
+          opacity: 0;
+          transition:
+            opacity .72s cubic-bezier(.2,.8,.2,1),
+            transform .72s cubic-bezier(.2,.8,.2,1),
+            box-shadow .3s;
+          will-change: opacity, transform;
+        }
+        .rv-slide-left {
+          transform: translateX(-72px) translateY(16px);
+        }
+        .rv-slide-right {
+          transform: translateX(72px) translateY(16px);
+        }
+        .rv-slide-reveal.rv-visible {
+          opacity: 1;
+          transform: translateX(0) translateY(0);
+        }
         .rv-stagger-1 { transition-delay: .06s; }
         .rv-stagger-2 { transition-delay: .12s; }
         .rv-stagger-3 { transition-delay: .18s; }
@@ -766,6 +861,10 @@ export default function ReviewsPage() {
           .rv-btn-outline {
             width: 100%;
           }
+          .rv-slide-left,
+          .rv-slide-right {
+            transform: translateY(28px);
+          }
         }
         @media (max-width: 480px) {
           .rv-section,
@@ -777,6 +876,14 @@ export default function ReviewsPage() {
           .rv-review-card,
           .rv-case-body {
             padding: 18px;
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .rv-fade-up,
+          .rv-slide-reveal {
+            opacity: 1;
+            transform: none;
+            transition: none;
           }
         }
       `}</style>
@@ -844,73 +951,7 @@ export default function ReviewsPage() {
 
           <div className="rv-batch-stack">
             {BATCH_REVIEWS.map((batch, index) => (
-              <article
-                id={batch.slug}
-                key={batch.batch}
-                className={`rv-batch-card rv-fade-up rv-stagger-${index + 1} ${batchesVisible ? "rv-visible" : ""}`}
-                style={{
-                  ["--accent" as string]: batch.accent,
-                  ["--accent-soft" as string]: `${batch.accent}14`,
-                }}
-              >
-                <div className="rv-batch-head">
-                  <div>
-                    <span className="rv-batch-label">
-                      <BadgeCheck size={14} aria-hidden="true" />
-                      {batch.label}
-                    </span>
-                    <h2 className="rv-batch-title">{batch.batch} Cohort</h2>
-                  </div>
-                  <div className="rv-batch-summary">
-                    <TrendingUp size={18} color={batch.accent} aria-hidden="true" />
-                    <span>{batch.outcome}</span>
-                  </div>
-                </div>
-
-                <div className="rv-batch-body">
-                  <div className="rv-video-column">
-                    {batch.videos.map((video, videoIndex) => (
-                      <div key={video} className="rv-video-shell">
-                        <video
-                          controls
-                          controlsList="nodownload"
-                          playsInline
-                          preload="metadata"
-                          aria-label={`${batch.batch} cohort video testimonial ${videoIndex + 1}`}
-                        >
-                          <source src={video} type="video/mp4" />
-                          Your browser does not support the video tag.
-                        </video>
-                        <span className="rv-video-chip">
-                          <Sparkles size={14} aria-hidden="true" />
-                          Learner video {videoIndex + 1}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="rv-written-grid">
-                    {batch.reviews.map((review) => (
-                      <div key={review.name} className="rv-review-card">
-                        <div className="rv-review-top">
-                          <span className="rv-review-quote-icon">
-                            <Quote size={16} aria-hidden="true" />
-                          </span>
-                          <Stars />
-                        </div>
-                        <p className="rv-review-text">&ldquo;{review.text}&rdquo;</p>
-                        <div className="rv-review-author">
-                          <div className="rv-review-avatar">{initials(review.name)}</div>
-                          <div>
-                            <p className="rv-name">{review.name}</p>
-                            <p className="rv-role">{review.role}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </article>
+              <CohortReviewCard key={batch.batch} batch={batch} index={index} />
             ))}
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, FormEvent } from "react";
+import { useState, useEffect, useRef, type FormEvent, type ReactNode } from "react";
 import Link from "next/link";
 import TopBanner from "@/components/layout/TopBanner";
 import Navbar from "@/components/layout/Navbar";
@@ -13,8 +13,19 @@ const BLUE = "#D95700";
 const GOLD = "#D4AF37";
 const DEEP = "#24101F";
 
+type ResourceItem = {
+  id: string;
+  title: string;
+  desc: string;
+  cta: string;
+  type: "Report" | "Guide";
+  color: string;
+  icon: ReactNode;
+  downloadHref?: string;
+};
+
 /* ── resource data ── */
-const RESOURCES = [
+const RESOURCES: ResourceItem[] = [
   {
     id: "uk-data-analyst-salary-2026",
     title: "UK Data Analyst Salary Report (2026)",
@@ -22,6 +33,7 @@ const RESOURCES = [
     cta: "Download Report",
     type: "Report",
     color: "#D95700",
+    downloadHref: "/resources_pdf/Brit_Institute_UK_Data_Analyst_Salary_Report_2026.pdf",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" />
@@ -35,6 +47,7 @@ const RESOURCES = [
     cta: "Download Guide",
     type: "Guide",
     color: "#746D5C",
+    downloadHref: "/resources_pdf/Brit_Institute_How_to_Start_a_Career_in_Data_Analytics_UK_Guide.pdf",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
@@ -47,6 +60,7 @@ const RESOURCES = [
     desc: "Explore how AI is transforming roles and where new opportunities are emerging.",
     cta: "Download Report",
     type: "Report",
+    downloadHref: "/resources_pdf/Brit_Institute_AI_Automation_in_the_UK_Career_Opportunities_Report.pdf",
     color: "#7C9A4F",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -60,6 +74,7 @@ const RESOURCES = [
     desc: "Learn the skills, tools, and progression path for data science roles.",
     cta: "Download Guide",
     type: "Guide",
+    downloadHref: "/resources_pdf/Brit_Institute_Data_Science_Career_Path_Guide_UK_Edition.pdf",
     color: "#F5C242",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -237,12 +252,26 @@ export default function ResourcesPage() {
           color: #6B7280; font-size: 1rem; line-height: 1.6;
           max-width: 540px; margin: 0 auto;
         }
+        .rs-resources-layout {
+          display: grid;
+          grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+          gap: 32px;
+          align-items: stretch;
+        }
+        .rs-resources-left,
+        .rs-resources-right {
+          display: flex;
+          flex-direction: column;
+          min-width: 0;
+        }
 
         /* ── resource cards ── */
         .rs-cards-grid {
           display: grid;
           grid-template-columns: 1fr;
+          grid-template-rows: repeat(4, minmax(0, 1fr));
           gap: 24px;
+          flex: 1;
         }
         .rs-card {
           background: #fff; border-radius: 16px;
@@ -252,6 +281,7 @@ export default function ResourcesPage() {
           display: flex; flex-direction: column;
           transition: transform .35s cubic-bezier(.4,0,.2,1), box-shadow .35s;
           position: relative;
+          min-height: 0;
         }
         .rs-card:hover {
           transform: translateY(-6px);
@@ -318,12 +348,16 @@ export default function ResourcesPage() {
 
         /* ── download form ── */
         .rs-form-wrap {
-          max-width: 580px; margin: 0 auto;
+          max-width: none; margin: 0;
+          height: 100%;
           background: #fff; border-radius: 20px;
           padding: 48px 40px;
           border: 1px solid rgba(0,0,0,.06);
           box-shadow: 0 8px 40px rgba(0,0,0,.06);
           position: relative; overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
         .rs-form-wrap::before {
           content: ''; position: absolute;
@@ -488,14 +522,23 @@ export default function ResourcesPage() {
         .rs-s4 { transition-delay: .4s; }
 
         @media (min-width: 640px) {
-          .rs-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-        }
-
-        @media (min-width: 768px) {
-          .rs-cards-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+          .rs-cards-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+          }
         }
 
         @media (max-width: 768px) {
+          .rs-resources-layout {
+            grid-template-columns: 1fr;
+          }
+          .rs-cards-grid {
+            grid-template-rows: auto;
+          }
+          .rs-form-wrap {
+            height: auto;
+            justify-content: flex-start;
+          }
           .rs-form-wrap { padding: 32px 20px; }
           .rs-extra-grid { grid-template-columns: 1fr; }
           .rs-cta { padding: 40px 24px; }
@@ -522,190 +565,208 @@ export default function ResourcesPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          2. RESOURCE CARDS
+          2. RESOURCES AND DOWNLOAD FORM
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingTop: 96, paddingBottom: 96 }}>
-        <div ref={cardsRevealRef} className="rs-section">
-          <div className={`rs-section-title rs-fade-up ${cardsVisible ? "rs-vis" : ""}`}>
+        <div className="rs-section">
+          <div ref={cardsRevealRef} className={`rs-section-title rs-fade-up ${cardsVisible ? "rs-vis" : ""}`}>
             <h2>Featured <span>Resources</span></h2>
             <p>Free guides and reports to accelerate your career transition into data and AI.</p>
           </div>
 
-          <div className="rs-cards-grid">
-            {RESOURCES.map((r, i) => (
-              <div
-                key={r.id}
-                className={`rs-card rs-fade-up rs-s${i + 1} ${cardsVisible ? "rs-vis" : ""} ${selected === r.id ? "rs-selected" : ""}`}
-              >
-                <div className="rs-card-accent" style={{ background: r.color }} />
-                <div className="rs-card-body">
-                  <div className="rs-card-icon" style={{ background: r.color }}>
-                    {r.icon}
-                  </div>
-                  <div className="rs-card-type" style={{ background: `${r.color}CC` }}>
-                    {r.type === "Report" ? (
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>
-                    ) : (
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /></svg>
-                    )}
-                    {r.type}
-                  </div>
-                  <h3 className="rs-card-title">{r.title}</h3>
-                  <p className="rs-card-desc">{r.desc}</p>
-                  <button
-                    className="rs-card-cta"
-                    style={{ background: r.color }}
-                    onClick={() => handleDownloadClick(r.id)}
-                  >
-                    {r.cta}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════
-          3. DOWNLOAD FORM (GATED)
-      ═══════════════════════════════════════════════════ */}
-      <section style={{ paddingBottom: 96, background: "#F3F4F6", paddingTop: 80 }}>
-        <div ref={formRevealRef} className="rs-section">
-          <div ref={formRef} className={`rs-form-wrap rs-fade-up ${formVisible ? "rs-vis" : ""}`}>
-            {success ? (
-              <div className="rs-success">
-                <div className="rs-success-icon">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <h3>Thank You!</h3>
-                <p>Your download link has been sent to your email. Check your inbox shortly.</p>
-                <button
-                  style={{
-                    marginTop: 20, padding: "10px 24px",
-                    background: BLUE, color: "#fff", border: "none",
-                    borderRadius: 8, fontWeight: 600, fontSize: ".88rem",
-                    cursor: "pointer", fontFamily: "inherit",
-                  }}
-                  onClick={() => { setSuccess(false); setSelected(null); }}
+          <div className="rs-resources-layout">
+            <div className="rs-resources-left">
+            <div className="rs-cards-grid">
+              {RESOURCES.map((r, i) => (
+                <div
+                  key={r.id}
+                  className={`rs-card rs-fade-up rs-s${i + 1} ${cardsVisible ? "rs-vis" : ""} ${selected === r.id ? "rs-selected" : ""}`}
                 >
-                  Download Another Resource
-                </button>
-              </div>
-            ) : (
-              <>
-                <div className="rs-form-header">
-                  <h2>Get Instant Access to Resources</h2>
-                  <p>Fill in your details to download the selected guide or report.</p>
-                </div>
-
-                {/* selected resource indicator */}
-                {selectedResource ? (
-                  <div className="rs-form-selected">
-                    <div className="rs-form-selected-icon" style={{ background: selectedResource.color }}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" />
-                      </svg>
+                  <div className="rs-card-accent" style={{ background: r.color }} />
+                  <div className="rs-card-body">
+                    <div className="rs-card-icon" style={{ background: r.color }}>
+                      {r.icon}
                     </div>
-                    <span className="rs-form-selected-title">{selectedResource.title}</span>
-                  </div>
-                ) : (
-                  <div className="rs-form-selected" style={{ background: "#FEF3C7", borderColor: "#FDE68A" }}>
-                    <div className="rs-form-selected-icon" style={{ background: "#F59E0B" }}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
-                      </svg>
+                    <div className="rs-card-type" style={{ background: `${r.color}CC` }}>
+                      {r.type === "Report" ? (
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>
+                      ) : (
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /></svg>
+                      )}
+                      {r.type}
                     </div>
-                    <span style={{ fontSize: ".85rem", fontWeight: 600, color: "#92400E" }}>Select a resource above to download</span>
-                  </div>
-                )}
-
-                {error && <div className="rs-error">{error}</div>}
-
-                <form onSubmit={handleSubmit}>
-                  <div className="rs-field">
-                    <label className="rs-label">Full Name *</label>
-                    <input
-                      className="rs-input"
-                      type="text"
-                      placeholder="e.g. John Smith"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="rs-field">
-                    <label className="rs-label">Email Address *</label>
-                    <input
-                      className="rs-input"
-                      type="email"
-                      placeholder="e.g. john@example.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="rs-field">
-                    <label className="rs-label">Phone Number <span style={{ color: "#9CA3AF", fontWeight: 400 }}>(optional)</span></label>
-                    <div style={{ display: "flex", gap: "8px" }}>
-                      <div style={{ position: "relative", width: "180px" }}>
-                        <select
-                          className="rs-input"
-                          style={{ width: "100%", paddingRight: "36px", appearance: "none" }}
-                          value={phoneCountry}
-                          onChange={(e) => setPhoneCountry(e.target.value)}
-                        >
-                          {PHONE_COUNTRY_CODES.map((country) => (
-                            <option key={country.value} value={country.value}>
-                              {country.label}
-                            </option>
-                          ))}
-                        </select>
-                        <div style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#6B7280" }}>
-                          <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                        </div>
-                      </div>
-                      <input
-                        className="rs-input"
-                        type="tel"
-                        placeholder="e.g. 7700 900000"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        style={{ flex: 1 }}
-                      />
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="rs-submit"
-                    disabled={submitting || !selected}
-                  >
-                    {submitting ? (
-                      <>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ animation: "spin 1s linear infinite" }}><path d="M12 2v4m0 12v4m-7.07-3.93 2.83-2.83m8.48-8.48 2.83-2.83M2 12h4m12 0h4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83" /></svg>
-                        Submitting…
-                      </>
-                    ) : (
-                      <>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <h3 className="rs-card-title">{r.title}</h3>
+                    <p className="rs-card-desc">{r.desc}</p>
+                    {r.downloadHref ? (
+                      <a
+                        className="rs-card-cta"
+                        style={{ background: r.color }}
+                        href={r.downloadHref}
+                        download
+                        onClick={() => {
+                          setSelected(r.id);
+                          setSuccess(false);
+                          setError("");
+                        }}
+                      >
+                        {r.cta}
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
                         </svg>
-                        Download Now
-                      </>
+                      </a>
+                    ) : (
+                      <button
+                        className="rs-card-cta"
+                        style={{ background: r.color }}
+                        onClick={() => handleDownloadClick(r.id)}
+                      >
+                        {r.cta}
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                      </button>
                     )}
-                  </button>
-                </form>
+                  </div>
+                </div>
+              ))}
+            </div>
+            </div>
 
-                <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-              </>
-            )}
+            <div ref={formRevealRef} className="rs-resources-right">
+            <div ref={formRef} className={`rs-form-wrap rs-fade-up ${formVisible ? "rs-vis" : ""}`}>
+              {success ? (
+                <div className="rs-success">
+                  <div className="rs-success-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <h3>Thank You!</h3>
+                  <p>Your download link has been sent to your email. Check your inbox shortly.</p>
+                  <button
+                    style={{
+                      marginTop: 20, padding: "10px 24px",
+                      background: BLUE, color: "#fff", border: "none",
+                      borderRadius: 8, fontWeight: 600, fontSize: ".88rem",
+                      cursor: "pointer", fontFamily: "inherit",
+                    }}
+                    onClick={() => { setSuccess(false); setSelected(null); }}
+                  >
+                    Download Another Resource
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div className="rs-form-header">
+                    <h2>Get Instant Access to Resources</h2>
+                    <p>Fill in your details to download the selected guide or report.</p>
+                  </div>
+
+                  {/* selected resource indicator */}
+                  {selectedResource ? (
+                    <div className="rs-form-selected">
+                      <div className="rs-form-selected-icon" style={{ background: selectedResource.color }}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" />
+                        </svg>
+                      </div>
+                      <span className="rs-form-selected-title">{selectedResource.title}</span>
+                    </div>
+                  ) : (
+                    <div className="rs-form-selected" style={{ background: "#FEF3C7", borderColor: "#FDE68A" }}>
+                      <div className="rs-form-selected-icon" style={{ background: "#F59E0B" }}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                      </div>
+                      <span style={{ fontSize: ".85rem", fontWeight: 600, color: "#92400E" }}>Select a resource above to download</span>
+                    </div>
+                  )}
+
+                  {error && <div className="rs-error">{error}</div>}
+
+                  <form onSubmit={handleSubmit}>
+                    <div className="rs-field">
+                      <label className="rs-label">Full Name *</label>
+                      <input
+                        className="rs-input"
+                        type="text"
+                        placeholder="e.g. John Smith"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="rs-field">
+                      <label className="rs-label">Email Address *</label>
+                      <input
+                        className="rs-input"
+                        type="email"
+                        placeholder="e.g. john@example.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="rs-field">
+                      <label className="rs-label">Phone Number <span style={{ color: "#9CA3AF", fontWeight: 400 }}>(optional)</span></label>
+                      <div style={{ display: "flex", gap: "8px" }}>
+                        <div style={{ position: "relative", width: "180px" }}>
+                          <select
+                            className="rs-input"
+                            style={{ width: "100%", paddingRight: "36px", appearance: "none" }}
+                            value={phoneCountry}
+                            onChange={(e) => setPhoneCountry(e.target.value)}
+                          >
+                            {PHONE_COUNTRY_CODES.map((country) => (
+                              <option key={country.value} value={country.value}>
+                                {country.label}
+                              </option>
+                            ))}
+                          </select>
+                          <div style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#6B7280" }}>
+                            <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </div>
+                        </div>
+                        <input
+                          className="rs-input"
+                          type="tel"
+                          placeholder="e.g. 7700 900000"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          style={{ flex: 1 }}
+                        />
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="rs-submit"
+                      disabled={submitting || !selected}
+                    >
+                      {submitting ? (
+                        <>
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ animation: "spin 1s linear infinite" }}><path d="M12 2v4m0 12v4m-7.07-3.93 2.83-2.83m8.48-8.48 2.83-2.83M2 12h4m12 0h4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83" /></svg>
+                          Submitting…
+                        </>
+                      ) : (
+                        <>
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
+                          </svg>
+                          Download Now
+                        </>
+                      )}
+                    </button>
+                  </form>
+
+                  <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+                </>
+              )}
+            </div>
+            </div>
           </div>
         </div>
       </section>
