@@ -162,44 +162,44 @@ export default function BritInspiredHome() {
 
 function HeroSection() {
   return (
-    <section className="relative min-h-[760px] overflow-hidden bg-[#24101f] px-5 pb-20 pt-40 text-white md:px-8 lg:px-12 lg:pt-44">
+    <section className="relative min-h-[640px] overflow-hidden bg-[#24101f] px-5 pb-10 pt-20 text-white md:min-h-[700px] md:px-8 md:pt-24 lg:min-h-[735px] lg:px-12 lg:pb-12 lg:pt-24">
       <DarkPattern />
       <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(36,16,31,0.98)_0%,rgba(36,16,31,0.92)_45%,rgba(36,16,31,0.58)_100%)]" />
 
-      <div className="relative z-10 mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+      <div className="relative z-10 mx-auto grid max-w-7xl pt-12 gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div>
           <SectionLabel dark>Brit Institute</SectionLabel>
-          <h1 className="mt-5 max-w-3xl text-5xl font-black leading-[0.95] tracking-tight md:text-7xl lg:text-[88px]">
+          <h1 className="mt-3 max-w-2xl text-4xl font-black leading-[0.98] tracking-tight md:text-[52px] lg:text-[60px]">
             Powering the world's next data and AI careers
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-white/75 md:text-lg">
+          <p className="mt-4 max-w-2xl text-base leading-7 text-white/75 md:text-lg">
             Practical UK-focused programmes for learners who want portfolio proof, mentor support, and a clear path into analytics, data science, and AI roles.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="/contact" className="btn-gold lg">
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+            <Link href="/contact" className="btn-gold min-h-12 px-6 py-3 text-sm sm:min-w-[230px]">
               Book Free Consultation
             </Link>
-            <Link href="/courses" className="btn-outline btn-outline-white">
+            <Link href="/courses" className="btn-outline btn-outline-white min-h-12 px-6 py-3 text-sm sm:min-w-[176px]">
               Explore Courses
             </Link>
           </div>
 
-          <div className="mt-10 grid max-w-2xl grid-cols-3 gap-3">
+          <div className="mt-6 grid max-w-2xl grid-cols-3 gap-3">
             {[
               [SITE_STATS.learnersTrained, "learners"],
               [`${SITE_STATS.averageRating}/5`, "rating"],
               [SITE_STATS.hiringPartners, "partners"],
             ].map(([value, label]) => (
               <div key={label} className="border-t border-white/25 pt-4">
-                <div className="text-2xl font-black text-white md:text-3xl">{value}</div>
+                <div className="text-2xl font-black text-white">{value}</div>
                 <div className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-white/55">{label}</div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="relative min-h-[440px] lg:min-h-[560px]">
-          <div className="absolute inset-x-0 bottom-0 mx-auto h-[430px] max-w-[620px] overflow-hidden rounded-b-none rounded-t-[220px] border border-white/10 bg-[#352338] shadow-[0_40px_90px_rgba(0,0,0,0.42)] md:h-[540px]">
+        <div className="relative min-h-[330px] lg:min-h-[420px]">
+          <div className="absolute inset-x-0 bottom-0 mx-auto h-[330px] max-w-[570px] overflow-hidden rounded-b-none rounded-t-[190px] border border-white/10 bg-[#352338] shadow-[0_40px_90px_rgba(0,0,0,0.42)] md:h-[390px] lg:h-[410px]">
             <Image
               src="/hero-person.png"
               alt="Brit Institute learners in London"
@@ -210,12 +210,12 @@ function HeroSection() {
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(36,16,31,0.84)_100%)]" />
           </div>
-          <div className="absolute bottom-8 left-0 max-w-[260px] rounded-md border border-white/15 bg-white px-5 py-4 text-[#24101f] shadow-2xl md:left-8">
+          <div className="absolute bottom-4 left-0 max-w-[240px] rounded-md border border-white/15 bg-white px-4 py-3 text-[#24101f] shadow-2xl md:left-8">
             <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-[#c45118]">
               <Sparkles size={14} />
               Next intake
             </div>
-            <div className="mt-2 text-2xl font-black">30 June 2026</div>
+            <div className="mt-2 text-xl font-black">30 June 2026</div>
             <p className="mt-1 text-sm font-semibold text-[#6f665c]">Live, mentor-led cohorts now open.</p>
           </div>
         </div>

@@ -716,7 +716,7 @@ function PremiumSectionHeader({
   );
 }
 
-function DataAnalyticsPremiumLanding({
+function DataAnalyticsPremiumLanding({  
   course,
   richData,
   courseSchema,
