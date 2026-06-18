@@ -28,8 +28,6 @@ import {
   Target,
   Users,
 } from "lucide-react";
-import TopBanner from "@/components/layout/TopBanner";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { SITE_PHONE_DISPLAY } from "@/lib/site";
 
@@ -100,7 +98,6 @@ const staggerContainer: Variants = {
 };
 
 export default function PlacementPageClient() {
-  const [banner, setBanner] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -112,13 +109,10 @@ export default function PlacementPageClient() {
 
   return (
     <main className="min-h-screen bg-[#f7f3ea] font-sans text-[#241a1f] selection:bg-[#d4af37] selection:text-[#24101f]">
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
-
       {/* --- HERO SECTION --- */}
       <section 
         className="relative overflow-hidden bg-[#24101f] text-white"
-        style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "100px" }}
+        style={{ paddingTop: "120px", paddingBottom: "100px" }}
       >
         <div className="absolute inset-0 z-0 opacity-40">
           <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-[#d95700]/20 blur-[120px]" />

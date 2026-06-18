@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Clock3, FileText, GraduationCap, MonitorPlay, Trophy } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ThemeCTA, ThemeHero, ThemeLabel, ThemeShell } from "@/components/layout/ThinkificTheme";
 import { fetchCourses } from "@/lib/courses";
@@ -37,7 +36,6 @@ export default async function CoursesPage() {
 
   return (
     <ThemeShell>
-      <Navbar hasBanner={false} />
       <ThemeHero
         eyebrow="Programme Catalog"
         title={<>Choose the right learning product for your outcome.</>}

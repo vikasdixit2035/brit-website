@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import { useState, useEffect, useRef, FormEvent } from "react";
-import TopBanner from "@/components/layout/TopBanner";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { SITE_STATS } from "@/lib/site";
 import { trackLead } from "@/lib/analytics";
@@ -103,8 +101,6 @@ function useReveal(threshold = 0.12) {
 
 /* ══════════════════════════════════════════════════════════════════ */
 export default function WebinarPage() {
-  const [banner, setBanner] = useState(true);
-
   const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
   const { revealRef: learnRevealRef, visible: learnVisible } = useReveal();
   const { revealRef: speakerRevealRef, visible: speakerVisible } = useReveal();
@@ -165,9 +161,6 @@ export default function WebinarPage() {
 
   return (
     <main style={{ background: "#FAFAFA", minHeight: "100vh", fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)", color: "#111827" }}>
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
-
       <style>{`
         /* ── WEBINAR PAGE ── */
 
@@ -571,7 +564,7 @@ export default function WebinarPage() {
       ═══════════════════════════════════════════════════ */}
       <section
         className="wb-hero"
-        style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}
+        style={{ paddingTop: "120px", paddingBottom: "80px" }}
       >
         <div ref={heroRevealRef} className={`wb-hero-inner wb-fade-up ${heroVisible ? "wb-vis" : ""}`}>
           {/* left */}

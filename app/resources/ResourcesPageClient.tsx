@@ -2,8 +2,6 @@
 
 import { useState, useEffect, useRef, type FormEvent, type ReactNode } from "react";
 import Link from "next/link";
-import TopBanner from "@/components/layout/TopBanner";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { trackLead } from "@/lib/analytics";
 import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
@@ -85,6 +83,13 @@ const RESOURCES: ResourceItem[] = [
   },
 ];
 
+const COURSE_INTEREST_OPTIONS = [
+  "Data Analytics",
+  "Gen AI",
+  "Agentic AI",
+  "Data Science & Machine Learning",
+];
+
 /* ── animate-on-scroll ── */
 function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
@@ -104,8 +109,6 @@ function useReveal() {
 
 /* ══════════════════════════════════════════════════════════════════ */
 export default function ResourcesPage() {
-  const [banner, setBanner] = useState(true);
-
   /* reveal refs */
   const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
   const { revealRef: cardsRevealRef, visible: cardsVisible } = useReveal();
@@ -117,6 +120,7 @@ export default function ResourcesPage() {
   const [email, setEmail] = useState("");
   const [phoneCountry, setPhoneCountry] = useState(DEFAULT_PHONE_COUNTRY_CODE);
   const [phone, setPhone] = useState("");
+  const [courseInterest, setCourseInterest] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -136,7 +140,8 @@ export default function ResourcesPage() {
   /* submit */
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim()) { setError("Name and email are required."); return; }
+    if (!name.trim() || !email.trim() || !phone.trim()) { setError("Name, email, and phone number are required."); return; }
+    if (!courseInterest) { setError("Please select the course you are interested in."); return; }
     setSubmitting(true);
     setError("");
 
@@ -152,20 +157,22 @@ export default function ResourcesPage() {
         body: JSON.stringify({
           name: name.trim(),
           email: email.trim(),
-          phone: phone.trim() ? `${phoneCountry} ${phone.trim()}` : undefined,
+          phone: `${phoneCountry} ${phone.trim()}`,
+          course: courseInterest,
           source: "resources",
           resource: selected,
-          message: `Resource download: ${RESOURCES.find((r) => r.id === selected)?.title ?? selected}`,
+          message: `Resource download: ${RESOURCES.find((r) => r.id === selected)?.title ?? selected}. Interested in: ${courseInterest}`,
         }),
       });
       if (!res.ok) throw new Error("Submission failed");
       trackLead({
         formName: "resources_form",
         source: "resources",
+        course: courseInterest,
         resource: selected,
       });
       setSuccess(true);
-      setName(""); setEmail(""); setPhoneCountry(DEFAULT_PHONE_COUNTRY_CODE); setPhone("");
+      setName(""); setEmail(""); setPhoneCountry(DEFAULT_PHONE_COUNTRY_CODE); setPhone(""); setCourseInterest("");
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -177,9 +184,6 @@ export default function ResourcesPage() {
 
   return (
     <main style={{ background: "#F7F3EA", minHeight: "100vh", fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)", color: "#241A1F" }}>
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
-
       <style>{`
         /* ── RESOURCES PAGE ── */
 
@@ -348,6 +352,10 @@ export default function ResourcesPage() {
 
         /* ── download form ── */
         .rs-form-wrap {
+          --rs-form-title: 1.25rem;
+          --rs-form-text: .9rem;
+          --rs-form-small: .82rem;
+          --rs-form-action: .88rem;
           max-width: none; margin: 0;
           height: 100%;
           background: #fff; border-radius: 20px;
@@ -368,11 +376,12 @@ export default function ResourcesPage() {
           text-align: center; margin-bottom: 32px;
         }
         .rs-form-header h2 {
-          font-size: 1.4rem; font-weight: 800;
+          font-size: var(--rs-form-title); font-weight: 800;
           color: #111827; margin: 0 0 8px;
+          line-height: 1.3;
         }
         .rs-form-header p {
-          font-size: .92rem; color: #6B7280;
+          font-size: var(--rs-form-text); color: #6B7280;
           line-height: 1.5; margin: 0;
         }
         .rs-form-selected {
@@ -387,20 +396,25 @@ export default function ResourcesPage() {
           flex-shrink: 0; color: #fff;
         }
         .rs-form-selected-title {
-          font-size: .88rem; font-weight: 600; color: #C45118;
+          font-size: var(--rs-form-action); font-weight: 600; color: #C45118;
           line-height: 1.35;
         }
         .rs-field {
           margin-bottom: 18px;
         }
+        .rs-form-wrap form {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+        }
         .rs-label {
-          display: block; font-size: .82rem; font-weight: 600;
+          display: block; font-size: var(--rs-form-small); font-weight: 600;
           color: #374151; margin-bottom: 6px;
         }
         .rs-input {
           width: 100%; padding: 13px 16px;
           border: 1.5px solid #E5E7EB; border-radius: 10px;
-          font-size: .92rem; color: #111827;
+          font-size: var(--rs-form-text); color: #111827;
           background: #FAFAFA;
           font-family: inherit;
           transition: border-color .2s, box-shadow .2s;
@@ -415,12 +429,12 @@ export default function ResourcesPage() {
         .rs-submit {
           width: 100%; padding: 14px;
           background: linear-gradient(135deg, ${BLUE}, #F5C242);
-          color: #fff; font-weight: 700; font-size: .95rem;
+          color: #fff; font-weight: 700; font-size: var(--rs-form-action);
           border: none; border-radius: 10px; cursor: pointer;
           font-family: inherit;
           transition: transform .25s, box-shadow .25s;
           display: flex; align-items: center; justify-content: center; gap: 8px;
-          margin-top: 8px;
+          margin-top: auto;
         }
         .rs-submit:hover:not(:disabled) {
           transform: translateY(-2px);
@@ -550,7 +564,7 @@ export default function ResourcesPage() {
       ═══════════════════════════════════════════════════ */}
       <section
         className="rs-hero"
-        style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}
+        style={{ paddingTop: "120px", paddingBottom: "80px" }}
       >
         <div ref={heroRevealRef} className={`rs-hero-inner rs-fade-up ${heroVisible ? "rs-vis" : ""}`}>
           <h1 className="rs-h1">
@@ -679,7 +693,7 @@ export default function ResourcesPage() {
                           <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
                         </svg>
                       </div>
-                      <span style={{ fontSize: ".85rem", fontWeight: 600, color: "#92400E" }}>Select a resource above to download</span>
+                      <span style={{ fontSize: ".88rem", fontWeight: 600, color: "#92400E", lineHeight: 1.35 }}>Select a resource above to download</span>
                     </div>
                   )}
 
@@ -709,7 +723,7 @@ export default function ResourcesPage() {
                       />
                     </div>
                     <div className="rs-field">
-                      <label className="rs-label">Phone Number <span style={{ color: "#9CA3AF", fontWeight: 400 }}>(optional)</span></label>
+                      <label className="rs-label">Phone Number *</label>
                       <div style={{ display: "flex", gap: "8px" }}>
                         <div style={{ position: "relative", width: "180px" }}>
                           <select
@@ -737,14 +751,42 @@ export default function ResourcesPage() {
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           style={{ flex: 1 }}
+                          required
                         />
+                      </div>
+                    </div>
+
+                    <div className="rs-field">
+                      <label className="rs-label">Interested In *</label>
+                      <div style={{ position: "relative" }}>
+                        <select
+                          className="rs-input"
+                          style={{ width: "100%", paddingRight: "42px", appearance: "none" }}
+                          value={courseInterest}
+                          onChange={(e) => setCourseInterest(e.target.value)}
+                          required
+                        >
+                          <option value="" disabled>
+                            Select a course
+                          </option>
+                          {COURSE_INTEREST_OPTIONS.map((course) => (
+                            <option key={course} value={course}>
+                              {course}
+                            </option>
+                          ))}
+                        </select>
+                        <div style={{ position: "absolute", right: "16px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#6B7280" }}>
+                          <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
                       </div>
                     </div>
 
                     <button
                       type="submit"
                       className="rs-submit"
-                      disabled={submitting || !selected}
+                      disabled={submitting || !selected || !courseInterest}
                     >
                       {submitting ? (
                         <>

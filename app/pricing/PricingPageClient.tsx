@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -11,8 +10,6 @@ import {
   Phone,
   Star,
 } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
-import TopBanner from "@/components/layout/TopBanner";
 import Footer from "@/components/layout/Footer";
 import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_PHONE_UK } from "@/lib/site";
 import type { CourseRecord } from "@/lib/courses";
@@ -130,7 +127,6 @@ type PricingPageClientProps = {
 };
 
 export default function PricingPageClient({ courses }: PricingPageClientProps) {
-  const [banner, setBanner] = useState(true);
   const pricingCards = buildPricingCards(courses);
   const comparisonRows = [
     { label: "Duration", getValue: (course: CourseRecord) => course.duration },
@@ -142,9 +138,6 @@ export default function PricingPageClient({ courses }: PricingPageClientProps) {
 
   return (
     <main className="min-h-screen bg-[#f7f3ea] text-[#241a1f]">
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
-
       <style>{`
         .pricing-hero {
           position: relative;
@@ -183,7 +176,7 @@ export default function PricingPageClient({ courses }: PricingPageClientProps) {
 
       <section
         className="pricing-hero"
-        style={{ paddingTop: banner ? "164px" : "124px", paddingBottom: "104px" }}
+        style={{ paddingTop: "124px", paddingBottom: "104px" }}
       >
         <div className="relative z-10 mx-auto max-w-6xl px-6 text-center">
           <h1 className="mx-auto max-w-4xl text-4xl font-extrabold leading-[1.08] tracking-tight text-white md:text-5xl lg:text-[58px]">

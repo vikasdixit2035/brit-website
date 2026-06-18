@@ -11,8 +11,6 @@ import {
   Star,
   TrendingUp,
 } from "lucide-react";
-import TopBanner from "@/components/layout/TopBanner";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 const BLUE = "#D95700";
@@ -286,8 +284,6 @@ function CohortReviewCard({ batch, index }: { batch: BatchReview; index: number 
 }
 
 export default function ReviewsPage() {
-  const [banner, setBanner] = useState(true);
-
   const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
   const { revealRef: batchesRevealRef, visible: batchesVisible } = useReveal();
   const { revealRef: casesRevealRef, visible: casesVisible } = useReveal();
@@ -302,9 +298,6 @@ export default function ReviewsPage() {
         color: "#241A1F",
       }}
     >
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
-
       <style>{`
         .rv-hero {
           position: relative;
@@ -890,7 +883,7 @@ export default function ReviewsPage() {
 
       <section
         className="rv-hero"
-        style={{ paddingTop: banner ? "166px" : "126px", paddingBottom: "86px" }}
+        style={{ paddingTop: "126px", paddingBottom: "86px" }}
       >
         <div
           ref={heroRevealRef}

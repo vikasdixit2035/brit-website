@@ -1,13 +1,10 @@
 'use client';
 
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 export default function PrivacyPolicyPage() {
   return (
     <main className="min-h-screen bg-[#f7f3ea] flex flex-col font-sans text-[#241a1f]">
-      <Navbar hasBanner={false} />
-
       <div className="pt-[140px] pb-[100px] max-w-[800px] mx-auto px-6 w-full flex-grow">
 
         <div className="bg-white p-8 md:p-10 rounded-[8px] shadow-xl shadow-[#24101f]/5 border border-[#ded6c8]">

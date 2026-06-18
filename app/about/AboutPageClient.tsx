@@ -1,22 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Briefcase, CheckCircle2, Lightbulb, Target, TrendingUp, Users } from "lucide-react";
-import TopBanner from "@/components/layout/TopBanner";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ThemeCTA, ThemeHero, ThemeLabel, ThemeShell } from "@/components/layout/ThinkificTheme";
 import { SITE_STATS } from "@/lib/site";
 
 export default function AboutPage() {
-  const [banner, setBanner] = useState(true);
-
   return (
     <ThemeShell>
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
-
       <ThemeHero
         eyebrow="About Brit Institute"
         title={<>A practical approach to careers in data, AI, and emerging technology.</>}

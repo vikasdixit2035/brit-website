@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { CalendarCheck, Mail, MapPin, MessageCircle, Phone, Send, ShieldCheck } from "lucide-react";
-import TopBanner from "@/components/layout/TopBanner";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ThemeHero, ThemeLabel, ThemeShell } from "@/components/layout/ThinkificTheme";
 import { trackLead } from "@/lib/analytics";
@@ -13,7 +11,6 @@ const inputClass =
   "w-full rounded-md border border-[#ded6c8] bg-[#f7f3ea] px-4 py-3 text-sm font-semibold text-[#241a1f] outline-none transition placeholder:text-[#8b8175] focus:border-[#d95700] focus:bg-white";
 
 export default function ContactPage() {
-  const [banner, setBanner] = useState(true);
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -54,9 +51,6 @@ export default function ContactPage() {
 
   return (
     <ThemeShell>
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
-
       <ThemeHero
         eyebrow="Contact Admissions"
         title={<>Speak with an advisor before choosing your path.</>}

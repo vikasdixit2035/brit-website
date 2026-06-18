@@ -3,7 +3,6 @@
 import { FormEvent, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { trackLead } from "@/lib/analytics";
 import { BLOG_ARTICLES, BLOG_CATEGORIES, BlogArticle } from "./blogData";
@@ -157,8 +156,6 @@ export default function BlogPage() {
 
   return (
     <main className="blog-page">
-      <Navbar hasBanner={false} />
-
       <style>{`
         .blog-page {
           --ink: #24101f;

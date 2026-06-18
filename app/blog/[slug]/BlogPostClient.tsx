@@ -18,8 +18,6 @@ import {
   Sparkles,
   UserRound,
 } from "lucide-react";
-import TopBanner from "@/components/layout/TopBanner";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { BLOG_ARTICLES, BlogArticle, BlogCTA } from "../blogData";
 
@@ -323,7 +321,6 @@ function getRelatedArticles(article: BlogArticle): BlogArticle[] {
 export default function BlogPostPage() {
   const params = useParams();
   const slug = params?.slug as string;
-  const [banner, setBanner] = useState(true);
   const [readingProgress, setReadingProgress] = useState(0);
   const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
   const { revealRef: contentRevealRef, visible: contentVisible } = useReveal();
@@ -345,9 +342,7 @@ export default function BlogPostPage() {
   if (!article) {
     return (
       <main className="bp-page">
-        <TopBanner visible={banner} onClose={() => setBanner(false)} />
-        <Navbar hasBanner={banner} />
-        <section className="bp-not-found" style={{ paddingTop: banner ? "200px" : "160px" }}>
+        <section className="bp-not-found" style={{ paddingTop: "160px" }}>
           <h1>Article Not Found</h1>
           <p>The article you&apos;re looking for doesn&apos;t exist.</p>
           <Link href="/blog" className="bp-not-found-link">
@@ -371,12 +366,10 @@ export default function BlogPostPage() {
   const midIndex = Math.ceil(contentSections.length / 2);
   const contentBefore = contentSections.slice(0, midIndex).join("\n");
   const contentAfter = contentSections.slice(midIndex).join("\n");
-  const heroPaddingTop = banner ? "154px" : "114px";
+  const heroPaddingTop = "114px";
 
   return (
     <main className="bp-page">
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
       <div className="bp-progress" aria-hidden="true">
         <div style={{ width: `${readingProgress}%` }} />
       </div>

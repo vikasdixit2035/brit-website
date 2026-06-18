@@ -1,11 +1,9 @@
 import Link from "next/link";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 export default function NotFound() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
-      <Navbar hasBanner={false} />
       <section className="mx-auto flex max-w-4xl flex-col items-center px-6 pb-24 pt-32 text-center">
         <p className="mb-4 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">
           Page Not Found

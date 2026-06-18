@@ -2,8 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { CreditCard, ExternalLink, Loader2, ShieldCheck, Wallet } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
-import TopBanner from "@/components/layout/TopBanner";
 import Footer from "@/components/layout/Footer";
 import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_PHONE_UK } from "@/lib/site";
 
@@ -44,7 +42,6 @@ function isConfiguredUrl(url?: string) {
 }
 
 export default function PayPageClient() {
-  const [banner, setBanner] = useState(true);
   const [config, setConfig] = useState<PaymentConfig | null>(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -105,12 +102,9 @@ export default function PayPageClient() {
 
   return (
     <main className="min-h-screen bg-[#f7f3ea] text-[#241a1f]">
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
-
       <section
         className="bg-[linear-gradient(180deg,#24101f_0%,#24101f_70%,#160914_100%)] px-6 text-white"
-        style={{ paddingTop: banner ? "164px" : "124px", paddingBottom: "72px" }}
+        style={{ paddingTop: "124px", paddingBottom: "72px" }}
       >
         <div className="mx-auto max-w-5xl">
           <p className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold uppercase tracking-[0.18em] text-[#f5c242]">

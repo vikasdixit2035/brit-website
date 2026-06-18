@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import {
   ArrowRight,
   BarChart3,
@@ -21,8 +21,6 @@ import {
 } from "lucide-react";
 
 import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
-import TopBanner from "@/components/layout/TopBanner";
 
 const audienceCards = [
   {
@@ -175,14 +173,9 @@ function SectionHeading({
 }
 
 export default function CareersPageClient() {
-  const [banner, setBanner] = useState(true);
-
   return (
     <main className="bg-[#f7f3ea] text-[#241a1f]">
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
-
-      <HeroSection banner={banner} />
+      <HeroSection />
       <CareerConfusionSection />
       <AudienceSection />
       <PathSelectorSection />
@@ -199,12 +192,12 @@ export default function CareersPageClient() {
   );
 }
 
-function HeroSection({ banner }: { banner: boolean }) {
+function HeroSection() {
   return (
     <section
       className="relative overflow-hidden px-5 text-center text-white md:px-8"
       style={{
-        paddingTop: banner ? "166px" : "126px",
+        paddingTop: "126px",
         paddingBottom: "86px",
         background:
           "linear-gradient(135deg, rgba(36,16,31,.98), rgba(22,9,20,.98)), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(180deg, rgba(255,255,255,.045) 1px, transparent 1px)",
