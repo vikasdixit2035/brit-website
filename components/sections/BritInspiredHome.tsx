@@ -8,7 +8,6 @@ import {
   BarChart3,
   BookOpenCheck,
   BriefcaseBusiness,
-  CalendarCheck,
   CheckCircle2,
   Clock3,
   FileText,
@@ -18,7 +17,6 @@ import {
   MessageCircle,
   MonitorPlay,
   Sparkles,
-  Star,
   Target,
   Trophy,
   UserCheck,
@@ -30,13 +28,63 @@ import { SITE_STATS } from "@/lib/site";
 
 const companyLogos = [
   "Accenture.webp",
+  "Allianz logo.webp",
   "DataBricks logo.webp",
+  "Evergreen logo.webp",
+  "Google Deeo mind logo.webp",
   "HSBC logo.webp",
-  "nvidia.webp",
-  "snowflake.webp",
-  "monzo.webp",
+  "Harrods logo.webp",
+  "JP morragn logo.webp",
+  "Legal & general Logo.webp",
+  "Moonplay logo.webp",
+  "Nivoda logo.webp",
+  "Poly ai logo.webp",
   "Sky logo.webp",
+  "Stat sports logo.webp",
+  "arm logo.webp",
+  "artemis.webp",
+  "blackswan.webp",
+  "bumble logo.webp",
+  "capgemini.webp",
+  "cgi.webp",
+  "cityfootball.webp",
+  "cloudfare logo.webp",
+  "coinbase.webp",
+  "confluent.webp",
+  "couchbase.webp",
+  "cycle.webp",
+  "deliveroo.webp",
+  "elastic logo.webp",
+  "goldman logo.webp",
+  "graphcore.webp",
+  "mck.webp",
+  "monzo.webp",
+  "natwest.webp",
+  "nvidia.webp",
+  "ocado.webp",
+  "oodle.webp",
+  "pure DC.webp",
+  "rackspace.webp",
+  "revolut.webp",
+  "skyscanner.webp",
+  "snowflake.webp",
+  "softcat logo.webp",
+  "synthesia.webp",
+  "thoughts.webp",
+  "toluna.webp",
+  "tractable.webp",
+  "truelayer logo.webp",
+  "watson logo.webp",
+  "wayfair.webp",
+  "wayve.webp",
   "wise.webp",
+  "zopa.webp",
+];
+
+const companyLogoRows = [
+  companyLogos.filter((_, index) => index % 3 === 0),
+  companyLogos.filter((_, index) => index % 3 === 1),
+  companyLogos.filter((_, index) => index % 3 === 2),
 ];
 
 const courseImages: Record<string, string> = {
@@ -170,7 +218,7 @@ function HeroSection() {
         <div>
           <SectionLabel dark>Brit Institute</SectionLabel>
           <h1 className="mt-3 max-w-2xl text-4xl font-black leading-[0.98] tracking-tight md:text-[52px] lg:text-[60px]">
-            Powering the world's next data and AI careers
+            Powering the world&apos;s next data and AI careers
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-white/75 md:text-lg">
             Practical UK-focused programmes for learners who want portfolio proof, mentor support, and a clear path into analytics, data science, and AI roles.
@@ -226,24 +274,98 @@ function HeroSection() {
 
 function LogoTrustSection() {
   return (
-    <section className="bg-[#f7f3ea] px-5 py-12 md:px-8">
+    <section className="overflow-hidden bg-[#f7f3ea] px-5 py-12 md:px-8">
+      <style>{`
+        .company-logo-track {
+          display: flex;
+          width: max-content;
+          align-items: center;
+          will-change: transform;
+        }
+
+        .company-logo-track-left {
+          animation: companyLogoScrollLeft 46s linear infinite;
+        }
+
+        .company-logo-track-right {
+          animation: companyLogoScrollRight 46s linear infinite;
+        }
+
+        .company-logo-track:hover {
+          animation-play-state: paused;
+        }
+
+        .company-logo-cell {
+          display: flex;
+          width: 170px;
+          height: 58px;
+          flex-shrink: 0;
+          align-items: center;
+          justify-content: center;
+          margin-inline: 18px;
+        }
+
+        .company-logo-img {
+          object-fit: contain;
+          opacity: 1;
+          filter: saturate(1.14) contrast(1.28);
+          mix-blend-mode: multiply;
+          transform: scale(1.04);
+          transition: transform 0.25s ease;
+        }
+
+        .company-logo-cell:hover .company-logo-img {
+          transform: scale(1.1);
+        }
+
+        @keyframes companyLogoScrollLeft {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+
+        @keyframes companyLogoScrollRight {
+          from { transform: translateX(-50%); }
+          to { transform: translateX(0); }
+        }
+
+        @media (max-width: 767px) {
+          .company-logo-cell {
+            width: 138px;
+            height: 52px;
+            margin-inline: 12px;
+          }
+        }
+      `}</style>
+
       <div className="mx-auto max-w-6xl text-center">
         <p className="text-xs font-black uppercase tracking-[0.26em] text-[#7a7064]">
           Trusted by learners targeting roles across leading UK employers
         </p>
-        <div className="mt-8 grid grid-cols-2 items-center gap-5 sm:grid-cols-4 lg:grid-cols-8">
-          {companyLogos.map((logo) => (
-            <div key={logo} className="flex h-12 items-center justify-center">
-              <Image
-                src={`/companies/${encodeURIComponent(logo)}`}
-                alt={logo.replace(/\.webp$/i, "").replace(/\s+logo/i, "")}
-                width={130}
-                height={42}
-                className="max-h-9 w-auto grayscale opacity-70 transition hover:grayscale-0 hover:opacity-100"
-              />
+      </div>
+
+      <div className="mx-[calc(50%-50vw)] mt-8 flex flex-col gap-5">
+        {companyLogoRows.map((row, rowIndex) => {
+          const repeatedRow = [...row, ...row];
+          const directionClass = rowIndex % 2 === 0 ? "company-logo-track-left" : "company-logo-track-right";
+
+          return (
+            <div key={`company-logo-row-${rowIndex}`} className="flex overflow-hidden">
+              <div className={`company-logo-track ${directionClass}`} aria-hidden="true">
+                {repeatedRow.map((logo, logoIndex) => (
+                  <div key={`${logo}-${logoIndex}`} className="company-logo-cell">
+                    <Image
+                      src={`/companies-clean/${encodeURIComponent(logo)}`}
+                      alt={logo.replace(/\.webp$/i, "").replace(/\s+logo/i, "")}
+                      width={160}
+                      height={48}
+                      className="company-logo-img max-h-11 w-auto max-w-full"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -297,7 +419,7 @@ function ProductsSection() {
         <div className="mt-12 rounded-md bg-[#10151c] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.28)] md:p-7">
           <div className="mb-5 flex items-center justify-between gap-4">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.24em] text-[#f5c242]">What's included?</p>
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-[#f5c242]">What&apos;s included?</p>
               <h3 className="mt-2 text-2xl font-black">Courses, mentorship, portfolio work, and career support</h3>
             </div>
             <Link href="/courses" className="hidden rounded-full bg-[#f5c242] px-5 py-3 text-sm font-black text-[#24101f] md:inline-flex">
@@ -393,7 +515,7 @@ function FeatureSuite() {
       />
       <div className="relative z-10 mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">Brit Institute's stand-out suite of features</h2>
+          <h2 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">Brit Institute&apos;s stand-out suite of features</h2>
         </div>
 
         <div className="mt-16 space-y-20">
@@ -458,7 +580,7 @@ function TestimonialStrip() {
           <Image src="/testimonials/benjamin-hughes.webp" alt="Brit Institute learner" fill className="object-cover" sizes="112px" />
         </div>
         <blockquote className="text-lg font-semibold leading-8 text-[#24101f] md:text-xl">
-          "Brit Institute gave me structure, practical projects, and the confidence to explain my work clearly in interviews."
+          &quot;Brit Institute gave me structure, practical projects, and the confidence to explain my work clearly in interviews.&quot;
           <footer className="mt-4 text-sm font-black uppercase tracking-[0.2em] text-[#4d617f]">William Foster, Financial Analyst</footer>
         </blockquote>
       </div>
