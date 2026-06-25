@@ -1,711 +1,521 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import TopBanner from "@/components/layout/TopBanner";
-import Navbar from "@/components/layout/Navbar";
+import { type ReactNode } from "react";
+import {
+  ArrowRight,
+  BarChart3,
+  BookOpenCheck,
+  BrainCircuit,
+  BriefcaseBusiness,
+  CheckCircle2,
+  FileText,
+  GraduationCap,
+  Handshake,
+  LineChart,
+  MessageCircle,
+  Route,
+  Sparkles,
+  UserCheck,
+} from "lucide-react";
+
 import Footer from "@/components/layout/Footer";
 
-/* ── colour tokens ── */
-const BLUE = "#1D4ED8";
-const GOLD = "#D4AF37";
-const DEEP = "#0a0f1e";
-
-/* ── salary data ── */
-const SALARY_DATA = [
+const audienceCards = [
   {
-    role: "Data Analyst",
-    min: 28000,
-    max: 55000,
-    color: "#3B82F6",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" />
-      </svg>
-    ),
+    title: "Complete beginner",
+    text: "Start with Excel, data cleaning, dashboards, SQL basics, and business reporting.",
+    icon: GraduationCap,
   },
   {
-    role: "Data Scientist",
-    min: 40000,
-    max: 80000,
-    color: "#8B5CF6",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.14" />
-        <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.14" />
-      </svg>
-    ),
+    title: "Non-technical background",
+    text: "Build confidence with practical tools, real business cases, and clear project explanations.",
+    icon: UserCheck,
   },
   {
-    role: "AI / Automation Specialist",
-    min: 35000,
-    max: 75000,
-    color: "#10B981",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="4" y="4" width="16" height="16" rx="2" /><rect x="9" y="9" width="6" height="6" /><line x1="9" y1="1" x2="9" y2="4" /><line x1="15" y1="1" x2="15" y2="4" /><line x1="9" y1="20" x2="9" y2="23" /><line x1="15" y1="20" x2="15" y2="23" /><line x1="20" y1="9" x2="23" y2="9" /><line x1="20" y1="14" x2="23" y2="14" /><line x1="1" y1="9" x2="4" y2="9" /><line x1="1" y1="14" x2="4" y2="14" />
-      </svg>
-    ),
+    title: "Career switcher",
+    text: "Connect your previous experience with portfolio work for data, AI, and automation roles.",
+    icon: Route,
+  },
+  {
+    title: "Already working",
+    text: "Use data and AI skills to strengthen your current profile and move toward higher-value work.",
+    icon: BriefcaseBusiness,
   },
 ];
 
-/* ── job roles ── */
-const JOB_ROLES = [
+const careerDirections = [
   {
-    title: "Data Analyst",
-    desc: "Work with data to generate insights and support business decisions. Use tools like Excel, SQL, and Tableau to turn raw data into actionable reports.",
-    color: "#3B82F6",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" />
-      </svg>
-    ),
+    title: "Data Analytics",
+    fit: "Best first step for beginners.",
+    text: "Excel, SQL, Power BI, dashboards, reporting, and business insights.",
+    accent: "#f5c242",
+    icon: BarChart3,
   },
   {
-    title: "Data Scientist",
-    desc: "Build predictive models and analyse complex datasets. Combine statistics, programming, and domain expertise to solve real-world problems.",
-    color: "#8B5CF6",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.14" />
-        <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.14" />
-      </svg>
-    ),
+    title: "Business Intelligence",
+    fit: "For KPI and dashboard thinkers.",
+    text: "Reporting systems, executive dashboards, stakeholder questions, and decision support.",
+    accent: "#97c266",
+    icon: LineChart,
   },
   {
-    title: "AI / Automation Specialist",
-    desc: "Design intelligent systems and automate business workflows. Apply machine learning, NLP, and automation platforms to drive efficiency.",
-    color: "#10B981",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="4" y="4" width="16" height="16" rx="2" /><rect x="9" y="9" width="6" height="6" /><line x1="9" y1="1" x2="9" y2="4" /><line x1="15" y1="1" x2="15" y2="4" /><line x1="9" y1="20" x2="9" y2="23" /><line x1="15" y1="20" x2="15" y2="23" />
-      </svg>
-    ),
+    title: "Data Science",
+    fit: "For learners ready to go deeper.",
+    text: "Python, statistics, machine learning, notebooks, and model interpretation.",
+    accent: "#cfe0ff",
+    icon: BrainCircuit,
+  },
+  {
+    title: "AI & Automation",
+    fit: "For workflow builders.",
+    text: "AI tools, automation workflows, responsible AI use, and productivity systems.",
+    accent: "#f26722",
+    icon: Sparkles,
   },
 ];
 
-/* ── skills ── */
-const SKILLS = [
-  { label: "Data Analysis & Visualisation", pct: 92, color: "#3B82F6" },
-  { label: "Programming (Python, SQL)", pct: 88, color: "#8B5CF6" },
-  { label: "Machine Learning Fundamentals", pct: 78, color: "#10B981" },
-  { label: "AI Tools & Automation Platforms", pct: 74, color: "#F59E0B" },
-  { label: "Problem-Solving & Business Understanding", pct: 85, color: "#EF4444" },
+const employerSignals = [
+  "Understand a business problem",
+  "Clean messy data",
+  "Build useful dashboards",
+  "Write basic SQL queries",
+  "Explain insights clearly",
+  "Present project evidence",
 ];
 
-/* ── industries ── */
-const INDUSTRIES = [
-  { name: "Technology Companies", icon: "💻", accent: "#3B82F6" },
-  { name: "Financial Services", icon: "🏦", accent: "#8B5CF6" },
-  { name: "Consulting Firms", icon: "📊", accent: "#10B981" },
-  { name: "E-commerce & Retail", icon: "🛒", accent: "#F59E0B" },
-  { name: "Startups", icon: "🚀", accent: "#EF4444" },
+const portfolioProjects = [
+  "Sales performance dashboard",
+  "HR analytics report",
+  "Customer behaviour analysis",
+  "SQL business case study",
+  "Python data cleaning project",
+  "AI automation workflow",
 ];
 
-/* ── career paths ── */
-const CAREER_PATHS = [
-  {
-    title: "Data Analytics Track",
-    steps: ["Junior Analyst", "Data Analyst", "Senior Analyst", "Lead / Manager"],
-    color: "#3B82F6",
-  },
-  {
-    title: "Data Science Track",
-    steps: ["Data Analyst", "Junior Data Scientist", "Data Scientist", "Senior / Principal"],
-    color: "#8B5CF6",
-  },
-  {
-    title: "AI & Automation Track",
-    steps: ["AI Executive", "Automation Specialist", "AI Engineer", "AI Consultant"],
-    color: "#10B981",
-  },
+const readinessGaps = [
+  "No portfolio",
+  "Weak project explanation",
+  "Generic CV",
+  "Unclear LinkedIn profile",
+  "No interview practice",
+  "Wrong role targeting",
 ];
 
-/* ── animate-on-scroll hook ── */
-function useReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setVisible(true); io.disconnect(); } },
-      { threshold: 0.12 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-  return { revealRef: ref, visible };
-}
+const myths = [
+  ["You need to be a coding expert", "Many entry roles begin with Excel, SQL, dashboards, and business analysis."],
+  ["Only computer science graduates can enter", "Business, finance, operations, marketing, and healthcare backgrounds can transition."],
+  ["A certificate is enough", "Employers want practical projects, problem-solving ability, and confident communication."],
+  ["AI will replace every data role", "AI changes the work, but increases demand for people who can use data and AI well."],
+];
 
-/* ── animated counter ── */
-function AnimatedNumber({ value, visible, prefix = "", suffix = "" }: { value: number; visible: boolean; prefix?: string; suffix?: string }) {
-  const [display, setDisplay] = useState(0);
-  useEffect(() => {
-    if (!visible) return;
-    let start = 0;
-    const duration = 1200;
-    const step = value / (duration / 16);
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= value) { setDisplay(value); clearInterval(timer); }
-      else setDisplay(Math.floor(start));
-    }, 16);
-    return () => clearInterval(timer);
-  }, [visible, value]);
-  return <>{prefix}{display.toLocaleString()}{suffix}</>;
-}
+const supportItems = [
+  [FileText, "CV and LinkedIn", "Shape your profile around target roles, practical skill, and portfolio proof."],
+  [BookOpenCheck, "Portfolio structure", "Build projects you can explain clearly in interviews and applications."],
+  [MessageCircle, "Interview practice", "Prepare project walkthroughs, common questions, and confident role stories."],
+  [Handshake, "Role guidance", "Understand which UK roles match your background, current level, and timeline."],
+];
 
-/* ══════════════════════════════════════════════════════════════════ */
-export default function CareersPage() {
-  const [banner, setBanner] = useState(true);
+const ninetyDayPlan = [
+  ["1", "Polish proof", "Finalise 3 to 5 portfolio projects and prepare short walkthroughs."],
+  ["2", "Sharpen profile", "Improve CV, LinkedIn, GitHub, and project summaries for target roles."],
+  ["3", "Apply with rhythm", "Track applications, practise interview questions, and improve from feedback."],
+];
 
-  const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
-  const { revealRef: salariesRevealRef, visible: salariesVisible } = useReveal();
-  const { revealRef: rolesRevealRef, visible: rolesVisible } = useReveal();
-  const { revealRef: skillsRevealRef, visible: skillsVisible } = useReveal();
-  const { revealRef: hiringRevealRef, visible: hiringVisible } = useReveal();
-  const { revealRef: pathsRevealRef, visible: pathsVisible } = useReveal();
-  const { revealRef: ctaSecRevealRef, visible: ctaSecVisible } = useReveal();
-
+function DarkPattern({ className = "" }: { className?: string }) {
   return (
-    <main style={{ background: "#FAFAFA", minHeight: "100vh", fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)", color: "#111827" }}>
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
+    <div
+      aria-hidden="true"
+      className={`pointer-events-none absolute inset-0 opacity-45 ${className}`}
+      style={{
+        background:
+          "radial-gradient(circle at 48% 38%, rgba(245,194,66,0.16), transparent 32%), repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0 1px, transparent 1px 18px)",
+      }}
+    />
+  );
+}
 
-      <style>{`
-        /* ── CAREERS PAGE ── */
-        .cr-hero {
-          position: relative;
-          background: ${DEEP};
-          overflow: hidden;
-          text-align: center;
-        }
-        .cr-hero::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background:
-            radial-gradient(ellipse 55% 45% at 20% 80%, rgba(29,78,216,.2), transparent 60%),
-            radial-gradient(ellipse 50% 50% at 80% 20%, rgba(16,185,129,.12), transparent 55%),
-            radial-gradient(ellipse 60% 40% at 50% 0%, rgba(139,92,246,.15), transparent 65%);
-          pointer-events: none;
-        }
-        /* floating data nodes */
-        .cr-hero::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background-image:
-            radial-gradient(circle 2px at 15% 25%, rgba(255,255,255,.12) 0%, transparent 100%),
-            radial-gradient(circle 2px at 72% 18%, rgba(255,255,255,.1) 0%, transparent 100%),
-            radial-gradient(circle 1.5px at 88% 65%, rgba(255,255,255,.08) 0%, transparent 100%),
-            radial-gradient(circle 2px at 35% 78%, rgba(255,255,255,.1) 0%, transparent 100%),
-            radial-gradient(circle 1.5px at 60% 45%, rgba(255,255,255,.06) 0%, transparent 100%);
-          pointer-events: none;
-          animation: cr-drift 20s linear infinite alternate;
-        }
-        @keyframes cr-drift {
-          0%   { transform: translateY(0) translateX(0); }
-          100% { transform: translateY(-12px) translateX(8px); }
-        }
+function SectionLabel({ children, dark = false }: { children: ReactNode; dark?: boolean }) {
+  return (
+    <p className={`text-xs font-black uppercase tracking-[0.28em] ${dark ? "text-[#f5c242]" : "text-[#c45118]"}`}>
+      {children}
+    </p>
+  );
+}
 
-        .cr-hero-inner {
-          position: relative; z-index: 2;
-          max-width: 860px; margin: 0 auto; padding: 0 24px;
-        }
-        .cr-pill {
-          display: inline-flex; align-items: center; gap: 8px;
-          padding: 8px 18px; border-radius: 9999px;
-          background: rgba(255,255,255,.06);
-          border: 1px solid rgba(255,255,255,.1);
-          color: rgba(255,255,255,.72);
-          font-size: .82rem; font-weight: 600; letter-spacing: .04em;
-          margin-bottom: 28px; backdrop-filter: blur(8px);
-        }
-        .cr-h1 {
-          font-size: clamp(2rem, 4.5vw, 3.2rem);
-          font-weight: 800; color: #fff;
-          line-height: 1.12; letter-spacing: -.035em;
-          margin: 0 0 20px;
-        }
-        .cr-h1 span { color: ${GOLD}; }
-        .cr-sub {
-          font-size: 1.1rem; color: rgba(255,255,255,.55);
-          line-height: 1.7; max-width: 640px; margin: 0 auto;
-        }
-        .cr-divider {
-          width: 56px; height: 3px; border-radius: 2px;
-          background: linear-gradient(90deg, ${BLUE}, ${GOLD});
-          margin: 32px auto 0;
-        }
+function SectionHeading({
+  eyebrow,
+  title,
+  text,
+  align = "center",
+  dark = false,
+}: {
+  eyebrow?: string;
+  title: ReactNode;
+  text?: string;
+  align?: "left" | "center";
+  dark?: boolean;
+}) {
+  return (
+    <div className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
+      {eyebrow ? <SectionLabel dark={dark}>{eyebrow}</SectionLabel> : null}
+      <h2 className={`mt-4 text-4xl font-semibold leading-tight tracking-tight md:text-5xl ${dark ? "text-white" : "text-[#241a1f]"}`}>
+        {title}
+      </h2>
+      {text ? (
+        <p className={`mt-5 text-sm leading-7 md:text-base ${dark ? "text-white/72" : "text-[#6f665c]"}`}>
+          {text}
+        </p>
+      ) : null}
+    </div>
+  );
+}
 
-        /* ── shared ── */
-        .cr-section { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
-        .cr-section-title { text-align: center; margin-bottom: 48px; }
-        .cr-section-title h2 {
-          font-size: clamp(1.6rem, 3vw, 2.2rem);
-          font-weight: 800; color: #111827; margin: 0 0 12px; letter-spacing: -.025em;
-        }
-        .cr-section-title h2 span { color: ${BLUE}; }
-        .cr-section-title p {
-          color: #6B7280; font-size: 1rem; line-height: 1.6;
-          max-width: 540px; margin: 0 auto;
-        }
+export default function CareersPageClient() {
+  return (
+    <main className="bg-[#f7f3ea] text-[#241a1f]">
+      <HeroSection />
+      <CareerConfusionSection />
+      <AudienceSection />
+      <PathSelectorSection />
+      <EmployerExpectationSection />
+      <PortfolioSection />
+      <ReadinessGapSection />
+      <MythsSection />
+      <CareerSupportSection />
+      <NinetyDaysSection />
+      <FinalCTASection />
 
-        /* ── salary cards ── */
-        .cr-salary-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 24px;
-        }
-        .cr-salary-card {
-          background: #fff; border-radius: 16px;
-          padding: 32px 28px; border: 1px solid rgba(0,0,0,.06);
-          box-shadow: 0 4px 20px rgba(0,0,0,.04);
-          transition: transform .35s cubic-bezier(.4,0,.2,1), box-shadow .35s;
-          position: relative; overflow: hidden;
-        }
-        .cr-salary-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 12px 40px rgba(0,0,0,.1);
-        }
-        .cr-salary-card::after {
-          content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-        }
-        .cr-salary-icon {
-          width: 48px; height: 48px; border-radius: 12px;
-          display: flex; align-items: center; justify-content: center;
-          margin-bottom: 18px; color: #fff;
-        }
-        .cr-salary-role {
-          font-size: 1.08rem; font-weight: 700; color: #111827; margin: 0 0 20px;
-        }
-        .cr-salary-bar-wrap {
-          background: #F3F4F6; border-radius: 8px;
-          height: 12px; width: 100%; position: relative; overflow: hidden;
-          margin-bottom: 14px;
-        }
-        .cr-salary-bar {
-          height: 100%; border-radius: 8px;
-          transition: width 1.2s cubic-bezier(.4,0,.2,1);
-        }
-        .cr-salary-range {
-          display: flex; justify-content: space-between;
-          font-size: .85rem; font-weight: 600;
-        }
+      <Footer />
+    </main>
+  );
+}
 
-        /* ── role cards ── */
-        .cr-roles-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 24px;
-        }
-        .cr-role-card {
-          background: #fff; border-radius: 16px;
-          padding: 36px 28px; border: 1px solid rgba(0,0,0,.06);
-          box-shadow: 0 4px 20px rgba(0,0,0,.04);
-          transition: transform .35s cubic-bezier(.4,0,.2,1), box-shadow .35s;
-          position: relative;
-        }
-        .cr-role-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 12px 40px rgba(0,0,0,.1);
-        }
-        .cr-role-icon {
-          width: 56px; height: 56px; border-radius: 14px;
-          display: flex; align-items: center; justify-content: center;
-          margin-bottom: 20px; color: #fff;
-        }
-        .cr-role-title {
-          font-size: 1.15rem; font-weight: 700; color: #111827; margin: 0 0 10px;
-        }
-        .cr-role-desc {
-          font-size: .92rem; color: #6B7280; line-height: 1.65; margin: 0;
-        }
+function HeroSection() {
+  return (
+    <section
+      className="relative overflow-hidden px-5 text-center text-white md:px-8"
+      style={{
+        paddingTop: "126px",
+        paddingBottom: "86px",
+        background:
+          "linear-gradient(135deg, rgba(36,16,31,.98), rgba(22,9,20,.98)), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(180deg, rgba(255,255,255,.045) 1px, transparent 1px)",
+        backgroundSize: "auto, 44px 44px, 44px 44px",
+      }}
+    >
+      <div className="absolute inset-x-0 bottom-0 h-px bg-[linear-gradient(90deg,transparent,rgba(212,175,55,.56),transparent)]" />
 
-        /* ── skills bars ── */
-        .cr-skills-wrap {
-          max-width: 700px; margin: 0 auto;
-          display: flex; flex-direction: column; gap: 22px;
-        }
-        .cr-skill-row {
-          display: flex; flex-direction: column; gap: 8px;
-        }
-        .cr-skill-label {
-          display: flex; justify-content: space-between; align-items: center;
-        }
-        .cr-skill-name { font-size: .92rem; font-weight: 600; color: #111827; }
-        .cr-skill-pct { font-size: .82rem; font-weight: 700; }
-        .cr-skill-track {
-          background: #F3F4F6; border-radius: 8px;
-          height: 10px; width: 100%; overflow: hidden;
-        }
-        .cr-skill-fill {
-          height: 100%; border-radius: 8px;
-          transition: width 1s cubic-bezier(.4,0,.2,1);
-        }
-
-        /* ── industry grid ── */
-        .cr-industry-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-          gap: 18px;
-        }
-        .cr-industry-card {
-          background: #fff; border-radius: 14px;
-          padding: 28px 20px; text-align: center;
-          border: 1px solid rgba(0,0,0,.06);
-          box-shadow: 0 4px 18px rgba(0,0,0,.04);
-          transition: transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s, border-color .3s;
-          cursor: default;
-        }
-        .cr-industry-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 10px 32px rgba(0,0,0,.1);
-        }
-        .cr-industry-icon {
-          font-size: 2rem; margin-bottom: 12px; display: block;
-          filter: grayscale(0);
-        }
-        .cr-industry-name {
-          font-size: .88rem; font-weight: 700; color: #111827;
-        }
-
-        /* ── career paths ── */
-        .cr-paths-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 24px;
-        }
-        .cr-path-card {
-          background: #fff; border-radius: 16px;
-          padding: 32px 28px; border: 1px solid rgba(0,0,0,.06);
-          box-shadow: 0 4px 20px rgba(0,0,0,.04);
-          transition: transform .35s cubic-bezier(.4,0,.2,1), box-shadow .35s;
-        }
-        .cr-path-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 12px 36px rgba(0,0,0,.1);
-        }
-        .cr-path-title {
-          font-size: 1.05rem; font-weight: 700; color: #111827; margin: 0 0 24px;
-          display: flex; align-items: center; gap: 10px;
-        }
-        .cr-path-dot {
-          width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
-        }
-        .cr-path-steps {
-          display: flex; flex-direction: column; gap: 0;
-          position: relative; padding-left: 28px;
-        }
-        .cr-path-step {
-          position: relative; padding: 12px 0; display: flex; align-items: center;
-        }
-        .cr-path-step::before {
-          content: '';
-          position: absolute; left: -22px; top: 50%; transform: translateY(-50%);
-          width: 12px; height: 12px; border-radius: 50%;
-          border: 2.5px solid; background: #fff; z-index: 2;
-        }
-        .cr-path-step:not(:last-child)::after {
-          content: '';
-          position: absolute; left: -17px; top: calc(50% + 6px);
-          width: 2px; height: calc(100% - 2px);
-        }
-        .cr-path-step-label {
-          font-size: .9rem; font-weight: 600; color: #374151;
-          background: #F9FAFB; padding: 8px 16px; border-radius: 8px;
-          border: 1px solid #E5E7EB; flex: 1;
-          transition: background .2s, border-color .2s;
-        }
-        .cr-path-step:hover .cr-path-step-label {
-          border-color: #D1D5DB; background: #F3F4F6;
-        }
-        .cr-path-arrow {
-          display: flex; align-items: center; justify-content: center;
-          padding: 4px 0; color: #D1D5DB;
-        }
-
-        /* ── CTA ── */
-        .cr-cta-wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
-        .cr-cta {
-          background: linear-gradient(135deg, #111827 0%, #1E3A5F 50%, ${BLUE} 100%);
-          border-radius: 24px; padding: 60px 48px; text-align: center;
-          position: relative; overflow: hidden;
-          box-shadow: 0 24px 64px rgba(0,0,0,.2);
-        }
-        .cr-cta::before, .cr-cta::after {
-          content: ''; position: absolute; border-radius: 50%;
-          filter: blur(80px); pointer-events: none;
-        }
-        .cr-cta::before { width: 300px; height: 300px; top: -100px; left: -80px; background: rgba(59,130,246,.3); }
-        .cr-cta::after  { width: 250px; height: 250px; bottom: -80px; right: -50px; background: rgba(212,175,55,.2); }
-        .cr-cta-inner { position: relative; z-index: 2; }
-        .cr-cta h2 { font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 800; color: #fff; margin: 0 0 16px; letter-spacing: -.02em; }
-        .cr-cta p { color: rgba(255,255,255,.6); font-size: 1.05rem; line-height: 1.7; max-width: 540px; margin: 0 auto 36px; }
-        .cr-btn-gold {
-          display: inline-flex; align-items: center; gap: 8px;
-          padding: 14px 36px;
-          background: linear-gradient(135deg, ${GOLD}, #FBBF24);
-          color: #000; font-weight: 700; font-size: .95rem;
-          border: none; border-radius: 9999px; cursor: pointer;
-          text-decoration: none;
-          transition: transform .3s, box-shadow .3s;
-          box-shadow: 0 4px 20px rgba(212,175,55,.35);
-        }
-        .cr-btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(212,175,55,.5); }
-
-        /* ── Animations ── */
-        .cr-fade-up {
-          opacity: 0; transform: translateY(32px);
-          transition: opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1);
-        }
-        .cr-fade-up.cr-vis { opacity: 1; transform: translateY(0); }
-        .cr-s1 { transition-delay: .1s; }
-        .cr-s2 { transition-delay: .2s; }
-        .cr-s3 { transition-delay: .3s; }
-        .cr-s4 { transition-delay: .4s; }
-        .cr-s5 { transition-delay: .5s; }
-
-        @media (max-width: 768px) {
-          .cr-salary-grid,
-          .cr-roles-grid,
-          .cr-paths-grid { grid-template-columns: 1fr; }
-          .cr-industry-grid { grid-template-columns: repeat(2, 1fr); }
-          .cr-cta { padding: 40px 24px; }
-        }
-      `}</style>
-
-      {/* ═══════════════════════════════════════════════════
-          1. HERO
-      ═══════════════════════════════════════════════════ */}
-      <section
-        className="cr-hero"
-        style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}
-      >
-        <div ref={heroRevealRef} className={`cr-hero-inner cr-fade-up ${heroVisible ? "cr-vis" : ""}`}>
-
-          <h1 className="cr-h1">
-            Careers in <span>AI, Data Analytics</span><br />and Data Science in the UK
-          </h1>
-          <p className="cr-sub">
-            Explore high-demand career paths, salary benchmarks, and the skills required to enter the UK&apos;s fastest-growing tech roles.
-          </p>
-          <div className="cr-divider" />
+      <div className="relative z-10 mx-auto max-w-[960px]">
+        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-[0.8rem] font-extrabold tracking-[0.04em] text-white/80 backdrop-blur">
+          <Route size={16} aria-hidden="true" />
+          Career guidance for data, AI and automation roles
         </div>
-      </section>
+        <h1 className="mx-auto max-w-4xl text-[2.15rem] font-black leading-[1.04] tracking-normal md:text-[4.35rem]">
+          Build a career in <span className="text-[#f5c242]">Data, AI and Automation</span>
+        </h1>
+        <p className="mx-auto mt-6 max-w-[720px] text-base leading-8 text-white/70 md:text-lg">
+          Map your route from your current background to practical projects, interview confidence, and the right UK career direction.
+        </p>
 
-      {/* ═══════════════════════════════════════════════════
-          2. SALARY BENCHMARKS
-      ═══════════════════════════════════════════════════ */}
-      <section style={{ paddingTop: 96, paddingBottom: 96 }}>
-        <div ref={salariesRevealRef} className="cr-section">
-          <div className={`cr-section-title cr-fade-up ${salariesVisible ? "cr-vis" : ""}`}>
-            <h2>Salary Insights Across <span>Key Roles</span></h2>
-            <p>UK-based salary ranges for the most in-demand data and AI positions.</p>
+        <div className="mx-auto mt-10 grid max-w-[760px] gap-3 sm:grid-cols-3" aria-label="Career guidance highlights">
+          <div className="rounded-md border border-white/15 bg-white/[0.07] p-4 text-left">
+            <strong className="block text-xl leading-tight text-white">4 paths</strong>
+            <span className="mt-1 block text-sm leading-5 text-white/65">data, BI, science and AI routes</span>
           </div>
+          <div className="rounded-md border border-white/15 bg-white/[0.07] p-4 text-left">
+            <strong className="block text-xl leading-tight text-white">Portfolio proof</strong>
+            <span className="mt-1 block text-sm leading-5 text-white/65">projects that make skills visible</span>
+          </div>
+          <div className="rounded-md border border-white/15 bg-white/[0.07] p-4 text-left">
+            <strong className="block text-xl leading-tight text-white">UK focused</strong>
+            <span className="mt-1 block text-sm leading-5 text-white/65">role guidance and interview support</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-          <div className="cr-salary-grid">
-            {SALARY_DATA.map((s, i) => {
-              const barPct = (s.max / 80000) * 100;
-              return (
-                <div
-                  key={i}
-                  className={`cr-salary-card cr-fade-up cr-s${i + 1} ${salariesVisible ? "cr-vis" : ""}`}
-                  style={{ ["--acc" as string]: s.color }}
-                >
-                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: s.color, borderRadius: "16px 16px 0 0" }} />
-                  <div className="cr-salary-icon" style={{ background: s.color }}>{s.icon}</div>
-                  <div className="cr-salary-role">{s.role}</div>
+function CareerConfusionSection() {
+  return (
+    <section className="bg-[#f7f3ea] px-5 py-20 md:px-8 lg:py-24">
+      <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <SectionHeading
+          eyebrow="Not sure where to start?"
+          title="Career confusion usually starts before the first lesson."
+          text="Most learners do not struggle because information is missing. They struggle because they do not know what to learn first, which projects matter, and how to explain their skills to employers."
+          align="left"
+        />
 
-                  <div className="cr-salary-bar-wrap">
-                    <div
-                      className="cr-salary-bar"
-                      style={{
-                        width: salariesVisible ? `${barPct}%` : "0%",
-                        background: `linear-gradient(90deg, ${s.color}, ${s.color}99)`,
-                      }}
-                    />
-                  </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {[
+            ["What should I learn first?", "A sequenced roadmap beats random tutorials."],
+            ["Which roles fit me?", "Your background should shape the target path."],
+            ["What projects should I build?", "Proof needs to match real employer questions."],
+            ["How do I apply confidently?", "CV, LinkedIn, interviews, and role selection need practice."],
+          ].map(([title, text]) => (
+            <article key={title} className="rounded-md border border-[#ded6c8] bg-white p-5 shadow-[0_18px_45px_rgba(36,26,31,0.06)]">
+              <CheckCircle2 className="text-[#7c9a4f]" size={22} />
+              <h3 className="mt-4 text-lg font-black">{title}</h3>
+              <p className="mt-2 text-sm leading-6 text-[#6f665c]">{text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
-                  <div className="cr-salary-range">
-                    <span style={{ color: s.color }}>
-                      £<AnimatedNumber value={s.min} visible={salariesVisible} />
-                    </span>
-                    <span style={{ color: s.color }}>
-                      £<AnimatedNumber value={s.max} visible={salariesVisible} suffix="+" />
-                    </span>
-                  </div>
+function AudienceSection() {
+  return (
+    <section className="bg-[#cfe0ff] px-5 py-20 md:px-8 lg:py-24">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading
+          eyebrow="Your starting point matters"
+          title="The right career plan depends on where you begin."
+          text="A beginner, career switcher, coder, and working professional should not all follow the same route."
+        />
 
-                  <p style={{ fontSize: ".76rem", color: "#9CA3AF", marginTop: 12, marginBottom: 0, textAlign: "center" }}>
-                    Varies by experience, location &amp; industry
-                  </p>
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {audienceCards.map((item) => {
+            const Icon = item.icon;
+            return (
+              <article key={item.title} className="rounded-md bg-white p-6 shadow-[0_18px_45px_rgba(36,26,31,0.08)]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-md bg-[#24101f] text-[#f5c242]">
+                  <Icon size={24} />
                 </div>
+                <h3 className="mt-5 text-xl font-black">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-[#4d617f]">{item.text}</p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PathSelectorSection() {
+  return (
+    <section className="bg-[#746d5c] px-5 py-20 text-white md:px-8 lg:py-24">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading
+          eyebrow="Choose your career direction"
+          title="Pick the route that matches your target role."
+          text="Brit Institute helps learners choose a realistic path before months are lost on the wrong material."
+          dark
+        />
+
+        <div className="mt-12 rounded-md bg-[#10151c] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.28)] md:p-7">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {careerDirections.map((path) => {
+              const Icon = path.icon;
+              return (
+                <Link key={path.title} href="/courses" className="group rounded-md bg-white p-4 text-[#241a1f] transition hover:-translate-y-1">
+                  <div className="flex h-36 items-center justify-center rounded-md" style={{ background: path.accent }}>
+                    <Icon size={46} className={path.accent === "#cfe0ff" ? "text-[#24101f]" : "text-white"} />
+                  </div>
+                  <div className="mt-5 min-h-[154px]">
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-[#c45118]">{path.fit}</p>
+                    <h3 className="mt-2 text-xl font-black">{path.title}</h3>
+                    <p className="mt-3 text-sm leading-6 text-[#6f665c]">{path.text}</p>
+                  </div>
+                  <span className="mt-4 inline-flex items-center gap-2 text-sm font-black text-[#c45118]">
+                    View course options <ArrowRight size={16} className="transition group-hover:translate-x-1" />
+                  </span>
+                </Link>
               );
             })}
           </div>
         </div>
-      </section>
+      </div>
+    </section>
+  );
+}
 
-      {/* ═══════════════════════════════════════════════════
-          3. JOB ROLES
-      ═══════════════════════════════════════════════════ */}
-      <section style={{ paddingBottom: 96, background: "#F3F4F6", paddingTop: 80 }}>
-        <div ref={rolesRevealRef} className="cr-section">
-          <div className={`cr-section-title cr-fade-up ${rolesVisible ? "cr-vis" : ""}`}>
-            <h2>Popular <span>Career Roles</span></h2>
-            <p>Explore the roles driving digital transformation across industries.</p>
-          </div>
+function EmployerExpectationSection() {
+  return (
+    <section className="relative overflow-hidden bg-[#24101f] px-5 py-20 text-white md:px-8 lg:py-24">
+      <DarkPattern />
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+        <SectionHeading
+          eyebrow="Employer expectation"
+          title="UK employers look for evidence, not just tool names."
+          text="A strong candidate can understand the problem, prepare the data, build a useful output, and explain the business value clearly."
+          align="left"
+          dark
+        />
 
-          <div className="cr-roles-grid">
-            {JOB_ROLES.map((r, i) => (
-              <div
-                key={i}
-                className={`cr-role-card cr-fade-up cr-s${i + 1} ${rolesVisible ? "cr-vis" : ""}`}
-              >
-                <div className="cr-role-icon" style={{ background: r.color }}>{r.icon}</div>
-                <h3 className="cr-role-title">{r.title}</h3>
-                <p className="cr-role-desc">{r.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════
-          4. SKILLS REQUIRED
-      ═══════════════════════════════════════════════════ */}
-      <section style={{ paddingTop: 96, paddingBottom: 96 }}>
-        <div ref={skillsRevealRef} className="cr-section">
-          <div className={`cr-section-title cr-fade-up ${skillsVisible ? "cr-vis" : ""}`}>
-            <h2>Skills Employers <span>Look For</span></h2>
-            <p>The most requested skills by UK employers hiring for data and AI roles.</p>
-          </div>
-
-          <div className={`cr-skills-wrap cr-fade-up ${skillsVisible ? "cr-vis" : ""}`}>
-            {SKILLS.map((sk, i) => (
-              <div key={i} className={`cr-skill-row cr-fade-up cr-s${i + 1} ${skillsVisible ? "cr-vis" : ""}`}>
-                <div className="cr-skill-label">
-                  <span className="cr-skill-name">{sk.label}</span>
-                  <span className="cr-skill-pct" style={{ color: sk.color }}>
-                    {skillsVisible ? sk.pct : 0}%
-                  </span>
-                </div>
-                <div className="cr-skill-track">
-                  <div
-                    className="cr-skill-fill"
-                    style={{
-                      width: skillsVisible ? `${sk.pct}%` : "0%",
-                      background: `linear-gradient(90deg, ${sk.color}, ${sk.color}bb)`,
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-            <p style={{ fontSize: ".8rem", color: "#9CA3AF", textAlign: "center", marginTop: 8 }}>
-              Based on UK job listing data for data &amp; AI roles.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════
-          5. HIRING INDUSTRIES
-      ═══════════════════════════════════════════════════ */}
-      <section style={{ paddingBottom: 96, background: "#F3F4F6", paddingTop: 80 }}>
-        <div ref={hiringRevealRef} className="cr-section">
-          <div className={`cr-section-title cr-fade-up ${hiringVisible ? "cr-vis" : ""}`}>
-            <h2>Industries Hiring for <span>These Roles</span></h2>
-            <p>From finance to startups, data and AI talent is in demand everywhere.</p>
-          </div>
-
-          <div className="cr-industry-grid">
-            {INDUSTRIES.map((ind, i) => (
-              <div
-                key={i}
-                className={`cr-industry-card cr-fade-up cr-s${i + 1} ${hiringVisible ? "cr-vis" : ""}`}
-                style={{ borderTop: `3px solid ${ind.accent}` }}
-              >
-                <span className="cr-industry-icon">{ind.icon}</span>
-                <span className="cr-industry-name">{ind.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════
-          6. CAREER PATHS
-      ═══════════════════════════════════════════════════ */}
-      <section style={{ paddingTop: 96, paddingBottom: 96 }}>
-        <div ref={pathsRevealRef} className="cr-section">
-          <div className={`cr-section-title cr-fade-up ${pathsVisible ? "cr-vis" : ""}`}>
-            <h2>Typical Career <span>Progression</span></h2>
-            <p>See how professionals typically grow through these career tracks.</p>
-          </div>
-
-          <div className="cr-paths-grid">
-            {CAREER_PATHS.map((p, i) => (
-              <div
-                key={i}
-                className={`cr-path-card cr-fade-up cr-s${i + 1} ${pathsVisible ? "cr-vis" : ""}`}
-              >
-                <h3 className="cr-path-title">
-                  <span className="cr-path-dot" style={{ background: p.color }} />
-                  {p.title}
-                </h3>
-
-                <div className="cr-path-steps">
-                  {p.steps.map((step, si) => (
-                    <div
-                      key={si}
-                      className="cr-path-step"
-                      style={{
-                        ["--step-color" as string]: p.color,
-                      }}
-                    >
-                      <style>{`
-                        .cr-path-card:nth-child(${i + 1}) .cr-path-step:nth-child(${si + 1})::before {
-                          border-color: ${p.color};
-                        }
-                        .cr-path-card:nth-child(${i + 1}) .cr-path-step:nth-child(${si + 1}):not(:last-child)::after {
-                          background: ${p.color}44;
-                        }
-                      `}</style>
-                      <span className="cr-path-step-label">{step}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════
-          7. CTA
-      ═══════════════════════════════════════════════════ */}
-      <section style={{ paddingBottom: 96 }}>
-        <div ref={ctaSecRevealRef} className={`cr-cta-wrap cr-fade-up ${ctaSecVisible ? "cr-vis" : ""}`}>
-          <div className="cr-cta">
-            <div className="cr-cta-inner">
-              <h2>Start Your Career in Data or AI</h2>
-              <p>
-                Gain the skills required to enter these high-growth roles with structured, job-ready programmes.
-              </p>
-              <Link href="/courses" className="cr-btn-gold">
-                Explore Courses
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                </svg>
-              </Link>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {employerSignals.map((signal) => (
+            <div key={signal} className="flex items-center gap-3 rounded-md border border-white/12 bg-white px-4 py-4 text-[#24101f]">
+              <CheckCircle2 className="shrink-0 text-[#7c9a4f]" size={20} />
+              <span className="text-sm font-black">{signal}</span>
             </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PortfolioSection() {
+  return (
+    <section className="bg-[#f7f3ea] px-5 py-20 md:px-8 lg:py-24">
+      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-center">
+        <div className="rounded-md border border-[#ded6c8] bg-white p-4 shadow-[0_22px_55px_rgba(36,26,31,0.08)]">
+          <div className="relative h-[320px] overflow-hidden rounded-md bg-[#efe8dc] md:h-[390px]">
+            <Image
+              src="/da-Photoroom.png"
+              alt="Data analytics portfolio project"
+              fill
+              className="object-contain p-8"
+              sizes="(max-width: 1024px) 90vw, 520px"
+            />
           </div>
         </div>
-      </section>
 
-      <Footer />
-    </main>
+        <div>
+          <SectionHeading
+            eyebrow="Portfolio proof"
+            title="From learning to work you can show."
+            text="A strong data career starts with proof. Learners should be able to show what they built, why it matters, and how they solved the problem."
+            align="left"
+          />
+          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+            {portfolioProjects.map((project) => (
+              <div key={project} className="rounded-md border border-[#ded6c8] bg-white px-4 py-3 text-sm font-bold text-[#493f37]">
+                {project}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ReadinessGapSection() {
+  return (
+    <section className="bg-[#d95700] px-5 py-16 text-white md:px-8">
+      <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+        <div>
+          <SectionLabel dark>Career readiness gap</SectionLabel>
+          <h2 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl">Certificates alone rarely make learners interview-ready.</h2>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {readinessGaps.map((gap) => (
+            <div key={gap} className="rounded-md bg-white px-4 py-4 text-sm font-black text-[#24101f] shadow-[0_16px_36px_rgba(36,26,31,0.12)]">
+              {gap}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MythsSection() {
+  return (
+    <section className="bg-[#f0eadf] px-5 py-20 md:px-8 lg:py-24">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading
+          eyebrow="Myths vs reality"
+          title="A clearer view of data and AI careers."
+          text="The goal is to remove the common doubts that stop capable learners from starting."
+        />
+
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          {myths.map(([myth, reality]) => (
+            <article key={myth} className="rounded-md border border-[#ded6c8] bg-white p-6 shadow-[0_18px_45px_rgba(36,26,31,0.06)]">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#c45118]">Myth</p>
+              <h3 className="mt-2 text-xl font-black">{myth}</h3>
+              <p className="mt-5 text-xs font-black uppercase tracking-[0.22em] text-[#7c9a4f]">Reality</p>
+              <p className="mt-2 text-sm leading-7 text-[#6f665c]">{reality}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CareerSupportSection() {
+  return (
+    <section className="bg-[#24101f] px-5 py-20 text-white md:px-8 lg:py-24">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading
+          eyebrow="Career support"
+          title="Support beyond the classroom."
+          text="The aim is not just to complete a course. The aim is to become confident enough to apply, interview, and keep improving."
+          dark
+        />
+
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {supportItems.map(([Icon, title, text]) => {
+            const TypedIcon = Icon as typeof FileText;
+            return (
+              <article key={title as string} className="rounded-md border border-white/12 bg-white p-6 text-[#24101f]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-md bg-[#f5c242] text-[#24101f]">
+                  <TypedIcon size={24} />
+                </div>
+                <h3 className="mt-5 text-xl font-black">{title as string}</h3>
+                <p className="mt-3 text-sm leading-7 text-[#6f665c]">{text as string}</p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function NinetyDaysSection() {
+  return (
+    <section className="bg-[#cfe0ff] px-5 py-20 md:px-8 lg:py-24">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading
+          eyebrow="First 90 days after training"
+          title="A simple transition plan for the job search."
+          text="The first 90 days after training should turn learning into visible proof, stronger applications, and better interview confidence."
+        />
+
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {ninetyDayPlan.map(([step, title, text]) => (
+            <article key={title} className="rounded-md bg-white p-6 shadow-[0_18px_45px_rgba(36,26,31,0.08)]">
+              <div className="flex h-12 w-12 items-center justify-center rounded-md bg-[#24101f] text-xl font-black text-[#f5c242]">
+                {step}
+              </div>
+              <h3 className="mt-5 text-xl font-black">{title}</h3>
+              <p className="mt-3 text-sm leading-7 text-[#4d617f]">{text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FinalCTASection() {
+  return (
+    <section className="relative overflow-hidden bg-[#24101f] px-5 py-20 text-center text-white md:px-8">
+      <DarkPattern />
+      <div className="relative z-10 mx-auto max-w-3xl">
+        <SectionLabel dark>Free career guidance</SectionLabel>
+        <h2 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl">Book a Free Career Guidance Call</h2>
+        <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/72 md:text-base">
+          Talk through your background, target roles, and best-fit training route before choosing a programme.
+        </p>
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <Link href="/contact" className="btn-gold lg">
+            Book Free Career Guidance Call
+          </Link>
+          <Link href="/courses" className="btn-outline btn-outline-white">
+            Explore Courses
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 }

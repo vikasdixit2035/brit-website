@@ -12,6 +12,7 @@ type BrochureDownloadButtonProps = {
   downloadName: string;
   courseTitle: string;
   variant?: "primary" | "secondary";
+  label?: string;
 };
 
 export default function BrochureDownloadButton({
@@ -19,6 +20,7 @@ export default function BrochureDownloadButton({
   downloadName,
   courseTitle,
   variant = "secondary",
+  label = "Download Brochure",
 }: BrochureDownloadButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,7 +36,7 @@ export default function BrochureDownloadButton({
 
   const buttonClass =
     variant === "primary"
-      ? "w-full sm:w-auto px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-bold text-[15px] transition-all flex items-center justify-center gap-2 shadow-lg shadow-purple-200"
+      ? "w-full sm:w-auto px-8 py-4 bg-[#d95700] hover:bg-[#c45118] text-white rounded-xl font-bold text-[15px] transition-all flex items-center justify-center gap-2 shadow-lg shadow-orange-200"
       : "w-full sm:w-auto px-8 py-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-900 rounded-xl font-bold text-[16px] transition-all shadow-sm flex items-center justify-center gap-2 hover:-translate-y-0.5";
 
   const startDownload = () => {
@@ -104,7 +106,7 @@ export default function BrochureDownloadButton({
   return (
     <>
       <button type="button" onClick={() => setIsOpen(true)} className={buttonClass}>
-        Download Brochure <Download className={variant === "primary" ? "w-4 h-4" : "w-5 h-5 text-gray-500"} />
+        {label} <Download className={variant === "primary" ? "w-4 h-4" : "w-5 h-5 text-gray-500"} />
       </button>
 
       {isOpen && (
@@ -123,7 +125,7 @@ export default function BrochureDownloadButton({
             </button>
 
             <div className="mb-6 pr-8">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-purple-600">Course Brochure</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-[#c45118]">Course Brochure</p>
               <h3 className="text-2xl font-extrabold leading-tight text-gray-900">Get the brochure for {courseTitle}</h3>
               <p className="mt-2 text-sm leading-6 text-gray-600">
                 Fill in your details and the brochure will download once your enquiry is saved.
@@ -198,7 +200,7 @@ export default function BrochureDownloadButton({
                   required
                   checked={formData.agreed}
                   onChange={(e) => setFormData({ ...formData, agreed: e.target.checked })}
-                  className="mt-1 h-4 w-4 cursor-pointer accent-[#10B981]"
+                  className="mt-1 h-4 w-4 cursor-pointer accent-[#7C9A4F]"
                 />
                 <label htmlFor="brochure-agree" className="cursor-pointer text-xs leading-relaxed text-gray-600">
                   I agree to Brit Institute&apos;s{" "}

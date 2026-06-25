@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -11,8 +10,6 @@ import {
   Phone,
   Star,
 } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
-import TopBanner from "@/components/layout/TopBanner";
 import Footer from "@/components/layout/Footer";
 import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_PHONE_UK } from "@/lib/site";
 import type { CourseRecord } from "@/lib/courses";
@@ -28,33 +25,33 @@ const COURSE_STYLES: Record<string, {
   "data-analytics": {
     eyebrow: "In Demand",
     badge: "Most Popular",
-    accent: "#2563EB",
-    accentSoft: "rgba(37,99,235,0.12)",
-    gradient: "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)",
+    accent: "#D95700",
+    accentSoft: "rgba(217,87,0,0.12)",
+    gradient: "linear-gradient(135deg, #D95700 0%, #F5C242 100%)",
     comparisonLabel: "Best for fast entry into analyst roles",
   },
   "data-science": {
     eyebrow: "Advanced",
     badge: "Career Track",
-    accent: "#111827",
-    accentSoft: "rgba(17,24,39,0.10)",
-    gradient: "linear-gradient(135deg, #0F172A 0%, #1E293B 100%)",
+    accent: "#24101F",
+    accentSoft: "rgba(36,16,31,0.10)",
+    gradient: "linear-gradient(135deg, #24101F 0%, #746D5C 100%)",
     comparisonLabel: "Best for machine learning and predictive modelling",
   },
   "ai-automation": {
     eyebrow: "Featured",
     badge: "Future Ready",
-    accent: "#7E22CE",
-    accentSoft: "rgba(126,34,206,0.12)",
-    gradient: "linear-gradient(135deg, #4C1D95 0%, #A21CAF 100%)",
+    accent: "#746D5C",
+    accentSoft: "rgba(116,109,92,0.14)",
+    gradient: "linear-gradient(135deg, #746D5C 0%, #7C9A4F 100%)",
     comparisonLabel: "Best for AI tooling and workflow automation",
   },
   "gen-ai": {
     eyebrow: "Foundation",
     badge: "Fast Start",
-    accent: "#EA580C",
-    accentSoft: "rgba(234,88,12,0.12)",
-    gradient: "linear-gradient(135deg, #F59E0B 0%, #EA580C 100%)",
+    accent: "#C45118",
+    accentSoft: "rgba(196,81,24,0.12)",
+    gradient: "linear-gradient(135deg, #C45118 0%, #D95700 100%)",
     comparisonLabel: "Best for practical generative AI workflows",
   },
 } as const;
@@ -81,9 +78,9 @@ const COURSE_CARD_IMAGES: Record<string, { src: string; alt: string }> = {
 const DEFAULT_STYLE = {
   eyebrow: "Programme",
   badge: "Career Track",
-  accent: "#2563EB",
-  accentSoft: "rgba(37,99,235,0.12)",
-  gradient: "linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%)",
+  accent: "#D95700",
+  accentSoft: "rgba(217,87,0,0.12)",
+  gradient: "linear-gradient(135deg, #D95700 0%, #F5C242 100%)",
   comparisonLabel: "Practical programme for job-ready skill building",
 };
 
@@ -96,10 +93,10 @@ function formatPrice(price: number, currency = "GBP") {
 }
 
 function getGradientFromTailwindTokens(gradient: string, fallback: string) {
-  if (gradient.includes("from-blue-500")) return "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)";
-  if (gradient.includes("from-teal-400")) return "linear-gradient(135deg, #2DD4BF 0%, #0F766E 100%)";
-  if (gradient.includes("from-purple-500")) return "linear-gradient(135deg, #7C3AED 0%, #A21CAF 100%)";
-  if (gradient.includes("from-amber-400")) return "linear-gradient(135deg, #FBBF24 0%, #F97316 100%)";
+  if (gradient.includes("from-blue-500")) return "linear-gradient(135deg, #D95700 0%, #F5C242 100%)";
+  if (gradient.includes("from-teal-400")) return "linear-gradient(135deg, #746D5C 0%, #7C9A4F 100%)";
+  if (gradient.includes("from-purple-500")) return "linear-gradient(135deg, #24101F 0%, #746D5C 100%)";
+  if (gradient.includes("from-amber-400")) return "linear-gradient(135deg, #C45118 0%, #D95700 100%)";
   return fallback;
 }
 
@@ -130,7 +127,6 @@ type PricingPageClientProps = {
 };
 
 export default function PricingPageClient({ courses }: PricingPageClientProps) {
-  const [banner, setBanner] = useState(true);
   const pricingCards = buildPricingCards(courses);
   const comparisonRows = [
     { label: "Duration", getValue: (course: CourseRecord) => course.duration },
@@ -141,23 +137,20 @@ export default function PricingPageClient({ courses }: PricingPageClientProps) {
   ];
 
   return (
-    <main className="min-h-screen bg-[#f7f8fc] text-slate-900">
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
-
+    <main className="min-h-screen bg-[#f7f3ea] text-[#241a1f]">
       <style>{`
         .pricing-hero {
           position: relative;
           overflow: hidden;
-          background: linear-gradient(180deg, #05070d 0%, #0b1328 58%, #111827 100%);
+          background: linear-gradient(180deg, #24101f 0%, #24101f 58%, #160914 100%);
         }
         .pricing-hero::before {
           content: "";
           position: absolute;
           inset: 0;
           background:
-            radial-gradient(ellipse 55% 45% at 15% 82%, rgba(37,99,235,.22), transparent 60%),
-            radial-gradient(ellipse 42% 42% at 82% 22%, rgba(168,85,247,.18), transparent 58%),
+            radial-gradient(ellipse 55% 45% at 15% 82%, rgba(217,87,0,.24), transparent 60%),
+            radial-gradient(ellipse 42% 42% at 82% 22%, rgba(245,194,66,.14), transparent 58%),
             radial-gradient(ellipse 50% 30% at 50% 0%, rgba(228,190,59,.10), transparent 65%);
           pointer-events: none;
         }
@@ -183,16 +176,16 @@ export default function PricingPageClient({ courses }: PricingPageClientProps) {
 
       <section
         className="pricing-hero"
-        style={{ paddingTop: banner ? "164px" : "124px", paddingBottom: "104px" }}
+        style={{ paddingTop: "124px", paddingBottom: "104px" }}
       >
         <div className="relative z-10 mx-auto max-w-6xl px-6 text-center">
           <h1 className="mx-auto max-w-4xl text-4xl font-extrabold leading-[1.08] tracking-tight text-white md:text-5xl lg:text-[58px]">
-            Compare pricing across <span className="text-[#E4BE3B]">all Brit Institute courses</span>
+            Compare pricing across <span className="text-[#F5C242]">all Brit Institute courses</span>
           </h1>
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/60 md:text-xl">
             Choose the programme that fits your career stage, learning goals, and timeline. Every option is built around practical outcomes, portfolio work, and job-relevant skills.
           </p>
-          <div className="mx-auto mt-8 h-[3px] w-16 rounded-full bg-gradient-to-r from-[#2563EB] to-[#E4BE3B]" />
+          <div className="mx-auto mt-8 h-[3px] w-16 rounded-full bg-gradient-to-r from-[#D95700] to-[#F5C242]" />
         </div>
       </section>
 
@@ -265,11 +258,11 @@ export default function PricingPageClient({ courses }: PricingPageClientProps) {
 
                   <div className="mt-6 grid gap-3 rounded-2xl bg-slate-50 p-5 text-sm text-slate-700">
                     <div className="flex items-center gap-2">
-                      <Clock3 className="h-4 w-4 text-blue-600" />
+                      <Clock3 className="h-4 w-4 text-[#d95700]" />
                       <span>{card.duration}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CreditCard className="h-4 w-4 text-blue-600" />
+                      <CreditCard className="h-4 w-4 text-[#d95700]" />
                       <span>One-time programme fee</span>
                     </div>
                     <div className="text-slate-600">
@@ -280,7 +273,7 @@ export default function PricingPageClient({ courses }: PricingPageClientProps) {
                   <div className="mt-6 flex flex-col gap-3 min-[480px]:flex-row">
                     <Link
                       href={card.canonicalPath}
-                      className="inline-flex flex-1 items-center justify-center rounded-2xl bg-[#2563EB] px-5 py-3.5 text-center text-sm font-bold text-white transition hover:bg-[#1D4ED8]"
+                      className="inline-flex flex-1 items-center justify-center rounded-2xl bg-[#d95700] px-5 py-3.5 text-center text-sm font-bold text-white transition hover:bg-[#c45118]"
                     >
                       View Details
                     </Link>
@@ -332,10 +325,10 @@ export default function PricingPageClient({ courses }: PricingPageClientProps) {
         </div>
       </section>
 
-      <section className="px-6 pb-24">
+      {/* <section className="bg-[#746d5c] px-6 py-16 md:py-20">
         <div className="mx-auto max-w-[90rem] rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_18px_70px_rgba(15,23,42,0.06)] md:p-8">
           <div className="max-w-3xl">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-700">Quick Comparison</p>
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#c45118]">Quick Comparison</p>
             <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
               A tabular view of the core pricing differences
             </h2>
@@ -379,10 +372,10 @@ export default function PricingPageClient({ courses }: PricingPageClientProps) {
             </table>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      <section className="px-6 pb-24">
-        <div className="mx-auto grid max-w-6xl gap-8 rounded-[32px] bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 px-8 py-10 text-white shadow-2xl md:grid-cols-[1.4fr_1fr] md:px-12 md:py-12">
+      <section className="bg-[#746d5c] px-6 pb-12 pt-12">
+        <div className="mx-auto grid max-w-6xl gap-8 px-8 py-10 text-white md:grid-cols-[1.4fr_1fr] md:px-12 md:py-12">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#E4BE3B]">
               Need help choosing?
@@ -399,7 +392,7 @@ export default function PricingPageClient({ courses }: PricingPageClientProps) {
             <div className="space-y-4">
               <Link
                 href="/contact"
-                className="inline-flex w-full items-center justify-center rounded-2xl bg-[#2563EB] px-5 py-3.5 text-sm font-bold text-white transition hover:bg-[#1D4ED8]"
+                className="inline-flex w-full items-center justify-center rounded-2xl bg-[#d95700] px-5 py-3.5 text-sm font-bold text-white transition hover:bg-[#c45118]"
               >
                 Talk to Admissions <ArrowRight className="ml-2 h-4 w-4" />
               </Link>

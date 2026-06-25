@@ -2,17 +2,15 @@
 
 import Image from "next/image";
 import { useState, useEffect, useRef, FormEvent } from "react";
-import TopBanner from "@/components/layout/TopBanner";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { SITE_STATS } from "@/lib/site";
 import { trackLead } from "@/lib/analytics";
 import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 
 /* ── tokens ── */
-const BLUE = "#1D4ED8";
+const BLUE = "#D95700";
 const GOLD = "#D4AF37";
-const DEEP = "#0a0f1e";
+const DEEP = "#24101F";
 
 /* ── webinar date (update as needed) ── */
 const WEBINAR_DATE = "16 May 2026";
@@ -36,7 +34,7 @@ const LEARN_POINTS = [
         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
       </svg>
     ),
-    color: "#3B82F6",
+    color: "#D95700",
   },
   {
     text: "Key skills and tools employers expect",
@@ -54,7 +52,7 @@ const LEARN_POINTS = [
         <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
       </svg>
     ),
-    color: "#8B5CF6",
+    color: "#746D5C",
   },
   {
     text: "Common mistakes beginners make and how to avoid them",
@@ -72,15 +70,15 @@ const LEARN_POINTS = [
         <rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
       </svg>
     ),
-    color: "#10B981",
+    color: "#7C9A4F",
   },
 ];
 
 /* ── trust / proof stats ── */
 const PROOF_STATS = [
-  { value: SITE_STATS.learnersTrained, label: "Learners Trained", color: "#3B82F6" },
-  { value: SITE_STATS.careerTransitions, label: "Career Transitions", color: "#8B5CF6" },
-  { value: SITE_STATS.hiringPartners, label: "Hiring Partners", color: "#10B981" },
+  { value: SITE_STATS.learnersTrained, label: "Learners Trained", color: "#D95700" },
+  { value: SITE_STATS.careerTransitions, label: "Career Transitions", color: "#746D5C" },
+  { value: SITE_STATS.hiringPartners, label: "Hiring Partners", color: "#7C9A4F" },
   { value: `${SITE_STATS.averageRating}★`, label: "Average Rating", color: "#F59E0B" },
 ];
 
@@ -103,8 +101,6 @@ function useReveal(threshold = 0.12) {
 
 /* ══════════════════════════════════════════════════════════════════ */
 export default function WebinarPage() {
-  const [banner, setBanner] = useState(true);
-
   const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
   const { revealRef: learnRevealRef, visible: learnVisible } = useReveal();
   const { revealRef: speakerRevealRef, visible: speakerVisible } = useReveal();
@@ -165,9 +161,6 @@ export default function WebinarPage() {
 
   return (
     <main style={{ background: "#FAFAFA", minHeight: "100vh", fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)", color: "#111827" }}>
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
-
       <style>{`
         /* ── WEBINAR PAGE ── */
 
@@ -284,7 +277,7 @@ export default function WebinarPage() {
         }
         .wb-hero-card-avatar {
           width: 88px; height: 88px; border-radius: 50%;
-          background: linear-gradient(135deg, ${BLUE}, #8B5CF6);
+          background: linear-gradient(135deg, ${BLUE}, #F5C242);
           display: flex; align-items: center; justify-content: center;
           margin: 0 auto 18px;
           border: 3px solid rgba(255,255,255,.15);
@@ -369,7 +362,7 @@ export default function WebinarPage() {
         }
         .wb-speaker-avatar {
           width: 140px; height: 140px; border-radius: 20px;
-          background: linear-gradient(135deg, ${BLUE}, #8B5CF6);
+          background: linear-gradient(135deg, ${BLUE}, #F5C242);
           display: flex; align-items: center; justify-content: center;
           font-size: 3.2rem; color: #fff; font-weight: 800;
           box-shadow: 0 8px 32px rgba(29,78,216,.2);
@@ -571,7 +564,7 @@ export default function WebinarPage() {
       ═══════════════════════════════════════════════════ */}
       <section
         className="wb-hero"
-        style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}
+        style={{ paddingTop: "120px", paddingBottom: "80px" }}
       >
         <div ref={heroRevealRef} className={`wb-hero-inner wb-fade-up ${heroVisible ? "wb-vis" : ""}`}>
           {/* left */}
@@ -756,9 +749,9 @@ export default function WebinarPage() {
 
               <ul className="wb-reg-benefits">
                 {[
-                  { text: "100% free — no payment required", color: "#10B981" },
-                  { text: "Live Q&A with the speaker", color: "#3B82F6" },
-                  { text: "Recording sent to all registrants", color: "#8B5CF6" },
+                  { text: "100% free — no payment required", color: "#7C9A4F" },
+                  { text: "Live Q&A with the speaker", color: "#D95700" },
+                  { text: "Recording sent to all registrants", color: "#746D5C" },
                   { text: "Exclusive course discount for attendees", color: "#F59E0B" },
                 ].map((b, i) => (
                   <li key={i}>

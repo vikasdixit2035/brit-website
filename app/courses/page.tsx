@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
-import Navbar from "@/components/layout/Navbar";
+import { ArrowRight, Clock3, FileText, GraduationCap, MonitorPlay, Trophy } from "lucide-react";
 import Footer from "@/components/layout/Footer";
+import { ThemeCTA, ThemeHero, ThemeLabel, ThemeShell } from "@/components/layout/ThinkificTheme";
 import { fetchCourses } from "@/lib/courses";
 import { buildMetadata } from "@/lib/seo";
 
@@ -20,60 +22,133 @@ export const metadata = buildMetadata({
   ],
 });
 
+const courseImages: Record<string, string> = {
+  "data-analytics": "/da-Photoroom.png",
+  "data-science": "/ds-ml-Photoroom.png",
+  "ai-automation": "/agentic-ai-Photoroom.png",
+  "gen-ai": "/genai-Photoroom.png",
+};
+
+const accents = ["#f5c242", "#d95700", "#7c9a4f", "#c45118"];
+
 export default async function CoursesPage() {
   const courseCards = await fetchCourses();
 
   return (
-    <main className="min-h-screen bg-[#f8fafc] text-slate-900">
-      <Navbar hasBanner={false} />
-      <section className="mx-auto max-w-6xl px-6 pb-24 pt-32">
-        <div className="max-w-3xl">
-          <p className="mb-4 inline-flex rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">
-            Explore Career-Focused Programmes
-          </p>
-          <h1 className="mb-5 text-4xl font-extrabold tracking-tight md:text-5xl">
-            Generative AI, Data Analytics and Gen AI, Data Science, Machine Learning and Gen AI, and Agentic AI Certification Programs
-          </h1>
-          <p className="text-lg leading-8 text-slate-600">
-            Compare practical programmes built to help learners develop portfolio-ready skills, understand real tools, and prepare for career transitions.
-          </p>
-        </div>
-
-        <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {courseCards.map((course) => (
-            <Link
-              key={course.slug}
-              href={`/courses/${course.slug}`}
-              className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg"
-            >
-              <div className="mb-5 flex items-center justify-between gap-4">
-                <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold uppercase tracking-wide text-emerald-700">
-                  {course.topBadge}
-                </span>
-                <span className="text-sm font-semibold text-slate-500">{course.duration}</span>
-              </div>
-              <h2 className="mb-3 text-2xl font-bold tracking-tight text-slate-900 group-hover:text-blue-700">
-                {course.title}
-              </h2>
-              <p className="mb-6 text-sm leading-7 text-slate-600">{course.desc}</p>
-              <div className="mb-6 rounded-2xl bg-slate-50 p-4">
-                <div className="text-xs font-bold uppercase tracking-wide text-slate-500">Programme Fee</div>
-                <div className="mt-2 text-lg font-semibold text-slate-900">
-                  {new Intl.NumberFormat("en-GB", {
-                    style: "currency",
-                    currency: course.currency ?? "GBP",
-                    maximumFractionDigits: 0,
-                  }).format(course.price)}
-                </div>
-              </div>
-              <span className="inline-flex items-center text-sm font-bold text-blue-700">
-                View course details
-              </span>
-            </Link>
+    <ThemeShell>
+      <ThemeHero
+        eyebrow="Programme Catalog"
+        title={<>Choose the right learning product for your outcome.</>}
+        text="Compare practical programmes built to help learners develop portfolio-ready skills, understand real tools, and prepare for UK career transitions."
+      >
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          {["Live classes", "Portfolio projects", "Mentor support", "Career preparation"].map((item) => (
+            <span key={item} className="rounded-full border border-white/12 bg-white/8 px-4 py-2 text-sm font-bold text-white/78">
+              {item}
+            </span>
           ))}
         </div>
+      </ThemeHero>
+
+      <section className="bg-[#746d5c] px-5 py-20 text-white md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mx-auto max-w-3xl text-center">
+            <ThemeLabel dark>What's included?</ThemeLabel>
+            <h2 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl">
+              Courses designed like complete career products.
+            </h2>
+            <p className="mt-5 text-sm leading-7 text-white/72 md:text-base">
+              Each course gives you a structured path, practical assignments, reviewed output, and a clearer story for employers.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {courseCards.map((course, index) => {
+              const accent = accents[index % accents.length];
+              const price = new Intl.NumberFormat("en-GB", {
+                style: "currency",
+                currency: course.currency ?? "GBP",
+                maximumFractionDigits: 0,
+              }).format(course.price);
+
+              return (
+                <Link
+                  key={course.slug}
+                  href={`/courses/${course.slug}`}
+                  className="group flex h-full flex-col rounded-md bg-white p-4 text-[#241a1f] shadow-[0_24px_70px_rgba(0,0,0,0.18)] transition hover:-translate-y-1"
+                >
+                  <div className="relative h-44 overflow-hidden rounded-md" style={{ background: accent }}>
+                    <Image
+                      src={courseImages[course.slug] ?? "/genai-Photoroom.png"}
+                      alt={course.title}
+                      fill
+                      className="object-contain p-5 transition group-hover:scale-105"
+                      sizes="(max-width: 768px) 90vw, 300px"
+                    />
+                    {course.isPopular && (
+                      <span className="absolute right-3 top-3 rounded-full bg-[#24101f] px-3 py-1 text-xs font-black uppercase tracking-wide text-white">
+                        Popular
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex flex-1 flex-col p-2 pt-5">
+                    <div className="mb-4 flex items-center justify-between gap-3">
+                      <span className="rounded-full bg-[#f0eadf] px-3 py-1 text-xs font-black uppercase tracking-wide text-[#c45118]">
+                        {course.topBadge}
+                      </span>
+                      <span className="flex items-center gap-1 text-xs font-bold text-[#6f665c]">
+                        <Clock3 size={14} />
+                        {course.duration}
+                      </span>
+                    </div>
+                    <h2 className="text-xl font-black leading-tight transition group-hover:text-[#d95700]">{course.title}</h2>
+                    <p className="mt-3 line-clamp-4 text-sm leading-6 text-[#6f665c]">{course.desc}</p>
+                    <div className="mt-6 grid grid-cols-2 gap-3 text-sm">
+                      <div className="rounded-md bg-[#f7f3ea] p-3">
+                        <div className="text-xs font-black uppercase tracking-wide text-[#7a7064]">Fee</div>
+                        <div className="mt-1 font-black">{price}</div>
+                      </div>
+                      <div className="rounded-md bg-[#f7f3ea] p-3">
+                        <div className="text-xs font-black uppercase tracking-wide text-[#7a7064]">Projects</div>
+                        <div className="mt-1 font-black">{course.projects}</div>
+                      </div>
+                    </div>
+                    <span className="mt-6 inline-flex items-center gap-2 text-sm font-black text-[#d95700]">
+                      View course details <ArrowRight size={16} />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
       </section>
+
+      <section className="bg-[#f7f3ea] px-5 py-20 md:px-8">
+        <div className="mx-auto grid max-w-6xl gap-5 md:grid-cols-4">
+          {[
+            [MonitorPlay, "Live instruction", "Expert-led sessions with replays."],
+            [FileText, "Career portfolio", "Projects you can show and explain."],
+            [GraduationCap, "Certification", "Professional completion proof."],
+            [Trophy, "Job readiness", "CV, LinkedIn, and interview support."],
+          ].map(([Icon, title, text]) => {
+            const TypedIcon = Icon as typeof MonitorPlay;
+            return (
+              <article key={title as string} className="rounded-md border border-[#ded6c8] bg-white p-6">
+                <TypedIcon className="text-[#d95700]" size={26} />
+                <h3 className="mt-5 text-xl font-black">{title as string}</h3>
+                <p className="mt-3 text-sm leading-7 text-[#6f665c]">{text as string}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <ThemeCTA
+        title="Find the course that fits your next role."
+        text="Speak with an advisor and map your current experience to the right Brit Institute pathway."
+      />
       <Footer />
-    </main>
+    </ThemeShell>
   );
 }

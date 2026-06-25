@@ -480,7 +480,7 @@ export default function PaymentCheckout({
         prefill: {
           contact: DEFAULT_RAZORPAY_COUNTRY_CODE,
         },
-        theme: { color: "#1D4ED8" },
+        theme: { color: "#D95700" },
         modal: {
           ondismiss: () => setIsRazorpayLoading(false),
         },
@@ -527,7 +527,7 @@ export default function PaymentCheckout({
         }}
         className={
           className ??
-          "w-full sm:w-auto px-8 py-4 bg-blue-700 hover:bg-blue-800 text-white rounded-xl font-bold text-[16px] transition-all shadow-md flex items-center justify-center gap-2 hover:-translate-y-0.5"
+          "w-full sm:w-auto px-8 py-4 bg-[#d95700] hover:bg-[#c45118] text-white rounded-xl font-bold text-[16px] transition-all shadow-md flex items-center justify-center gap-2 hover:-translate-y-0.5"
         }
       >
         <CreditCard className="h-5 w-5" />
@@ -539,7 +539,7 @@ export default function PaymentCheckout({
           <div className="w-full max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
             <div className="flex items-start justify-between gap-4 border-b border-gray-100 px-6 py-5">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Secure checkout</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c45118]">Secure checkout</p>
                 <h2 className="mt-2 text-xl font-extrabold leading-snug text-gray-900">{courseTitle}</h2>
                 <p className="mt-1 text-sm font-semibold text-gray-600">
                   Total amount:{" "}
@@ -560,10 +560,10 @@ export default function PaymentCheckout({
             </div>
 
             <div className="space-y-5 px-6 py-6">
-              <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4">
+              <div className="rounded-2xl border border-[#ded6c8] bg-[#f7f3ea] p-4">
                 <div className="flex items-start gap-3">
-                  <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-blue-700" />
-                  <p className="text-sm font-medium leading-6 text-blue-950">
+                  <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#d95700]" />
+                  <p className="text-sm font-medium leading-6 text-[#493f37]">
                     Choose Razorpay or PayPal. Your course fee is created on the server and confirmed only after payment verification.
                   </p>
                 </div>
@@ -585,13 +585,13 @@ export default function PaymentCheckout({
                       setCouponMessage("");
                     }}
                     placeholder="Enter coupon code"
-                    className="min-h-12 flex-1 rounded-xl border border-gray-200 bg-white px-4 text-sm font-semibold text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 disabled:bg-gray-100"
+                    className="min-h-12 flex-1 rounded-xl border border-gray-200 bg-white px-4 text-sm font-semibold text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-[#d95700] focus:ring-2 focus:ring-[#f5c242]/25 disabled:bg-gray-100"
                   />
                   <button
                     type="button"
                     onClick={appliedCoupon ? removeCoupon : applyCoupon}
                     disabled={isApplyingCoupon}
-                    className="min-h-12 rounded-xl bg-blue-700 px-5 text-sm font-bold text-white transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:bg-gray-300"
+                    className="min-h-12 rounded-xl bg-[#d95700] px-5 text-sm font-bold text-white transition hover:bg-[#c45118] disabled:cursor-not-allowed disabled:bg-gray-300"
                   >
                     {isApplyingCoupon ? (
                       <span className="inline-flex items-center gap-2">
@@ -642,7 +642,7 @@ export default function PaymentCheckout({
 
               <div>
                 <div className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-700">
-                  <Wallet className="h-4 w-4 text-blue-700" />
+                  <Wallet className="h-4 w-4 text-[#d95700]" />
                   PayPal
                 </div>
                 {isPayPalLoading && (

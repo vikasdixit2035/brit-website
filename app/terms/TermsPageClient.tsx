@@ -1,13 +1,10 @@
 "use client";
 
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 export default function TermsAndConditionsPage() {
   return (
     <main style={{ backgroundColor: "#F9FAFB", minHeight: "100vh", fontFamily: "var(--font-inter), sans-serif", color: "#111827" }}>
-      <Navbar hasBanner={false} />
-
       <div style={{ paddingTop: "140px", paddingBottom: "100px", maxWidth: "800px", margin: "0 auto", paddingLeft: "24px", paddingRight: "24px" }}>
 
         {/* Colorful Gradient Header */}
