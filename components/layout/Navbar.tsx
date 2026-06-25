@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 const BRAND_CYAN = "#00E5FF"; // Free badge color
-const BRAND_BLUE = "#1D4ED8";
+const BRAND_BLUE = "#FFFFFF";
 const BRAND_GOLD = "#D4AF37";
 const NAV_BG = "#000000";
 const NAV_LINK = "#ffffff";
@@ -15,13 +15,13 @@ const TOP_BANNER_HEIGHT = 40;
 // Badge colour map
 const BADGE_COLOURS: Record<string, { bg: string; text: string }> = {
   FEATURED: { bg: "#FFD700", text: "#000" },
-  "MOST POPULAR": { bg: "#8B5CF6", text: "#fff" },
-  "IN DEMAND": { bg: "#10B981", text: "#fff" },
+  "MOST POPULAR": { bg: "#D95700", text: "#fff" },
+  "IN DEMAND": { bg: "#7C9A4F", text: "#fff" },
   "AI LEADER": { bg: "#D4AF37", text: "#1a1a1a" },
 };
 
 function badgeStyle(label: string) {
-  return BADGE_COLOURS[label?.toUpperCase()] ?? { bg: "#1D4ED8", text: "#fff" };
+  return BADGE_COLOURS[label?.toUpperCase()] ?? { bg: "#D95700", text: "#fff" };
 }
 
 interface Course {

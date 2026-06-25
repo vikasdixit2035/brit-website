@@ -1,20 +1,17 @@
 'use client';
 
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-rose-50 via-fuchsia-50 to-purple-50 flex flex-col font-sans text-gray-900">
-      <Navbar hasBanner={false} />
-
+    <main className="min-h-screen bg-[#f7f3ea] flex flex-col font-sans text-[#241a1f]">
       <div className="pt-[140px] pb-[100px] max-w-[800px] mx-auto px-6 w-full flex-grow">
 
-        <div className="bg-white/90 backdrop-blur-sm p-8 md:p-10 rounded-[20px] shadow-xl shadow-purple-900/5 border border-purple-100/50">
-          <h1 className="text-3xl md:text-[2.2rem] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-purple-700 mb-2 leading-tight">
+        <div className="bg-white p-8 md:p-10 rounded-[8px] shadow-xl shadow-[#24101f]/5 border border-[#ded6c8]">
+          <h1 className="text-3xl md:text-[2.2rem] font-extrabold text-[#24101f] mb-2 leading-tight">
             Privacy Policy – Brit Institute
           </h1>
-          <p className="text-purple-600/70 font-semibold mb-10">
+          <p className="text-[#c45118] font-semibold mb-10">
             Effective Date: 03/03/2026
           </p>
 

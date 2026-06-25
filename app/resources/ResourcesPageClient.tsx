@@ -1,27 +1,37 @@
 "use client";
 
-import { useState, useEffect, useRef, FormEvent } from "react";
+import { useState, useEffect, useRef, type FormEvent, type ReactNode } from "react";
 import Link from "next/link";
-import TopBanner from "@/components/layout/TopBanner";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { trackLead } from "@/lib/analytics";
 import { DEFAULT_PHONE_COUNTRY_CODE, PHONE_COUNTRY_CODES } from "@/components/ui/phoneCountryCodes";
 
 /* ── colour tokens ── */
-const BLUE = "#1D4ED8";
+const BLUE = "#D95700";
 const GOLD = "#D4AF37";
-const DEEP = "#0a0f1e";
+const DEEP = "#24101F";
+
+type ResourceItem = {
+  id: string;
+  title: string;
+  desc: string;
+  cta: string;
+  type: "Report" | "Guide";
+  color: string;
+  icon: ReactNode;
+  downloadHref?: string;
+};
 
 /* ── resource data ── */
-const RESOURCES = [
+const RESOURCES: ResourceItem[] = [
   {
     id: "uk-data-analyst-salary-2026",
     title: "UK Data Analyst Salary Report (2026)",
     desc: "Understand salary ranges, hiring trends, and role expectations across industries.",
     cta: "Download Report",
     type: "Report",
-    color: "#3B82F6",
+    color: "#D95700",
+    downloadHref: "/resources_pdf/Brit_Institute_UK_Data_Analyst_Salary_Report_2026.pdf",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" />
@@ -34,7 +44,8 @@ const RESOURCES = [
     desc: "A step-by-step roadmap to move into data analyst roles with no prior experience.",
     cta: "Download Guide",
     type: "Guide",
-    color: "#8B5CF6",
+    color: "#746D5C",
+    downloadHref: "/resources_pdf/Brit_Institute_How_to_Start_a_Career_in_Data_Analytics_UK_Guide.pdf",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
@@ -47,7 +58,8 @@ const RESOURCES = [
     desc: "Explore how AI is transforming roles and where new opportunities are emerging.",
     cta: "Download Report",
     type: "Report",
-    color: "#10B981",
+    downloadHref: "/resources_pdf/Brit_Institute_AI_Automation_UK_Career_Opportunities_Report.pdf",
+    color: "#7C9A4F",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="4" y="4" width="16" height="16" rx="2" /><rect x="9" y="9" width="6" height="6" /><line x1="9" y1="1" x2="9" y2="4" /><line x1="15" y1="1" x2="15" y2="4" /><line x1="9" y1="20" x2="9" y2="23" /><line x1="15" y1="20" x2="15" y2="23" />
@@ -60,7 +72,8 @@ const RESOURCES = [
     desc: "Learn the skills, tools, and progression path for data science roles.",
     cta: "Download Guide",
     type: "Guide",
-    color: "#F59E0B",
+    downloadHref: "/resources_pdf/Brit_Institute_Data_Science_Machine_Learning_Career_Path_Guide_UK_Edition.pdf",
+    color: "#F5C242",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.14" />
@@ -68,6 +81,13 @@ const RESOURCES = [
       </svg>
     ),
   },
+];
+
+const COURSE_INTEREST_OPTIONS = [
+  "Data Analytics",
+  "Gen AI",
+  "Agentic AI",
+  "Data Science & Machine Learning",
 ];
 
 /* ── animate-on-scroll ── */
@@ -89,8 +109,6 @@ function useReveal() {
 
 /* ══════════════════════════════════════════════════════════════════ */
 export default function ResourcesPage() {
-  const [banner, setBanner] = useState(true);
-
   /* reveal refs */
   const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
   const { revealRef: cardsRevealRef, visible: cardsVisible } = useReveal();
@@ -102,6 +120,7 @@ export default function ResourcesPage() {
   const [email, setEmail] = useState("");
   const [phoneCountry, setPhoneCountry] = useState(DEFAULT_PHONE_COUNTRY_CODE);
   const [phone, setPhone] = useState("");
+  const [courseInterest, setCourseInterest] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -121,7 +140,8 @@ export default function ResourcesPage() {
   /* submit */
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim()) { setError("Name and email are required."); return; }
+    if (!name.trim() || !email.trim() || !phone.trim()) { setError("Name, email, and phone number are required."); return; }
+    if (!courseInterest) { setError("Please select the course you are interested in."); return; }
     setSubmitting(true);
     setError("");
 
@@ -137,20 +157,22 @@ export default function ResourcesPage() {
         body: JSON.stringify({
           name: name.trim(),
           email: email.trim(),
-          phone: phone.trim() ? `${phoneCountry} ${phone.trim()}` : undefined,
+          phone: `${phoneCountry} ${phone.trim()}`,
+          course: courseInterest,
           source: "resources",
           resource: selected,
-          message: `Resource download: ${RESOURCES.find((r) => r.id === selected)?.title ?? selected}`,
+          message: `Resource download: ${RESOURCES.find((r) => r.id === selected)?.title ?? selected}. Interested in: ${courseInterest}`,
         }),
       });
       if (!res.ok) throw new Error("Submission failed");
       trackLead({
         formName: "resources_form",
         source: "resources",
+        course: courseInterest,
         resource: selected,
       });
       setSuccess(true);
-      setName(""); setEmail(""); setPhoneCountry(DEFAULT_PHONE_COUNTRY_CODE); setPhone("");
+      setName(""); setEmail(""); setPhoneCountry(DEFAULT_PHONE_COUNTRY_CODE); setPhone(""); setCourseInterest("");
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -161,10 +183,7 @@ export default function ResourcesPage() {
   const selectedResource = RESOURCES.find((r) => r.id === selected);
 
   return (
-    <main style={{ background: "#FAFAFA", minHeight: "100vh", fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)", color: "#111827" }}>
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
-
+    <main style={{ background: "#F7F3EA", minHeight: "100vh", fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)", color: "#241A1F" }}>
       <style>{`
         /* ── RESOURCES PAGE ── */
 
@@ -176,8 +195,8 @@ export default function ResourcesPage() {
         .rs-hero::before {
           content: ''; position: absolute; inset: 0;
           background:
-            radial-gradient(ellipse 60% 50% at 30% 90%, rgba(139,92,246,.18), transparent 60%),
-            radial-gradient(ellipse 50% 55% at 70% 15%, rgba(59,130,246,.2), transparent 55%),
+            radial-gradient(ellipse 60% 50% at 30% 90%, rgba(217,87,0,.18), transparent 60%),
+            radial-gradient(ellipse 50% 55% at 70% 15%, rgba(245,194,66,.16), transparent 55%),
             radial-gradient(ellipse 40% 40% at 50% 50%, rgba(212,175,55,.08), transparent 50%);
           pointer-events: none;
         }
@@ -230,19 +249,33 @@ export default function ResourcesPage() {
         .rs-section-title { text-align: center; margin-bottom: 48px; }
         .rs-section-title h2 {
           font-size: clamp(1.6rem, 3vw, 2.2rem);
-          font-weight: 800; color: #111827; margin: 0 0 12px; letter-spacing: -.025em;
+          font-weight: 800; color: #241A1F; margin: 0 0 12px; letter-spacing: -.025em;
         }
         .rs-section-title h2 span { color: ${BLUE}; }
         .rs-section-title p {
           color: #6B7280; font-size: 1rem; line-height: 1.6;
           max-width: 540px; margin: 0 auto;
         }
+        .rs-resources-layout {
+          display: grid;
+          grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+          gap: 32px;
+          align-items: stretch;
+        }
+        .rs-resources-left,
+        .rs-resources-right {
+          display: flex;
+          flex-direction: column;
+          min-width: 0;
+        }
 
         /* ── resource cards ── */
         .rs-cards-grid {
           display: grid;
           grid-template-columns: 1fr;
+          grid-template-rows: repeat(4, minmax(0, 1fr));
           gap: 24px;
+          flex: 1;
         }
         .rs-card {
           background: #fff; border-radius: 16px;
@@ -252,6 +285,7 @@ export default function ResourcesPage() {
           display: flex; flex-direction: column;
           transition: transform .35s cubic-bezier(.4,0,.2,1), box-shadow .35s;
           position: relative;
+          min-height: 0;
         }
         .rs-card:hover {
           transform: translateY(-6px);
@@ -313,17 +347,25 @@ export default function ResourcesPage() {
         /* selected glow ring */
         .rs-card.rs-selected {
           border-color: ${BLUE};
-          box-shadow: 0 0 0 3px rgba(29,78,216,.18), 0 16px 48px rgba(0,0,0,.1);
+          box-shadow: 0 0 0 3px rgba(217,87,0,.18), 0 16px 48px rgba(0,0,0,.1);
         }
 
         /* ── download form ── */
         .rs-form-wrap {
-          max-width: 580px; margin: 0 auto;
+          --rs-form-title: 1.25rem;
+          --rs-form-text: .9rem;
+          --rs-form-small: .82rem;
+          --rs-form-action: .88rem;
+          max-width: none; margin: 0;
+          height: 100%;
           background: #fff; border-radius: 20px;
           padding: 48px 40px;
           border: 1px solid rgba(0,0,0,.06);
           box-shadow: 0 8px 40px rgba(0,0,0,.06);
           position: relative; overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
         .rs-form-wrap::before {
           content: ''; position: absolute;
@@ -334,16 +376,17 @@ export default function ResourcesPage() {
           text-align: center; margin-bottom: 32px;
         }
         .rs-form-header h2 {
-          font-size: 1.4rem; font-weight: 800;
+          font-size: var(--rs-form-title); font-weight: 800;
           color: #111827; margin: 0 0 8px;
+          line-height: 1.3;
         }
         .rs-form-header p {
-          font-size: .92rem; color: #6B7280;
+          font-size: var(--rs-form-text); color: #6B7280;
           line-height: 1.5; margin: 0;
         }
         .rs-form-selected {
           display: flex; align-items: center; gap: 10px;
-          background: #EFF6FF; border: 1px solid #BFDBFE;
+          background: #F7F3EA; border: 1px solid #DED6C8;
           border-radius: 10px; padding: 14px 16px;
           margin-bottom: 24px;
         }
@@ -353,20 +396,25 @@ export default function ResourcesPage() {
           flex-shrink: 0; color: #fff;
         }
         .rs-form-selected-title {
-          font-size: .88rem; font-weight: 600; color: #1E40AF;
+          font-size: var(--rs-form-action); font-weight: 600; color: #C45118;
           line-height: 1.35;
         }
         .rs-field {
           margin-bottom: 18px;
         }
+        .rs-form-wrap form {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+        }
         .rs-label {
-          display: block; font-size: .82rem; font-weight: 600;
+          display: block; font-size: var(--rs-form-small); font-weight: 600;
           color: #374151; margin-bottom: 6px;
         }
         .rs-input {
           width: 100%; padding: 13px 16px;
           border: 1.5px solid #E5E7EB; border-radius: 10px;
-          font-size: .92rem; color: #111827;
+          font-size: var(--rs-form-text); color: #111827;
           background: #FAFAFA;
           font-family: inherit;
           transition: border-color .2s, box-shadow .2s;
@@ -374,23 +422,23 @@ export default function ResourcesPage() {
         }
         .rs-input:focus {
           border-color: ${BLUE};
-          box-shadow: 0 0 0 3px rgba(29,78,216,.1);
+          box-shadow: 0 0 0 3px rgba(217,87,0,.1);
           background: #fff;
         }
         .rs-input::placeholder { color: #9CA3AF; }
         .rs-submit {
           width: 100%; padding: 14px;
-          background: linear-gradient(135deg, ${BLUE}, #2563EB);
-          color: #fff; font-weight: 700; font-size: .95rem;
+          background: linear-gradient(135deg, ${BLUE}, #F5C242);
+          color: #fff; font-weight: 700; font-size: var(--rs-form-action);
           border: none; border-radius: 10px; cursor: pointer;
           font-family: inherit;
           transition: transform .25s, box-shadow .25s;
           display: flex; align-items: center; justify-content: center; gap: 8px;
-          margin-top: 8px;
+          margin-top: auto;
         }
         .rs-submit:hover:not(:disabled) {
           transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(29,78,216,.3);
+          box-shadow: 0 8px 24px rgba(217,87,0,.3);
         }
         .rs-submit:disabled {
           opacity: .65; cursor: not-allowed;
@@ -450,7 +498,7 @@ export default function ResourcesPage() {
         /* ── CTA ── */
         .rs-cta-wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
         .rs-cta {
-          background: linear-gradient(135deg, #111827 0%, #1E3A5F 50%, ${BLUE} 100%);
+          background: linear-gradient(135deg, #24101F 0%, #160914 50%, ${BLUE} 100%);
           border-radius: 24px; padding: 60px 48px; text-align: center;
           position: relative; overflow: hidden;
           box-shadow: 0 24px 64px rgba(0,0,0,.2);
@@ -459,7 +507,7 @@ export default function ResourcesPage() {
           content: ''; position: absolute; border-radius: 50%;
           filter: blur(80px); pointer-events: none;
         }
-        .rs-cta::before { width: 280px; height: 280px; top: -100px; left: -80px; background: rgba(139,92,246,.25); }
+        .rs-cta::before { width: 280px; height: 280px; top: -100px; left: -80px; background: rgba(217,87,0,.25); }
         .rs-cta::after  { width: 240px; height: 240px; bottom: -80px; right: -50px; background: rgba(212,175,55,.2); }
         .rs-cta-inner { position: relative; z-index: 2; }
         .rs-cta h2 { font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 800; color: #fff; margin: 0 0 16px; }
@@ -488,14 +536,23 @@ export default function ResourcesPage() {
         .rs-s4 { transition-delay: .4s; }
 
         @media (min-width: 640px) {
-          .rs-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-        }
-
-        @media (min-width: 768px) {
-          .rs-cards-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+          .rs-cards-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+          }
         }
 
         @media (max-width: 768px) {
+          .rs-resources-layout {
+            grid-template-columns: 1fr;
+          }
+          .rs-cards-grid {
+            grid-template-rows: auto;
+          }
+          .rs-form-wrap {
+            height: auto;
+            justify-content: flex-start;
+          }
           .rs-form-wrap { padding: 32px 20px; }
           .rs-extra-grid { grid-template-columns: 1fr; }
           .rs-cta { padding: 40px 24px; }
@@ -507,7 +564,7 @@ export default function ResourcesPage() {
       ═══════════════════════════════════════════════════ */}
       <section
         className="rs-hero"
-        style={{ paddingTop: banner ? "160px" : "120px", paddingBottom: "80px" }}
+        style={{ paddingTop: "120px", paddingBottom: "80px" }}
       >
         <div ref={heroRevealRef} className={`rs-hero-inner rs-fade-up ${heroVisible ? "rs-vis" : ""}`}>
           <h1 className="rs-h1">
@@ -522,190 +579,236 @@ export default function ResourcesPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          2. RESOURCE CARDS
+          2. RESOURCES AND DOWNLOAD FORM
       ═══════════════════════════════════════════════════ */}
       <section style={{ paddingTop: 96, paddingBottom: 96 }}>
-        <div ref={cardsRevealRef} className="rs-section">
-          <div className={`rs-section-title rs-fade-up ${cardsVisible ? "rs-vis" : ""}`}>
+        <div className="rs-section">
+          <div ref={cardsRevealRef} className={`rs-section-title rs-fade-up ${cardsVisible ? "rs-vis" : ""}`}>
             <h2>Featured <span>Resources</span></h2>
             <p>Free guides and reports to accelerate your career transition into data and AI.</p>
           </div>
 
-          <div className="rs-cards-grid">
-            {RESOURCES.map((r, i) => (
-              <div
-                key={r.id}
-                className={`rs-card rs-fade-up rs-s${i + 1} ${cardsVisible ? "rs-vis" : ""} ${selected === r.id ? "rs-selected" : ""}`}
-              >
-                <div className="rs-card-accent" style={{ background: r.color }} />
-                <div className="rs-card-body">
-                  <div className="rs-card-icon" style={{ background: r.color }}>
-                    {r.icon}
-                  </div>
-                  <div className="rs-card-type" style={{ background: `${r.color}CC` }}>
-                    {r.type === "Report" ? (
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>
+          <div className="rs-resources-layout">
+            <div className="rs-resources-left">
+            <div className="rs-cards-grid">
+              {RESOURCES.map((r, i) => (
+                <div
+                  key={r.id}
+                  className={`rs-card rs-fade-up rs-s${i + 1} ${cardsVisible ? "rs-vis" : ""} ${selected === r.id ? "rs-selected" : ""}`}
+                >
+                  <div className="rs-card-accent" style={{ background: r.color }} />
+                  <div className="rs-card-body">
+                    <div className="rs-card-icon" style={{ background: r.color }}>
+                      {r.icon}
+                    </div>
+                    <div className="rs-card-type" style={{ background: `${r.color}CC` }}>
+                      {r.type === "Report" ? (
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>
+                      ) : (
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /></svg>
+                      )}
+                      {r.type}
+                    </div>
+                    <h3 className="rs-card-title">{r.title}</h3>
+                    <p className="rs-card-desc">{r.desc}</p>
+                    {r.downloadHref ? (
+                      <a
+                        className="rs-card-cta"
+                        style={{ background: r.color }}
+                        href={r.downloadHref}
+                        download
+                        onClick={() => {
+                          setSelected(r.id);
+                          setSuccess(false);
+                          setError("");
+                        }}
+                      >
+                        {r.cta}
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                      </a>
                     ) : (
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /></svg>
+                      <button
+                        className="rs-card-cta"
+                        style={{ background: r.color }}
+                        onClick={() => handleDownloadClick(r.id)}
+                      >
+                        {r.cta}
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                      </button>
                     )}
-                    {r.type}
                   </div>
-                  <h3 className="rs-card-title">{r.title}</h3>
-                  <p className="rs-card-desc">{r.desc}</p>
-                  <button
-                    className="rs-card-cta"
-                    style={{ background: r.color }}
-                    onClick={() => handleDownloadClick(r.id)}
-                  >
-                    {r.cta}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
+                </div>
+              ))}
+            </div>
+            </div>
+
+            <div ref={formRevealRef} className="rs-resources-right">
+            <div ref={formRef} className={`rs-form-wrap rs-fade-up ${formVisible ? "rs-vis" : ""}`}>
+              {success ? (
+                <div className="rs-success">
+                  <div className="rs-success-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
                     </svg>
+                  </div>
+                  <h3>Thank You!</h3>
+                  <p>Your download link has been sent to your email. Check your inbox shortly.</p>
+                  <button
+                    style={{
+                      marginTop: 20, padding: "10px 24px",
+                      background: BLUE, color: "#fff", border: "none",
+                      borderRadius: 8, fontWeight: 600, fontSize: ".88rem",
+                      cursor: "pointer", fontFamily: "inherit",
+                    }}
+                    onClick={() => { setSuccess(false); setSelected(null); }}
+                  >
+                    Download Another Resource
                   </button>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              ) : (
+                <>
+                  <div className="rs-form-header">
+                    <h2>Get Instant Access to Resources</h2>
+                    <p>Fill in your details to download the selected guide or report.</p>
+                  </div>
 
-      {/* ═══════════════════════════════════════════════════
-          3. DOWNLOAD FORM (GATED)
-      ═══════════════════════════════════════════════════ */}
-      <section style={{ paddingBottom: 96, background: "#F3F4F6", paddingTop: 80 }}>
-        <div ref={formRevealRef} className="rs-section">
-          <div ref={formRef} className={`rs-form-wrap rs-fade-up ${formVisible ? "rs-vis" : ""}`}>
-            {success ? (
-              <div className="rs-success">
-                <div className="rs-success-icon">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <h3>Thank You!</h3>
-                <p>Your download link has been sent to your email. Check your inbox shortly.</p>
-                <button
-                  style={{
-                    marginTop: 20, padding: "10px 24px",
-                    background: BLUE, color: "#fff", border: "none",
-                    borderRadius: 8, fontWeight: 600, fontSize: ".88rem",
-                    cursor: "pointer", fontFamily: "inherit",
-                  }}
-                  onClick={() => { setSuccess(false); setSelected(null); }}
-                >
-                  Download Another Resource
-                </button>
-              </div>
-            ) : (
-              <>
-                <div className="rs-form-header">
-                  <h2>Get Instant Access to Resources</h2>
-                  <p>Fill in your details to download the selected guide or report.</p>
-                </div>
-
-                {/* selected resource indicator */}
-                {selectedResource ? (
-                  <div className="rs-form-selected">
-                    <div className="rs-form-selected-icon" style={{ background: selectedResource.color }}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" />
-                      </svg>
+                  {/* selected resource indicator */}
+                  {selectedResource ? (
+                    <div className="rs-form-selected">
+                      <div className="rs-form-selected-icon" style={{ background: selectedResource.color }}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" />
+                        </svg>
+                      </div>
+                      <span className="rs-form-selected-title">{selectedResource.title}</span>
                     </div>
-                    <span className="rs-form-selected-title">{selectedResource.title}</span>
-                  </div>
-                ) : (
-                  <div className="rs-form-selected" style={{ background: "#FEF3C7", borderColor: "#FDE68A" }}>
-                    <div className="rs-form-selected-icon" style={{ background: "#F59E0B" }}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
-                      </svg>
+                  ) : (
+                    <div className="rs-form-selected" style={{ background: "#FEF3C7", borderColor: "#FDE68A" }}>
+                      <div className="rs-form-selected-icon" style={{ background: "#F59E0B" }}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                      </div>
+                      <span style={{ fontSize: ".88rem", fontWeight: 600, color: "#92400E", lineHeight: 1.35 }}>Select a resource above to download</span>
                     </div>
-                    <span style={{ fontSize: ".85rem", fontWeight: 600, color: "#92400E" }}>Select a resource above to download</span>
-                  </div>
-                )}
+                  )}
 
-                {error && <div className="rs-error">{error}</div>}
+                  {error && <div className="rs-error">{error}</div>}
 
-                <form onSubmit={handleSubmit}>
-                  <div className="rs-field">
-                    <label className="rs-label">Full Name *</label>
-                    <input
-                      className="rs-input"
-                      type="text"
-                      placeholder="e.g. John Smith"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="rs-field">
-                    <label className="rs-label">Email Address *</label>
-                    <input
-                      className="rs-input"
-                      type="email"
-                      placeholder="e.g. john@example.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="rs-field">
-                    <label className="rs-label">Phone Number <span style={{ color: "#9CA3AF", fontWeight: 400 }}>(optional)</span></label>
-                    <div style={{ display: "flex", gap: "8px" }}>
-                      <div style={{ position: "relative", width: "180px" }}>
+                  <form onSubmit={handleSubmit}>
+                    <div className="rs-field">
+                      <label className="rs-label">Full Name *</label>
+                      <input
+                        className="rs-input"
+                        type="text"
+                        placeholder="e.g. John Smith"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="rs-field">
+                      <label className="rs-label">Email Address *</label>
+                      <input
+                        className="rs-input"
+                        type="email"
+                        placeholder="e.g. john@example.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="rs-field">
+                      <label className="rs-label">Phone Number *</label>
+                      <div style={{ display: "flex", gap: "8px" }}>
+                        <div style={{ position: "relative", width: "180px" }}>
+                          <select
+                            className="rs-input"
+                            style={{ width: "100%", paddingRight: "36px", appearance: "none" }}
+                            value={phoneCountry}
+                            onChange={(e) => setPhoneCountry(e.target.value)}
+                          >
+                            {PHONE_COUNTRY_CODES.map((country) => (
+                              <option key={country.value} value={country.value}>
+                                {country.label}
+                              </option>
+                            ))}
+                          </select>
+                          <div style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#6B7280" }}>
+                            <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </div>
+                        </div>
+                        <input
+                          className="rs-input"
+                          type="tel"
+                          placeholder="e.g. 7700 900000"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          style={{ flex: 1 }}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="rs-field">
+                      <label className="rs-label">Interested In *</label>
+                      <div style={{ position: "relative" }}>
                         <select
                           className="rs-input"
-                          style={{ width: "100%", paddingRight: "36px", appearance: "none" }}
-                          value={phoneCountry}
-                          onChange={(e) => setPhoneCountry(e.target.value)}
+                          style={{ width: "100%", paddingRight: "42px", appearance: "none" }}
+                          value={courseInterest}
+                          onChange={(e) => setCourseInterest(e.target.value)}
+                          required
                         >
-                          {PHONE_COUNTRY_CODES.map((country) => (
-                            <option key={country.value} value={country.value}>
-                              {country.label}
+                          <option value="" disabled>
+                            Select a course
+                          </option>
+                          {COURSE_INTEREST_OPTIONS.map((course) => (
+                            <option key={course} value={course}>
+                              {course}
                             </option>
                           ))}
                         </select>
-                        <div style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#6B7280" }}>
+                        <div style={{ position: "absolute", right: "16px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#6B7280" }}>
                           <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
                         </div>
                       </div>
-                      <input
-                        className="rs-input"
-                        type="tel"
-                        placeholder="e.g. 7700 900000"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        style={{ flex: 1 }}
-                      />
                     </div>
-                  </div>
 
-                  <button
-                    type="submit"
-                    className="rs-submit"
-                    disabled={submitting || !selected}
-                  >
-                    {submitting ? (
-                      <>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ animation: "spin 1s linear infinite" }}><path d="M12 2v4m0 12v4m-7.07-3.93 2.83-2.83m8.48-8.48 2.83-2.83M2 12h4m12 0h4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83" /></svg>
-                        Submitting…
-                      </>
-                    ) : (
-                      <>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
-                        </svg>
-                        Download Now
-                      </>
-                    )}
-                  </button>
-                </form>
+                    <button
+                      type="submit"
+                      className="rs-submit"
+                      disabled={submitting || !selected || !courseInterest}
+                    >
+                      {submitting ? (
+                        <>
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ animation: "spin 1s linear infinite" }}><path d="M12 2v4m0 12v4m-7.07-3.93 2.83-2.83m8.48-8.48 2.83-2.83M2 12h4m12 0h4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83" /></svg>
+                          Submitting…
+                        </>
+                      ) : (
+                        <>
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
+                          </svg>
+                          Download Now
+                        </>
+                      )}
+                    </button>
+                  </form>
 
-                <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-              </>
-            )}
+                  <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+                </>
+              )}
+            </div>
+            </div>
           </div>
         </div>
       </section>
@@ -722,9 +825,9 @@ export default function ResourcesPage() {
 
           <div className="rs-extra-grid">
             {[
-              { icon: "📹", title: "Free Masterclass", desc: "Watch an intro session on data analytics and AI careers.", accent: "#3B82F6", href: "#masterclass" },
-              { icon: "📊", title: "Career Quiz", desc: "Find out which data or AI career path fits you best.", accent: "#8B5CF6", href: "/careers" },
-              { icon: "💬", title: "Free Consultation", desc: "Book a 1-on-1 call with our career guidance team.", accent: "#10B981", href: "/contact" },
+              { icon: "▶", title: "Free Masterclass", desc: "Watch an intro session on data analytics and AI careers.", accent: "#D95700", href: "#masterclass" },
+              { icon: "↗", title: "Career Quiz", desc: "Find out which data or AI career path fits you best.", accent: "#746D5C", href: "/careers" },
+              { icon: "✓", title: "Free Consultation", desc: "Book a 1-on-1 call with our career guidance team.", accent: "#7C9A4F", href: "/contact" },
               { icon: "📖", title: "Course Catalogue", desc: "Browse all available programmes and certifications.", accent: "#F59E0B", href: "/courses" },
             ].map((item, i) => (
               <Link href={item.href} key={i} style={{ textDecoration: "none" }}>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -17,14 +18,34 @@ import {
   Sparkles,
   UserRound,
 } from "lucide-react";
-import TopBanner from "@/components/layout/TopBanner";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { BLOG_ARTICLES, BlogArticle, BlogCTA } from "../blogData";
 
-const BLUE = "#1D4ED8";
+const BLUE = "#D95700";
 const GOLD = "#D4AF37";
-const DEEP = "#0a0f1e";
+const DEEP = "#24101F";
+const PAPER = "#F7F3EA";
+const INK = "#241A1F";
+const MUTED = "#746D5C";
+const LINE = "#DED6C8";
+
+const ARTICLE_IMAGES: Record<string, string> = {
+  "data-analyst-vs-data-scientist": "/hero-person.png",
+  "how-to-become-data-analyst-uk": "/da-Photoroom.webp",
+  "data-analyst-salary-uk-2026": "/da-Photoroom.png",
+  "best-ai-tools-data-analysts-2026": "/genai-Photoroom.png",
+  "how-to-start-career-data-science-uk": "/ds-ml-Photoroom.png",
+  "is-data-analytics-good-career-uk": "/hero1.png",
+  "python-vs-sql-data-analysts-learn-first": "/hero2.png",
+  "sql-interview-questions-data-analysts": "/da-Photoroom.webp",
+  "data-analyst-cv-guide-uk": "/da-Photoroom.webp",
+  "data-analyst-mock-interview-checklist": "/da-Photoroom.webp",
+  "data-analyst-case-study-interview-questions": "/da-Photoroom.webp",
+  "data-scientist-salary-uk-2026": "/ds-ml-Photoroom.png",
+  "how-to-become-ai-specialist-uk": "/agentic-ai-Photoroom.png",
+};
+
+const DEFAULT_ARTICLE_IMAGE = "/hero3_v2.png";
 
 const COURSE_LINKS: Record<string, { title: string; href: string; description: string }> = {
   "data-analytics": {
@@ -118,6 +139,28 @@ function renderContent(content: string) {
 
     if (!trimmed) {
       i += 1;
+      continue;
+    }
+
+    if (trimmed.startsWith("```") || trimmed.startsWith("~~~")) {
+      const fence = trimmed.slice(0, 3);
+      const language = trimmed.slice(3).trim();
+      const codeLines: string[] = [];
+      i += 1;
+
+      while (i < lines.length && !lines[i].trimStart().startsWith(fence)) {
+        codeLines.push(lines[i]);
+        i += 1;
+      }
+
+      if (i < lines.length) i += 1;
+
+      elements.push(
+        <pre key={key++} className="bp-code-block">
+          {language && <span className="bp-code-language">{language}</span>}
+          <code>{codeLines.join("\n")}</code>
+        </pre>,
+      );
       continue;
     }
 
@@ -278,7 +321,6 @@ function getRelatedArticles(article: BlogArticle): BlogArticle[] {
 export default function BlogPostPage() {
   const params = useParams();
   const slug = params?.slug as string;
-  const [banner, setBanner] = useState(true);
   const [readingProgress, setReadingProgress] = useState(0);
   const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
   const { revealRef: contentRevealRef, visible: contentVisible } = useReveal();
@@ -300,9 +342,7 @@ export default function BlogPostPage() {
   if (!article) {
     return (
       <main className="bp-page">
-        <TopBanner visible={banner} onClose={() => setBanner(false)} />
-        <Navbar hasBanner={banner} />
-        <section className="bp-not-found" style={{ paddingTop: banner ? "200px" : "160px" }}>
+        <section className="bp-not-found" style={{ paddingTop: "160px" }}>
           <h1>Article Not Found</h1>
           <p>The article you&apos;re looking for doesn&apos;t exist.</p>
           <Link href="/blog" className="bp-not-found-link">
@@ -316,6 +356,8 @@ export default function BlogPostPage() {
   }
 
   const related = getRelatedArticles(article);
+  const suggestedArticles = related.slice(0, 5);
+  const articleImage = ARTICLE_IMAGES[article.slug] ?? DEFAULT_ARTICLE_IMAGE;
   const relatedCourses = (article.relatedCourseSlugs ?? [])
     .map((courseSlug) => COURSE_LINKS[courseSlug])
     .filter((course): course is (typeof COURSE_LINKS)[string] => Boolean(course));
@@ -324,12 +366,10 @@ export default function BlogPostPage() {
   const midIndex = Math.ceil(contentSections.length / 2);
   const contentBefore = contentSections.slice(0, midIndex).join("\n");
   const contentAfter = contentSections.slice(midIndex).join("\n");
-  const heroPaddingTop = banner ? "154px" : "114px";
+  const heroPaddingTop = "114px";
 
   return (
     <main className="bp-page">
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
       <div className="bp-progress" aria-hidden="true">
         <div style={{ width: `${readingProgress}%` }} />
       </div>
@@ -339,9 +379,13 @@ export default function BlogPostPage() {
           --bp-blue: ${BLUE};
           --bp-gold: ${GOLD};
           --bp-deep: ${DEEP};
-          background: #f8fafc;
+          --bp-paper: ${PAPER};
+          --bp-ink: ${INK};
+          --bp-muted: ${MUTED};
+          --bp-line: ${LINE};
+          background: var(--bp-paper);
           min-height: 100vh;
-          color: #111827;
+          color: var(--bp-ink);
           font-family: var(--font-inter, system-ui, -apple-system, sans-serif);
         }
         .bp-progress {
@@ -355,17 +399,16 @@ export default function BlogPostPage() {
         }
         .bp-progress > div {
           height: 100%;
-          background: linear-gradient(90deg, ${GOLD}, #60A5FA);
+          background: linear-gradient(90deg, ${DEEP}, ${BLUE}, ${GOLD});
           transition: width .15s ease;
         }
         .bp-hero {
           position: relative;
           overflow: hidden;
           background:
-            linear-gradient(135deg, rgba(10,15,30,.96), rgba(17,24,39,.94) 48%, rgba(29,78,216,.88)),
-            linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px),
-            linear-gradient(0deg, rgba(255,255,255,.05) 1px, transparent 1px);
-          background-size: auto, 46px 46px, 46px 46px;
+            radial-gradient(ellipse 48% 54% at 68% 12%, rgba(217,87,0,.28), transparent 62%),
+            radial-gradient(ellipse 46% 58% at 10% 90%, rgba(212,175,55,.11), transparent 58%),
+            linear-gradient(135deg, ${DEEP} 0%, #160914 74%, #2d1126 100%);
         }
         .bp-hero::after {
           content: "";
@@ -373,14 +416,14 @@ export default function BlogPostPage() {
           left: 0;
           right: 0;
           bottom: -1px;
-          height: 96px;
-          background: linear-gradient(180deg, transparent, #f8fafc);
+          height: 42px;
+          background: linear-gradient(180deg, transparent, var(--bp-paper));
           pointer-events: none;
         }
         .bp-hero-inner {
           position: relative;
           z-index: 1;
-          max-width: 1180px;
+          max-width: 1120px;
           margin: 0 auto;
           padding: 0 24px;
         }
@@ -401,56 +444,97 @@ export default function BlogPostPage() {
         }
         .bp-hero-grid {
           display: grid;
-          grid-template-columns: minmax(0, 1fr) 340px;
-          gap: 42px;
-          align-items: end;
+          grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+          gap: 44px;
+          align-items: center;
+        }
+        .bp-hero-media {
+          position: relative;
+          min-height: 292px;
+          border-radius: 8px;
+          overflow: hidden;
+          background: #352338;
+          box-shadow: 0 28px 80px rgba(0,0,0,.3);
+        }
+        .bp-hero-media img {
+          object-fit: cover;
+        }
+        .bp-hero-media::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background:
+            linear-gradient(180deg, transparent 44%, rgba(36,16,31,.58)),
+            linear-gradient(90deg, rgba(36,16,31,.08), transparent 40%);
+          pointer-events: none;
+        }
+        .bp-hero-copy {
+          min-width: 0;
         }
         .bp-category {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          padding: 8px 14px;
-          border-radius: 999px;
-          color: #fff;
-          font-size: .74rem;
+          padding: 0;
+          color: ${GOLD};
+          background: transparent !important;
+          font-size: .72rem;
           font-weight: 800;
-          letter-spacing: .06em;
+          letter-spacing: .16em;
           text-transform: uppercase;
           margin-bottom: 18px;
-          box-shadow: 0 12px 28px rgba(0,0,0,.18);
+          box-shadow: none;
         }
         .bp-title {
-          max-width: 850px;
+          max-width: 760px;
           color: #fff;
-          font-size: clamp(2rem, 4.4vw, 4rem);
-          line-height: 1.05;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(2rem, 4.2vw, 3.6rem);
+          line-height: 1.02;
           letter-spacing: 0;
-          font-weight: 900;
-          margin: 0 0 22px;
+          font-weight: 700;
+          margin: 0 0 18px;
         }
         .bp-excerpt {
           max-width: 700px;
-          color: rgba(255,255,255,.72);
-          font-size: 1.06rem;
-          line-height: 1.75;
-          margin: 0 0 28px;
+          color: rgba(255,255,255,.7);
+          font-size: 1rem;
+          line-height: 1.72;
+          margin: 0 0 22px;
         }
         .bp-meta {
           display: flex;
           flex-wrap: wrap;
-          gap: 12px;
+          gap: 10px;
           color: rgba(255,255,255,.78);
         }
         .bp-meta span {
           display: inline-flex;
           align-items: center;
           gap: 7px;
-          padding: 8px 12px;
+          padding: 7px 0;
           border: 1px solid rgba(255,255,255,.13);
-          background: rgba(255,255,255,.07);
-          border-radius: 999px;
+          border-width: 0 0 1px;
+          background: transparent;
+          border-radius: 0;
           font-size: .85rem;
           font-weight: 650;
+        }
+        .bp-reading-chip {
+          position: absolute;
+          left: 18px;
+          bottom: 18px;
+          z-index: 2;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          border-radius: 8px;
+          background: rgba(255,255,255,.92);
+          color: ${INK};
+          padding: 10px 12px;
+          font-size: .78rem;
+          font-weight: 900;
+          box-shadow: 0 16px 38px rgba(0,0,0,.2);
         }
         .bp-hero-panel {
           border: 1px solid rgba(255,255,255,.14);
@@ -489,27 +573,32 @@ export default function BlogPostPage() {
           margin-top: 2px;
         }
         .bp-cover {
-          max-width: 1180px;
-          margin: -54px auto 0;
+          max-width: 1120px;
+          margin: -30px auto 0;
           padding: 0 24px;
           position: relative;
           z-index: 2;
         }
         .bp-cover-inner {
           display: grid;
-          grid-template-columns: 1fr auto;
-          gap: 28px;
-          align-items: center;
-          min-height: 146px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 0;
+          align-items: stretch;
+          min-height: 118px;
           border-radius: 8px;
-          padding: 26px 30px;
-          background:
-            linear-gradient(135deg, ${article.color}, ${article.color}cc 48%, #111827),
-            linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px);
-          background-size: auto, 34px 34px;
-          box-shadow: 0 22px 70px rgba(17,24,39,.18);
-          color: #fff;
+          padding: 0;
+          background: #fff;
+          border: 1px solid var(--bp-line);
+          box-shadow: 0 18px 50px rgba(36,16,31,.09);
+          color: var(--bp-ink);
           overflow: hidden;
+        }
+        .bp-cover-item {
+          padding: 24px 26px;
+          border-left: 1px solid var(--bp-line);
+        }
+        .bp-cover-item:first-child {
+          border-left: 0;
         }
         .bp-cover-label {
           display: inline-flex;
@@ -520,36 +609,35 @@ export default function BlogPostPage() {
           font-size: .78rem;
           letter-spacing: .08em;
           text-transform: uppercase;
-          color: rgba(255,255,255,.72);
+          color: ${BLUE};
         }
         .bp-cover-title {
           margin: 0;
-          max-width: 620px;
-          font-size: clamp(1.15rem, 2.4vw, 1.7rem);
-          line-height: 1.25;
+          max-width: none;
+          font-size: .98rem;
+          line-height: 1.65;
           font-weight: 850;
+          color: #3D3133;
         }
         .bp-cover-stat {
-          display: grid;
-          place-items: center;
-          width: 104px;
-          height: 104px;
-          border-radius: 8px;
-          background: rgba(255,255,255,.14);
-          border: 1px solid rgba(255,255,255,.18);
-          text-align: center;
-          flex-shrink: 0;
+          display: block;
+          width: auto;
+          height: auto;
+          border-radius: 0;
+          background: transparent;
+          border: 0;
+          text-align: left;
         }
         .bp-cover-stat strong {
           display: block;
-          color: ${GOLD};
-          font-size: 1.7rem;
+          color: ${BLUE};
+          font-size: 1.45rem;
           line-height: 1;
         }
         .bp-cover-stat span {
           display: block;
           margin-top: 5px;
-          color: rgba(255,255,255,.76);
+          color: ${MUTED};
           font-size: .74rem;
           font-weight: 750;
           text-transform: uppercase;
@@ -557,59 +645,119 @@ export default function BlogPostPage() {
         }
         .bp-layout {
           display: grid;
-          grid-template-columns: minmax(0, 760px) 320px;
-          gap: 36px;
+          grid-template-columns: minmax(0, 730px) 310px;
+          gap: 56px;
           align-items: start;
-          max-width: 1180px;
+          max-width: 1120px;
           margin: 0 auto;
-          padding: 64px 24px 0;
+          padding: 54px 24px 0;
         }
         .bp-main {
           min-width: 0;
         }
         .bp-article-card {
-          background: #fff;
-          border: 1px solid rgba(15,23,42,.08);
-          border-radius: 8px;
-          padding: 50px;
-          box-shadow: 0 18px 55px rgba(15,23,42,.07);
+          background: transparent;
+          border: 0;
+          border-radius: 0;
+          padding: 0;
+          box-shadow: none;
         }
         .bp-article-card + .bp-article-card {
           margin-top: 26px;
         }
         .bp-sidebar {
           position: sticky;
-          top: 112px;
+          top: 104px;
           display: grid;
           gap: 18px;
         }
         .bp-side-card {
-          background: #fff;
-          border: 1px solid rgba(15,23,42,.08);
+          background: rgba(255,255,255,.72);
+          border: 1px solid var(--bp-line);
           border-radius: 8px;
           padding: 22px;
-          box-shadow: 0 12px 38px rgba(15,23,42,.06);
+          box-shadow: 0 12px 38px rgba(36,26,31,.06);
+          backdrop-filter: blur(12px);
         }
         .bp-side-title {
           display: flex;
           align-items: center;
           gap: 9px;
           margin: 0 0 14px;
-          color: #111827;
+          color: #241A1F;
           font-size: .92rem;
           font-weight: 850;
+        }
+        .bp-side-title.bp-side-title-accent {
+          align-items: flex-start;
+          border-left: 4px solid ${GOLD};
+          padding-left: 12px;
+        }
+        .bp-suggest-list {
+          display: grid;
+          gap: 14px;
+        }
+        .bp-suggest-card {
+          display: grid;
+          grid-template-columns: 74px minmax(0, 1fr);
+          gap: 12px;
+          align-items: center;
+          color: inherit;
+          text-decoration: none;
+        }
+        .bp-suggest-thumb {
+          position: relative;
+          height: 64px;
+          overflow: hidden;
+          border-radius: 8px;
+          background: ${DEEP};
+          border: 1px solid rgba(36,16,31,.08);
+        }
+        .bp-suggest-thumb img {
+          object-fit: cover;
+          transition: transform .25s ease;
+        }
+        .bp-suggest-card:hover .bp-suggest-thumb img {
+          transform: scale(1.06);
+        }
+        .bp-suggest-meta {
+          display: block;
+          margin-bottom: 4px;
+          color: ${BLUE};
+          font-size: .68rem;
+          font-weight: 900;
+          letter-spacing: .08em;
+          text-transform: uppercase;
+        }
+        .bp-suggest-card strong {
+          display: block;
+          color: ${INK};
+          font-size: .82rem;
+          line-height: 1.34;
+          font-weight: 850;
+          transition: color .2s;
+        }
+        .bp-suggest-card:hover strong {
+          color: ${BLUE};
+        }
+        .bp-suggest-card small {
+          display: block;
+          margin-top: 5px;
+          color: ${MUTED};
+          font-size: .74rem;
+          font-weight: 700;
         }
         .bp-toc {
           display: grid;
           gap: 2px;
         }
         .bp-toc a {
-          color: #64748b;
+          color: #746D5C;
           text-decoration: none;
           font-size: .86rem;
           line-height: 1.45;
           padding: 9px 0 9px 14px;
-          border-left: 2px solid #e5e7eb;
+          border-left: 2px solid #DED6C8;
           transition: color .2s, border-color .2s, transform .2s;
         }
         .bp-toc a:hover {
@@ -629,17 +777,17 @@ export default function BlogPostPage() {
           border-radius: 8px;
           display: grid;
           place-items: center;
-          background: #eef2ff;
+          background: rgba(217,87,0,.1);
           color: ${BLUE};
         }
         .bp-author strong {
           display: block;
-          color: #111827;
+          color: #241A1F;
           font-size: .95rem;
         }
         .bp-author span {
           display: block;
-          color: #64748b;
+          color: #746D5C;
           font-size: .8rem;
           margin-top: 1px;
         }
@@ -651,9 +799,9 @@ export default function BlogPostPage() {
           gap: 8px;
           min-height: 42px;
           border-radius: 8px;
-          border: 1px solid #dbe3ee;
-          background: #f8fafc;
-          color: #334155;
+          border: 1px solid #DED6C8;
+          background: #F7F3EA;
+          color: #3D3133;
           text-decoration: none;
           font-weight: 800;
           font-size: .86rem;
@@ -661,38 +809,39 @@ export default function BlogPostPage() {
         }
         .bp-share:hover {
           color: ${BLUE};
-          border-color: rgba(29,78,216,.3);
+          border-color: rgba(217,87,0,.32);
           background: #fff;
         }
         .bp-prose-h2 {
           scroll-margin-top: 126px;
-          color: #111827;
-          font-size: clamp(1.45rem, 2.6vw, 2rem);
-          line-height: 1.2;
+          color: #241A1F;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(1.6rem, 2.7vw, 2.18rem);
+          line-height: 1.18;
           letter-spacing: 0;
-          font-weight: 900;
-          margin: 44px 0 16px;
+          font-weight: 700;
+          margin: 46px 0 15px;
         }
         .bp-prose-h2:first-child {
           margin-top: 0;
         }
         .bp-prose-h3 {
-          color: #111827;
-          font-size: 1.14rem;
+          color: #241A1F;
+          font-size: 1.18rem;
           line-height: 1.35;
           font-weight: 850;
           margin: 30px 0 10px;
         }
         .bp-prose-p {
-          color: #374151;
-          font-size: 1rem;
-          line-height: 1.84;
-          margin: 0 0 16px;
+          color: #3D3133;
+          font-size: 1.02rem;
+          line-height: 1.88;
+          margin: 0 0 18px;
         }
         .bp-prose-p strong,
         .bp-list strong,
         .bp-table strong {
-          color: #111827;
+          color: #241A1F;
           font-weight: 850;
         }
         .bp-list {
@@ -704,7 +853,7 @@ export default function BlogPostPage() {
         }
         .bp-list li {
           position: relative;
-          color: #374151;
+          color: #3D3133;
           font-size: .98rem;
           line-height: 1.7;
           padding-left: 30px;
@@ -734,7 +883,7 @@ export default function BlogPostPage() {
           display: grid;
           place-items: center;
           border-radius: 8px;
-          background: #eef2ff;
+          background: rgba(217,87,0,.1);
           box-shadow: none;
           color: ${BLUE};
           font-size: .74rem;
@@ -742,10 +891,11 @@ export default function BlogPostPage() {
         }
         .bp-table-wrap {
           overflow-x: auto;
-          margin: 22px 0 30px;
-          border: 1px solid #e5e7eb;
+          margin: 24px 0 32px;
+          border: 1px solid #DED6C8;
           border-radius: 8px;
           background: #fff;
+          box-shadow: 0 12px 38px rgba(36,26,31,.06);
         }
         .bp-table {
           width: 100%;
@@ -756,21 +906,50 @@ export default function BlogPostPage() {
         .bp-table td {
           text-align: left;
           padding: 14px 16px;
-          border-bottom: 1px solid #edf2f7;
-          color: #475569;
+          border-bottom: 1px solid #EEE6D8;
+          color: #3D3133;
           font-size: .92rem;
           line-height: 1.55;
         }
         .bp-table th {
-          background: #f8fafc;
-          color: #111827;
+          background: #F7F3EA;
+          color: #241A1F;
           font-weight: 850;
         }
         .bp-table tr:last-child td {
           border-bottom: 0;
         }
+        .bp-code-block {
+          position: relative;
+          overflow-x: auto;
+          margin: 22px 0 30px;
+          padding: 42px 18px 18px;
+          border-radius: 8px;
+          border: 1px solid rgba(36,16,31,.16);
+          background: #1d171b;
+          color: #f8f1e7;
+          box-shadow: 0 16px 42px rgba(36,16,31,.12);
+        }
+        .bp-code-block code {
+          display: block;
+          min-width: max-content;
+          font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+          font-size: .88rem;
+          line-height: 1.7;
+          white-space: pre;
+        }
+        .bp-code-language {
+          position: absolute;
+          top: 12px;
+          left: 18px;
+          color: ${GOLD};
+          font-size: .72rem;
+          font-weight: 900;
+          letter-spacing: .12em;
+          text-transform: uppercase;
+        }
         .bp-cta-wrap {
-          margin: 28px 0;
+          margin: 36px 0;
         }
         .bp-cta {
           position: relative;
@@ -793,10 +972,10 @@ export default function BlogPostPage() {
           pointer-events: none;
         }
         .bp-cta-mid {
-          background: linear-gradient(135deg, ${BLUE}, #2563EB 55%, #111827);
+          background: linear-gradient(135deg, ${BLUE}, #F5C242 58%, #24101F);
         }
         .bp-cta-bottom {
-          background: linear-gradient(135deg, #111827, #1E3A5F 48%, ${BLUE});
+          background: linear-gradient(135deg, #24101F, #160914 52%, ${BLUE});
         }
         .bp-cta-icon {
           position: relative;
@@ -855,7 +1034,7 @@ export default function BlogPostPage() {
           transform: translateY(-2px);
         }
         .bp-btn-gold {
-          color: #111827;
+          color: #241A1F;
           background: linear-gradient(135deg, ${GOLD}, #FBBF24);
           box-shadow: 0 10px 26px rgba(212,175,55,.28);
         }
@@ -878,7 +1057,7 @@ export default function BlogPostPage() {
         }
         .bp-section-head h2 {
           margin: 0 0 9px;
-          color: #111827;
+          color: #241A1F;
           font-size: clamp(1.45rem, 2.4vw, 2rem);
           line-height: 1.2;
           font-weight: 900;
@@ -889,7 +1068,7 @@ export default function BlogPostPage() {
         .bp-section-head p {
           max-width: 600px;
           margin: 0 auto;
-          color: #64748b;
+          color: #746D5C;
           font-size: .96rem;
           line-height: 1.68;
         }
@@ -899,15 +1078,15 @@ export default function BlogPostPage() {
         }
         .bp-faq-item {
           background: #fff;
-          border: 1px solid rgba(15,23,42,.08);
+          border: 1px solid #DED6C8;
           border-radius: 8px;
           overflow: hidden;
-          box-shadow: 0 8px 26px rgba(15,23,42,.05);
+          box-shadow: 0 8px 26px rgba(36,26,31,.05);
           transition: border-color .25s, box-shadow .25s;
         }
         .bp-faq-open {
-          border-color: rgba(29,78,216,.28);
-          box-shadow: 0 12px 34px rgba(29,78,216,.09);
+          border-color: rgba(217,87,0,.28);
+          box-shadow: 0 12px 34px rgba(217,87,0,.09);
         }
         .bp-faq-question {
           width: 100%;
@@ -918,7 +1097,7 @@ export default function BlogPostPage() {
           padding: 19px 22px;
           border: 0;
           background: transparent;
-          color: #111827;
+          color: #241A1F;
           cursor: pointer;
           text-align: left;
           font: inherit;
@@ -933,8 +1112,8 @@ export default function BlogPostPage() {
           height: 30px;
           border-radius: 8px;
           flex: 0 0 auto;
-          color: #64748b;
-          background: #f1f5f9;
+          color: #746D5C;
+          background: #F7F3EA;
           transition: transform .25s, color .25s, background .25s;
         }
         .bp-faq-open .bp-faq-toggle {
@@ -954,7 +1133,7 @@ export default function BlogPostPage() {
         }
         .bp-faq-answer p {
           margin: 0;
-          color: #64748b;
+          color: #746D5C;
           font-size: .93rem;
           line-height: 1.72;
         }
@@ -972,17 +1151,17 @@ export default function BlogPostPage() {
           color: inherit;
           text-decoration: none;
           background: #fff;
-          border: 1px solid rgba(15,23,42,.08);
+          border: 1px solid #DED6C8;
           border-radius: 8px;
           padding: 24px;
-          box-shadow: 0 10px 30px rgba(15,23,42,.05);
+          box-shadow: 0 10px 30px rgba(36,26,31,.05);
           transition: transform .25s, box-shadow .25s, border-color .25s;
         }
         .bp-course-card:hover,
         .bp-related-card:hover {
           transform: translateY(-4px);
-          border-color: rgba(29,78,216,.28);
-          box-shadow: 0 16px 42px rgba(15,23,42,.1);
+          border-color: rgba(217,87,0,.28);
+          box-shadow: 0 16px 42px rgba(36,26,31,.1);
         }
         .bp-course-icon {
           width: 42px;
@@ -991,7 +1170,7 @@ export default function BlogPostPage() {
           place-items: center;
           margin-bottom: 16px;
           border-radius: 8px;
-          background: #eef2ff;
+          background: rgba(217,87,0,.1);
           color: ${BLUE};
         }
         .bp-course-card small,
@@ -1006,7 +1185,7 @@ export default function BlogPostPage() {
         .bp-course-card h3,
         .bp-related-card h3 {
           margin: 0 0 10px;
-          color: #111827;
+          color: #241A1F;
           font-size: 1rem;
           line-height: 1.38;
           font-weight: 850;
@@ -1014,7 +1193,7 @@ export default function BlogPostPage() {
         .bp-course-card p,
         .bp-related-card p {
           margin: 0 0 18px;
-          color: #64748b;
+          color: #746D5C;
           font-size: .9rem;
           line-height: 1.65;
           flex: 1;
@@ -1041,7 +1220,7 @@ export default function BlogPostPage() {
         }
         .bp-related-meta {
           display: inline-flex;
-          color: #94a3b8;
+          color: #9B927F;
           font-size: .8rem;
           font-weight: 700;
         }
@@ -1057,13 +1236,13 @@ export default function BlogPostPage() {
         }
         .bp-not-found h1 {
           margin: 0 0 10px;
-          color: #111827;
+          color: #241A1F;
           font-size: 2rem;
           font-weight: 900;
         }
         .bp-not-found p {
           margin: 0 0 26px;
-          color: #64748b;
+          color: #746D5C;
         }
         .bp-not-found-link {
           display: inline-flex;
@@ -1074,8 +1253,8 @@ export default function BlogPostPage() {
           text-decoration: none;
         }
         .bp-fade-up {
-          opacity: 0;
-          transform: translateY(28px);
+          opacity: 1;
+          transform: translateY(0);
           transition: opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1);
         }
         .bp-fade-up.bp-vis {
@@ -1087,8 +1266,8 @@ export default function BlogPostPage() {
           .bp-layout {
             grid-template-columns: 1fr;
           }
-          .bp-hero-panel {
-            max-width: 640px;
+          .bp-hero-media {
+            min-height: 360px;
           }
           .bp-sidebar {
             position: static;
@@ -1110,6 +1289,12 @@ export default function BlogPostPage() {
           .bp-hero-grid {
             gap: 28px;
           }
+          .bp-hero-media {
+            min-height: 250px;
+          }
+          .bp-title {
+            font-size: clamp(2rem, 10vw, 2.75rem);
+          }
           .bp-meta {
             gap: 8px;
           }
@@ -1122,6 +1307,16 @@ export default function BlogPostPage() {
           .bp-cover-inner {
             grid-template-columns: 1fr;
             padding: 22px;
+          }
+          .bp-cover-item {
+            padding: 0 0 18px;
+            border-left: 0;
+            border-top: 1px solid var(--bp-line);
+            margin-top: 18px;
+          }
+          .bp-cover-item:first-child {
+            border-top: 0;
+            margin-top: 0;
           }
           .bp-cover-stat {
             width: 100%;
@@ -1140,7 +1335,7 @@ export default function BlogPostPage() {
             grid-template-columns: 1fr;
           }
           .bp-side-card:first-child {
-            display: none;
+            display: block;
           }
           .bp-cta {
             padding: 34px 22px;
@@ -1158,7 +1353,21 @@ export default function BlogPostPage() {
             Back to Blog
           </Link>
           <div className="bp-hero-grid">
-            <div>
+            <div className="bp-hero-media">
+              <Image
+                src={articleImage}
+                alt={`${article.title} article visual`}
+                fill
+                priority
+                sizes="(max-width: 900px) 92vw, 520px"
+              />
+              <span className="bp-reading-chip">
+                <Clock3 size={15} />
+                {article.readTime}
+              </span>
+            </div>
+
+            <div className="bp-hero-copy">
               <span className="bp-category" style={{ background: article.color }}>
                 <BookOpen size={14} />
                 {article.category}
@@ -1180,45 +1389,30 @@ export default function BlogPostPage() {
                 </span>
               </div>
             </div>
-
-            <aside className="bp-hero-panel" aria-label="Article highlights">
-              <div className="bp-panel-kicker">
-                <ListChecks size={16} />
-                What you will get
-              </div>
-              <div className="bp-panel-list">
-                <div className="bp-panel-item">
-                  <CheckCircle2 size={18} />
-                  <span>Clear UK-focused career guidance without generic theory.</span>
-                </div>
-                <div className="bp-panel-item">
-                  <CheckCircle2 size={18} />
-                  <span>Practical skills, salary context, and next steps.</span>
-                </div>
-                <div className="bp-panel-item">
-                  <CheckCircle2 size={18} />
-                  <span>Recommended programmes connected to this topic.</span>
-                </div>
-              </div>
-            </aside>
           </div>
         </div>
       </section>
 
       <section className="bp-cover" aria-label="Article summary">
         <div className="bp-cover-inner">
-          <div>
+          <div className="bp-cover-item">
             <span className="bp-cover-label">
               <Sparkles size={16} />
               Brit Institute guide
             </span>
             <h2 className="bp-cover-title">{article.excerpt}</h2>
           </div>
-          <div className="bp-cover-stat">
-            <div>
-              <strong>{headings.length || 1}</strong>
-              <span>Sections</span>
-            </div>
+          <div className="bp-cover-item bp-cover-stat">
+            <strong>{headings.length || 1}</strong>
+            <span>Sections</span>
+            <h2 className="bp-cover-title">A focused reading path with clear comparison points and practical next steps.</h2>
+          </div>
+          <div className="bp-cover-item">
+            <span className="bp-cover-label">
+              <CheckCircle2 size={16} />
+              Best for
+            </span>
+            <h2 className="bp-cover-title">Career changers comparing analyst, scientist, BI, and AI-adjacent data roles in the UK.</h2>
           </div>
         </div>
       </section>
@@ -1239,6 +1433,31 @@ export default function BlogPostPage() {
         </article>
 
         <aside className="bp-sidebar">
+          {suggestedArticles.length > 0 && (
+            <div className="bp-side-card">
+              <h2 className="bp-side-title bp-side-title-accent">You might also like</h2>
+              <div className="bp-suggest-list">
+                {suggestedArticles.map((item) => (
+                  <Link key={item.slug} href={`/blog/${item.slug}`} className="bp-suggest-card">
+                    <span className="bp-suggest-thumb">
+                      <Image
+                        src={ARTICLE_IMAGES[item.slug] ?? DEFAULT_ARTICLE_IMAGE}
+                        alt=""
+                        fill
+                        sizes="74px"
+                      />
+                    </span>
+                    <span>
+                      <span className="bp-suggest-meta">{item.category}</span>
+                      <strong>{item.title}</strong>
+                      <small>{item.readTime}</small>
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
           {headings.length > 0 && (
             <div className="bp-side-card">
               <h2 className="bp-side-title">

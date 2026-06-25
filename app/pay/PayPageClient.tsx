@@ -2,8 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { CreditCard, ExternalLink, Loader2, ShieldCheck, Wallet } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
-import TopBanner from "@/components/layout/TopBanner";
 import Footer from "@/components/layout/Footer";
 import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_PHONE_UK } from "@/lib/site";
 
@@ -44,7 +42,6 @@ function isConfiguredUrl(url?: string) {
 }
 
 export default function PayPageClient() {
-  const [banner, setBanner] = useState(true);
   const [config, setConfig] = useState<PaymentConfig | null>(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -87,7 +84,7 @@ export default function PayPageClient() {
         icon: CreditCard,
         badge: "INR custom amount",
         buttonLabel: "Open Razorpay Payment Page",
-        accent: "bg-blue-700 hover:bg-blue-800",
+        accent: "bg-[#d95700] hover:bg-[#c45118]",
       },
       {
         id: "paypal",
@@ -97,23 +94,20 @@ export default function PayPageClient() {
         icon: Wallet,
         badge: "International",
         buttonLabel: "Open PayPal.Me",
-        accent: "bg-slate-950 hover:bg-slate-800",
+        accent: "bg-[#24101f] hover:bg-[#160914]",
       },
     ],
     [config]
   );
 
   return (
-    <main className="min-h-screen bg-[#f7f8fc] text-slate-900">
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
-
+    <main className="min-h-screen bg-[#f7f3ea] text-[#241a1f]">
       <section
-        className="bg-[linear-gradient(180deg,#05070d_0%,#0b1328_70%,#111827_100%)] px-6 text-white"
-        style={{ paddingTop: banner ? "164px" : "124px", paddingBottom: "72px" }}
+        className="bg-[linear-gradient(180deg,#24101f_0%,#24101f_70%,#160914_100%)] px-6 text-white"
+        style={{ paddingTop: "124px", paddingBottom: "72px" }}
       >
         <div className="mx-auto max-w-5xl">
-          <p className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold uppercase tracking-[0.18em] text-[#E4BE3B]">
+          <p className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold uppercase tracking-[0.18em] text-[#f5c242]">
             Secure payment links
           </p>
           <h1 className="mt-6 max-w-3xl text-4xl font-extrabold tracking-tight md:text-5xl">
@@ -134,7 +128,7 @@ export default function PayPageClient() {
             return (
               <article key={method.id} className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-[0_18px_50px_rgba(15,23,42,0.08)]">
                 <div className="flex items-start justify-between gap-4">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-slate-100 text-slate-950">
+                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#f0eadf] text-[#24101f]">
                     <Icon className="h-6 w-6" />
                   </div>
                   <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.14em] text-amber-800">
@@ -145,10 +139,10 @@ export default function PayPageClient() {
                 <h2 className="mt-6 text-2xl font-extrabold tracking-tight text-slate-950">{method.title}</h2>
                 <p className="mt-3 flex-1 text-base leading-7 text-slate-600">{method.description}</p>
 
-                <div className="mt-6 rounded-xl border border-blue-100 bg-blue-50 p-4">
+                <div className="mt-6 rounded-xl border border-[#ded6c8] bg-[#f7f3ea] p-4">
                   <div className="flex items-start gap-3">
-                    <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-blue-700" />
-                    <p className="text-sm font-semibold leading-6 text-blue-950">
+                    <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#d95700]" />
+                    <p className="text-sm font-semibold leading-6 text-[#493f37]">
                       Hosted-link payments are confirmed by the payment provider. Our admissions team will match the payment using the details you enter.
                     </p>
                   </div>
@@ -193,7 +187,7 @@ export default function PayPageClient() {
           <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
               href={`tel:${SITE_PHONE_UK}`}
-              className="inline-flex min-h-11 items-center justify-center rounded-xl bg-blue-700 px-5 text-sm font-bold text-white transition hover:bg-blue-800"
+              className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#d95700] px-5 text-sm font-bold text-white transition hover:bg-[#c45118]"
             >
               {SITE_PHONE_DISPLAY}
             </a>

@@ -4,6 +4,7 @@ import "./globals.css";
 import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
 import StickyBottomBar from "@/components/layout/StickyBottomBar";
 import CareerChatbotFloat from "@/components/layout/CareerChatbotFloat";
+import SiteChrome from "@/components/layout/SiteChrome";
 import { DEFAULT_OG_IMAGE } from "@/lib/site";
 import {
   getRequestSiteConfig,
@@ -140,6 +141,7 @@ export default async function RootLayout({
         <GoogleTagManagerNoScript />
         <MetaPixel />
         <GlobalUI />
+        {isStandalone ? null : <SiteChrome />}
         {children}
         {isStandalone ? null : <CareerChatbotFloat />}
         {isStandalone ? null : <WhatsAppFloat />}

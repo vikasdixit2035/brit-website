@@ -9,7 +9,6 @@ import {
   TrendingUp, Target, Users, BookOpen, Terminal, Sparkles, Quote, Database,
   Shield, Award, MapPin, Star, ChevronDown, Play
 } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import BrochureDownloadButton from "./BrochureDownloadButton";
 import CourseLeadForm from "./CourseLeadForm";
@@ -32,7 +31,7 @@ const COURSE_RELATED_BLOG_SLUGS: Record<string, string[]> = {
   "data-analytics": [
     "how-to-become-data-analyst-uk",
     "data-analyst-salary-uk-2026",
-    "python-vs-sql-data-analysts",
+    "python-vs-sql-data-analysts-learn-first",
   ],
   "data-science": [
     "how-to-start-career-data-science-uk",
@@ -46,7 +45,7 @@ const COURSE_RELATED_BLOG_SLUGS: Record<string, string[]> = {
   "gen-ai": [
     "best-ai-tools-data-analysts-2026",
     "how-to-become-ai-specialist-uk",
-    "python-vs-sql-data-analysts",
+    "python-vs-sql-data-analysts-learn-first",
   ],
 };
 
@@ -60,7 +59,7 @@ const TOOL_LOGOS: Record<string, { icon: () => ReactNode; accent: string; fallba
   Excel: { icon: ExcelLogo, accent: "bg-emerald-50 border-emerald-100", fallback: "XL" },
   "Power BI": { icon: PowerBILogo, accent: "bg-amber-50 border-amber-100", fallback: "BI" },
   SQL: { icon: SqlLogo, accent: "bg-sky-50 border-sky-100", fallback: "SQL" },
-  Python: { icon: PythonLogo, accent: "bg-blue-50 border-blue-100", fallback: "Py" },
+  Python: { icon: PythonLogo, accent: "bg-orange-50 border-orange-100", fallback: "Py" },
   pandas: { icon: PandasLogo, accent: "bg-violet-50 border-violet-100", fallback: "pd" },
   "scikit-learn": { icon: ScikitLearnLogo, accent: "bg-orange-50 border-orange-100", fallback: "sk" },
   "OpenAI API": { icon: OpenAILogo, accent: "bg-slate-50 border-slate-100", fallback: "AI" },
@@ -123,7 +122,7 @@ function StarIcon({ fill = "currentColor", size = 14 }: { fill?: string; size?: 
 
 function DiamondIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="#1D4ED8" stroke="#1E40AF" strokeWidth="2" className="mt-1 flex-shrink-0">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="#D95700" stroke="#C45118" strokeWidth="2" className="mt-1 flex-shrink-0">
       <polygon points="12 3 21 12 12 21 3 12 12 3"></polygon>
     </svg>
   );
@@ -291,6 +290,905 @@ function SectionLabel({ children }: { children: ReactNode }) {
   );
 }
 
+const dataAnalyticsHeroBadges = [
+  "24 Weekend Program",
+  "Live Mentor-Led Classes",
+  "10+ Portfolio Projects",
+  "Career Support Included",
+];
+
+const dataAnalyticsTrustStrip = [
+  {
+    value: "4.9/5",
+    label: "Learner Rating",
+    detail: "Verified reviews from learners who completed practical analytics projects.",
+  },
+  {
+    value: "24",
+    label: "Structured Weekends",
+    detail: "A clear weekly rhythm from foundation skills to portfolio presentation.",
+  },
+  {
+    value: "10+",
+    label: "Portfolio Projects",
+    detail: "Dashboards, SQL cases, Python automation, AI workflows, and a capstone.",
+  },
+  {
+    value: "Live",
+    label: "Mentor Sessions",
+    detail: "Weekend teaching, project feedback, and career checkpoints with tutors.",
+  },
+];
+
+const dataAnalyticsOutcomes = [
+  {
+    icon: Database,
+    title: "Clean messy business data",
+    result: "Prepare raw spreadsheets and exports so teams can trust the analysis.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Build Excel KPI dashboards",
+    result: "Turn operational data into clear trackers for performance decisions.",
+  },
+  {
+    icon: Terminal,
+    title: "Write SQL analysis queries",
+    result: "Answer business questions with joins, filters, grouping, and validation.",
+  },
+  {
+    icon: MonitorPlay,
+    title: "Create Power BI reports",
+    result: "Design interactive reports with meaningful KPIs and executive summaries.",
+  },
+  {
+    icon: Zap,
+    title: "Automate analysis with Python",
+    result: "Use notebooks and scripts to clean files, analyse data, and save time.",
+  },
+  {
+    icon: Sparkles,
+    title: "Use GenAI in analyst workflows",
+    result: "Apply AI for summaries, QA, prompts, and documented analyst support.",
+  },
+];
+
+const dataAnalyticsNotForYou = [
+  "You want only recorded videos",
+  "You are looking for an advanced research-heavy data science degree",
+  "You do not want to complete assignments or portfolio projects",
+];
+
+const dataAnalyticsToolGroups = [
+  { label: "Data Handling", tools: ["Excel", "Google Sheets", "Power Query"] },
+  { label: "Databases", tools: ["SQL", "PostgreSQL / MySQL"] },
+  { label: "Dashboards", tools: ["Power BI", "Pivot Charts", "KPI Reports"] },
+  { label: "Programming", tools: ["Python", "pandas", "Jupyter"] },
+  { label: "AI Workflows", tools: ["ChatGPT", "Prompting", "AI-assisted analysis", "Automation"] },
+];
+
+const dataAnalyticsRoadmap = [
+  {
+    phase: "Phase 1",
+    title: "Data Foundation & Visualization",
+    weeks: "Weeks 1-4",
+    learn: "Excel formulas, data cleaning, PivotTables, dashboard basics",
+    tools: "Excel, Power Query, Pivot Charts",
+    build: "Operations KPI Tracker and first dashboard file",
+    output: "Cleaned dataset, KPI dashboard, and insight summary",
+  },
+  {
+    phase: "Phase 2",
+    title: "Business Intelligence & SQL",
+    weeks: "Weeks 5-10",
+    learn: "Data modelling, joins, filtering, grouping, KPI logic",
+    tools: "SQL, Power BI, Power Query",
+    build: "Sales dashboard, SQL case study, management report",
+    output: "Decision-ready dashboard and documented SQL analysis",
+  },
+  {
+    phase: "Phase 3",
+    title: "Python Analytics",
+    weeks: "Weeks 11-16",
+    learn: "Python basics, pandas, notebooks, reusable analysis scripts",
+    tools: "Python, pandas, Jupyter",
+    build: "Python data-cleaning automation and EDA notebook",
+    output: "A reusable automation workflow for your portfolio",
+  },
+  {
+    phase: "Phase 4",
+    title: "GenAI, ML & Responsible AI",
+    weeks: "Weeks 17-20",
+    learn: "Prompting, structured AI outputs, ML basics, model limits",
+    tools: "OpenAI API, scikit-learn, GitHub",
+    build: "GenAI analyst workflow and ML prototype",
+    output: "AI-use declaration, model card, and verified insight memo",
+  },
+  {
+    phase: "Phase 5",
+    title: "Career & Portfolio Sprint",
+    weeks: "Weeks 21-24",
+    learn: "Project storytelling, CV evidence, interview walkthroughs",
+    tools: "LinkedIn, GitHub, portfolio templates",
+    build: "Final capstone and hiring-ready project pack",
+    output: "Portfolio, interview stories, and clearer job-search plan",
+  },
+];
+
+const dataAnalyticsPortfolioProjects = [
+  ["Operations KPI Dashboard", "Excel, Pivot Tables, Charts", "A management dashboard tracking performance, trends and issues.", "Dashboard + insight summary", "Beginner"],
+  ["HR Workforce Analytics", "Excel, Power BI", "A people analytics view covering headcount, attrition, and workforce patterns.", "Workforce report + recommendations", "Dashboard"],
+  ["Sales Performance Dashboard", "Power BI, DAX", "An executive dashboard for revenue, product, and regional performance.", "Interactive report + KPI notes", "Power BI"],
+  ["SQL Business Case Study", "SQL", "A documented query pack that answers realistic commercial questions.", "SQL scripts + business answer pack", "SQL"],
+  ["Power BI Executive Dashboard", "Power Query, DAX", "A polished report with KPIs, filters, and stakeholder-ready commentary.", "Published dashboard + walkthrough", "Portfolio-ready"],
+  ["Python Data Cleaning Automation", "Python, pandas", "A repeatable workflow that turns raw files into analysis-ready outputs.", "Notebook + reusable script", "Python"],
+  ["Customer Segmentation Analysis", "Python, statistics", "A business-focused segmentation exercise with explained findings.", "Segment profile + action plan", "Analysis"],
+  ["GenAI Analyst Workflow", "Prompting, OpenAI API", "A reviewed AI workflow for summaries, QA, and structured insight generation.", "AI workflow + validation log", "AI"],
+  ["Machine Learning Prototype", "scikit-learn", "A simple prediction or segmentation prototype with clear model limits.", "Model card + findings memo", "ML"],
+  ["Final Capstone Project", "Full stack", "A complete analyst story combining data, dashboard, insights, and presentation.", "Capstone deck + portfolio case study", "Capstone"],
+];
+
+const dataAnalyticsWeeklyExperience = [
+  ["Saturday", "Live concept class + demo"],
+  ["Sunday", "Project implementation + doubt solving"],
+  ["Weekdays", "Practice tasks + mentor feedback"],
+  ["End of Month", "Portfolio review + career checkpoint"],
+];
+
+const dataAnalyticsCareerSupport = [
+  "CV Improvement",
+  "LinkedIn Profile Review",
+  "Portfolio Building",
+  "Mock Interviews",
+  "Project Walkthrough Practice",
+  "Job Search Guidance",
+  "AI Use Declaration",
+];
+
+const dataAnalyticsFaqGroups = [
+  {
+    title: "Eligibility",
+    questions: ["Can beginners join?", "Do I need coding experience?", "Is this suitable for career switchers?"],
+  },
+  {
+    title: "Course Format",
+    questions: ["Are classes live?", "Are recordings available?", "How many hours per week are required?"],
+  },
+  {
+    title: "Projects",
+    questions: ["Will I build portfolio projects?", "Are projects reviewed?", "Is there a final capstone?"],
+  },
+  {
+    title: "Career Support",
+    questions: ["Do you help with CVs?", "Will I practise interviews?", "Do I get portfolio guidance?"],
+  },
+];
+
+const dataAnalyticsSkillStack = [
+  "Excel",
+  "Power BI",
+  "SQL",
+  "Python",
+  "ChatGPT",
+  "Portfolio Projects",
+  "Career Guidance",
+];
+
+const dataAnalyticsPremiumOutcomes = [
+  {
+    title: "Live, Guided Classes",
+    text: "Learn through weekend live sessions, demos and practical implementation.",
+    icon: MonitorPlay,
+  },
+  {
+    title: "Mentor Support",
+    text: "Get structured guidance, doubt solving and feedback on your work.",
+    icon: Users,
+  },
+  {
+    title: "Career Readiness",
+    text: "Build your CV, LinkedIn, portfolio and project explanation confidence.",
+    icon: Briefcase,
+  },
+];
+
+const dataAnalyticsLearningPath = [
+  {
+    title: "Data Analytics Foundation",
+    text: "Excel, formulas, cleaning, dashboards",
+  },
+  {
+    title: "Business Intelligence",
+    text: "Power BI, Power Query, DAX, reporting",
+  },
+  {
+    title: "SQL + Python Analytics",
+    text: "Databases, queries, automation, pandas",
+  },
+  {
+    title: "GenAI Career Workflow",
+    text: "Prompting, AI-assisted analysis, portfolio and job search",
+  },
+];
+
+const dataAnalyticsLearningSteps = [
+  ["Define your target", "Map your current background to realistic analyst roles."],
+  ["Build visible proof", "Create projects that show how you think and solve problems."],
+  ["Apply with support", "Prepare CV, LinkedIn, portfolio stories and interviews."],
+];
+
+const dataAnalyticsCurriculumPhases = [
+  {
+    phase: "Phase 1",
+    title: "Excel and Data Foundation",
+    weeks: "Weeks 1-4",
+    learn: "Excel formulas, cleaning, tables, pivots, charts",
+    build: "Operations KPI Dashboard, HR Analytics Dashboard",
+  },
+  {
+    phase: "Phase 2",
+    title: "Power BI and Business Reporting",
+    weeks: "Weeks 5-10",
+    learn: "Power Query, data modelling, DAX, dashboard design",
+    build: "Executive Power BI Dashboard, Sales Performance Report",
+  },
+  {
+    phase: "Phase 3",
+    title: "SQL for Analysts",
+    weeks: "Weeks 11-14",
+    learn: "SELECT, JOIN, GROUP BY, subqueries, business case queries",
+    build: "SQL Business Case Study Pack",
+  },
+  {
+    phase: "Phase 4",
+    title: "Python for Analytics",
+    weeks: "Weeks 15-18",
+    learn: "Python basics, pandas, cleaning, automation",
+    build: "Python Data Cleaning Automation Project",
+  },
+  {
+    phase: "Phase 5",
+    title: "GenAI and Applied ML",
+    weeks: "Weeks 19-21",
+    learn: "AI prompting, analyst workflows, basic ML prototype",
+    build: "AI-assisted analysis workflow, ML prototype",
+  },
+  {
+    phase: "Phase 6",
+    title: "Career and Portfolio",
+    weeks: "Weeks 22-24",
+    learn: "Project storytelling, job-search assets, interview practice",
+    build: "Final capstone, GitHub portfolio, CV, LinkedIn, mock interview",
+  },
+];
+
+const dataAnalyticsPremiumProjects = [
+  {
+    title: "Operations KPI Dashboard",
+    tools: "Excel, Pivot Tables, Charts",
+    problem: "Track operational performance, trends and issues.",
+    output: "Dashboard + insight summary",
+    value: "Shows spreadsheet reporting and KPI thinking.",
+  },
+  {
+    title: "HR Workforce Analytics",
+    tools: "Excel, Power BI",
+    problem: "Understand workforce patterns, headcount and attrition.",
+    output: "People analytics report",
+    value: "Shows practical business analytics storytelling.",
+  },
+  {
+    title: "Sales Performance Dashboard",
+    tools: "Power BI, DAX",
+    problem: "Explain revenue performance across products and regions.",
+    output: "Interactive sales dashboard",
+    value: "Shows BI modelling and executive reporting.",
+  },
+  {
+    title: "SQL Business Case Study Pack",
+    tools: "SQL",
+    problem: "Answer business questions from relational data.",
+    output: "Query pack + business answers",
+    value: "Shows database analysis and validation.",
+  },
+  {
+    title: "Python Data Cleaning Automation",
+    tools: "Python, pandas",
+    problem: "Turn raw files into repeatable analysis-ready outputs.",
+    output: "Notebook + reusable script",
+    value: "Shows automation and practical Python skill.",
+  },
+  {
+    title: "GenAI Analyst Workflow",
+    tools: "ChatGPT, OpenAI API",
+    problem: "Use AI to support summaries, QA and structured insights.",
+    output: "Workflow + validation log",
+    value: "Shows responsible AI use in analyst work.",
+  },
+  {
+    title: "Power BI Executive Dashboard",
+    tools: "Power Query, DAX",
+    problem: "Create a stakeholder-ready management view.",
+    output: "Published dashboard + walkthrough",
+    value: "Shows presentation-ready reporting confidence.",
+  },
+  {
+    title: "Final Capstone Project",
+    tools: "Excel, SQL, Power BI, Python, GenAI",
+    problem: "Bring data, analysis, dashboard and explanation together.",
+    output: "Portfolio case study + capstone deck",
+    value: "Shows end-to-end analyst capability.",
+  },
+];
+
+const dataAnalyticsFeatureSuite = [
+  {
+    title: "Turn learning into portfolio proof",
+    text: "Every phase ends with a project you can show in interviews, explain on LinkedIn and add to your portfolio.",
+    bullets: ["Project-based learning", "Real business-style datasets", "Dashboard and case-study outputs"],
+  },
+  {
+    title: "Study with structure, not guesswork",
+    text: "You get a weekly roadmap, clear tasks, mentor guidance and checkpoints, so you always know what to complete next.",
+    bullets: ["Weekly learning plan", "Practice tasks and assignments", "Mentor feedback and doubt support"],
+  },
+  {
+    title: "Prepare for the roles you actually want",
+    text: "The program connects technical skills with CV, LinkedIn, project explanation and interview preparation.",
+    bullets: ["CV and LinkedIn support", "Mock interview preparation", "Project walkthrough practice"],
+  },
+];
+
+const dataAnalyticsIncludedFeatures = [
+  "Live weekend classes",
+  "24-week structured roadmap",
+  "10+ portfolio projects",
+  "Excel, SQL, Power BI, Python and GenAI",
+  "Mentor support",
+  "Career preparation",
+  "Certificate of completion",
+];
+
+const dataAnalyticsStories = [
+  "I finally understood how Excel dashboards are built for real business use.",
+  "The Power BI project helped me explain analytics better in interviews.",
+  "The course gave me a proper roadmap instead of random YouTube learning.",
+];
+
+const dataAnalyticsPremiumFaqs = [
+  ["Can beginners join this course?", "Yes. The roadmap starts with Excel and data foundations before moving into SQL, Power BI, Python and GenAI workflows."],
+  ["Do I need coding experience?", "No. Python and SQL are introduced step by step for analyst use cases, with practical tasks and mentor support."],
+  ["Are classes live or recorded?", "The program is built around live weekend classes. Recordings and supporting resources may be shared for revision where available."],
+  ["Will I get project files?", "Yes. The course is project-led, with datasets, dashboard work, SQL cases, Python notebooks and portfolio outputs."],
+  ["Will I receive career support?", "Yes. Career preparation includes CV, LinkedIn, portfolio guidance, project walkthrough practice and mock interview preparation."],
+  ["Will I get a certificate?", "Yes. Learners receive a certificate of completion after meeting the program requirements."],
+  ["How much time should I spend weekly?", "Plan for weekend classes plus weekday practice tasks. Consistent weekly work is important for building portfolio-quality proof."],
+  ["Is this suitable for career switchers?", "Yes. It is designed for beginners, Excel users and professionals who want a structured route into practical data analytics work."],
+];
+
+type RichCourseData = (typeof coursesData)[string];
+
+function DataAnalyticsCtaRow({ courseTitle, align = "left" }: { courseTitle: string; align?: "left" | "center" }) {
+  return (
+    <div className={`flex flex-col gap-3 sm:flex-row ${align === "center" ? "sm:justify-center" : ""}`}>
+      <Link
+        href="/apply"
+        className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#E95B00] px-7 py-3.5 text-base font-extrabold text-white shadow-lg shadow-black/15 transition-all hover:-translate-y-0.5 hover:bg-[#c94f00] focus:outline-none focus:ring-2 focus:ring-[#F5B82E] focus:ring-offset-2"
+      >
+        Book a Free Counselling Call
+      </Link>
+      <BrochureDownloadButton
+        brochureHref={BROCHURE_HREF}
+        downloadName={BROCHURE_DOWNLOAD_NAME}
+        courseTitle={courseTitle}
+        label="Download Curriculum"
+      />
+    </div>
+  );
+}
+
+function PremiumSectionHeader({
+  eyebrow,
+  title,
+  text,
+  light = false,
+}: {
+  eyebrow?: string;
+  title: string;
+  text?: string;
+  light?: boolean;
+}) {
+  return (
+    <div className="mb-10 max-w-3xl">
+      {eyebrow && (
+        <p className={`mb-3 text-sm font-black uppercase tracking-[0.18em] ${light ? "text-[#F5B82E]" : "text-[#E95B00]"}`}>
+          {eyebrow}
+        </p>
+      )}
+      <h2 className={`text-[2rem] font-black leading-tight md:text-[2.7rem] ${light ? "text-white" : "text-[#231F20]"}`}>
+        {title}
+      </h2>
+      {text && (
+        <p className={`mt-4 text-base leading-8 md:text-lg ${light ? "text-white/75" : "text-[#6B6262]"}`}>{text}</p>
+      )}
+    </div>
+  );
+}
+
+function courseCareerLabel(slug: string, title: string) {
+  if (slug === "data-science") return "Data Science, Machine Learning and AI";
+  if (slug === "ai-automation") return "Agentic AI and automation";
+  if (slug === "gen-ai") return "Generative AI";
+  if (slug === "data-analytics") return "Data Analytics and AI";
+  return title.replace(/ Certification Program$/i, "");
+}
+
+function countLabel(count: number, singular: string, plural = `${singular}s`) {
+  return `${count} ${count === 1 ? singular : plural}`;
+}
+
+function buildPremiumCourseContent(course: CourseRecord, richData: RichCourseData) {
+  const careerLabel = courseCareerLabel(course.slug, richData.h1);
+  const projectCount = richData.projects.length;
+  const reviewRating = richData.reviews?.aggregate.ratingValue ?? 4.9;
+  const supportCount = richData.careerSupport.length;
+  const curriculumCount = richData.curriculum.length;
+  const tools = richData.toolsCovered.slice(0, 8);
+
+  const heroBadges = [
+    richData.programmeOverview.duration,
+    richData.programmeOverview.format,
+    countLabel(projectCount, "Portfolio Project"),
+    "Career Support Included",
+  ];
+
+  const metricCards = [
+    [`${reviewRating}/5`, "Learner Rating"],
+    [richData.programmeOverview.duration, "Structured Program"],
+    [`${projectCount}+`, "Portfolio Projects"],
+    ["Included", "Career Support"],
+  ];
+
+  const outcomes = [
+    {
+      title: "Live, guided learning",
+      text: `Study ${careerLabel.toLowerCase()} through structured sessions, demos, labs and practical implementation.`,
+      icon: MonitorPlay,
+    },
+    {
+      title: "Project-first practice",
+      text: `Build ${countLabel(projectCount, "portfolio project")} that turn concepts into visible proof for interviews and applications.`,
+      icon: Briefcase,
+    },
+    {
+      title: "Career readiness",
+      text: "Shape your CV, LinkedIn, portfolio story and interview confidence around the roles you want.",
+      icon: Users,
+    },
+  ];
+
+  const learningPath = richData.curriculum.slice(0, 4).map((item, index) => ({
+    title: item,
+    text: index === 0
+      ? "Build the foundations and vocabulary for practical work."
+      : index === 1
+        ? "Connect tools, workflows and business problem solving."
+        : index === 2
+          ? "Apply the skills through guided builds and review."
+          : "Turn your work into a portfolio-ready career story.",
+  }));
+
+  const learningSteps = [
+    ["Define your target", `Map your background to ${richData.careerOutcomes.roles.slice(0, 2).join(" and ")} opportunities.`],
+    ["Build visible proof", `Create practical outputs such as ${richData.projects.slice(0, 2).join(" and ")}.`],
+    ["Apply with support", "Prepare your CV, LinkedIn, portfolio walkthroughs and interview stories."],
+  ];
+
+  const curriculumPhases = richData.curriculum.map((title, index) => ({
+    phase: `Phase ${index + 1}`,
+    title,
+    weeks: `Stage ${index + 1}`,
+    learn: `Core concepts, tools and applied workflows for ${title.toLowerCase()}.`,
+    build: richData.projects[index % richData.projects.length] ?? "Portfolio-ready practical output",
+  }));
+
+  const projectTools = richData.toolsCovered.length ? richData.toolsCovered : tools;
+  const projects = richData.projects.map((title, index) => ({
+    title,
+    tools: projectTools.slice(index % Math.max(1, projectTools.length), index % Math.max(1, projectTools.length) + 3).join(", ") || projectTools.slice(0, 3).join(", "),
+    problem: `Solve a realistic ${careerLabel.toLowerCase()} problem with a clear business or portfolio outcome.`,
+    output: `${title} deliverable + walkthrough notes`,
+    value: "Shows practical capability, tool confidence and communication.",
+  }));
+
+  const featureSuite = [
+    {
+      title: "Turn learning into portfolio proof",
+      text: "Every stage connects learning to a tangible project, case study or workflow you can explain clearly.",
+      bullets: richData.projects.slice(0, 3),
+    },
+    {
+      title: "Study with structure, not guesswork",
+      text: "Follow a clear roadmap with guided practice, checkpoints and practical expectations.",
+      bullets: richData.curriculum.slice(0, 3),
+    },
+    {
+      title: "Prepare for the roles you actually want",
+      text: `Position yourself for roles such as ${richData.careerOutcomes.roles.slice(0, 3).join(", ")}.`,
+      bullets: richData.careerSupport.slice(0, 3),
+    },
+  ];
+
+  const includedFeatures = [
+    richData.programmeOverview.format,
+    `${richData.programmeOverview.duration} structured roadmap`,
+    countLabel(projectCount, "portfolio project"),
+    ...tools.slice(0, 4),
+    ...richData.careerSupport.slice(0, 3),
+    "Certificate of completion",
+  ];
+
+  const stories = richData.reviews?.items.map((review) => review.body) ?? dataAnalyticsStories;
+  const faqs = [
+    ["Can beginners join this course?", richData.programmeOverview.level === "Beginner-friendly" ? "Yes. The roadmap is designed to start from foundations and move into practical projects step by step." : "Yes, if you are ready for a structured intermediate programme with regular practice and project work."],
+    ["What will I learn?", `You will work through ${richData.curriculum.slice(0, 4).join(", ")} and related portfolio projects.`],
+    ["Will I build portfolio projects?", `Yes. The programme includes projects such as ${richData.projects.slice(0, 3).join(", ")}.`],
+    ["Will I receive career support?", `Yes. Support includes ${richData.careerSupport.slice(0, 4).join(", ")}.`],
+    ["What tools are covered?", `Tools and workflows include ${richData.toolsCovered.slice(0, 8).join(", ")}.`],
+    ["Will I get a certificate?", "Yes. Learners receive a certificate of completion after meeting the programme requirements."],
+  ];
+
+  return {
+    careerLabel,
+    heroBadges,
+    metricCards,
+    tools,
+    outcomes,
+    learningPath,
+    learningSteps,
+    curriculumPhases,
+    projects,
+    featureSuite,
+    includedFeatures,
+    stories,
+    faqs,
+  };
+}
+
+function CoursePremiumLanding({
+  course,
+  richData,
+  courseSchema,
+  breadcrumbs,
+}: {
+  course: CourseRecord;
+  richData: RichCourseData;
+  courseSchema: ReturnType<typeof buildCourseSchema> | null;
+  breadcrumbs: ReturnType<typeof breadcrumbSchema>;
+}) {
+  const content = buildPremiumCourseContent(course, richData);
+
+  return (
+    <div className="min-h-screen bg-[#F8F1E7] font-sans text-[#231F20]">
+      {courseSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }} />
+      )}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      {course.slug === "data-analytics" && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dataAnalyticsFaqPageSchema) }} />
+      )}
+
+      <header className="relative overflow-hidden bg-[linear-gradient(135deg,#180715_0%,#23091D_50%,#3A102C_100%)] pt-20 text-white">
+
+        <section className="mx-auto max-w-[1180px] px-5 pb-10 pt-8 md:pb-12 md:pt-10 lg:px-8">
+          <nav className="mb-7 flex items-center gap-2 text-sm font-semibold text-white/55" aria-label="Breadcrumb">
+            <Link href="/" className="hover:text-white">Home</Link>
+            <ChevronRight className="h-4 w-4" />
+            <Link href="/courses" className="hover:text-white">Courses</Link>
+            <ChevronRight className="h-4 w-4" />
+            <span className="text-white/80">{content.careerLabel}</span>
+          </nav>
+          <div className="max-w-5xl">
+            <p className="mb-4 inline-flex rounded-full border border-[#F5B82E]/30 bg-white/10 px-4 py-2 text-sm font-black uppercase tracking-[0.16em] text-[#F5B82E]">
+              {richData.h1}
+            </p>
+            <h1 className="max-w-5xl text-[2.65rem] font-black leading-[1.03] tracking-tight md:text-[4.4rem]">
+              Powering your {content.careerLabel} career
+            </h1>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-white/78 md:text-xl">
+              {richData.subheadline}
+            </p>
+            <div className="mt-7">
+              <DataAnalyticsCtaRow courseTitle={course.title} />
+            </div>
+            <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {content.heroBadges.map((badge) => (
+                <div key={badge} className="rounded-xl border border-white/12 bg-white/8 px-5 py-3.5 text-base font-extrabold text-white shadow-xl shadow-black/10 backdrop-blur">
+                  {badge}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </header>
+
+      <main>
+        <section className="bg-[#F8F1E7] px-5 py-16 md:py-24 lg:px-8">
+          <div className="mx-auto max-w-[1180px]">
+            <PremiumSectionHeader title="Trusted by learners building practical data and AI skills" />
+            <div className="mb-8 flex flex-wrap gap-3">
+              {content.tools.map((skill) => (
+                <span key={skill} className="rounded-full border border-[#E8DCCB] bg-[#FFF9F1] px-4 py-2 text-base font-bold text-[#231F20] shadow-sm">
+                  {skill}
+                </span>
+              ))}
+            </div>
+            <div className="grid gap-4 md:grid-cols-4">
+              {content.metricCards.map(([value, label]) => (
+                <div key={label} className="rounded-3xl border border-[#E8DCCB] bg-[#FFF9F1] p-6 shadow-[0_18px_40px_rgba(35,9,29,0.08)] transition-all hover:-translate-y-1">
+                  <div className="text-4xl font-black text-[#23091D]">{value}</div>
+                  <p className="mt-2 text-base font-bold text-[#6B6262]">{label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#F8F1E7] px-5 pb-16 md:pb-28 lg:px-8">
+          <div className="mx-auto max-w-[1180px]">
+            <PremiumSectionHeader title="Learning experiences that convert ambition into career-ready skill." />
+            <div className="grid gap-6 md:grid-cols-3">
+              {content.outcomes.map(({ title, text, icon: Icon }) => (
+                <article key={title} className="rounded-3xl border border-[#E8DCCB] bg-[#FFF9F1] p-8 shadow-[0_18px_40px_rgba(35,9,29,0.08)] transition-all hover:-translate-y-1">
+                  <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#23091D] text-white">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-2xl font-black text-[#231F20]">{title}</h3>
+                  <p className="mt-4 text-base leading-8 text-[#6B6262]">{text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="program" className="bg-[#7A7462] px-5 py-16 md:py-28 lg:px-8">
+          <div className="mx-auto max-w-[1180px]">
+            <PremiumSectionHeader light title={`The right learning path for your ${content.careerLabel.toLowerCase()} outcomes`} />
+            <div className="rounded-[2rem] bg-[#23091D] p-6 shadow-2xl md:p-8">
+              <div className="grid gap-4 md:grid-cols-4">
+                {content.learningPath.map((item) => (
+                  <article key={item.title} className="rounded-3xl border border-white/10 bg-white/[0.06] p-6 text-white transition-all hover:-translate-y-1 hover:bg-white/[0.1]">
+                    <h3 className="text-xl font-black">{item.title}</h3>
+                    <p className="mt-4 text-base leading-7 text-white/72">{item.text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {content.learningSteps.map(([title, text]) => (
+                <article key={title} className="rounded-3xl border border-white/18 bg-[#FFF9F1] p-6 shadow-xl">
+                  <h3 className="text-xl font-black text-[#23091D]">{title}</h3>
+                  <p className="mt-3 text-base leading-7 text-[#6B6262]">{text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[linear-gradient(135deg,#180715_0%,#23091D_50%,#3A102C_100%)] px-5 py-16 text-white md:py-28 lg:px-8">
+          <div className="mx-auto max-w-[1180px]">
+            <PremiumSectionHeader light title="The proof stack for career change." />
+            <div className="grid gap-4 md:grid-cols-4">
+              {content.metricCards.map(([value, label]) => (
+                <div key={label} className="rounded-3xl border border-white/12 bg-white/8 p-7 shadow-xl shadow-black/10">
+                  <div className="text-4xl font-black text-[#F5B82E]">{value}</div>
+                  <p className="mt-3 text-lg font-bold text-white/82">{label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="curriculum" className="bg-[#F8F1E7] px-5 py-16 md:py-28 lg:px-8">
+          <div className="mx-auto max-w-[1180px]">
+            <PremiumSectionHeader title={`A ${richData.programmeOverview.duration} roadmap from learning to portfolio proof`} />
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {content.curriculumPhases.map((phase) => (
+                <details key={phase.phase} className="group rounded-3xl border border-[#E8DCCB] bg-[#FFF9F1] p-6 shadow-[0_18px_40px_rgba(35,9,29,0.08)] open:bg-white">
+                  <summary className="cursor-pointer list-none">
+                    <p className="text-sm font-black uppercase tracking-[0.16em] text-[#E95B00]">{phase.phase} · {phase.weeks}</p>
+                    <h3 className="mt-3 text-2xl font-black leading-tight text-[#231F20]">{phase.title}</h3>
+                    <span className="mt-5 inline-flex rounded-full bg-[#23091D] px-4 py-2 text-sm font-bold text-white group-open:bg-[#E95B00]">
+                      View phase
+                    </span>
+                  </summary>
+                  <div className="mt-6 space-y-4 border-t border-[#E8DCCB] pt-6">
+                    <div>
+                      <p className="font-black text-[#23091D]">Learn</p>
+                      <p className="mt-1 text-base leading-7 text-[#6B6262]">{phase.learn}</p>
+                    </div>
+                    <div>
+                      <p className="font-black text-[#23091D]">Build</p>
+                      <p className="mt-1 text-base leading-7 text-[#6B6262]">{phase.build}</p>
+                    </div>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="projects" className="bg-[#7A7462] px-5 py-16 md:py-28 lg:px-8">
+          <div className="mx-auto max-w-[1180px]">
+            <PremiumSectionHeader light title={`Build portfolio projects that show real ${content.careerLabel.toLowerCase()} capability`} />
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {content.projects.map((project) => (
+                <article key={project.title} className="rounded-3xl border border-white/20 bg-[#FFF9F1] p-6 shadow-xl transition-all hover:-translate-y-1">
+                  <h3 className="text-2xl font-black text-[#23091D]">{project.title}</h3>
+                  <p className="mt-3 text-sm font-black uppercase tracking-[0.14em] text-[#E95B00]">Tools used</p>
+                  <p className="mt-1 text-base font-bold text-[#231F20]">{project.tools}</p>
+                  <p className="mt-4 text-base leading-7 text-[#6B6262]"><span className="font-black text-[#231F20]">Business problem:</span> {project.problem}</p>
+                  <p className="mt-3 text-base leading-7 text-[#6B6262]"><span className="font-black text-[#231F20]">Final output:</span> {project.output}</p>
+                  <p className="mt-3 text-base leading-7 text-[#6B6262]"><span className="font-black text-[#231F20]">Portfolio value:</span> {project.value}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="career-support" className="bg-[#F8F1E7] px-5 py-16 md:py-28 lg:px-8">
+          <div className="mx-auto max-w-[1180px]">
+            <PremiumSectionHeader title="Brit Institute’s stand-out suite of features" />
+            <div className="space-y-6">
+              {content.featureSuite.map((feature, index) => (
+                <article key={feature.title} className={`grid gap-8 rounded-[2rem] border border-[#E8DCCB] bg-[#FFF9F1] p-8 shadow-[0_18px_40px_rgba(35,9,29,0.08)] md:grid-cols-2 md:p-10 ${index % 2 ? "md:[&>div:first-child]:order-2" : ""}`}>
+                  <div>
+                    <p className="mb-3 text-sm font-black uppercase tracking-[0.16em] text-[#E95B00]">Feature {index + 1}</p>
+                    <h3 className="text-3xl font-black leading-tight text-[#23091D]">{feature.title}</h3>
+                    <p className="mt-4 text-lg leading-8 text-[#6B6262]">{feature.text}</p>
+                  </div>
+                  <div className="rounded-3xl bg-[#23091D] p-6 text-white">
+                    <ul className="space-y-4">
+                      {feature.bullets.map((bullet) => (
+                        <li key={bullet} className="flex gap-3 text-base font-bold leading-7">
+                          <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#F5B82E]" />
+                          {bullet}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="fees" className="bg-[linear-gradient(135deg,#180715_0%,#23091D_60%,#3A102C_100%)] px-5 py-16 text-white md:py-28 lg:px-8">
+          <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[1fr_430px] lg:items-center">
+            <div>
+              <PremiumSectionHeader
+                light
+                title={`Start your ${content.careerLabel.toLowerCase()} journey with a clear learning plan.`}
+                text="Book a free counselling call and understand the right path based on your background, goals and current skill level."
+              />
+              <DataAnalyticsCtaRow courseTitle={course.title} />
+            </div>
+            <aside className="rounded-[2rem] border border-white/12 bg-white/8 p-7 shadow-2xl">
+              <p className="text-sm font-black uppercase tracking-[0.16em] text-[#F5B82E]">Included Features</p>
+              <div className="mt-5 text-5xl font-black">{richData.pricing.price}</div>
+              {richData.pricing.emi && <p className="mt-2 text-base font-bold text-white/70">Flexible payment options available</p>}
+              <ul className="mt-7 space-y-4">
+                {content.includedFeatures.map((feature) => (
+                  <li key={feature} className="flex gap-3 text-base font-bold leading-7">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#F5B82E]" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          </div>
+        </section>
+
+        <section className="bg-[#D8E8FF] px-5 py-16 md:py-24 lg:px-8">
+          <div className="mx-auto max-w-[980px] text-center">
+            <Quote className="mx-auto mb-6 h-10 w-10 text-[#23091D]" />
+            <p className="text-3xl font-black leading-tight text-[#23091D] md:text-5xl">
+              “{content.stories[0] ?? "Brit Institute gave me structure, practical projects and the confidence to explain my work clearly in interviews."}”
+            </p>
+          </div>
+        </section>
+
+        <section className="bg-[#F8F1E7] px-5 py-16 md:py-28 lg:px-8">
+          <div className="mx-auto max-w-[1180px]">
+            <PremiumSectionHeader title="Join learners building practical career success stories" />
+            <div className="grid gap-5 md:grid-cols-3">
+              {content.stories.slice(0, 3).map((story, index) => (
+                <article key={story} className="rounded-3xl border border-[#E8DCCB] bg-[#FFF9F1] p-7 shadow-[0_18px_40px_rgba(35,9,29,0.08)]">
+                  <div className="mb-5 flex gap-1 text-[#F5B82E]">
+                    {[1, 2, 3, 4, 5].map((star) => <Star key={star} className="h-5 w-5 fill-current" />)}
+                  </div>
+                  <p className="text-xl font-bold leading-8 text-[#231F20]">“{story}”</p>
+                  <p className="mt-5 text-base font-bold text-[#6B6262]">Learner story {index + 1}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#E95B00] px-5 py-14 text-white md:py-20 lg:px-8">
+          <div className="mx-auto grid max-w-[1180px] gap-8 md:grid-cols-[1fr_auto] md:items-center">
+            <h2 className="text-3xl font-black leading-tight md:text-5xl">The best investment is skill you can prove.</h2>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {[countLabel(richData.projects.length, "Portfolio Project"), richData.programmeOverview.duration, "Career Support Included"].map((item) => (
+                <div key={item} className="rounded-2xl border border-white/25 bg-white/12 px-5 py-4 text-base font-black">
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" className="bg-[#FFF9F1] px-5 py-16 md:py-28 lg:px-8">
+          <div className="mx-auto max-w-[1180px]">
+            <PremiumSectionHeader title="Frequently Asked Questions" />
+            <div className="grid gap-4 md:grid-cols-2">
+              {content.faqs.map(([question, answer]) => (
+                <details key={question} className="group rounded-3xl border border-[#E8DCCB] bg-white p-6 shadow-sm">
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-lg font-black text-[#23091D]">
+                    <span>{question}</span>
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#F8F1E7] text-[#E95B00] transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-5 text-base leading-8 text-[#6B6262]">{answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="bg-[#180715] px-5 pb-28 pt-16 text-white md:pb-16 lg:px-8">
+        <div className="mx-auto grid max-w-[1180px] gap-10 md:grid-cols-4">
+          <div>
+            <h2 className="text-2xl font-black">Brit Institute</h2>
+            <p className="mt-4 text-base leading-7 text-white/65">Practical UK-focused data, AI and career training for learners building visible skill proof.</p>
+            <Link href="/apply" className="mt-6 inline-flex rounded-full bg-[#F5B82E] px-5 py-3 text-sm font-black text-[#23091D] transition-all hover:-translate-y-0.5 hover:bg-white">
+              Book Free Counselling
+            </Link>
+          </div>
+          {[
+            ["Programs", ["Data Analytics + GenAI", "Data Science", "Agentic AI"]],
+            ["Resources", ["Blog", "Reviews", "Pricing"]],
+            ["Contact", ["info@britinstitute.uk", "London, United Kingdom", "Online weekend classes"]],
+          ].map(([title, items]) => (
+            <div key={title as string}>
+              <h3 className="text-lg font-black">{title}</h3>
+              <ul className="mt-4 space-y-3 text-base text-white/65">
+                {(items as string[]).map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </footer>
+
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#E8DCCB] bg-[#FFF9F1]/95 p-3 shadow-2xl backdrop-blur md:hidden">
+        <div className="mx-auto flex max-w-[520px] gap-2">
+          <Link href="/apply" className="flex flex-1 items-center justify-center rounded-full bg-[#E95B00] px-4 py-3 text-sm font-black text-white">
+            Book a Free Counselling Call
+          </Link>
+          <BrochureDownloadButton
+            brochureHref={BROCHURE_HREF}
+            downloadName={BROCHURE_DOWNLOAD_NAME}
+            courseTitle={course.title}
+            label="Download Curriculum"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─────────────────────────────────── Page ─────────────────────────────────── */
 
 export default async function CoursePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -330,6 +1228,21 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
     { name: richData?.seoTitle ?? course.title, path: coursePath },
   ]);
   const aggregateRating = hasCourseReviews ? richData!.reviews.aggregate : null;
+
+  const premiumRichData = richData;
+  if (premiumRichData) {
+    return (
+      <CoursePremiumLanding
+        course={course}
+        richData={premiumRichData}
+        courseSchema={courseSchema}
+        breadcrumbs={breadcrumbs}
+      />
+    );
+  }
+
+  const legacyRichData = richData as RichCourseData | undefined;
+
   const relatedBlogArticles = (COURSE_RELATED_BLOG_SLUGS[resolvedParams.slug] ?? [])
     .map((s) => BLOG_ARTICLES.find((a) => a.slug === s))
     .filter((a): a is (typeof BLOG_ARTICLES)[number] => Boolean(a));
@@ -340,7 +1253,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
     .filter((p: string) => p.length > 5);
 
   return (
-    <div className="min-h-screen font-sans" style={{ background: "linear-gradient(180deg, #F8F9FC 0%, #FFFFFF 100%)", color: "#0F172A" }}>
+    <div className="min-h-screen font-sans" style={{ background: "linear-gradient(180deg, #F7F3EA 0%, #FFFFFF 100%)", color: "#241A1F" }}>
       {courseSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }} />
       )}
@@ -349,10 +1262,8 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dataAnalyticsFaqPageSchema) }} />
       )}
 
-      <Navbar hasBanner={false} />
-
       {/* ── Thin UK accent bar ── */}
-      <div className="h-[3px] w-full" style={{ background: "linear-gradient(90deg, #012169 0%, #C8102E 50%, #012169 100%)" }} />
+      <div className="h-[3px] w-full" style={{ background: "linear-gradient(90deg, #24101F 0%, #D95700 50%, #D4AF37 100%)" }} />
 
       <main className="pt-24 pb-24 max-w-[1240px] xl:max-w-[1400px] mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-14">
 
@@ -374,7 +1285,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
             {/* Status pills row */}
             <div className="flex flex-wrap gap-2 mb-6">
               {isDataAnalyticsCourse && (
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-blue-700">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-[#f5c242]/40 bg-[#fff7df] px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-[#c45118]">
                   <Sparkles className="h-3 w-3 text-amber-500" />
                   AI-Enhanced
                 </span>
@@ -391,31 +1302,55 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
               )}
             </div>
 
-            <h1 className="text-[2.6rem] md:text-[3.2rem] font-black leading-[1.1] tracking-tight text-slate-900 mb-5" style={{ fontVariantNumeric: "tabular-nums" }}>
-              {richData ? richData.h1 : course.title}
+            <h1 className="text-[2.6rem] md:text-[3.2rem] font-black leading-[1.1] tracking-tight text-[#241a1f] mb-5" style={{ fontVariantNumeric: "tabular-nums" }}>
+              {isDataAnalyticsCourse ? "Become a Job-Ready Data Analyst with GenAI" : legacyRichData ? legacyRichData.h1 : course.title}
             </h1>
 
-            {richData && (
+            {legacyRichData && (
               <p className="text-lg md:text-xl text-slate-500 mb-8 leading-relaxed max-w-2xl font-normal">
-                {richData.subheadline}
+                {isDataAnalyticsCourse
+                  ? "Learn Excel, SQL, Power BI, Python and AI workflows through live weekend classes, portfolio projects, mentor support and career preparation."
+                  : legacyRichData.subheadline}
               </p>
             )}
 
+            {legacyRichData && (
+              <div className="mb-8 flex flex-col gap-3 sm:flex-row">
+                <Link
+                  href="/apply"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-7 py-3.5 text-[15px] font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-slate-800 sm:w-auto"
+                >
+                  Book Free Counselling <ArrowRight className="h-4 w-4" />
+                </Link>
+                <BrochureDownloadButton brochureHref={BROCHURE_HREF} downloadName={BROCHURE_DOWNLOAD_NAME} courseTitle={course.title} />
+              </div>
+            )}
+
             {/* Cohort / Duration chips */}
-            {richData && (
+            {legacyRichData && (
               <div className="flex flex-wrap gap-2.5 mb-8">
                 <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
                   <Clock className="w-3.5 h-3.5 text-emerald-500" />
-                  Cohort: <span className="text-slate-900">{richData.cohort}</span>
+                  Cohort: <span className="text-slate-900">{legacyRichData.cohort}</span>
                 </div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
-                  <Layers className="w-3.5 h-3.5 text-blue-500" />
-                  Duration: <span className="text-slate-900">{richData.duration}</span>
+                  <Layers className="w-3.5 h-3.5 text-[#d95700]" />
+                  Duration: <span className="text-slate-900">{legacyRichData.duration}</span>
                 </div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
                   <MapPin className="w-3.5 h-3.5 text-rose-500" />
-                  {richData.programmeOverview.format}
+                  {legacyRichData.programmeOverview.format}
                 </div>
+              </div>
+            )}
+
+            {isDataAnalyticsCourse && (
+              <div className="mb-8 grid grid-cols-2 gap-2.5 md:grid-cols-4">
+                {dataAnalyticsHeroBadges.map((badge) => (
+                  <div key={badge} className="rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-center text-[12px] font-black leading-snug text-slate-800 shadow-sm">
+                    {badge}
+                  </div>
+                ))}
               </div>
             )}
 
@@ -430,23 +1365,29 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                   ))}
                 </div>
                 <div className="text-sm">
-                  <span className="font-black text-slate-900">{richData ? richData.trustLayer.learnersTrained : "300K+"}</span>
+                  <span className="font-black text-slate-900">{legacyRichData ? legacyRichData.trustLayer.learnersTrained : "300K+"}</span>
                   <span className="text-slate-500 ml-1 font-medium">trained</span>
                 </div>
               </div>
-              {richData && (
+              {legacyRichData && (
                 <>
                   <div className="px-5 py-3.5 text-sm hidden sm:block">
-                    <span className="font-black text-emerald-600">{richData.trustLayer.placedOrTransitioned}</span>
+                    <span className="font-black text-emerald-600">{legacyRichData.trustLayer.placedOrTransitioned}</span>
                     <span className="text-slate-500 ml-1 font-medium">placed</span>
                   </div>
                   <div className="px-5 py-3.5 hidden sm:flex items-center gap-1.5 text-sm text-slate-600 font-medium">
                     <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                    {richData.trustLayer.toolsUsed}
+                    {legacyRichData.trustLayer.toolsUsed}
                   </div>
                 </>
               )}
             </div>
+
+            {isDataAnalyticsCourse && (
+              <p className="mt-4 text-[13px] font-semibold text-slate-500">
+                Rated 4.9 by learners | Practical projects | UK career-focused training
+              </p>
+            )}
 
             {/* Aggregate rating banner */}
             {aggregateRating && (
@@ -471,7 +1412,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
           </header>
 
           {/* ── FALLBACK CONTENT ── */}
-          {!richData ? (
+          {!legacyRichData ? (
             <div>
               <div className="rounded-2xl border border-slate-100 bg-white p-8 shadow-sm mb-8">
                 <div className="space-y-5">
@@ -494,14 +1435,44 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
             /* ── RICH CONTENT ── */
             <div className="space-y-20">
 
-              {/* CTA row */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pb-10 border-b border-slate-100">
-                <PaymentCheckout courseSlug={resolvedParams.slug} courseTitle={course.title} amount={paymentAmount} currency={paymentCurrency} />
-                <button className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-[15px] transition-all flex items-center justify-center gap-2 shadow-md hover:-translate-y-0.5">
-                  Apply Now <ArrowRight className="w-4 h-4" />
-                </button>
-                <BrochureDownloadButton brochureHref={BROCHURE_HREF} downloadName={BROCHURE_DOWNLOAD_NAME} courseTitle={course.title} />
-              </div>
+              {isDataAnalyticsCourse && (
+                <section>
+                  <div className="grid gap-3 md:grid-cols-4">
+                    {dataAnalyticsTrustStrip.map((item) => (
+                      <div key={item.label} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                        <div className="mb-2 text-[2rem] font-black leading-none text-slate-900">{item.value}</div>
+                        <h2 className="mb-2 text-[13px] font-black uppercase tracking-[0.16em] text-[#c45118]">{item.label}</h2>
+                        <p className="text-[13px] leading-6 text-slate-500">{item.detail}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {isDataAnalyticsCourse && (
+                <section>
+                  <SectionLabel>Outcomes</SectionLabel>
+                  <div className="mb-7 flex items-end gap-3">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-900">
+                      <Target className="h-4.5 w-4.5 text-white" />
+                    </div>
+                    <h2 className="text-[1.65rem] font-black leading-tight text-slate-900">
+                      By the End of This Program, You Will Be Able To
+                    </h2>
+                  </div>
+                  <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    {dataAnalyticsOutcomes.map(({ icon: Icon, title, result }) => (
+                      <div key={title} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+                        <div className="mb-5 flex h-9 w-9 items-center justify-center rounded-xl border border-slate-100 bg-slate-50">
+                          <Icon className="h-4.5 w-4.5 text-[#d95700]" />
+                        </div>
+                        <h3 className="mb-2 text-[15px] font-black text-slate-900">{title}</h3>
+                        <p className="text-[13px] leading-6 text-slate-500">{result}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
 
               {/* ── CAREER OUTCOMES ── */}
               <section>
@@ -521,7 +1492,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                     </div>
                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">Target Roles</p>
                     <ul className="space-y-2.5">
-                      {richData.careerOutcomes.roles.map((r: string, idx: number) => (
+                      {legacyRichData.careerOutcomes.roles.map((r: string, idx: number) => (
                         <li key={idx} className="flex items-start gap-2.5 text-[13px] text-slate-700 font-semibold">
                           <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> {r}
                         </li>
@@ -530,13 +1501,13 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                   </div>
 
                   {/* Salary */}
-                  <div className="rounded-2xl border border-blue-100 bg-gradient-to-b from-blue-50 to-white p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                  <div className="rounded-2xl border border-[#ded6c8] bg-gradient-to-b from-[#fff7df] to-white p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
                     <div>
-                      <div className="w-8 h-8 rounded-lg bg-blue-100 border border-blue-200 flex items-center justify-center mb-5">
-                        <Briefcase className="w-4 h-4 text-blue-700" />
+                      <div className="w-8 h-8 rounded-lg bg-[#f0eadf] border border-[#ded6c8] flex items-center justify-center mb-5">
+                        <Briefcase className="w-4 h-4 text-[#d95700]" />
                       </div>
-                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 mb-2">Average UK Salary</p>
-                      <div className="text-[2.4rem] font-black text-slate-900 leading-none mb-2">{richData.careerOutcomes.salary}</div>
+                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#c45118] mb-2">Average UK Salary</p>
+                      <div className="text-[2.4rem] font-black text-slate-900 leading-none mb-2">{legacyRichData.careerOutcomes.salary}</div>
                     </div>
                     <p className="text-[12px] font-semibold text-slate-500">Annual, post-completion</p>
                   </div>
@@ -547,16 +1518,16 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                       <Users className="w-4 h-4 text-violet-600" />
                     </div>
                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">Industry Demand</p>
-                    {Array.isArray(richData.careerOutcomes.demand) ? (
+                    {Array.isArray(legacyRichData.careerOutcomes.demand) ? (
                       <ul className="grid grid-cols-2 gap-2">
-                        {richData.careerOutcomes.demand.map((industry: string) => (
+                        {legacyRichData.careerOutcomes.demand.map((industry: string) => (
                           <li key={industry} className="flex items-start gap-2 text-[12px] font-semibold text-slate-700">
                             <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-violet-500" />{industry}
                           </li>
                         ))}
                       </ul>
                     ) : (
-                      <p className="text-[13px] text-slate-700 leading-relaxed font-medium">{richData.careerOutcomes.demand}</p>
+                      <p className="text-[13px] text-slate-700 leading-relaxed font-medium">{legacyRichData.careerOutcomes.demand}</p>
                     )}
                   </div>
                 </div>
@@ -571,16 +1542,32 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                   </div>
                   <h2 className="text-[1.65rem] font-black text-slate-900 leading-tight">Is This Right For You?</h2>
                 </div>
-                <div className="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden">
-                  <div className="grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
-                    {richData.isForYou.map((item: string, idx: number) => (
-                      <div key={idx} className="flex gap-4 items-start p-6">
-                        <div className="shrink-0 w-6 h-6 rounded-full bg-slate-900 flex items-center justify-center mt-0.5">
-                          <Check className="w-3.5 h-3.5 text-white" />
+                <div className="grid gap-5 md:grid-cols-2">
+                  <div className="rounded-2xl border border-slate-100 bg-white p-7 shadow-sm">
+                    <h3 className="mb-5 text-[15px] font-black text-slate-900">This program is ideal for you if:</h3>
+                    <div className="space-y-4">
+                      {legacyRichData.isForYou.map((item: string, idx: number) => (
+                        <div key={idx} className="flex gap-3.5">
+                          <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100">
+                            <Check className="h-3 w-3 text-emerald-700" />
+                          </div>
+                          <span className="text-[14px] font-medium leading-relaxed text-slate-700">{item}</span>
                         </div>
-                        <span className="text-[14px] text-slate-700 font-medium leading-relaxed">{item}</span>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+                  </div>
+                  <div className="rounded-2xl border border-slate-100 bg-slate-50 p-7 shadow-sm">
+                    <h3 className="mb-5 text-[15px] font-black text-slate-900">This may not be right if:</h3>
+                    <div className="space-y-4">
+                      {(isDataAnalyticsCourse ? dataAnalyticsNotForYou : ["You want only passive viewing", "You are not ready to practise between sessions", "You do not want feedback on projects"]).map((item) => (
+                        <div key={item} className="flex gap-3.5">
+                          <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white text-[13px] font-black text-slate-500">
+                            ×
+                          </div>
+                          <span className="text-[14px] font-medium leading-relaxed text-slate-600">{item}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </section>
@@ -599,16 +1586,42 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                       <h2 className="text-[1.65rem] font-black text-slate-900 leading-tight">Curriculum</h2>
                     </div>
 
-                    {isDataAnalyticsCourse || isAgenticAICourse || isDataScienceCourse || isGenerativeAICourse ? (
-                      <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-[#EFF6FF] to-white p-6">
+                    {isDataAnalyticsCourse ? (
+                      <div className="space-y-4">
+                        {dataAnalyticsRoadmap.map((phase) => (
+                          <article key={phase.phase} className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
+                            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                              <div>
+                                <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#c45118]">{phase.phase} · {phase.weeks}</p>
+                                <h3 className="mt-1 text-[16px] font-black text-slate-900">{phase.title}</h3>
+                              </div>
+                              <span className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-bold text-slate-600">Roadmap</span>
+                            </div>
+                            <div className="grid gap-3 sm:grid-cols-2">
+                              {[
+                                ["Learn", phase.learn],
+                                ["Tools", phase.tools],
+                                ["Build", phase.build],
+                                ["Career Output", phase.output],
+                              ].map(([label, text]) => (
+                                <div key={label} className="rounded-xl bg-slate-50 p-4">
+                                  <p className="mb-1.5 text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">{label}</p>
+                                  <p className="text-[13px] font-semibold leading-6 text-slate-700">{text}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </article>
+                        ))}
+                      </div>
+                    ) : isAgenticAICourse || isDataScienceCourse || isGenerativeAICourse ? (
+                      <div className="rounded-2xl border border-[#ded6c8] bg-gradient-to-br from-[#fff7df] to-white p-6">
                         <p className="text-[13px] font-semibold leading-7 text-slate-700 mb-5">
-                          {isDataAnalyticsCourse ? "The full 26-week Data Analytics with AI curriculum is expanded below — phase-by-phase topics, weekly labs, AI integration, and portfolio outcomes."
-                            : isAgenticAICourse ? "The full 16-week Agentic AI curriculum is expanded below — agent workflow design, phase topics, labs, and portfolio outcomes."
+                          {isAgenticAICourse ? "The full 16-week Agentic AI curriculum is expanded below — agent workflow design, phase topics, labs, and portfolio outcomes."
                               : isDataScienceCourse ? "The full 48-week Data Science, ML & GenAI curriculum is expanded below — ML projects, GenAI integration, and capstone outcomes."
                               : "The full 12-week Generative AI curriculum is expanded below — prompt systems, GenAI tools, workflow projects, and responsible AI outcomes."}
                         </p>
                         <a
-                          href={isDataAnalyticsCourse ? "#detailed-data-analytics-curriculum" : isAgenticAICourse ? "#detailed-agentic-ai-curriculum" : isDataScienceCourse ? "#detailed-data-science-curriculum" : "#detailed-generative-ai-curriculum"}
+                          href={isAgenticAICourse ? "#detailed-agentic-ai-curriculum" : isDataScienceCourse ? "#detailed-data-science-curriculum" : "#detailed-generative-ai-curriculum"}
                           className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-2.5 text-[13px] font-bold text-white hover:bg-slate-800 transition-colors"
                         >
                           View full curriculum <ChevronDown className="w-3.5 h-3.5" />
@@ -616,8 +1629,8 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                       </div>
                     ) : (
                       <div className="space-y-2.5">
-                        {richData.curriculum.map((item: string, idx: number) => (
-                          <div key={idx} className="flex items-center gap-4 bg-white rounded-xl border border-slate-100 px-4 py-3.5 shadow-sm hover:border-blue-200 transition-all group">
+                        {legacyRichData.curriculum.map((item: string, idx: number) => (
+                          <div key={idx} className="flex items-center gap-4 bg-white rounded-xl border border-slate-100 px-4 py-3.5 shadow-sm hover:border-[#d95700]/40 transition-all group">
                             <span className="w-7 h-7 rounded-full bg-slate-100 text-slate-600 group-hover:bg-slate-900 group-hover:text-white flex items-center justify-center text-[11px] font-black shrink-0 transition-colors">
                               {idx + 1}
                             </span>
@@ -638,30 +1651,40 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                       <div className="space-y-0 divide-y divide-slate-800">
                         <div className="flex justify-between items-center py-3.5">
                           <span className="text-[13px] text-slate-400 font-medium">Duration</span>
-                          <span className="text-[14px] font-bold">{richData.programmeOverview.duration}</span>
+                          <span className="text-[14px] font-bold">{legacyRichData.programmeOverview.duration}</span>
                         </div>
                         <div className="flex justify-between items-center py-3.5">
                           <span className="text-[13px] text-slate-400 font-medium">Format</span>
-                          <span className="text-[14px] font-bold">{richData.programmeOverview.format}</span>
+                          <span className="text-[14px] font-bold">{legacyRichData.programmeOverview.format}</span>
                         </div>
                         <div className="flex justify-between items-center py-3.5">
                           <span className="text-[13px] text-slate-400 font-medium">Level</span>
-                          <span className="text-[14px] font-bold">{richData.programmeOverview.level}</span>
+                          <span className="text-[14px] font-bold">{legacyRichData.programmeOverview.level}</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Pricing card */}
-                    <CourseInvestmentTracker courseTitle={course.title} courseSlug={resolvedParams.slug} price={paymentAmount || richData.pricing.price} currency={paymentCurrency}>
+                    <CourseInvestmentTracker courseTitle={course.title} courseSlug={resolvedParams.slug} price={paymentAmount || legacyRichData.pricing.price} currency={paymentCurrency}>
                       <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-700 mb-2 flex items-center gap-1.5">
-                        <Zap className="w-3.5 h-3.5" /> Course Investment
+                        <Zap className="w-3.5 h-3.5" /> Program Fee
                       </h3>
                       <div className="text-[2.4rem] font-black text-slate-900 leading-none mb-3">
-                        {course.price ? new Intl.NumberFormat("en-GB", { style: "currency", currency: course.currency ?? "GBP", maximumFractionDigits: 0 }).format(course.price) : richData.pricing.price}
+                        {course.price ? new Intl.NumberFormat("en-GB", { style: "currency", currency: course.currency ?? "GBP", maximumFractionDigits: 0 }).format(course.price) : legacyRichData.pricing.price}
                       </div>
-                      {richData.pricing.emi && (
+                      {isDataAnalyticsCourse && (
+                        <div className="mb-4 grid gap-2 text-[12px] font-semibold text-slate-600">
+                          {["Live weekend classes", "Project files and templates", "Mentor support", "Portfolio projects", "Career guidance", "Certificate of completion"].map((item) => (
+                            <span key={item} className="flex items-start gap-2">
+                              <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-600" />
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      {legacyRichData.pricing.emi && (
                         <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 text-[11px] font-bold text-emerald-700 px-3 py-1">
-                          <Check className="w-3 h-3" /> EMI Available
+                          <Check className="w-3 h-3" /> Flexible payment options available
                         </span>
                       )}
                     </CourseInvestmentTracker>
@@ -671,7 +1694,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                       courseTitle={course.title}
                       amount={paymentAmount}
                       currency={paymentCurrency}
-                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-700 px-6 py-3.5 text-[14px] font-bold text-white shadow-md hover:bg-blue-800 hover:-translate-y-0.5 transition-all"
+                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#d95700] px-6 py-3.5 text-[14px] font-bold text-white shadow-md hover:bg-[#c45118] hover:-translate-y-0.5 transition-all"
                     />
                   </div>
                 </div>
@@ -684,22 +1707,47 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                   <div className="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center shrink-0">
                     <Terminal className="w-4.5 h-4.5 text-white" />
                   </div>
-                  <h2 className="text-[1.65rem] font-black text-slate-900 leading-tight">Tools & Technologies</h2>
+                  <h2 className="text-[1.65rem] font-black text-slate-900 leading-tight">Tools & Technologies You Will Use</h2>
                 </div>
-                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 xl:grid-cols-4">
-                  {richData.toolsCovered.map((tool: string, idx: number) => (
-                    <div key={idx} className="group flex items-center gap-3 rounded-xl border border-slate-100 bg-white px-3.5 py-3 shadow-sm hover:border-slate-300 hover:shadow-md transition-all">
-                      <ToolLogo tool={tool} />
-                      <span className="text-[13px] font-bold text-slate-900 leading-tight">{tool}</span>
-                    </div>
-                  ))}
-                </div>
+                {isDataAnalyticsCourse ? (
+                  <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    {dataAnalyticsToolGroups.map((group) => (
+                      <div key={group.label} className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
+                        <h3 className="mb-4 text-[12px] font-black uppercase tracking-[0.18em] text-slate-400">{group.label}</h3>
+                        <div className="flex flex-wrap gap-2">
+                          {group.tools.map((tool) => (
+                            <span key={tool} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[12px] font-bold text-slate-700">
+                              {tool}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 xl:grid-cols-4">
+                    {legacyRichData.toolsCovered.map((tool: string, idx: number) => (
+                      <div key={idx} className="group flex items-center gap-3 rounded-xl border border-slate-100 bg-white px-3.5 py-3 shadow-sm hover:border-slate-300 hover:shadow-md transition-all">
+                        <ToolLogo tool={tool} />
+                        <span className="text-[13px] font-bold text-slate-900 leading-tight">{tool}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </section>
 
               {/* ── DETAILED CURRICULA ── */}
               {isDataAnalyticsCourse && (
                 <section id="detailed-data-analytics-curriculum" className="scroll-mt-28">
-                  <DataAnalyticsCurriculum />
+                  <details className="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-black text-slate-900">
+                      <span>View the full week-by-week curriculum</span>
+                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-slate-100 text-slate-600 transition-transform group-open:rotate-45">+</span>
+                    </summary>
+                    <div className="mt-8">
+                      <DataAnalyticsCurriculum />
+                    </div>
+                  </details>
                 </section>
               )}
               {isAgenticAICourse && (
@@ -740,11 +1788,11 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                           >
                             {article.category}
                           </span>
-                          <h3 className="text-[14px] font-bold leading-snug text-slate-900 group-hover:text-blue-700 mb-3">
+                          <h3 className="text-[14px] font-bold leading-snug text-slate-900 group-hover:text-[#d95700] mb-3">
                             {article.title}
                           </h3>
                           <p className="text-[13px] leading-6 text-slate-500">{article.excerpt}</p>
-                          <span className="mt-4 inline-flex items-center gap-1 text-[13px] font-bold text-blue-700">
+                          <span className="mt-4 inline-flex items-center gap-1 text-[13px] font-bold text-[#d95700]">
                             Read guide <ArrowRight className="w-3.5 h-3.5" />
                           </span>
                         </Link>
@@ -755,44 +1803,108 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
               )}
 
               {/* ── PROJECTS + CAREER SUPPORT ── */}
-              <section>
-                <SectionLabel>Hands-On Learning</SectionLabel>
-                <div className="grid md:grid-cols-2 gap-5">
-                  <div className="rounded-2xl border border-slate-100 bg-white p-7 shadow-sm">
-                    <div className="w-8 h-8 rounded-lg bg-violet-50 border border-violet-100 flex items-center justify-center mb-5">
-                      <Layers className="w-4 h-4 text-violet-600" />
-                    </div>
-                    <h2 className="text-lg font-black text-slate-900 mb-5">Portfolio Projects</h2>
-                    <ul className="space-y-4">
-                      {richData.projects.map((proj: string, idx: number) => (
-                        <li key={idx} className="flex items-start gap-3.5">
-                          <span className="w-5 h-5 rounded-full bg-violet-100 flex items-center justify-center shrink-0 mt-0.5">
-                            <span className="text-[9px] font-black text-violet-700">{idx + 1}</span>
-                          </span>
-                          <span className="text-[14px] text-slate-700 font-medium leading-relaxed">{proj}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="rounded-2xl border border-slate-100 bg-white p-7 shadow-sm">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center mb-5">
-                      <Briefcase className="w-4 h-4 text-emerald-600" />
-                    </div>
-                    <h2 className="text-lg font-black text-slate-900 mb-5">Career Support</h2>
-                    <ul className="space-y-4">
-                      {richData.careerSupport.map((support: string, idx: number) => (
-                        <li key={idx} className="flex items-start gap-3.5">
-                          <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                            <Check className="w-3 h-3 text-emerald-700" />
+              {isDataAnalyticsCourse ? (
+                <>
+                  <section>
+                    <SectionLabel>Weekly Learning</SectionLabel>
+                    <div className="rounded-2xl border border-slate-100 bg-white p-7 shadow-sm">
+                      <div className="mb-7 flex items-end gap-3">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-900">
+                          <Clock className="h-4.5 w-4.5 text-white" />
+                        </div>
+                        <h2 className="text-[1.65rem] font-black leading-tight text-slate-900">How Your Week Will Look</h2>
+                      </div>
+                      <div className="grid gap-3 md:grid-cols-4">
+                        {dataAnalyticsWeeklyExperience.map(([day, activity]) => (
+                          <div key={day} className="rounded-xl bg-slate-50 p-5">
+                            <p className="mb-2 text-[12px] font-black uppercase tracking-[0.18em] text-[#c45118]">{day}</p>
+                            <p className="text-[14px] font-semibold leading-6 text-slate-700">{activity}</p>
                           </div>
-                          <span className="text-[14px] text-slate-700 font-medium leading-relaxed">{support}</span>
-                        </li>
+                        ))}
+                      </div>
+                    </div>
+                  </section>
+
+                  <section>
+                    <SectionLabel>Portfolio Proof</SectionLabel>
+                    <div className="mb-7">
+                      <h2 className="text-[1.8rem] font-black leading-tight text-slate-900">Build a Portfolio That Shows Real Analyst Capability</h2>
+                      <p className="mt-3 max-w-2xl text-[14px] leading-7 text-slate-500">
+                        Every project is designed to create evidence you can explain in interviews: what the data showed, what you built, and how you checked your work.
+                      </p>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                      {dataAnalyticsPortfolioProjects.map(([title, tools, build, output, tag]) => (
+                        <article key={title} className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
+                          <span className="mb-4 inline-flex rounded-full bg-violet-50 px-3 py-1 text-[11px] font-black text-violet-700">{tag}</span>
+                          <h3 className="mb-3 text-[15px] font-black text-slate-900">{title}</h3>
+                          <p className="mb-3 text-[12px] font-bold text-slate-500">Tools: {tools}</p>
+                          <p className="text-[13px] leading-6 text-slate-600">You will build: {build}</p>
+                          <p className="mt-4 text-[12px] font-black uppercase tracking-[0.16em] text-[#c45118]">Portfolio Output</p>
+                          <p className="mt-1 text-[13px] font-semibold leading-6 text-slate-700">{output}</p>
+                        </article>
                       ))}
-                    </ul>
+                    </div>
+                  </section>
+
+                  <section className="overflow-hidden rounded-3xl bg-slate-950 p-8 text-white shadow-lg md:p-10">
+                    <div className="mb-8 max-w-2xl">
+                      <p className="mb-3 text-[11px] font-black uppercase tracking-[0.24em] text-[#f5c242]">Career Support</p>
+                      <h2 className="mb-4 text-[1.9rem] font-black leading-tight">Career Preparation Built Into the Program</h2>
+                      <p className="text-[15px] leading-7 text-slate-300">
+                        You do not only complete a course. You graduate with projects, interview stories and a clearer job-search plan.
+                      </p>
+                    </div>
+                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                      {dataAnalyticsCareerSupport.map((support) => (
+                        <div key={support} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-4">
+                          <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-300" />
+                          <span className="text-[13px] font-bold text-slate-100">{support}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                </>
+              ) : (
+                <section>
+                  <SectionLabel>Hands-On Learning</SectionLabel>
+                  <div className="grid md:grid-cols-2 gap-5">
+                    <div className="rounded-2xl border border-slate-100 bg-white p-7 shadow-sm">
+                      <div className="w-8 h-8 rounded-lg bg-violet-50 border border-violet-100 flex items-center justify-center mb-5">
+                        <Layers className="w-4 h-4 text-violet-600" />
+                      </div>
+                      <h2 className="text-lg font-black text-slate-900 mb-5">Portfolio Projects</h2>
+                      <ul className="space-y-4">
+                        {legacyRichData.projects.map((proj: string, idx: number) => (
+                          <li key={idx} className="flex items-start gap-3.5">
+                            <span className="w-5 h-5 rounded-full bg-violet-100 flex items-center justify-center shrink-0 mt-0.5">
+                              <span className="text-[9px] font-black text-violet-700">{idx + 1}</span>
+                            </span>
+                            <span className="text-[14px] text-slate-700 font-medium leading-relaxed">{proj}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="rounded-2xl border border-slate-100 bg-white p-7 shadow-sm">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center mb-5">
+                        <Briefcase className="w-4 h-4 text-emerald-600" />
+                      </div>
+                      <h2 className="text-lg font-black text-slate-900 mb-5">Career Support</h2>
+                      <ul className="space-y-4">
+                        {legacyRichData.careerSupport.map((support: string, idx: number) => (
+                          <li key={idx} className="flex items-start gap-3.5">
+                            <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
+                              <Check className="w-3 h-3 text-emerald-700" />
+                            </div>
+                            <span className="text-[14px] text-slate-700 font-medium leading-relaxed">{support}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                </div>
-              </section>
+                </section>
+              )}
 
               {/* ── REVIEWS ── */}
               {hasCourseReviews && (
@@ -810,7 +1922,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                     </div>
                   </div>
                   <div className="grid gap-4 md:grid-cols-3">
-                    {richData.reviews.items.map((review, idx) => (
+                    {legacyRichData.reviews.items.map((review, idx) => (
                       <article key={`${review.author}-${idx}`} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
                         <div className="flex justify-between items-start gap-3 mb-5">
                           <div>
@@ -839,7 +1951,22 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                   <SectionLabel>FAQ</SectionLabel>
                   <div className="rounded-2xl border border-slate-100 bg-white p-8 shadow-sm">
                     <h2 className="text-[1.65rem] font-black text-slate-900 mb-2">Common Questions</h2>
-                    <p className="text-[14px] text-slate-500 mb-8">About studying data analytics in the UK</p>
+                    <p className="text-[14px] text-slate-500 mb-8">Grouped by format, eligibility, projects, fees, and career support.</p>
+                    <div className="mb-8 grid gap-3 md:grid-cols-2">
+                      {dataAnalyticsFaqGroups.map((group) => (
+                        <div key={group.title} className="rounded-xl bg-slate-50 p-5">
+                          <h3 className="mb-3 text-[12px] font-black uppercase tracking-[0.18em] text-[#c45118]">{group.title}</h3>
+                          <ul className="space-y-2">
+                            {group.questions.map((question) => (
+                              <li key={question} className="flex items-start gap-2 text-[13px] font-semibold leading-6 text-slate-600">
+                                <Check className="mt-1 h-3.5 w-3.5 shrink-0 text-emerald-600" />
+                                {question}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
                     <div className="divide-y divide-slate-100">
                       {dataAnalyticsFaqItems.map((item) => (
                         <details key={item.question} className="group py-5">
@@ -864,20 +1991,20 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                 {/* Accent gradient */}
                 <div className="absolute inset-x-0 -top-px h-px" style={{ background: "linear-gradient(90deg, transparent, #3B82F6 50%, transparent)" }} />
                 <div className="relative z-10 px-10 py-14 md:px-16 md:py-18 text-center max-w-2xl mx-auto">
-                  <p className="text-[11px] font-black uppercase tracking-[0.3em] text-blue-400 mb-4">Begin Your Journey</p>
+                  <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[#f5c242] mb-4">Begin Your Journey</p>
                   <h2 className="text-[2.4rem] md:text-[2.8rem] font-black text-white leading-[1.1] mb-5">
-                    Ready to accelerate<br />your career?
+                    {isDataAnalyticsCourse ? "Ready to Start Your Data Career?" : "Ready to accelerate your career?"}
                   </h2>
                   <p className="text-[15px] text-slate-400 mb-8 leading-relaxed">
-                    Join hundreds of professionals who have transformed their careers with Brit Institute's industry-aligned programmes.
+                    {isDataAnalyticsCourse
+                      ? "Speak with our advisor, understand the curriculum, and choose the right learning path for your background."
+                      : "Join hundreds of professionals who have transformed their careers with Brit Institute's industry-aligned programmes."}
                   </p>
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                    <button className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white text-slate-900 font-bold text-[15px] hover:bg-slate-100 hover:-translate-y-0.5 transition-all shadow-lg flex items-center justify-center gap-2">
-                      Apply Now <ArrowRight className="w-4 h-4" />
-                    </button>
-                    <button className="w-full sm:w-auto px-8 py-3.5 rounded-xl border border-white/20 text-white font-bold text-[15px] hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
-                      Book a Consultation
-                    </button>
+                    <Link href="/apply" className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white text-slate-900 font-bold text-[15px] hover:bg-slate-100 hover:-translate-y-0.5 transition-all shadow-lg flex items-center justify-center gap-2">
+                      Book Free Counselling <ArrowRight className="w-4 h-4" />
+                    </Link>
+                    <BrochureDownloadButton brochureHref={BROCHURE_HREF} downloadName={BROCHURE_DOWNLOAD_NAME} courseTitle={course.title} />
                   </div>
                 </div>
               </div>
@@ -889,6 +2016,37 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
         {/* ═══════════════════════════════ RIGHT COLUMN (STICKY) ═══════════════════════════════ */}
         <aside className="relative">
           <div className="lg:sticky lg:top-28 space-y-4">
+
+            {legacyRichData && (
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl">
+                <p className="mb-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#c45118]">Next Cohort Starts Soon</p>
+                <h2 className="mb-5 text-xl font-black text-slate-900">{isDataAnalyticsCourse ? "Data Analytics + GenAI" : course.title}</h2>
+                <div className="space-y-0 divide-y divide-slate-100">
+                  {[
+                    ["Duration", legacyRichData.programmeOverview.duration],
+                    ["Format", isDataAnalyticsCourse ? "Weekend Live Classes" : legacyRichData.programmeOverview.format],
+                    ["Level", isDataAnalyticsCourse ? "Beginner to Job-Ready" : legacyRichData.programmeOverview.level],
+                    ["Mode", "Online"],
+                  ].map(([label, value]) => (
+                    <div key={label} className="flex items-center justify-between gap-4 py-3">
+                      <span className="text-[13px] font-semibold text-slate-500">{label}</span>
+                      <span className="text-right text-[13px] font-black text-slate-900">{value}</span>
+                    </div>
+                  ))}
+                </div>
+                <Link
+                  href="/apply"
+                  className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-[14px] font-bold text-white transition-colors hover:bg-slate-800"
+                >
+                  Book Free Counselling <ArrowRight className="h-4 w-4" />
+                </Link>
+                {isDataAnalyticsCourse && (
+                  <p className="mt-4 text-center text-[12px] font-semibold leading-5 text-slate-500">
+                    Rated 4.9 by learners | Practical projects | UK career-focused training
+                  </p>
+                )}
+              </div>
+            )}
 
             {/* Lead Form */}
             <div className="rounded-2xl border border-slate-200 bg-white shadow-xl overflow-hidden">

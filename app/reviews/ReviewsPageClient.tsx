@@ -11,11 +11,9 @@ import {
   Star,
   TrendingUp,
 } from "lucide-react";
-import TopBanner from "@/components/layout/TopBanner";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-const BLUE = "#1D4ED8";
+const BLUE = "#D95700";
 const GOLD = "#D4AF37";
 
 const BATCH_REVIEWS = [
@@ -26,7 +24,7 @@ const BATCH_REVIEWS = [
     label: "Most recent completed cohort",
     videos: ["/testimonials/1.mp4", "/testimonials/2.mp4"],
     outcome: "Moved from reporting support to dashboard ownership",
-    accent: "#1D4ED8",
+    accent: "#D95700",
     reviews: [
       {
         name: "Ananya Menon",
@@ -57,7 +55,7 @@ const BATCH_REVIEWS = [
     label: "Winter career transition cohort",
     videos: ["/testimonials/3.mp4", "/testimonials/4.mp4"],
     outcome: "Built a portfolio using Excel, SQL and Power BI",
-    accent: "#0F766E",
+    accent: "#7C9A4F",
     reviews: [
       {
         name: "Amina Begum",
@@ -88,7 +86,7 @@ const BATCH_REVIEWS = [
     label: "Autumn AI and data cohort",
     videos: ["/testimonials/5.MP4", "/testimonials/6.MP4"],
     outcome: "Used AI workflows to speed up analysis and documentation",
-    accent: "#7C3AED",
+    accent: "#746D5C",
     reviews: [
       {
         name: "Sophie Williams",
@@ -119,7 +117,7 @@ const BATCH_REVIEWS = [
     label: "Project-focused career cohort",
     videos: ["/testimonials/7.MP4", "/testimonials/8.MP4"],
     outcome: "Completed a reviewed capstone project",
-    accent: "#B45309",
+    accent: "#C45118",
     reviews: [
       {
         name: "George Edwards",
@@ -150,19 +148,19 @@ const CASE_HIGHLIGHTS = [
     before: { label: "Admin and reporting", detail: "Manual spreadsheets and ad hoc reports" },
     after: { label: "Data analyst ready", detail: "Power BI dashboard, SQL case study and CV review" },
     timeline: "16 weeks",
-    color: "#1D4ED8",
+    color: "#D95700",
   },
   {
     before: { label: "Non-tech graduate", detail: "Limited coding and project experience" },
     after: { label: "Portfolio built", detail: "Python notebook, analytics story and interview practice" },
     timeline: "18 weeks",
-    color: "#0F766E",
+    color: "#7C9A4F",
   },
   {
     before: { label: "Operations role", detail: "Wanted practical AI skills for daily work" },
     after: { label: "AI workflow capable", detail: "Prompt library, automation plan and responsible-use notes" },
     timeline: "20 weeks",
-    color: "#7C3AED",
+    color: "#746D5C",
   },
 ] as const;
 
@@ -208,9 +206,84 @@ function Stars() {
   );
 }
 
-export default function ReviewsPage() {
-  const [banner, setBanner] = useState(true);
+type BatchReview = (typeof BATCH_REVIEWS)[number];
 
+function CohortReviewCard({ batch, index }: { batch: BatchReview; index: number }) {
+  const { revealRef, visible } = useReveal();
+  const direction = index % 2 === 0 ? "left" : "right";
+
+  return (
+    <article
+      ref={revealRef}
+      id={batch.slug}
+      className={`rv-batch-card rv-slide-reveal rv-slide-${direction} ${visible ? "rv-visible" : ""}`}
+      style={{
+        ["--accent" as string]: batch.accent,
+        ["--accent-soft" as string]: `${batch.accent}14`,
+      }}
+    >
+      <div className="rv-batch-head">
+        <div>
+          <span className="rv-batch-label">
+            <BadgeCheck size={14} aria-hidden="true" />
+            {batch.label}
+          </span>
+          <h2 className="rv-batch-title">{batch.batch} Cohort</h2>
+        </div>
+        <div className="rv-batch-summary">
+          <TrendingUp size={18} color={batch.accent} aria-hidden="true" />
+          <span>{batch.outcome}</span>
+        </div>
+      </div>
+
+      <div className="rv-batch-body">
+        <div className="rv-video-column">
+          {batch.videos.map((video, videoIndex) => (
+            <div key={video} className="rv-video-shell">
+              <video
+                controls
+                controlsList="nodownload"
+                playsInline
+                preload="metadata"
+                aria-label={`${batch.batch} cohort video testimonial ${videoIndex + 1}`}
+              >
+                <source src={video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <span className="rv-video-chip">
+                <Sparkles size={14} aria-hidden="true" />
+                Learner video {videoIndex + 1}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="rv-written-grid">
+          {batch.reviews.map((review) => (
+            <div key={review.name} className="rv-review-card">
+              <div className="rv-review-top">
+                <span className="rv-review-quote-icon">
+                  <Quote size={16} aria-hidden="true" />
+                </span>
+                <Stars />
+              </div>
+              <p className="rv-review-text">&ldquo;{review.text}&rdquo;</p>
+              <div className="rv-review-author">
+                <div className="rv-review-avatar">{initials(review.name)}</div>
+                <div>
+                  <p className="rv-name">{review.name}</p>
+                  <p className="rv-role">{review.role}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export default function ReviewsPage() {
   const { revealRef: heroRevealRef, visible: heroVisible } = useReveal();
   const { revealRef: batchesRevealRef, visible: batchesVisible } = useReveal();
   const { revealRef: casesRevealRef, visible: casesVisible } = useReveal();
@@ -219,22 +292,19 @@ export default function ReviewsPage() {
   return (
     <main
       style={{
-        background: "#F8FAFC",
+        background: "#F7F3EA",
         minHeight: "100vh",
         fontFamily: "var(--font-inter, system-ui, -apple-system, sans-serif)",
-        color: "#111827",
+        color: "#241A1F",
       }}
     >
-      <TopBanner visible={banner} onClose={() => setBanner(false)} />
-      <Navbar hasBanner={banner} />
-
       <style>{`
         .rv-hero {
           position: relative;
           overflow: hidden;
           text-align: center;
           background:
-            linear-gradient(135deg, rgba(7,17,31,.98), rgba(13,30,57,.98)),
+            linear-gradient(135deg, rgba(36,16,31,.98), rgba(22,9,20,.98)),
             linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px),
             linear-gradient(180deg, rgba(255,255,255,.045) 1px, transparent 1px);
           background-size: auto, 44px 44px, 44px 44px;
@@ -336,7 +406,7 @@ export default function ReviewsPage() {
         .rv-section-title h2 {
           font-size: clamp(1.75rem, 3vw, 2.55rem);
           font-weight: 850;
-          color: #101827;
+          color: #241A1F;
           line-height: 1.12;
           letter-spacing: 0;
           margin: 0;
@@ -376,7 +446,7 @@ export default function ReviewsPage() {
         .rv-nav-link:hover {
           border-color: ${BLUE};
           color: ${BLUE};
-          background: #EFF6FF;
+          background: #F7F3EA;
         }
         .rv-batch-stack {
           display: grid;
@@ -622,7 +692,7 @@ export default function ReviewsPage() {
         .rv-case-title {
           font-size: 1rem;
           font-weight: 850;
-          color: #111827;
+          color: #241A1F;
         }
         .rv-case-detail {
           font-size: .86rem;
@@ -634,7 +704,7 @@ export default function ReviewsPage() {
           margin: 0 auto;
         }
         .rv-cta {
-          background: linear-gradient(135deg, #07111F 0%, #132B4A 58%, #1D4ED8 100%);
+          background: linear-gradient(135deg, #24101F 0%, #160914 58%, #D95700 100%);
           border-radius: 8px;
           padding: 56px 44px;
           text-align: center;
@@ -715,6 +785,24 @@ export default function ReviewsPage() {
           opacity: 1;
           transform: translateY(0);
         }
+        .rv-slide-reveal {
+          opacity: 0;
+          transition:
+            opacity .72s cubic-bezier(.2,.8,.2,1),
+            transform .72s cubic-bezier(.2,.8,.2,1),
+            box-shadow .3s;
+          will-change: opacity, transform;
+        }
+        .rv-slide-left {
+          transform: translateX(-72px) translateY(16px);
+        }
+        .rv-slide-right {
+          transform: translateX(72px) translateY(16px);
+        }
+        .rv-slide-reveal.rv-visible {
+          opacity: 1;
+          transform: translateX(0) translateY(0);
+        }
         .rv-stagger-1 { transition-delay: .06s; }
         .rv-stagger-2 { transition-delay: .12s; }
         .rv-stagger-3 { transition-delay: .18s; }
@@ -766,6 +854,10 @@ export default function ReviewsPage() {
           .rv-btn-outline {
             width: 100%;
           }
+          .rv-slide-left,
+          .rv-slide-right {
+            transform: translateY(28px);
+          }
         }
         @media (max-width: 480px) {
           .rv-section,
@@ -779,11 +871,19 @@ export default function ReviewsPage() {
             padding: 18px;
           }
         }
+        @media (prefers-reduced-motion: reduce) {
+          .rv-fade-up,
+          .rv-slide-reveal {
+            opacity: 1;
+            transform: none;
+            transition: none;
+          }
+        }
       `}</style>
 
       <section
         className="rv-hero"
-        style={{ paddingTop: banner ? "166px" : "126px", paddingBottom: "86px" }}
+        style={{ paddingTop: "126px", paddingBottom: "86px" }}
       >
         <div
           ref={heroRevealRef}
@@ -844,73 +944,7 @@ export default function ReviewsPage() {
 
           <div className="rv-batch-stack">
             {BATCH_REVIEWS.map((batch, index) => (
-              <article
-                id={batch.slug}
-                key={batch.batch}
-                className={`rv-batch-card rv-fade-up rv-stagger-${index + 1} ${batchesVisible ? "rv-visible" : ""}`}
-                style={{
-                  ["--accent" as string]: batch.accent,
-                  ["--accent-soft" as string]: `${batch.accent}14`,
-                }}
-              >
-                <div className="rv-batch-head">
-                  <div>
-                    <span className="rv-batch-label">
-                      <BadgeCheck size={14} aria-hidden="true" />
-                      {batch.label}
-                    </span>
-                    <h2 className="rv-batch-title">{batch.batch} Cohort</h2>
-                  </div>
-                  <div className="rv-batch-summary">
-                    <TrendingUp size={18} color={batch.accent} aria-hidden="true" />
-                    <span>{batch.outcome}</span>
-                  </div>
-                </div>
-
-                <div className="rv-batch-body">
-                  <div className="rv-video-column">
-                    {batch.videos.map((video, videoIndex) => (
-                      <div key={video} className="rv-video-shell">
-                        <video
-                          controls
-                          controlsList="nodownload"
-                          playsInline
-                          preload="metadata"
-                          aria-label={`${batch.batch} cohort video testimonial ${videoIndex + 1}`}
-                        >
-                          <source src={video} type="video/mp4" />
-                          Your browser does not support the video tag.
-                        </video>
-                        <span className="rv-video-chip">
-                          <Sparkles size={14} aria-hidden="true" />
-                          Learner video {videoIndex + 1}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="rv-written-grid">
-                    {batch.reviews.map((review) => (
-                      <div key={review.name} className="rv-review-card">
-                        <div className="rv-review-top">
-                          <span className="rv-review-quote-icon">
-                            <Quote size={16} aria-hidden="true" />
-                          </span>
-                          <Stars />
-                        </div>
-                        <p className="rv-review-text">&ldquo;{review.text}&rdquo;</p>
-                        <div className="rv-review-author">
-                          <div className="rv-review-avatar">{initials(review.name)}</div>
-                          <div>
-                            <p className="rv-name">{review.name}</p>
-                            <p className="rv-role">{review.role}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </article>
+              <CohortReviewCard key={batch.batch} batch={batch} index={index} />
             ))}
           </div>
         </div>
@@ -941,7 +975,7 @@ export default function ReviewsPage() {
                 className={`rv-case-card rv-fade-up rv-stagger-${index + 1} ${casesVisible ? "rv-visible" : ""}`}
               >
                 <div className="rv-case-header">
-                  <span style={{ fontSize: ".84rem", fontWeight: 850, color: "#111827" }}>
+                  <span style={{ fontSize: ".84rem", fontWeight: 850, color: "#241A1F" }}>
                     Learner path {index + 1}
                   </span>
                   <span className="rv-case-timeline" style={{ background: highlight.color }}>
