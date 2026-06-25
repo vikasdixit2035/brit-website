@@ -17,7 +17,7 @@ export const SITE_ADDRESS_SHORT = "London, United Kingdom";
 export const SITE_STATS = {
   learnersTrained: "10,000+",
   careerTransitions: "85%",
-  hiringPartners: "100+",
+  hiringPartners: "1,000+",
   averageRating: "4.8",
 };
 

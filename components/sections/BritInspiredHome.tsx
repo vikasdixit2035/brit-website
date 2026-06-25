@@ -169,6 +169,12 @@ const productCards = Object.entries(coursesData).slice(0, 4).map(([slug, course]
   accent: courseAccents[index % courseAccents.length],
 }));
 
+const proofBadges = [
+  { eyebrow: "Brit 2026", title: "4.8/5", subtitle: "Top Rated", accent: "#f26722" },
+  { eyebrow: "Brit 2026", title: "Projects", subtitle: "Portfolio", accent: "#f5c242" },
+  { eyebrow: "Brit 2026", title: "Support", subtitle: "Career", accent: "#2563eb" },
+];
+
 function DarkPattern({ className = "" }: { className?: string }) {
   return (
     <div
@@ -477,17 +483,44 @@ function ProofBand() {
     <section className="relative overflow-hidden bg-[#24101f] px-5 py-16 text-white md:px-8">
       <DarkPattern />
       <div className="relative z-10 mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-          {[
-            ["Top rated", "4.8/5"],
-            ["Portfolio", "Projects"],
-            ["Career", "Support"],
-          ].map(([label, value]) => (
-            <div key={label} className="rounded-md border border-white/12 bg-white p-5 text-center text-[#24101f]">
-              <Award className="mx-auto text-[#c45118]" size={28} />
-              <div className="mt-3 text-2xl font-black">{value}</div>
-              <div className="mt-1 text-xs font-black uppercase tracking-[0.18em] text-[#7a7064]">{label}</div>
-            </div>
+        <div className="grid grid-cols-1 gap-4 min-[420px]:grid-cols-3 sm:gap-5">
+          {proofBadges.map((badge) => (
+            <article
+              key={badge.subtitle}
+              className="relative mx-auto flex aspect-[0.88] w-full max-w-[150px] bg-[#15110f] p-[2px] text-center text-[#111] shadow-[0_20px_48px_rgba(0,0,0,0.18)] sm:max-w-[170px]"
+              style={{ clipPath: "polygon(0 0, 100% 0, 100% 78%, 50% 100%, 0 78%)" }}
+              aria-label={`${badge.title} ${badge.subtitle}`}
+            >
+              <div
+                className="relative flex min-h-0 w-full flex-col overflow-hidden bg-white"
+                style={{ clipPath: "polygon(0 0, 100% 0, 100% 77%, 50% 98%, 0 77%)" }}
+              >
+                <div className="flex h-9 items-center justify-between border-b-2 border-[#15110f] pl-3">
+                  <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#15110f]">
+                    {badge.eyebrow}
+                  </span>
+                  <span className="flex h-full w-8 items-center justify-center bg-[#ff492f] text-white">
+                    <Award size={16} strokeWidth={2.5} />
+                  </span>
+                </div>
+                <div className="flex flex-1 flex-col items-center justify-center px-3 pb-8 pt-3">
+                  <strong className="text-[20px] font-black leading-[0.98] tracking-tight sm:text-[23px]">
+                    {badge.title}
+                  </strong>
+                  <span className="mt-2 text-[9px] font-black uppercase tracking-[0.22em] text-[#5d5148]">
+                    {badge.subtitle}
+                  </span>
+                </div>
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-x-0 bottom-0 h-10"
+                  style={{
+                    background: badge.accent,
+                    clipPath: "polygon(0 30%, 50% 72%, 100% 30%, 100% 52%, 50% 94%, 0 52%)",
+                  }}
+                />
+              </div>
+            </article>
           ))}
         </div>
         <div>
