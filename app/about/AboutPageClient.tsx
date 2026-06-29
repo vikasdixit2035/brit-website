@@ -1,10 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BookOpen, Briefcase, CheckCircle2, Lightbulb, Target, TrendingUp, Users } from "lucide-react";
+import { ArrowRight, Award, BookOpen, Briefcase, CheckCircle2, Lightbulb, Target, TrendingUp, Users } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 import { ThemeCTA, ThemeHero, ThemeLabel, ThemeShell } from "@/components/layout/ThinkificTheme";
 import { SITE_STATS } from "@/lib/site";
+
+const aboutProofBadges = [
+  { title: SITE_STATS.learnersTrained, subtitle: "Learners Trained", accent: "#f26722" },
+  { title: SITE_STATS.careerTransitions, subtitle: "Career Transitions", accent: "#2563eb" },
+];
 
 export default function AboutPage() {
   return (
@@ -72,15 +77,42 @@ export default function AboutPage() {
             })}
           </div>
 
-          <div className="mx-auto mt-12 grid max-w-3xl gap-4 rounded-md bg-white p-6 text-[#24101f] md:grid-cols-2">
-            {[
-              [SITE_STATS.learnersTrained, "Learners trained"],
-              [SITE_STATS.careerTransitions, "Career transitions"],
-            ].map(([value, label]) => (
-              <div key={label} className="text-center md:border-r md:border-[#ded6c8] md:last:border-r-0">
-                <div className="text-4xl font-black">{value}</div>
-                <div className="mt-2 text-xs font-black uppercase tracking-[0.24em] text-[#7a7064]">{label}</div>
-              </div>
+          <div className="mx-auto mt-12 grid max-w-[420px] grid-cols-1 gap-5 min-[420px]:grid-cols-2">
+            {aboutProofBadges.map((badge) => (
+              <article
+                key={badge.subtitle}
+                className="relative mx-auto flex aspect-[0.88] w-full max-w-[170px] bg-[#15110f] p-[2px] text-center text-[#111] shadow-[0_20px_48px_rgba(36,16,31,0.18)]"
+                style={{ clipPath: "polygon(0 0, 100% 0, 100% 78%, 50% 100%, 0 78%)" }}
+                aria-label={`${badge.title} ${badge.subtitle}`}
+              >
+                <div
+                  className="relative flex min-h-0 w-full flex-col overflow-hidden bg-white"
+                  style={{ clipPath: "polygon(0 0, 100% 0, 100% 77%, 50% 98%, 0 77%)" }}
+                >
+                  <div className="flex h-9 items-center justify-between border-b-2 border-[#15110f] pl-3">
+                    <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#15110f]">Brit 2026</span>
+                    <span className="flex h-full w-8 items-center justify-center bg-[#ff492f] text-white">
+                      <Award size={16} strokeWidth={2.5} />
+                    </span>
+                  </div>
+                  <div className="flex flex-1 flex-col items-center justify-center px-3 pb-8 pt-3">
+                    <strong className="text-[22px] font-black leading-[0.98] tracking-tight sm:text-[24px]">
+                      {badge.title}
+                    </strong>
+                    <span className="mt-2 text-[9px] font-black uppercase tracking-[0.22em] text-[#5d5148]">
+                      {badge.subtitle}
+                    </span>
+                  </div>
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-x-0 bottom-0 h-10"
+                    style={{
+                      background: badge.accent,
+                      clipPath: "polygon(0 30%, 50% 72%, 100% 30%, 100% 52%, 50% 94%, 0 52%)",
+                    }}
+                  />
+                </div>
+              </article>
             ))}
           </div>
         </div>

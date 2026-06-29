@@ -749,6 +749,24 @@ function buildPremiumCourseContent(course: CourseRecord, richData: RichCourseDat
     ["Included", "Career Support"],
   ];
 
+  const investmentBadges = [
+    {
+      title: String(projectCount),
+      subtitle: projectCount === 1 ? "Portfolio Project" : "Portfolio Projects",
+      accent: "#f26722",
+    },
+    {
+      title: richData.programmeOverview.duration,
+      subtitle: "Structured Program",
+      accent: "#f5c242",
+    },
+    {
+      title: "Career",
+      subtitle: "Support Included",
+      accent: "#2563eb",
+    },
+  ];
+
   const outcomes = [
     {
       title: "Live, guided learning",
@@ -842,6 +860,7 @@ function buildPremiumCourseContent(course: CourseRecord, richData: RichCourseDat
     careerLabel,
     heroBadges,
     metricCards,
+    investmentBadges,
     tools,
     outcomes,
     learningPath,
@@ -1116,13 +1135,44 @@ function CoursePremiumLanding({
         </section>
 
         <section className="bg-[#E95B00] px-5 py-14 text-white md:py-20 lg:px-8">
-          <div className="mx-auto grid max-w-[1180px] gap-8 md:grid-cols-[1fr_auto] md:items-center">
+          <div className="mx-auto grid max-w-[1180px] gap-8 md:grid-cols-[0.8fr_1.2fr] md:items-center">
             <h2 className="text-3xl font-black leading-tight md:text-5xl">The best investment is skill you can prove.</h2>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {[countLabel(richData.projects.length, "Portfolio Project"), richData.programmeOverview.duration, "Career Support Included"].map((item) => (
-                <div key={item} className="rounded-2xl border border-white/25 bg-white/12 px-5 py-4 text-base font-black">
-                  {item}
-                </div>
+            <div className="grid grid-cols-1 gap-4 min-[520px]:grid-cols-3 sm:gap-5 md:justify-items-end">
+              {content.investmentBadges.map((badge) => (
+                <article
+                  key={badge.subtitle}
+                  className="relative mx-auto flex aspect-[0.88] w-full max-w-[150px] bg-[#15110f] p-[2px] text-center text-[#111] shadow-[0_20px_48px_rgba(89,32,0,0.2)] sm:max-w-[168px] md:mx-0"
+                  style={{ clipPath: "polygon(0 0, 100% 0, 100% 78%, 50% 100%, 0 78%)" }}
+                  aria-label={`${badge.title} ${badge.subtitle}`}
+                >
+                  <div
+                    className="relative flex min-h-0 w-full flex-col overflow-hidden bg-white"
+                    style={{ clipPath: "polygon(0 0, 100% 0, 100% 77%, 50% 98%, 0 77%)" }}
+                  >
+                    <div className="flex h-9 items-center justify-between border-b-2 border-[#15110f] pl-3">
+                      <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#15110f]">Brit 2026</span>
+                      <span className="flex h-full w-8 items-center justify-center bg-[#ff492f] text-white">
+                        <Award size={16} strokeWidth={2.5} />
+                      </span>
+                    </div>
+                    <div className="flex flex-1 flex-col items-center justify-center px-3 pb-8 pt-3">
+                      <strong className="text-[20px] font-black leading-[0.98] tracking-tight sm:text-[23px]">
+                        {badge.title}
+                      </strong>
+                      <span className="mt-2 text-[9px] font-black uppercase tracking-[0.22em] text-[#5d5148]">
+                        {badge.subtitle}
+                      </span>
+                    </div>
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-x-0 bottom-0 h-10"
+                      style={{
+                        background: badge.accent,
+                        clipPath: "polygon(0 30%, 50% 72%, 100% 30%, 100% 52%, 50% 94%, 0 52%)",
+                      }}
+                    />
+                  </div>
+                </article>
               ))}
             </div>
           </div>
