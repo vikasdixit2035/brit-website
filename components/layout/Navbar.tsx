@@ -107,7 +107,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
   // Close mobile menu on resize to desktop
   useEffect(() => {
     const handler = () => {
-      if (window.innerWidth >= 900) {
+      if (window.innerWidth >= 1181) {
         setMenuOpen(false);
         setDrawerCoursesOpen(false);
       }
@@ -287,6 +287,11 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
         .nav-courses-trigger[data-open="true"] {
           color: ${NAV_LINK_HOVER};
           background: transparent;
+        }
+
+        .nav-desktop-right {
+          margin-left: 28px;
+          min-width: 0;
         }
 
         .chevron-icon { transition: transform .2s; flex-shrink: 0; stroke: currentColor; }
@@ -513,13 +518,23 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
         .drawer-signin-btn:hover { background: #b08d2c; }
 
         /* ── Responsive breakpoints ─ */
-        @media (max-width: 1024px) {
+        @media (max-width: 1180px) {
           .nav-desktop-right { display: none !important; }
           .nav-desktop-courses { display: none !important; }
           .nav-hamburger { display: flex !important; }
           .nav-mobile-right { display: flex !important; }
         }
-        @media (min-width: 1025px) {
+        @media (min-width: 1181px) and (max-width: 1320px) {
+          .nav-desktop-right {
+            gap: 24px !important;
+            margin-left: 36px;
+          }
+          .alma-nav .logo-text span { font-size: 1.35rem !important; }
+          .alma-nav .nav-signin-btn {
+            padding: 10px 18px;
+          }
+        }
+        @media (min-width: 1181px) {
           .nav-hamburger { display: none !important; }
           .nav-mobile-right { display: none !important; }
         }
@@ -555,6 +570,7 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            gap: "28px",
             width: "100%",
             maxWidth: "1400px",
             margin: "0 auto",
