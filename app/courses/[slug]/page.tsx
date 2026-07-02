@@ -701,7 +701,7 @@ function DataAnalyticsCtaRow({
           courseTitle={courseTitle}
           amount={amount}
           currency={currency}
-          label="Pay with PayPal / Razorpay"
+          label="Pay Now"
           className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[#F5B82E]/70 bg-[#F5B82E] px-7 py-3.5 text-base font-extrabold text-[#23091D] shadow-lg shadow-black/10 transition-all hover:-translate-y-0.5 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#F5B82E] focus:ring-offset-2"
         />
       )}
@@ -1137,7 +1137,7 @@ function CoursePremiumLanding({
                     courseTitle={course.title}
                     amount={paymentAmount}
                     currency={paymentCurrency}
-                    label="Pay with PayPal / Razorpay"
+                    label="Pay now"
                     className="flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#F5B82E] px-6 py-3.5 text-sm font-black text-[#23091D] shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white"
                   />
                   <p className="mt-3 text-sm font-bold leading-6 text-white/68">
