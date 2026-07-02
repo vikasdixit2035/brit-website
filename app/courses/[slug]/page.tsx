@@ -668,7 +668,19 @@ const dataAnalyticsPremiumFaqs = [
 
 type RichCourseData = (typeof coursesData)[string];
 
-function DataAnalyticsCtaRow({ courseTitle, align = "left" }: { courseTitle: string; align?: "left" | "center" }) {
+function DataAnalyticsCtaRow({
+  courseSlug,
+  courseTitle,
+  amount,
+  currency,
+  align = "left",
+}: {
+  courseSlug: string;
+  courseTitle: string;
+  amount: number;
+  currency: string;
+  align?: "left" | "center";
+}) {
   return (
     <div className={`flex flex-col gap-3 sm:flex-row ${align === "center" ? "sm:justify-center" : ""}`}>
       <Link
@@ -683,6 +695,16 @@ function DataAnalyticsCtaRow({ courseTitle, align = "left" }: { courseTitle: str
         courseTitle={courseTitle}
         label="Download Curriculum"
       />
+      {amount > 0 && (
+        <PaymentCheckout
+          courseSlug={courseSlug}
+          courseTitle={courseTitle}
+          amount={amount}
+          currency={currency}
+          label="Pay with PayPal / Razorpay"
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[#F5B82E]/70 bg-[#F5B82E] px-7 py-3.5 text-base font-extrabold text-[#23091D] shadow-lg shadow-black/10 transition-all hover:-translate-y-0.5 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#F5B82E] focus:ring-offset-2"
+        />
+      )}
     </div>
   );
 }
@@ -886,6 +908,8 @@ function CoursePremiumLanding({
   breadcrumbs: ReturnType<typeof breadcrumbSchema>;
 }) {
   const content = buildPremiumCourseContent(course, richData);
+  const paymentAmount = course.price || Number(schemaPrice(richData.pricing.price)) || 0;
+  const paymentCurrency = course.currency ?? "GBP";
 
   return (
     <div className="min-h-screen bg-[#F8F1E7] font-sans text-[#231F20]">
@@ -918,7 +942,12 @@ function CoursePremiumLanding({
               {richData.subheadline}
             </p>
             <div className="mt-7">
-              <DataAnalyticsCtaRow courseTitle={course.title} />
+              <DataAnalyticsCtaRow
+                courseSlug={course.slug}
+                courseTitle={course.title}
+                amount={paymentAmount}
+                currency={paymentCurrency}
+              />
             </div>
             <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {content.heroBadges.map((badge) => (
@@ -1090,12 +1119,32 @@ function CoursePremiumLanding({
                 title={`Start your ${content.careerLabel.toLowerCase()} journey with a clear learning plan.`}
                 text="Book a free counselling call and understand the right path based on your background, goals and current skill level."
               />
-              <DataAnalyticsCtaRow courseTitle={course.title} />
+              <DataAnalyticsCtaRow
+                courseSlug={course.slug}
+                courseTitle={course.title}
+                amount={paymentAmount}
+                currency={paymentCurrency}
+              />
             </div>
             <aside className="rounded-[2rem] border border-white/12 bg-white/8 p-7 shadow-2xl">
               <p className="text-sm font-black uppercase tracking-[0.16em] text-[#F5B82E]">Included Features</p>
               <div className="mt-5 text-5xl font-black">{richData.pricing.price}</div>
               {richData.pricing.emi && <p className="mt-2 text-base font-bold text-white/70">Flexible payment options available</p>}
+              {paymentAmount > 0 && (
+                <div className="mt-6">
+                  <PaymentCheckout
+                    courseSlug={course.slug}
+                    courseTitle={course.title}
+                    amount={paymentAmount}
+                    currency={paymentCurrency}
+                    label="Pay with PayPal / Razorpay"
+                    className="flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#F5B82E] px-6 py-3.5 text-sm font-black text-[#23091D] shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white"
+                  />
+                  <p className="mt-3 text-sm font-bold leading-6 text-white/68">
+                    Coupon codes can be applied in checkout before PayPal or Razorpay payment.
+                  </p>
+                </div>
+              )}
               <ul className="mt-7 space-y-4">
                 {content.includedFeatures.map((feature) => (
                   <li key={feature} className="flex gap-3 text-base font-bold leading-7">
@@ -1227,12 +1276,23 @@ function CoursePremiumLanding({
           <Link href="/apply" className="flex flex-1 items-center justify-center rounded-full bg-[#E95B00] px-4 py-3 text-sm font-black text-white">
             Book a Free Counselling Call
           </Link>
-          <BrochureDownloadButton
-            brochureHref={BROCHURE_HREF}
-            downloadName={BROCHURE_DOWNLOAD_NAME}
-            courseTitle={course.title}
-            label="Download Curriculum"
-          />
+          {paymentAmount > 0 ? (
+            <PaymentCheckout
+              courseSlug={course.slug}
+              courseTitle={course.title}
+              amount={paymentAmount}
+              currency={paymentCurrency}
+              label="Pay Now"
+              className="flex min-h-11 flex-1 items-center justify-center gap-2 rounded-full bg-[#23091D] px-4 py-3 text-sm font-black text-white"
+            />
+          ) : (
+            <BrochureDownloadButton
+              brochureHref={BROCHURE_HREF}
+              downloadName={BROCHURE_DOWNLOAD_NAME}
+              courseTitle={course.title}
+              label="Download Curriculum"
+            />
+          )}
         </div>
       </div>
     </div>
