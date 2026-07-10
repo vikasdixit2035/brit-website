@@ -269,7 +269,7 @@ function HeroSection() {
               <Sparkles size={14} />
               Next intake
             </div>
-            <div className="mt-2 text-xl font-black">30 June 2026</div>
+            <div className="mt-2 text-xl font-black">25 July 2026</div>
             <p className="mt-1 text-sm font-semibold text-[#6f665c]">Live, mentor-led cohorts now open.</p>
           </div>
         </div>
