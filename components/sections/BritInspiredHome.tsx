@@ -126,7 +126,7 @@ const featureRows = [
     eyebrow: "Communities built to belong",
     title: "Study with structure, not guesswork.",
     text: "Learners get a visible path from first module to final interview prep, with checkpoints that make progress easy to understand.",
-    image: "/certificate-signed.png",
+    image: "/microsoft-certificate.png",
     checks: ["Weekly learning rhythm", "Progress reviews and accountability", "Career support layered into the course"],
   },
   {
@@ -568,12 +568,12 @@ function FeatureSuite() {
                 </ul>
               </div>
               <div className="rounded-md border border-[#ded6c8] bg-white p-4 shadow-[0_22px_55px_rgba(36,26,31,0.08)]">
-                <div className="relative h-[300px] overflow-hidden rounded-md bg-[#efe8dc] md:h-[360px]">
+                <div className="relative h-[300px] overflow-hidden rounded-md md:h-[360px]">
                   <Image
                     src={feature.image}
                     alt={feature.title}
                     fill
-                    className={feature.image === "/hero-person.png" ? "object-cover" : "object-contain p-6"}
+                    className={feature.image === "/hero-person.png" ? "object-cover" : "object-contain"}
                     sizes="(max-width: 1024px) 90vw, 520px"
                   />
                 </div>
