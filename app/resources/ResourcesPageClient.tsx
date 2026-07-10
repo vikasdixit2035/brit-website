@@ -25,6 +25,20 @@ type ResourceItem = {
 /* ── resource data ── */
 const RESOURCES: ResourceItem[] = [
   {
+    id: "jan-2026-cohort-success-story",
+    title: "January 2026 Data Analytics with Gen AI Cohort Success Story",
+    desc: "Explore the cohort's UK placement outcomes, learner starting points, and the industries they entered.",
+    cta: "Download Report",
+    type: "Report",
+    color: "#D4AF37",
+    downloadHref: "/resources_pdf/Brit_Institute_Jan_2026_Cohort_Success_Story.pdf",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="8" y1="17" x2="8" y2="13" /><line x1="12" y1="17" x2="12" y2="10" /><line x1="16" y1="17" x2="16" y2="14" />
+      </svg>
+    ),
+  },
+  {
     id: "uk-data-analyst-salary-2026",
     title: "UK Data Analyst Salary Report (2026)",
     desc: "Understand salary ranges, hiring trends, and role expectations across industries.",
