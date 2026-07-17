@@ -51,14 +51,14 @@ const roadmap = [
 
 const stories = [
   {
-    name: "Aisha Khan",
+    name: "Rahul Sharma",
     role: "Junior Data Analyst",
     company: "FinTech Startup, London",
     text: "The portfolio-first approach changed everything. Instead of just sending my CV, I was able to walk interviewers through a live Power BI dashboard I built during the program.",
     image: "/avatar-1.png",
   },
   {
-    name: "Rahul Sharma",
+    name: "Aisha Khan",
     role: "BI Developer",
     company: "Retail Group, Manchester",
     text: "I was struggling to get past the initial screening. The mock interviews and CV optimization helped me translate my past experience into the language tech recruiters want to hear.",

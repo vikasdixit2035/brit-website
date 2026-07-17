@@ -564,7 +564,7 @@ export default function PaymentCheckout({
                 <div className="flex items-start gap-3">
                   <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#d95700]" />
                   <p className="text-sm font-medium leading-6 text-[#493f37]">
-                    Choose Razorpay or PayPal. Your course fee is created on the server and confirmed only after payment verification.
+                    Choose Razorpay, Apple Pay, or PayPal. Apple Pay is offered inside Razorpay Checkout on eligible devices, and every course fee is confirmed only after server verification.
                   </p>
                 </div>
               </div>
@@ -634,6 +634,10 @@ export default function PaymentCheckout({
                   {isRazorpayLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <CreditCard className="h-5 w-5" />}
                   Pay with Razorpay
                 </button>
+
+                <p className="text-xs font-medium text-gray-500">
+                  Apple Pay appears in Razorpay Checkout when it is available for your device and account.
+                </p>
 
                 {config && !config.razorpayKeyId && (
                   <p className="text-xs font-medium text-gray-500">Razorpay key is not configured on the backend.</p>

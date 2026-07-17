@@ -1141,7 +1141,7 @@ function CoursePremiumLanding({
                     className="flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#F5B82E] px-6 py-3.5 text-sm font-black text-[#23091D] shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white"
                   />
                   <p className="mt-3 text-sm font-bold leading-6 text-white/68">
-                    Coupon codes can be applied in checkout before PayPal or Razorpay payment.
+                    Coupon codes can be applied in checkout before PayPal, Razorpay, or Apple Pay payment.
                   </p>
                 </div>
               )}
