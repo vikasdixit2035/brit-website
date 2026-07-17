@@ -209,6 +209,8 @@ export default function PaymentCheckout({
   const [isApplePayChecking, setIsApplePayChecking] = useState(false);
   const [isApplePayEligible, setIsApplePayEligible] = useState(false);
   const [applePaySdkReady, setApplePaySdkReady] = useState(false);
+  const [applePayUnavailableReason, setApplePayUnavailableReason] = useState("");
+  const [applePayCheckAttempt, setApplePayCheckAttempt] = useState(0);
   const [isApplyingCoupon, setIsApplyingCoupon] = useState(false);
   const [paypalReady, setPaypalReady] = useState(false);
   const [isCardChecking, setIsCardChecking] = useState(false);
@@ -251,6 +253,7 @@ export default function PaymentCheckout({
     setIsApplePayLoading(false);
     setIsApplePayChecking(false);
     setIsApplePayEligible(false);
+    setApplePayUnavailableReason("");
     setError("");
   }, [isCheckoutOpen]);
 
@@ -259,8 +262,7 @@ export default function PaymentCheckout({
       !isCheckoutOpen ||
       !paypalReady ||
       !applePaySdkReady ||
-      !applePayContainerRef.current ||
-      !window.paypal?.Applepay
+      !applePayContainerRef.current
     ) return;
 
     let isCancelled = false;
@@ -271,13 +273,47 @@ export default function PaymentCheckout({
     container.innerHTML = "";
     setIsApplePayChecking(true);
     setIsApplePayEligible(false);
+    setApplePayUnavailableReason("");
 
     async function setUpApplePay() {
       const ApplePaySession = window.ApplePaySession;
       const applePayFactory = window.paypal?.Applepay;
 
-      if (!ApplePaySession?.canMakePayments() || !applePayFactory) {
-        if (!isCancelled) setIsApplePayChecking(false);
+      if (!window.isSecureContext) {
+        if (!isCancelled) {
+          setApplePayUnavailableReason("Apple Pay requires a secure HTTPS page.");
+          setIsApplePayChecking(false);
+        }
+        return;
+      }
+
+      if (!ApplePaySession) {
+        if (!isCancelled) {
+          setApplePayUnavailableReason(
+            "This browser or device does not expose the Apple Pay payment API. Try Safari on an Apple Pay-enabled device or a browser that supports Apple Pay on the web."
+          );
+          setIsApplePayChecking(false);
+        }
+        return;
+      }
+
+      if (!ApplePaySession.canMakePayments()) {
+        if (!isCancelled) {
+          setApplePayUnavailableReason(
+            "Apple Pay is not configured for this device. Sign in to your Apple Account and add an eligible card to Apple Wallet."
+          );
+          setIsApplePayChecking(false);
+        }
+        return;
+      }
+
+      if (!applePayFactory) {
+        if (!isCancelled) {
+          setApplePayUnavailableReason(
+            "The PayPal Apple Pay component is unavailable for this merchant application."
+          );
+          setIsApplePayChecking(false);
+        }
         return;
       }
 
@@ -289,7 +325,12 @@ export default function PaymentCheckout({
         setIsApplePayEligible(eligibleConfig.isEligible);
         setIsApplePayChecking(false);
 
-        if (!eligibleConfig.isEligible) return;
+        if (!eligibleConfig.isEligible) {
+          setApplePayUnavailableReason(
+            "PayPal marked this merchant or buyer as ineligible. Confirm that Apple Pay is enabled for the live PayPal app and that britinstitute.uk is registered under its Apple Pay domains."
+          );
+          return;
+        }
 
         applePayButton = document.createElement("apple-pay-button");
         applePayButton.setAttribute("buttonstyle", "black");
@@ -401,6 +442,9 @@ export default function PaymentCheckout({
       } catch (err) {
         if (isCancelled) return;
         console.error("Apple Pay eligibility check failed:", err);
+        setApplePayUnavailableReason(
+          "PayPal could not complete the Apple Pay eligibility check. Verify the live app's Apple Pay feature and registered domain, then retry."
+        );
         setIsApplePayChecking(false);
         setIsApplePayEligible(false);
       }
@@ -417,6 +461,7 @@ export default function PaymentCheckout({
     };
   }, [
     appliedCoupon?.code,
+    applePayCheckAttempt,
     applePaySdkReady,
     checkoutAmount,
     checkoutCurrency,
@@ -452,6 +497,9 @@ export default function PaymentCheckout({
             setApplePaySdkReady(appleScriptLoaded);
             if (!paypalScriptLoaded) {
               setError("PayPal could not be loaded. Please try again.");
+            }
+            if (!appleScriptLoaded) {
+              setApplePayUnavailableReason("Apple's Apple Pay SDK could not be loaded.");
             }
           }
         }
@@ -869,7 +917,17 @@ export default function PaymentCheckout({
                 )}
                 {!isPayPalLoading && config && !isApplePayChecking && !isApplePayEligible && (
                   <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-600">
-                    Apple Pay is unavailable for this browser, device, wallet, or PayPal merchant account.
+                    <p>
+                      <span className="font-bold text-gray-800">Apple Pay is unavailable.</span>{" "}
+                      {applePayUnavailableReason || "The eligibility check did not complete."}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setApplePayCheckAttempt((attempt) => attempt + 1)}
+                      className="mt-3 rounded-lg border border-gray-300 bg-white px-3 py-2 text-xs font-bold text-gray-800 transition hover:border-gray-400 hover:bg-gray-100"
+                    >
+                      Retry Apple Pay check
+                    </button>
                   </div>
                 )}
               </div>
