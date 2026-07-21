@@ -170,7 +170,6 @@ export default function PaymentCheckout({
   const [isCardRendered, setIsCardRendered] = useState(false);
   const [isPayLaterChecking, setIsPayLaterChecking] = useState(false);
   const [isPayLaterRendered, setIsPayLaterRendered] = useState(false);
-  const [payLaterUnavailable, setPayLaterUnavailable] = useState(false);
   const [config, setConfig] = useState<PaymentConfig | null>(null);
   const [error, setError] = useState("");
   const [couponCode, setCouponCode] = useState("");
@@ -184,8 +183,8 @@ export default function PaymentCheckout({
   const checkoutCurrency = appliedCoupon?.currency ?? currency ?? "GBP";
   const displayAmount = formatAmount(checkoutAmount, checkoutCurrency);
   const originalDisplayAmount = formatAmount(amount, currency ?? "GBP");
-  const payLaterMinAmount = config?.paypalPayLaterMinAmount ?? 30;
-  const payLaterMaxAmount = config?.paypalPayLaterMaxAmount ?? 2000;
+  const payLaterMinAmount = config?.paypalPayLaterMinAmount ?? 20;
+  const payLaterMaxAmount = config?.paypalPayLaterMaxAmount ?? 3000;
   const isPayLaterAmountEligible =
     checkoutCurrency === "GBP" &&
     checkoutAmount >= payLaterMinAmount &&
@@ -201,7 +200,6 @@ export default function PaymentCheckout({
     setIsCardRendered(false);
     setIsPayLaterChecking(false);
     setIsPayLaterRendered(false);
-    setPayLaterUnavailable(false);
     setError("");
   }, [isCheckoutOpen]);
 
@@ -267,7 +265,6 @@ export default function PaymentCheckout({
     setIsCardRendered(false);
     setIsPayLaterChecking(isPayLaterAmountEligible);
     setIsPayLaterRendered(false);
-    setPayLaterUnavailable(false);
 
     const createOrder = async () => {
       const response = await apiRequest<{ id: string }>("/api/payments/paypal/order", {
@@ -401,7 +398,6 @@ export default function PaymentCheckout({
     payLaterRenderResult.then((didRenderPayLater) => {
       if (isCancelled) return;
       setIsPayLaterRendered(didRenderPayLater);
-      setPayLaterUnavailable(isPayLaterAmountEligible && !didRenderPayLater);
       setIsPayLaterChecking(false);
     });
 
@@ -676,10 +672,8 @@ export default function PaymentCheckout({
               <div
                 className={
                   paypalReady &&
-                  (isPayLaterChecking ||
-                    isPayLaterRendered ||
-                    payLaterUnavailable ||
-                    !isPayLaterAmountEligible)
+                  isPayLaterAmountEligible &&
+                  (isPayLaterChecking || isPayLaterRendered)
                     ? ""
                     : "hidden"
                 }
@@ -695,18 +689,6 @@ export default function PaymentCheckout({
                   </div>
                 )}
                 <div ref={payLaterContainerRef} className={isPayLaterRendered ? "min-h-12" : "hidden"} />
-                {!isPayLaterAmountEligible && (
-                  <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-600">
-                    PayPal Pay Later is available for eligible GBP totals from{" "}
-                    {formatAmount(payLaterMinAmount, "GBP")} to {formatAmount(payLaterMaxAmount, "GBP")}. Current total:{" "}
-                    {displayAmount}.
-                  </div>
-                )}
-                {isPayLaterAmountEligible && payLaterUnavailable && (
-                  <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-600">
-                    PayPal Pay Later is not available for this buyer or PayPal account right now.
-                  </div>
-                )}
               </div>
 
               <div className={paypalReady && (isCardChecking || isCardRendered) ? "" : "hidden"}>
