@@ -642,7 +642,7 @@ export default function PaymentCheckout({
                 </button>
 
                 <p className="text-xs font-medium text-gray-500">
-                  Includes Apple Pay for eligible customers after Razorpay domain verification.
+                  Includes Apple Pay for eligible customers
                 </p>
 
                 {config && !config.razorpayKeyId && (
