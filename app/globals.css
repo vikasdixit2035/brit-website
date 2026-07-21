@@ -2257,3 +2257,150 @@ body {
   z-index: 2;
   position: relative;
 }
+
+/* Course-page cards: distinct accents with restrained ambient motion. */
+.course-accent-card {
+  --card-accent: #c37b06;
+  --card-accent-rgb: 195, 123, 6;
+  --card-delay: 0ms;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-color: rgba(var(--card-accent-rgb), 0.26);
+  background:
+    radial-gradient(circle at 112% -18%, rgba(var(--card-accent-rgb), 0.2), transparent 46%),
+    linear-gradient(135deg, #fffaf4 34%, rgba(var(--card-accent-rgb), 0.08) 100%);
+  background-size: 165% 165%;
+  box-shadow: 0 18px 40px rgba(35, 9, 29, 0.08);
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 320ms ease,
+    box-shadow 320ms ease;
+  animation:
+    course-card-arrive 680ms cubic-bezier(0.22, 1, 0.36, 1) backwards,
+    course-card-tint 6s ease-in-out infinite;
+  animation-delay: var(--card-delay), calc(var(--card-delay) + 680ms);
+}
+
+.course-accent-card::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--card-accent) 22%, var(--card-accent) 78%, transparent);
+  transform-origin: left;
+  animation: course-card-line 4.8s ease-in-out infinite;
+  animation-delay: var(--card-delay);
+}
+
+.course-accent-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(var(--card-accent-rgb), 0.52);
+  box-shadow:
+    0 24px 48px rgba(35, 9, 29, 0.12),
+    0 10px 26px rgba(var(--card-accent-rgb), 0.14);
+}
+
+.course-accent-card__value {
+  color: var(--card-accent);
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.course-accent-card:hover .course-accent-card__value {
+  transform: translateY(-2px);
+}
+
+.course-accent-card__icon {
+  background: var(--card-accent);
+  box-shadow: 0 10px 24px rgba(var(--card-accent-rgb), 0.24);
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 320ms ease;
+}
+
+.course-accent-card:hover .course-accent-card__icon {
+  transform: translateY(-2px) rotate(-3deg) scale(1.04);
+  box-shadow: 0 14px 30px rgba(var(--card-accent-rgb), 0.34);
+}
+
+.course-accent-card--metric:nth-child(2) {
+  --card-accent: #2563eb;
+  --card-accent-rgb: 37, 99, 235;
+  --card-delay: 90ms;
+}
+
+.course-accent-card--metric:nth-child(3) {
+  --card-accent: #7c3aed;
+  --card-accent-rgb: 124, 58, 237;
+  --card-delay: 180ms;
+}
+
+.course-accent-card--metric:nth-child(4) {
+  --card-accent: #0f766e;
+  --card-accent-rgb: 15, 118, 110;
+  --card-delay: 270ms;
+}
+
+.course-accent-card--outcome {
+  --card-accent: #c2412d;
+  --card-accent-rgb: 194, 65, 45;
+}
+
+.course-accent-card--outcome:nth-child(2) {
+  --card-accent: #4f46e5;
+  --card-accent-rgb: 79, 70, 229;
+  --card-delay: 110ms;
+}
+
+.course-accent-card--outcome:nth-child(3) {
+  --card-accent: #047857;
+  --card-accent-rgb: 4, 120, 87;
+  --card-delay: 220ms;
+}
+
+@keyframes course-card-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes course-card-tint {
+  0%,
+  100% {
+    background-position: 0% 45%;
+  }
+
+  50% {
+    background-position: 100% 55%;
+  }
+}
+
+@keyframes course-card-line {
+  0%,
+  100% {
+    opacity: 0.42;
+    transform: scaleX(0.38);
+  }
+
+  50% {
+    opacity: 0.92;
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .course-accent-card,
+  .course-accent-card::after {
+    animation: none;
+  }
+
+  .course-accent-card,
+  .course-accent-card__value,
+  .course-accent-card__icon {
+    transition: none;
+  }
+}

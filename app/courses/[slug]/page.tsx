@@ -973,8 +973,8 @@ function CoursePremiumLanding({
             </div>
             <div className="grid gap-4 md:grid-cols-4">
               {content.metricCards.map(([value, label]) => (
-                <div key={label} className="rounded-3xl border border-[#E8DCCB] bg-[#FFF9F1] p-6 shadow-[0_18px_40px_rgba(35,9,29,0.08)] transition-all hover:-translate-y-1">
-                  <div className="text-4xl font-black text-[#23091D]">{value}</div>
+                <div key={label} className="course-accent-card course-accent-card--metric rounded-3xl border p-6">
+                  <div className="course-accent-card__value text-4xl font-black">{value}</div>
                   <p className="mt-2 text-base font-bold text-[#6B6262]">{label}</p>
                 </div>
               ))}
@@ -987,8 +987,8 @@ function CoursePremiumLanding({
             <PremiumSectionHeader title="Learning experiences that convert ambition into career-ready skill." />
             <div className="grid gap-6 md:grid-cols-3">
               {content.outcomes.map(({ title, text, icon: Icon }) => (
-                <article key={title} className="rounded-3xl border border-[#E8DCCB] bg-[#FFF9F1] p-8 shadow-[0_18px_40px_rgba(35,9,29,0.08)] transition-all hover:-translate-y-1">
-                  <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#23091D] text-white">
+                <article key={title} className="course-accent-card course-accent-card--outcome rounded-3xl border p-8">
+                  <div className="course-accent-card__icon mb-7 flex h-14 w-14 items-center justify-center rounded-2xl text-white">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="text-2xl font-black text-[#231F20]">{title}</h3>
