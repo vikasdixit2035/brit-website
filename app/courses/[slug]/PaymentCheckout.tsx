@@ -535,12 +535,22 @@ export default function PaymentCheckout({
       </button>
 
       {isCheckoutOpen && (
-        <div className="fixed inset-0 z-[1100] flex items-center justify-center bg-gray-950/65 px-4 py-6 backdrop-blur-sm">
-          <div className="w-full max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
-            <div className="flex items-start justify-between gap-4 border-b border-gray-100 px-6 py-5">
+        <div className="fixed inset-0 z-[1100] flex items-center justify-center bg-gray-950/65 p-4 backdrop-blur-sm sm:p-6">
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={`payment-title-${courseSlug}`}
+            className="flex max-h-[calc(100dvh-2rem)] w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl sm:max-h-[calc(100dvh-3rem)]"
+          >
+            <div className="flex shrink-0 items-start justify-between gap-4 border-b border-gray-100 px-6 py-5">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c45118]">Secure checkout</p>
-                <h2 className="mt-2 text-xl font-extrabold leading-snug text-gray-900">{courseTitle}</h2>
+                <h2
+                  id={`payment-title-${courseSlug}`}
+                  className="mt-2 text-xl font-extrabold leading-snug text-gray-900"
+                >
+                  {courseTitle}
+                </h2>
                 <p className="mt-1 text-sm font-semibold text-gray-600">
                   Total amount:{" "}
                   {appliedCoupon && (
@@ -559,7 +569,7 @@ export default function PaymentCheckout({
               </button>
             </div>
 
-            <div className="space-y-5 px-6 py-6">
+            <div className="min-h-0 flex-1 space-y-5 overflow-y-auto overscroll-contain px-6 py-6">
               <div className="rounded-2xl border border-[#ded6c8] bg-[#f7f3ea] p-4">
                 <div className="flex items-start gap-3">
                   <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#d95700]" />
