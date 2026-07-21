@@ -5,6 +5,19 @@ import { fileURLToPath } from "url";
 const appRoot = dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
+  async headers() {
+    return [
+      {
+        source: "/.well-known/apple-developer-merchantid-domain-association",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "text/plain",
+          },
+        ],
+      },
+    ];
+  },
   turbopack: {
     root: appRoot,
   },

@@ -62,45 +62,6 @@ type PayPalButtonConfig = {
   onCancel: () => void;
 };
 
-type ApplePayConfig = {
-  isEligible: boolean;
-  countryCode: string;
-  merchantCapabilities: string[];
-  supportedNetworks: string[];
-};
-
-type ApplePayMerchant = {
-  config: () => Promise<ApplePayConfig>;
-  validateMerchant: (options: {
-    validationUrl: string;
-    displayName: string;
-  }) => Promise<{ merchantSession: unknown }>;
-  confirmOrder: (options: {
-    orderId: string;
-    token: unknown;
-    billingContact?: unknown;
-  }) => Promise<unknown>;
-};
-
-type ApplePaySessionInstance = {
-  onvalidatemerchant: ((event: { validationURL: string }) => void) | null;
-  onpaymentauthorized: ((event: {
-    payment: { token: unknown; billingContact?: unknown };
-  }) => void) | null;
-  oncancel: (() => void) | null;
-  completeMerchantValidation: (merchantSession: unknown) => void;
-  completePayment: (status: number) => void;
-  abort: () => void;
-  begin: () => void;
-};
-
-type ApplePaySessionConstructor = {
-  new (version: number, paymentRequest: Record<string, unknown>): ApplePaySessionInstance;
-  canMakePayments: () => boolean;
-  STATUS_SUCCESS: number;
-  STATUS_FAILURE: number;
-};
-
 declare global {
   interface Window {
     Razorpay?: new (options: Record<string, unknown>) => { open: () => void };
@@ -115,9 +76,7 @@ declare global {
         isEligible?: () => boolean;
         render: (selector: HTMLElement) => Promise<void>;
       };
-      Applepay?: () => ApplePayMerchant;
     };
-    ApplePaySession?: ApplePaySessionConstructor;
   }
 }
 
@@ -182,7 +141,7 @@ function buildPayPalSdkUrl(config: PaymentConfig) {
     "client-id": config.paypalClientId,
     currency: config.paypalCurrency || "GBP",
     intent: "capture",
-    components: "buttons,funding-eligibility,applepay",
+    components: "buttons,funding-eligibility",
     "enable-funding": "paylater,credit,card",
   });
 
@@ -205,12 +164,6 @@ export default function PaymentCheckout({
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [isRazorpayLoading, setIsRazorpayLoading] = useState(false);
   const [isPayPalLoading, setIsPayPalLoading] = useState(false);
-  const [isApplePayLoading, setIsApplePayLoading] = useState(false);
-  const [isApplePayChecking, setIsApplePayChecking] = useState(false);
-  const [isApplePayEligible, setIsApplePayEligible] = useState(false);
-  const [applePaySdkReady, setApplePaySdkReady] = useState(false);
-  const [applePayUnavailableReason, setApplePayUnavailableReason] = useState("");
-  const [applePayCheckAttempt, setApplePayCheckAttempt] = useState(0);
   const [isApplyingCoupon, setIsApplyingCoupon] = useState(false);
   const [paypalReady, setPaypalReady] = useState(false);
   const [isCardChecking, setIsCardChecking] = useState(false);
@@ -226,7 +179,6 @@ export default function PaymentCheckout({
   const paypalContainerRef = useRef<HTMLDivElement | null>(null);
   const cardContainerRef = useRef<HTMLDivElement | null>(null);
   const payLaterContainerRef = useRef<HTMLDivElement | null>(null);
-  const applePayContainerRef = useRef<HTMLDivElement | null>(null);
 
   const checkoutAmount = appliedCoupon?.finalAmount ?? amount;
   const checkoutCurrency = appliedCoupon?.currency ?? currency ?? "GBP";
@@ -250,226 +202,8 @@ export default function PaymentCheckout({
     setIsPayLaterChecking(false);
     setIsPayLaterRendered(false);
     setPayLaterUnavailable(false);
-    setIsApplePayLoading(false);
-    setIsApplePayChecking(false);
-    setIsApplePayEligible(false);
-    setApplePayUnavailableReason("");
     setError("");
   }, [isCheckoutOpen]);
-
-  useEffect(() => {
-    if (
-      !isCheckoutOpen ||
-      !paypalReady ||
-      !applePaySdkReady ||
-      !applePayContainerRef.current
-    ) return;
-
-    let isCancelled = false;
-    let applePayButton: HTMLElement | null = null;
-    let handleApplePayClick: (() => void) | null = null;
-    const container = applePayContainerRef.current;
-
-    container.innerHTML = "";
-    setIsApplePayChecking(true);
-    setIsApplePayEligible(false);
-    setApplePayUnavailableReason("");
-
-    async function setUpApplePay() {
-      const ApplePaySession = window.ApplePaySession;
-      const applePayFactory = window.paypal?.Applepay;
-
-      if (!window.isSecureContext) {
-        if (!isCancelled) {
-          setApplePayUnavailableReason("Apple Pay requires a secure HTTPS page.");
-          setIsApplePayChecking(false);
-        }
-        return;
-      }
-
-      if (!ApplePaySession) {
-        if (!isCancelled) {
-          setApplePayUnavailableReason(
-            "This browser or device does not expose the Apple Pay payment API. Try Safari on an Apple Pay-enabled device or a browser that supports Apple Pay on the web."
-          );
-          setIsApplePayChecking(false);
-        }
-        return;
-      }
-
-      if (!ApplePaySession.canMakePayments()) {
-        if (!isCancelled) {
-          setApplePayUnavailableReason(
-            "Apple Pay is not configured for this device. Sign in to your Apple Account and add an eligible card to Apple Wallet."
-          );
-          setIsApplePayChecking(false);
-        }
-        return;
-      }
-
-      if (!applePayFactory) {
-        if (!isCancelled) {
-          setApplePayUnavailableReason(
-            "The PayPal Apple Pay component is unavailable for this merchant application."
-          );
-          setIsApplePayChecking(false);
-        }
-        return;
-      }
-
-      try {
-        const applePay = applePayFactory();
-        const eligibleConfig = await applePay.config();
-        if (isCancelled) return;
-
-        setIsApplePayEligible(eligibleConfig.isEligible);
-        setIsApplePayChecking(false);
-
-        if (!eligibleConfig.isEligible) {
-          setApplePayUnavailableReason(
-            "PayPal marked this merchant or buyer as ineligible. Confirm that Apple Pay is enabled for the live PayPal app and that britinstitute.uk is registered under its Apple Pay domains."
-          );
-          return;
-        }
-
-        applePayButton = document.createElement("apple-pay-button");
-        applePayButton.setAttribute("buttonstyle", "black");
-        applePayButton.setAttribute("type", "buy");
-        applePayButton.setAttribute("locale", "en-GB");
-        applePayButton.setAttribute("aria-label", `Buy ${courseTitle} with Apple Pay`);
-        applePayButton.style.display = "block";
-        applePayButton.style.width = "100%";
-        applePayButton.style.height = "48px";
-        applePayButton.style.cursor = "pointer";
-
-        handleApplePayClick = () => {
-          const Session = window.ApplePaySession;
-          if (!Session) {
-            setError("Apple Pay is not supported on this device.");
-            return;
-          }
-
-          setError("");
-          setIsApplePayLoading(true);
-
-          let session: ApplePaySessionInstance;
-          try {
-            session = new Session(4, {
-              countryCode: eligibleConfig.countryCode,
-              merchantCapabilities: eligibleConfig.merchantCapabilities,
-              supportedNetworks: eligibleConfig.supportedNetworks,
-              currencyCode: checkoutCurrency,
-              requiredBillingContactFields: ["postalAddress"],
-              total: {
-                label: "Brit Institute",
-                type: "final",
-                amount: checkoutAmount.toFixed(2),
-              },
-            });
-          } catch (err) {
-            setError(err instanceof Error ? err.message : "Apple Pay could not be started.");
-            setIsApplePayLoading(false);
-            return;
-          }
-
-          session.onvalidatemerchant = async (event) => {
-            try {
-              const validation = await applePay.validateMerchant({
-                validationUrl: event.validationURL,
-                displayName: "Brit Institute",
-              });
-              session.completeMerchantValidation(validation.merchantSession);
-            } catch (err) {
-              console.error("Apple Pay merchant validation failed:", err);
-              setError("Apple Pay merchant validation failed. Please try another payment method.");
-              setIsApplePayLoading(false);
-              session.abort();
-            }
-          };
-
-          session.onpaymentauthorized = async (event) => {
-            try {
-              const orderResponse = await apiRequest<{ id: string }>("/api/payments/paypal/order", {
-                method: "POST",
-                body: JSON.stringify({ courseSlug, couponCode: appliedCoupon?.code }),
-              });
-
-              await applePay.confirmOrder({
-                orderId: orderResponse.data.id,
-                token: event.payment.token,
-                billingContact: event.payment.billingContact,
-              });
-
-              const captureResponse = await apiRequest<{
-                provider: string;
-                orderId: string;
-                captureId: string;
-              }>("/api/payments/paypal/capture", {
-                method: "POST",
-                body: JSON.stringify({
-                  courseSlug,
-                  orderID: orderResponse.data.id,
-                  couponCode: appliedCoupon?.code,
-                }),
-              });
-
-              if (!captureResponse.success) {
-                throw new Error("Apple Pay capture failed.");
-              }
-
-              session.completePayment(Session.STATUS_SUCCESS);
-              setIsCheckoutOpen(false);
-              setIsSuccessOpen(true);
-            } catch (err) {
-              console.error("Apple Pay payment failed:", err);
-              session.completePayment(Session.STATUS_FAILURE);
-              setError(err instanceof Error ? err.message : "Apple Pay payment failed.");
-            } finally {
-              setIsApplePayLoading(false);
-            }
-          };
-
-          session.oncancel = () => {
-            setIsApplePayLoading(false);
-            setError("Apple Pay payment was cancelled.");
-          };
-
-          session.begin();
-        };
-
-        applePayButton.addEventListener("click", handleApplePayClick);
-        container.appendChild(applePayButton);
-      } catch (err) {
-        if (isCancelled) return;
-        console.error("Apple Pay eligibility check failed:", err);
-        setApplePayUnavailableReason(
-          "PayPal could not complete the Apple Pay eligibility check. Verify the live app's Apple Pay feature and registered domain, then retry."
-        );
-        setIsApplePayChecking(false);
-        setIsApplePayEligible(false);
-      }
-    }
-
-    setUpApplePay();
-
-    return () => {
-      isCancelled = true;
-      if (applePayButton && handleApplePayClick) {
-        applePayButton.removeEventListener("click", handleApplePayClick);
-      }
-      container.innerHTML = "";
-    };
-  }, [
-    appliedCoupon?.code,
-    applePayCheckAttempt,
-    applePaySdkReady,
-    checkoutAmount,
-    checkoutCurrency,
-    courseSlug,
-    courseTitle,
-    isCheckoutOpen,
-    paypalReady,
-  ]);
 
   useEffect(() => {
     if (!isCheckoutOpen) return;
@@ -485,21 +219,14 @@ export default function PaymentCheckout({
         setConfig(response.data);
 
         if (response.data.paypalClientId) {
-          const [paypalScriptLoaded, appleScriptLoaded] = await Promise.all([
-            loadExternalScript(buildPayPalSdkUrl(response.data), "paypal-js-sdk"),
-            loadExternalScript(
-              "https://applepay.cdn-apple.com/jsapi/1.latest/apple-pay-sdk.js",
-              "apple-pay-js-sdk"
-            ),
-          ]);
+          const paypalScriptLoaded = await loadExternalScript(
+            buildPayPalSdkUrl(response.data),
+            "paypal-js-sdk"
+          );
           if (isMounted) {
             setPaypalReady(paypalScriptLoaded);
-            setApplePaySdkReady(appleScriptLoaded);
             if (!paypalScriptLoaded) {
               setError("PayPal could not be loaded. Please try again.");
-            }
-            if (!appleScriptLoaded) {
-              setApplePayUnavailableReason("Apple's Apple Pay SDK could not be loaded.");
             }
           }
         }
@@ -767,7 +494,7 @@ export default function PaymentCheckout({
               "/api/payments/razorpay/verify",
               {
                 method: "POST",
-                body: JSON.stringify({ courseSlug, couponCode: appliedCoupon?.code, ...paymentResponse }),
+                body: JSON.stringify(paymentResponse),
               }
             );
 
@@ -837,7 +564,7 @@ export default function PaymentCheckout({
                 <div className="flex items-start gap-3">
                   <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#d95700]" />
                   <p className="text-sm font-medium leading-6 text-[#493f37]">
-                    Choose Apple Pay, Razorpay, or PayPal. Each option creates the course fee on the server and confirms it only after verified payment capture.
+                    Choose Razorpay or PayPal. Apple Pay appears securely inside Razorpay Checkout on eligible devices.
                   </p>
                 </div>
               </div>
@@ -897,41 +624,6 @@ export default function PaymentCheckout({
                 </div>
               )}
 
-              <div>
-                <div className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-700">
-                  <Wallet className="h-4 w-4 text-gray-950" />
-                  Apple Pay
-                </div>
-                {(isPayPalLoading || isApplePayChecking) && (
-                  <div className="flex h-14 items-center justify-center rounded-xl border border-gray-200 bg-gray-50 text-sm font-semibold text-gray-600">
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Checking Apple Pay
-                  </div>
-                )}
-                <div
-                  ref={applePayContainerRef}
-                  className={isApplePayEligible ? "min-h-12" : "hidden"}
-                />
-                {isApplePayLoading && (
-                  <p className="mt-2 text-xs font-semibold text-gray-600">Completing Apple Pay payment…</p>
-                )}
-                {!isPayPalLoading && config && !isApplePayChecking && !isApplePayEligible && (
-                  <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-600">
-                    <p>
-                      <span className="font-bold text-gray-800">Apple Pay is unavailable.</span>{" "}
-                      {applePayUnavailableReason || "The eligibility check did not complete."}
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => setApplePayCheckAttempt((attempt) => attempt + 1)}
-                      className="mt-3 rounded-lg border border-gray-300 bg-white px-3 py-2 text-xs font-bold text-gray-800 transition hover:border-gray-400 hover:bg-gray-100"
-                    >
-                      Retry Apple Pay check
-                    </button>
-                  </div>
-                )}
-              </div>
-
               <div className="grid gap-3">
                 <button
                   type="button"
@@ -942,6 +634,10 @@ export default function PaymentCheckout({
                   {isRazorpayLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <CreditCard className="h-5 w-5" />}
                   Pay with Razorpay
                 </button>
+
+                <p className="text-xs font-medium text-gray-500">
+                  Includes Apple Pay for eligible customers after Razorpay domain verification.
+                </p>
 
                 {config && !config.razorpayKeyId && (
                   <p className="text-xs font-medium text-gray-500">Razorpay key is not configured on the backend.</p>
