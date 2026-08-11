@@ -185,7 +185,11 @@ export const coursesData: Record<string, CourseSeoData> = {
       "Prediction Model Benchmark",
       "Customer or Behaviour Segmentation",
       "Explainable ML Report",
+      "Time Series Forecasting Dashboard",
+      "Natural Language Processing Classifier",
+      "Computer Vision Application",
       "LLM Data Science Assistant",
+      "Production ML Deployment Pipeline",
       "End-to-End Data Science Capstone"
     ],
     careerSupport: [

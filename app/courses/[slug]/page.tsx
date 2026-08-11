@@ -293,7 +293,7 @@ function SectionLabel({ children }: { children: ReactNode }) {
 const dataAnalyticsHeroBadges = [
   "24 Weekend Program",
   "Live Mentor-Led Classes",
-  "10+ Portfolio Projects",
+  "40+ Portfolio Projects",
   "Career Support Included",
 ];
 
