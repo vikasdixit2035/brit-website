@@ -246,6 +246,16 @@ const portfolioProjects = [
     proof: "Notebook, metrics summary, feature explanation, model card, and stakeholder summary",
     outcome: "Frame an ML problem, evaluate a model, and explain limits",
   },
+  {
+    title: "Portfolio Repository + AI-Use Declaration",
+    proof: "GitHub repository, project READMEs, validation logs, and transparent AI-use notes",
+    outcome: "Document project work clearly and demonstrate responsible AI practice",
+  },
+  {
+    title: "Hiring-Ready Portfolio Pack",
+    proof: "Curated project case studies, walkthrough notes, CV evidence, and interview stories",
+    outcome: "Present practical analyst capability confidently to employers",
+  },
 ];
 
 const submissionPattern = [
@@ -291,7 +301,7 @@ export default function DataAnalyticsCurriculum() {
               A six-month weekend programme built around Excel, Power BI, SQL, Python, statistics, machine learning, and AI-assisted analyst workflows. Learners finish with portfolio evidence for junior data analyst, BI analyst, reporting analyst, operations analyst, and data insight roles.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              {["26 weeks", "104 guided hours", "6 portfolio projects", "AI in every module"].map((item) => (
+              {["26 weeks", "104 guided hours", "8 portfolio projects", "AI in every module"].map((item) => (
                 <span key={item} className="rounded-md border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold text-white">
                   {item}
                 </span>
@@ -385,7 +395,7 @@ export default function DataAnalyticsCurriculum() {
       <section>
         <SectionHeading
           eyebrow="Portfolio outcomes"
-          title="Six module projects, one hiring-ready evidence pack."
+          title="Eight projects, one hiring-ready evidence pack."
           description="The certificate should not end with only quizzes. Every module creates a concrete submission that shows practical ability, communication, validation, and responsible AI use."
         />
         <div className="grid gap-5 md:grid-cols-2">

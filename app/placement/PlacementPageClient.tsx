@@ -65,7 +65,7 @@ const stories = [
     image: "/avatar-2.png",
   },
   {
-    name: "Sara Ahmed",
+    name: "Iqbal Ahmed",
     role: "Operations Analyst",
     company: "Healthcare Provider, Leeds",
     text: "The alumni network was invaluable. I connected with a previous learner who referred me internally, skipping the queue of hundreds of applicants.",

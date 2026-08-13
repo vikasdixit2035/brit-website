@@ -97,7 +97,9 @@ export const coursesData: Record<string, CourseSeoData> = {
       "SQL Business Case Pack",
       "Analyst Copilot Mini-App",
       "Decision Memo",
-      "Prediction or Segmentation Prototype"
+      "Prediction or Segmentation Prototype",
+      "Portfolio Repository + AI-Use Declaration",
+      "Hiring-Ready Portfolio Pack"
     ],
     careerSupport: [
       "CV tailored for UK data analyst jobs",
