@@ -42,17 +42,17 @@ export const faqItems: FaqItem[] = [
   {
     question: "Do you offer placement support?",
     answer:
-      "Yes. We provide a 100% Placement Guarantee and end-to-end placement support until eligible learners are placed.\n\nThis includes job-ready training, resume and LinkedIn optimisation, interview preparation, mock interviews, and continuous job opportunities until placement.",
+      "Yes. We provide end-to-end placement support, including job-ready training, resume and LinkedIn optimisation, interview preparation, mock interviews, and continuous job opportunities.\n\nA 100% Placement Guarantee is available to eligible learners in selected batches, subject to the applicable programme agreement.",
   },
   {
     question: "What does 100% placement guarantee mean?",
     answer:
-      "It means we stay with you until you secure a job. You are not left alone after course completion, and our dedicated placement team keeps working on your profile.\n\nPlacement support is subject to course completion, performance, and participation in placement activities.",
+      "For selected batches, Brit Institute takes responsibility for placing eligible learners. If Brit Institute is unable to secure a placement in accordance with the applicable programme agreement, the learner will receive a 100% refund.\n\nTo remain eligible, learners must maintain at least 85% attendance throughout the programme and complete 100% of all projects and assignments.",
   },
   {
-    question: "Are Pay After Placement, registration fee, and refunds available?",
+    question: "What are the registration fee and refund policy?",
     answer:
-      "Eligible candidates can opt for Pay After Placement, allowing them to pay fees after securing employment as per agreement terms.\n\nA one-time registration fee is required to confirm enrollment and block your seat.\n\nRefunds are processed according to the organisation's internal refund policy and may take 30 to 45 working days.",
+      "A one-time registration fee is required to confirm enrollment and reserve your seat.\n\nUnder the 45-Day Money-Back Guarantee, learners may attend classes for the first 30 days and, with a valid reason such as an unfulfilled programme commitment or a concern about course quality, request a 100% refund within the following 15 days.\n\nEligibility requires 100% class attendance and completion of all assignments during the initial 30 days. Failure to meet either requirement voids the guarantee.",
   },
   {
     question: "How are classes delivered, and what if I miss a session?",

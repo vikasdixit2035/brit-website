@@ -10,7 +10,7 @@ export default function TermsAndConditionsPage() {
         {/* Colorful Gradient Header */}
         <div style={{ background: "linear-gradient(135deg, #1D4ED8 0%, #10B981 100%)", padding: "40px", borderRadius: "20px 20px 0 0", color: "white" }}>
           <h1 style={{ fontSize: "2.5rem", fontWeight: 800, marginBottom: "8px" }}>Terms & Conditions</h1>
-          <p style={{ fontWeight: 500, opacity: 0.9 }}>Effective Date: 03/03/2026</p>
+          <p style={{ fontWeight: 500, opacity: 0.9 }}>Effective Date: 15/08/2026</p>
         </div>
 
         {/* Content Body */}
@@ -39,33 +39,48 @@ export default function TermsAndConditionsPage() {
                 </li>
                 <li style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
                   <span style={{ color: "#10B981" }}>✔</span>
-                  Refunds are subject to our standard refund policy, provided to students prior to official enrollment.
+                  Refund eligibility is subject to the 45-Day Money-Back Guarantee and Placement Guarantee terms below.
                 </li>
               </ul>
             </section>
 
             <section style={{ borderLeft: "4px solid #F59E0B", paddingLeft: "20px" }}>
-              <h2 style={{ fontSize: "1.4rem", fontWeight: 700, color: "#111827" }}>3. Intellectual Property</h2>
-              <p>All content provided, including but not limited to course modules, videos, assignments, and presentations, are the exclusive property of Brit Institute. Sharing, redistributing, or selling these materials without explicit written consent is strictly prohibited and violates our intellectual property rights.</p>
+              <h2 style={{ fontSize: "1.4rem", fontWeight: 700, color: "#111827" }}>3. 45-Day Money-Back Guarantee</h2>
+              <p>
+                Learners may attend classes for the first 30 days to experience the Brit Institute learning model. After the initial 30-day period, a learner with a valid reason for withdrawing, such as an unfulfilled programme commitment or a concern about course quality, may submit a request within the following 15 days for a 100% refund.
+              </p>
+              <p style={{ marginTop: "12px" }}>
+                To remain eligible, the learner must attend 100% of classes during the initial 30 days and complete all assignments provided during that period. Failure to meet either requirement will void the 45-Day Money-Back Guarantee.
+              </p>
             </section>
 
             <section style={{ borderLeft: "4px solid #8B5CF6", paddingLeft: "20px" }}>
-              <h2 style={{ fontSize: "1.4rem", fontWeight: 700, color: "#111827" }}>4. Code of Conduct</h2>
-              <p>Students are expected to maintain professional behavior in all interactions with our instructors, staff, and peers. Harassment, discrimination, or cheating in assessments will not be tolerated and may lead to immediate termination of enrollment without a refund.</p>
+              <h2 style={{ fontSize: "1.4rem", fontWeight: 700, color: "#111827" }}>4. Intellectual Property</h2>
+              <p>All content provided, including but not limited to course modules, videos, assignments, and presentations, are the exclusive property of Brit Institute. Sharing, redistributing, or selling these materials without explicit written consent is strictly prohibited and violates our intellectual property rights.</p>
             </section>
 
             <section style={{ borderLeft: "4px solid #EF4444", paddingLeft: "20px" }}>
-              <h2 style={{ fontSize: "1.4rem", fontWeight: 700, color: "#111827" }}>5. Job Placement Guarantee</h2>
-              <p>Our Job Placement Guarantee is applicable only to students who successfully fulfill all academic, attendance, and assignment requirements outlined in the program syllabus. Specific conditions apply and will be detailed in the Student Enrollment Agreement.</p>
+              <h2 style={{ fontSize: "1.4rem", fontWeight: 700, color: "#111827" }}>5. Code of Conduct</h2>
+              <p>Students are expected to maintain professional behavior in all interactions with our instructors, staff, and peers. Harassment, discrimination, or cheating in assessments will not be tolerated and may lead to immediate termination of enrollment without a refund.</p>
+            </section>
+
+            <section style={{ borderLeft: "4px solid #F59E0B", paddingLeft: "20px" }}>
+              <h2 style={{ fontSize: "1.4rem", fontWeight: 700, color: "#111827" }}>6. Placement Guarantee</h2>
+              <p>
+                Brit Institute provides a Placement Guarantee for selected batches. For eligible learners, Brit Institute takes responsibility for their placement; if Brit Institute is unable to secure a placement in accordance with the applicable programme agreement, the learner will receive a 100% refund.
+              </p>
+              <p style={{ marginTop: "12px" }}>
+                To remain eligible, learners must maintain at least 85% attendance throughout the programme and complete 100% of all projects and assignments.
+              </p>
             </section>
 
             <section style={{ borderLeft: "4px solid #6B7280", paddingLeft: "20px" }}>
-              <h2 style={{ fontSize: "1.4rem", fontWeight: 700, color: "#111827" }}>6. Limitation of Liability</h2>
+              <h2 style={{ fontSize: "1.4rem", fontWeight: 700, color: "#111827" }}>7. Limitation of Liability</h2>
               <p>Brit Institute is committed to providing high-quality education. However, we do not guarantee specific employment outcomes beyond our explicit agreements. We are not liable for any indirect, incidental, or consequential damages arising from the use of our services.</p>
             </section>
 
             <section style={{ borderLeft: "4px solid #3B82F6", paddingLeft: "20px" }}>
-              <h2 style={{ fontSize: "1.4rem", fontWeight: 700, color: "#111827" }}>7. Modifications to Terms</h2>
+              <h2 style={{ fontSize: "1.4rem", fontWeight: 700, color: "#111827" }}>8. Modifications to Terms</h2>
               <p>We may revise these Terms and Conditions periodically. Continued use of our website or services after any changes indicates your acceptance of the updated terms.</p>
             </section>
 

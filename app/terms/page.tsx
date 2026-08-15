@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Terms and Conditions",
   description:
-    "Review Brit Institute terms and conditions for website use, enrolment, payments, intellectual property, and programme policies.",
+    "Review Brit Institute terms and conditions, including enrolment, payments, the 45-day money-back guarantee, and placement guarantee eligibility.",
   path: "/terms",
 });
 
