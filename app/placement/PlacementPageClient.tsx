@@ -29,7 +29,7 @@ import {
   Users,
 } from "lucide-react";
 import Footer from "@/components/layout/Footer";
-import { SITE_PHONE_DISPLAY } from "@/lib/site";
+import { SITE_ADDRESS, SITE_PHONE_DISPLAY } from "@/lib/site";
 
 // --- Data Constants ---
 const stats = [
@@ -435,7 +435,7 @@ export default function PlacementPageClient() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-950/10">
                     <MapPin className="h-5 w-5" />
                   </div>
-                  <span className="font-bold">London, United Kingdom</span>
+                  <span className="font-bold">{SITE_ADDRESS}</span>
                 </div>
               </div>
             </div>

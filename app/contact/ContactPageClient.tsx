@@ -5,7 +5,7 @@ import { CalendarCheck, Mail, MapPin, MessageCircle, Phone, Send, ShieldCheck } 
 import Footer from "@/components/layout/Footer";
 import { ThemeHero, ThemeLabel, ThemeShell } from "@/components/layout/ThinkificTheme";
 import { trackLead } from "@/lib/analytics";
-import { SITE_ADDRESS_LINES, SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_PHONE_UK } from "@/lib/site";
+import { SITE_ADDRESS, SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_PHONE_UK } from "@/lib/site";
 
 const inputClass =
   "w-full rounded-md border border-[#ded6c8] bg-[#f7f3ea] px-4 py-3 text-sm font-semibold text-[#241a1f] outline-none transition placeholder:text-[#8b8175] focus:border-[#d95700] focus:bg-white";
@@ -88,7 +88,7 @@ export default function ContactPage() {
                   icon: MapPin,
                   title: "Location",
                   text: "Brit Institute is based in the United Kingdom.",
-                  value: SITE_ADDRESS_LINES.join(", "),
+                  value: SITE_ADDRESS,
                   href: "/contact",
                 },
               ].map((item) => {

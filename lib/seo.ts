@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
-import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL, SITE_EMAIL, SITE_PHONE_UK } from "@/lib/site";
+import {
+  DEFAULT_OG_IMAGE,
+  SITE_EMAIL,
+  SITE_NAME,
+  SITE_PHONE_UK,
+  SITE_POSTAL_ADDRESS,
+  SITE_URL,
+} from "@/lib/site";
 import type { SiteConfig } from "@/lib/siteConfig";
 
 type MetaInput = {
@@ -122,14 +129,7 @@ export function organizationSchema() {
     url: SITE_URL,
     logo: absoluteUrl("/britinstitute_v1.png"),
     email: "info@britinstitute.uk",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Office 7084, 58 Peregrine Road",
-      addressLocality: "Hainault",
-      addressRegion: "Ilford",
-      addressCountry: "GB",
-      postalCode: "IG6 3SZ",
-    },
+    address: SITE_POSTAL_ADDRESS,
     contactPoint: [
       {
         "@type": "ContactPoint",
@@ -154,14 +154,7 @@ export function organizationSchemaForSite(siteConfig: SiteConfig) {
     url: siteConfig.siteUrl,
     logo: getAbsoluteUrl("/britinstitute_v1.png", siteConfig),
     email: SITE_EMAIL,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Office 7084, 58 Peregrine Road",
-      addressLocality: "Hainault",
-      addressRegion: "Ilford",
-      addressCountry: "GB",
-      postalCode: "IG6 3SZ",
-    },
+    address: SITE_POSTAL_ADDRESS,
     contactPoint: [
       {
         "@type": "ContactPoint",
@@ -387,14 +380,7 @@ export function educationalOrganizationSchema() {
     telephone: SITE_PHONE_UK,
     description:
       "Brit Institute offers practical AI and data career training in the UK including data analytics, data science, agentic AI, and generative AI programmes with career support.",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Office 7084, 58 Peregrine Road",
-      addressLocality: "Hainault",
-      addressRegion: "Ilford",
-      addressCountry: "GB",
-      postalCode: "IG6 3SZ",
-    },
+    address: SITE_POSTAL_ADDRESS,
     contactPoint: [
       {
         "@type": "ContactPoint",

@@ -24,6 +24,7 @@ import { breadcrumbSchema, buildCourseSchema, buildMetadata } from "@/lib/seo";
 import { fetchCourseBySlug } from "@/lib/courses";
 import type { CourseRecord } from "@/lib/courses";
 import { dataAnalyticsFaqItems, dataAnalyticsFaqPageSchema } from "@/lib/faqData";
+import { SITE_ADDRESS } from "@/lib/site";
 
 const BROCHURE_HREF = "/brochure/Brit_Institute_Brochure_A4_HD-2.pdf";
 const BROCHURE_DOWNLOAD_NAME = "Brit_Institute_Data_Analytics_Brochure.pdf";
@@ -1257,7 +1258,7 @@ function CoursePremiumLanding({
           {[
             ["Programs", ["Data Analytics + GenAI", "Data Science", "Agentic AI"]],
             ["Resources", ["Blog", "Reviews", "Pricing"]],
-            ["Contact", ["info@britinstitute.uk", "London, United Kingdom", "Online weekend classes"]],
+            ["Contact", ["info@britinstitute.uk", SITE_ADDRESS, "Online weekend classes"]],
           ].map(([title, items]) => (
             <div key={title as string}>
               <h3 className="text-lg font-black">{title}</h3>

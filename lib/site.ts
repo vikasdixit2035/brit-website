@@ -7,12 +7,24 @@ export const SITE_PHONE_UK_LOCAL = "7447 177848";
 export const SITE_PHONE_UK = "7447 177848";
 export const SITE_PHONE_DISPLAY = "7447 177848";
 export const SITE_WHATSAPP_NUMBER = "447447177848";
+export const SITE_ADDRESS_STREET = "58 Peregrine Rd";
+export const SITE_ADDRESS_LOCALITY = "Ilford";
+export const SITE_ADDRESS_POSTCODE = "IG6 3SZ";
+export const SITE_ADDRESS_COUNTRY = "United Kingdom";
+export const SITE_ADDRESS_COUNTRY_CODE = "GB";
 export const SITE_ADDRESS_LINES = [
-  "London",
-  "United Kingdom",
+  SITE_ADDRESS_STREET,
+  `${SITE_ADDRESS_LOCALITY} ${SITE_ADDRESS_POSTCODE}`,
+  SITE_ADDRESS_COUNTRY,
 ] as const;
 export const SITE_ADDRESS = SITE_ADDRESS_LINES.join(", ");
-export const SITE_ADDRESS_SHORT = "London, United Kingdom";
+export const SITE_POSTAL_ADDRESS = {
+  "@type": "PostalAddress",
+  streetAddress: SITE_ADDRESS_STREET,
+  addressLocality: SITE_ADDRESS_LOCALITY,
+  postalCode: SITE_ADDRESS_POSTCODE,
+  addressCountry: SITE_ADDRESS_COUNTRY_CODE,
+} as const;
 
 export const SITE_STATS = {
   learnersTrained: "10,000+",
