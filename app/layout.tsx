@@ -18,6 +18,7 @@ import {
   GoogleTagManagerHead,
   GoogleTagManagerNoScript,
 } from "@/components/analytics/GoogleTagManager";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import MetaPixel from "@/components/analytics/MetaPixel";
 import {
   educationalOrganizationSchema,
@@ -121,6 +122,7 @@ export default async function RootLayout({
     <html lang="en">
       <head>
         <GoogleTagManagerHead />
+        <GoogleAnalytics />
         <OrganizationSchema siteConfig={siteConfig} />
         <script
           type="application/ld+json"
