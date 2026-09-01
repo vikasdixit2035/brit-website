@@ -93,7 +93,7 @@ export default function FAQ() {
       <div className={`relative z-10 mx-auto max-w-[1440px] px-6 md:px-12 lg:px-20 ${cls}`}>
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <h2 className="mb-4 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl lg:text-[2.9rem]">
-            Frequently Asked <span className="text-amber-600">Questions</span>
+            Frequently Asked Questions About Becoming a <span className="text-amber-600">Data Analyst in the UK</span>
           </h2>
           <p className="mx-auto max-w-xl text-sm leading-relaxed text-slate-600 md:text-base">
             Clear answers about our programmes, eligibility, delivery format,

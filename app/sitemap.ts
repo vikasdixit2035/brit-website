@@ -2,21 +2,14 @@ import type { MetadataRoute } from "next";
 import { headers } from "next/headers";
 import { BLOG_ARTICLES } from "@/app/blog/blogData";
 import { coursesData } from "@/app/courses/[slug]/courseData";
-import { CHATBOT_SUBDOMAIN_PATH, getRequestSiteConfig } from "@/lib/siteConfig";
+import { getRequestSiteConfig } from "@/lib/siteConfig";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const requestHeaders = await headers();
   const siteConfig = getRequestSiteConfig(requestHeaders);
 
   if (siteConfig.variant === "chatbot") {
-    return [
-      {
-        url: siteConfig.siteUrl,
-        lastModified: new Date(),
-        changeFrequency: "weekly",
-        priority: 1,
-      },
-    ];
+    return [];
   }
 
   const staticRoutes = [
@@ -24,21 +17,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/about",
     "/contact",
     "/courses",
+    "/power-bi-course-uk",
+    "/career-change-data-analyst-uk",
+    "/data-analyst-bootcamp-uk",
     "/placement",
     "/pricing",
     "/reviews",
     "/resources",
     "/blog",
+    "/faq",
     "/careers",
     "/privacy-policy",
     "/terms",
-    CHATBOT_SUBDOMAIN_PATH,
   ];
 
   const staticEntries = staticRoutes.map((path) => {
     let priority = 0.7;
     if (path === "/") priority = 1.0;
-    else if (["/about", "/contact", "/courses", "/placement", "/pricing"].includes(path)) priority = 0.9;
+    else if (["/about", "/contact", "/courses", "/placement", "/pricing", "/power-bi-course-uk", "/career-change-data-analyst-uk"].includes(path)) priority = 0.9;
     
     return {
       url: `${siteConfig.siteUrl}${path}`,

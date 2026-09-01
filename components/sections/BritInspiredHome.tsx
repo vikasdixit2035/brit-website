@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  Award,
   BarChart3,
   BookOpenCheck,
   BriefcaseBusiness,
@@ -19,73 +18,10 @@ import {
   Sparkles,
   Target,
   Trophy,
-  UserCheck,
   Users,
 } from "lucide-react";
 
 import { coursesData } from "@/app/courses/[slug]/courseData";
-import { SITE_STATS } from "@/lib/site";
-
-const companyLogos = [
-  "Accenture.webp",
-  "Allianz logo.webp",
-  "DataBricks logo.webp",
-  "Evergreen logo.webp",
-  "Google Deeo mind logo.webp",
-  "HSBC logo.webp",
-  "Harrods logo.webp",
-  "JP morragn logo.webp",
-  "Legal & general Logo.webp",
-  "Moonplay logo.webp",
-  "Nivoda logo.webp",
-  "Poly ai logo.webp",
-  "Sky logo.webp",
-  "Stat sports logo.webp",
-  "arm logo.webp",
-  "artemis.webp",
-  "blackswan.webp",
-  "bumble logo.webp",
-  "capgemini.webp",
-  "cgi.webp",
-  "cityfootball.webp",
-  "cloudfare logo.webp",
-  "coinbase.webp",
-  "confluent.webp",
-  "couchbase.webp",
-  "cycle.webp",
-  "deliveroo.webp",
-  "elastic logo.webp",
-  "goldman logo.webp",
-  "graphcore.webp",
-  "mck.webp",
-  "monzo.webp",
-  "natwest.webp",
-  "nvidia.webp",
-  "ocado.webp",
-  "oodle.webp",
-  "pure DC.webp",
-  "rackspace.webp",
-  "revolut.webp",
-  "skyscanner.webp",
-  "snowflake.webp",
-  "softcat logo.webp",
-  "synthesia.webp",
-  "thoughts.webp",
-  "toluna.webp",
-  "tractable.webp",
-  "truelayer logo.webp",
-  "watson logo.webp",
-  "wayfair.webp",
-  "wayve.webp",
-  "wise.webp",
-  "zopa.webp",
-];
-
-const companyLogoRows = [
-  companyLogos.filter((_, index) => index % 3 === 0),
-  companyLogos.filter((_, index) => index % 3 === 1),
-  companyLogos.filter((_, index) => index % 3 === 2),
-];
 
 const courseImages: Record<string, string> = {
   "data-analytics": "/da-Photoroom.png",
@@ -99,63 +35,42 @@ const courseAccents = ["#f5c242", "#f26722", "#97c266", "#c44d2d"];
 const included = [
   {
     icon: MonitorPlay,
-    title: "Live, guided classes",
-    text: "Weekly expert sessions with practical demos, walkthroughs, and replay access.",
+    title: "Learn the tools employers use",
+    text: "Build practical capability in Excel, SQL, Power BI, Python and applied AI through live, guided training.",
   },
   {
-    icon: UserCheck,
-    title: "1-to-1 mentor support",
-    text: "Progress reviews, doubt clearing, and feedback that keeps your study plan moving.",
+    icon: BookOpenCheck,
+    title: "Build real portfolio projects",
+    text: "Create dashboards, analysis case studies and project walkthroughs you can explain during interviews.",
   },
   {
     icon: BriefcaseBusiness,
-    title: "Career readiness",
-    text: "CV, LinkedIn, portfolio, interview prep, and UK job-search guidance.",
+    title: "Prepare for the UK job search",
+    text: "Strengthen your CV, LinkedIn profile, interview answers and application strategy with structured support.",
   },
 ];
 
 const featureRows = [
   {
-    eyebrow: "Courses built to perform",
+    eyebrow: "Skills UK analyst roles require",
+    title: "Learn Excel, SQL, Power BI, Python and applied AI.",
+    text: "The Data Analytics + AI programme connects core analyst tools to practical business tasks, so each skill has a clear workplace purpose.",
+    image: "/dapic.png",
+    checks: ["Data cleaning and analysis", "Dashboard and reporting workflows", "Business-focused SQL and Python practice"],
+  },
+  {
+    eyebrow: "Projects before certificates",
     title: "Turn learning into portfolio proof.",
-    text: "Each programme is organised around practical assignments, dashboards, AI workflows, notebooks, and capstone projects you can discuss with employers.",
-    image: "/da-Photoroom.png",
-    checks: ["Project briefs based on real business tasks", "Mentor review before portfolio submission", "Tools mapped to UK data and AI job descriptions"],
-  },
-  {
-    eyebrow: "Communities built to belong",
-    title: "Study with structure, not guesswork.",
-    text: "Learners get a visible path from first module to final interview prep, with checkpoints that make progress easy to understand.",
+    text: "Build practical assignments, dashboards and case studies that show how you approach a problem, use data and communicate an outcome.",
     image: "/microsoft-certificate.png",
-    checks: ["Weekly learning rhythm", "Progress reviews and accountability", "Career support layered into the course"],
+    checks: ["Business-style project briefs", "Mentor feedback on practical work", "Portfolio outputs prepared for interviews"],
   },
   {
-    eyebrow: "Built for exit outcomes",
-    title: "Prepare for the roles you actually want.",
-    text: "The experience connects skills to target roles across analytics, data science, AI automation, and generative AI.",
+    eyebrow: "Career support built in",
+    title: "Move from projects to interviews with a clear plan.",
+    text: "Connect your skills and project evidence to suitable UK analyst roles through CV, LinkedIn, interview and job-search preparation.",
     image: "/hero-person.png",
-    checks: ["Role-based guidance", "Mock interview practice", "Application and salary conversation support"],
-  },
-];
-
-const testimonials = [
-  {
-    name: "Olivia Carter",
-    role: "Business Analyst, London",
-    image: "/testimonials/emma-thompson.webp",
-    quote: "The projects gave me clear proof of what I could do. I finally felt ready to talk about analytics in interviews.",
-  },
-  {
-    name: "Karan Patel",
-    role: "Operations Manager, Leeds",
-    image: "/testimonials/ankit-verma.jpg",
-    quote: "I moved from Excel-heavy reporting to confident Power BI dashboards and better business conversations.",
-  },
-  {
-    name: "Priya Nair",
-    role: "Analytics Intern, Leeds",
-    image: "/testimonials/neha-kulkarni.jpg",
-    quote: "Brit Institute simplified complex topics and helped me build the confidence to apply for my first analytics role.",
+    checks: ["CV and LinkedIn optimisation", "Technical and behavioural interview practice", "Application and placement support"],
   },
 ];
 
@@ -169,11 +84,6 @@ const productCards = Object.entries(coursesData).slice(0, 4).map(([slug, course]
   accent: courseAccents[index % courseAccents.length],
 }));
 
-const proofBadges = [
-  { eyebrow: "Brit 2026", title: "4.8/5", subtitle: "Top Rated", accent: "#f26722" },
-  { eyebrow: "Brit 2026", title: "Projects", subtitle: "Portfolio", accent: "#f5c242" },
-  { eyebrow: "Brit 2026", title: "Support", subtitle: "Career", accent: "#2563eb" },
-];
 
 function DarkPattern({ className = "" }: { className?: string }) {
   return (
@@ -200,15 +110,15 @@ export default function BritInspiredHome() {
   return (
     <main className="bg-[#f7f3ea] text-[#241a1f]">
       <HeroSection />
-      <LogoTrustSection />
+      <CareerJourneyStrip />
       <IntroCardsSection />
       <ProductsSection />
-      <ProofBand />
+      <CareerChangeBand />
       <FeatureSuite />
       <CohortCTA />
-      <TestimonialStrip />
-      <SuccessGrid />
-      <StatsBand />
+      <ReviewEvidenceStrip />
+      <PortfolioGrid />
+      <OutcomeProcessBand />
       <FinalDarkCTA />
     </main>
   );
@@ -222,31 +132,31 @@ function HeroSection() {
 
       <div className="relative z-10 mx-auto grid max-w-7xl pt-12 gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div>
-          <SectionLabel dark>Brit Institute</SectionLabel>
+          <SectionLabel dark>UK Data Analyst Career Programme</SectionLabel>
           <h1 className="mt-3 max-w-2xl text-4xl font-black leading-[0.98] tracking-tight md:text-[52px] lg:text-[60px]">
-            Powering the world&apos;s next data and AI careers
+            Become a Job-Ready Data Analyst in the UK
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-white/75 md:text-lg">
-            Practical UK-focused programmes for learners who want portfolio proof, mentor support, and a clear path into analytics, data science, and AI roles.
+            Live, mentor-led Data Analytics + AI training built for UK careers. Master Excel, SQL, Power BI, Python and AI through real projects, then get structured CV, interview, job-search and placement support to help you move into a data role.
           </p>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
             <Link href="/contact" className="btn-gold min-h-12 px-6 py-3 text-sm sm:min-w-[230px]">
-              Book Free Consultation
+              Book Free Career Consultation
             </Link>
-            <Link href="/courses" className="btn-outline btn-outline-white min-h-12 px-6 py-3 text-sm sm:min-w-[176px]">
-              Explore Courses
+            <Link href="/courses/data-analytics" className="btn-outline btn-outline-white min-h-12 px-6 py-3 text-sm sm:min-w-[230px]">
+              Explore Data Analyst Programme
             </Link>
           </div>
 
-          <div className="mt-6 grid max-w-2xl grid-cols-3 gap-3">
+          <div className="mt-6 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
             {[
-              [SITE_STATS.learnersTrained, "learners"],
-              [`${SITE_STATS.averageRating}/5`, "rating"],
-              [SITE_STATS.hiringPartners, "partners"],
-            ].map(([value, label]) => (
+              "Real Projects",
+              "UK Job Preparation",
+              "1-to-1 Mentoring",
+              "Placement Support",
+            ].map((label) => (
               <div key={label} className="border-t border-white/25 pt-4">
-                <div className="text-2xl font-black text-white">{value}</div>
-                <div className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-white/55">{label}</div>
+                <div className="text-sm font-black leading-5 text-white">{label}</div>
               </div>
             ))}
           </div>
@@ -256,7 +166,7 @@ function HeroSection() {
           <div className="absolute inset-x-0 bottom-0 mx-auto h-[330px] max-w-[570px] overflow-hidden rounded-b-none rounded-t-[190px] border border-white/10 bg-[#352338] shadow-[0_40px_90px_rgba(0,0,0,0.42)] md:h-[390px] lg:h-[410px]">
             <Image
               src="/hero-person.png"
-              alt="Brit Institute learners in London"
+              alt="Learner preparing for a UK data analyst career with Brit Institute"
               fill
               priority
               className="object-cover object-center"
@@ -267,10 +177,10 @@ function HeroSection() {
           <div className="absolute bottom-4 left-0 max-w-[240px] rounded-md border border-white/15 bg-white px-4 py-3 text-[#24101f] shadow-2xl md:left-8">
             <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-[#c45118]">
               <Sparkles size={14} />
-              Next intake
+              Live online programme
             </div>
-            <div className="mt-2 text-xl font-black">22 August 2026</div>
-            <p className="mt-1 text-sm font-semibold text-[#6f665c]">Live, mentor-led cohorts now open.</p>
+            <div className="mt-2 text-xl font-black">Beginner-friendly</div>
+            <p className="mt-1 text-sm font-semibold text-[#6f665c]">A structured route from skills to job search.</p>
           </div>
         </div>
       </div>
@@ -278,100 +188,18 @@ function HeroSection() {
   );
 }
 
-function LogoTrustSection() {
+function CareerJourneyStrip() {
   return (
-    <section className="overflow-hidden bg-[#f7f3ea] px-5 py-12 md:px-8">
-      <style>{`
-        .company-logo-track {
-          display: flex;
-          width: max-content;
-          align-items: center;
-          will-change: transform;
-        }
-
-        .company-logo-track-left {
-          animation: companyLogoScrollLeft 46s linear infinite;
-        }
-
-        .company-logo-track-right {
-          animation: companyLogoScrollRight 46s linear infinite;
-        }
-
-        .company-logo-track:hover {
-          animation-play-state: paused;
-        }
-
-        .company-logo-cell {
-          display: flex;
-          width: 170px;
-          height: 58px;
-          flex-shrink: 0;
-          align-items: center;
-          justify-content: center;
-          margin-inline: 18px;
-        }
-
-        .company-logo-img {
-          object-fit: contain;
-          opacity: 1;
-          filter: saturate(1.14) contrast(1.28);
-          mix-blend-mode: multiply;
-          transform: scale(1.04);
-          transition: transform 0.25s ease;
-        }
-
-        .company-logo-cell:hover .company-logo-img {
-          transform: scale(1.1);
-        }
-
-        @keyframes companyLogoScrollLeft {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-
-        @keyframes companyLogoScrollRight {
-          from { transform: translateX(-50%); }
-          to { transform: translateX(0); }
-        }
-
-        @media (max-width: 767px) {
-          .company-logo-cell {
-            width: 138px;
-            height: 52px;
-            margin-inline: 12px;
-          }
-        }
-      `}</style>
-
-      <div className="mx-auto max-w-6xl text-center">
-        <p className="text-xs font-black uppercase tracking-[0.26em] text-[#7a7064]">
-          Trusted by learners targeting roles across leading UK employers
-        </p>
-      </div>
-
-      <div className="mx-[calc(50%-50vw)] mt-8 flex flex-col gap-5">
-        {companyLogoRows.map((row, rowIndex) => {
-          const repeatedRow = [...row, ...row];
-          const directionClass = rowIndex % 2 === 0 ? "company-logo-track-left" : "company-logo-track-right";
-
-          return (
-            <div key={`company-logo-row-${rowIndex}`} className="flex overflow-hidden">
-              <div className={`company-logo-track ${directionClass}`} aria-hidden="true">
-                {repeatedRow.map((logo, logoIndex) => (
-                  <div key={`${logo}-${logoIndex}`} className="company-logo-cell">
-                    <Image
-                      src={`/companies-clean/${encodeURIComponent(logo)}`}
-                      alt={logo.replace(/\.webp$/i, "").replace(/\s+logo/i, "")}
-                      width={160}
-                      height={48}
-                      className="company-logo-img max-h-11 w-auto max-w-full"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          );
-        })}
+    <section aria-label="Brit Institute career journey" className="bg-[#d95700] px-5 py-7 text-white md:px-8">
+      <div className="mx-auto grid max-w-6xl gap-3 text-center sm:grid-cols-5 sm:text-left">
+        {["Learn skills", "Build real projects", "Become job ready", "Prepare for interviews", "Get placement support"].map((step, index) => (
+          <div key={step} className="flex items-center justify-center gap-3 rounded-md border border-white/20 bg-white/8 px-4 py-3 sm:justify-start">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#f5c242] text-xs font-black text-[#24101f]">
+              {index + 1}
+            </span>
+            <span className="text-sm font-black leading-5">{step}</span>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -381,12 +209,12 @@ function IntroCardsSection() {
   return (
     <section className="bg-[#f7f3ea] px-5 py-20 md:px-8 lg:py-24">
       <div className="mx-auto max-w-6xl text-center">
-        <SectionLabel>Learning platform</SectionLabel>
+        <SectionLabel>Career-outcome training</SectionLabel>
         <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
-          Learning experiences that convert ambition into career-ready skill.
+          Data Analytics Training Built Around Getting Hired
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#6f665c] md:text-base">
-          Brit Institute combines structured courses, hands-on projects, mentor feedback, and career support into a single journey.
+          Brit Institute combines live training, hands-on projects, mentor feedback and UK career preparation in one structured journey from first skill to job search.
         </p>
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -399,8 +227,8 @@ function IntroCardsSection() {
                 </div>
                 <h3 className="mt-5 text-xl font-black">{item.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-[#6f665c]">{item.text}</p>
-                <Link href="/courses" className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#c45118]">
-                  View details <ArrowRight size={16} />
+                <Link href={item.title.includes("job search") ? "/placement" : "/courses/data-analytics"} className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#c45118]">
+                  {item.title.includes("job search") ? "Explore placement support" : "Explore the programme"} <ArrowRight size={16} />
                 </Link>
               </article>
             );
@@ -416,20 +244,20 @@ function ProductsSection() {
     <section id="programs" className="bg-[#746d5c] px-5 py-20 text-white md:px-8 lg:py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-4xl font-semibold leading-tight md:text-5xl">The right learning products for your outcomes</h2>
+          <h2 className="text-4xl font-semibold leading-tight md:text-5xl">Explore Data &amp; AI Career Programmes</h2>
           <p className="mt-4 text-sm leading-7 text-white/72">
-            Pick the route that matches your starting point and target role.
+            Choose the pathway that matches your starting point, the skills you need to prove and the role you want to pursue.
           </p>
         </div>
 
         <div className="mt-12 rounded-md bg-[#10151c] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.28)] md:p-7">
           <div className="mb-5 flex items-center justify-between gap-4">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.24em] text-[#f5c242]">What&apos;s included?</p>
-              <h3 className="mt-2 text-2xl font-black">Courses, mentorship, portfolio work, and career support</h3>
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-[#f5c242]">Skills + projects + career preparation</p>
+              <h3 className="mt-2 text-2xl font-black">Programmes designed to create visible, interview-ready proof</h3>
             </div>
             <Link href="/courses" className="hidden rounded-full bg-[#f5c242] px-5 py-3 text-sm font-black text-[#24101f] md:inline-flex">
-              View all
+              Compare programmes
             </Link>
           </div>
 
@@ -453,7 +281,7 @@ function ProductsSection() {
         </div>
 
         <div className="mt-14">
-          <h3 className="text-center text-2xl font-semibold">How learners win with Brit Institute</h3>
+          <h3 className="text-center text-2xl font-semibold">How learning becomes job readiness</h3>
           <div className="mt-7 grid gap-4 md:grid-cols-3">
             {[
               ["Define your target", "Choose the programme that fits your role goal and current skill level.", Target],
@@ -478,57 +306,29 @@ function ProductsSection() {
   );
 }
 
-function ProofBand() {
+function CareerChangeBand() {
   return (
     <section className="relative overflow-hidden bg-[#24101f] px-5 py-16 text-white md:px-8">
       <DarkPattern />
-      <div className="relative z-10 mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div className="grid grid-cols-1 gap-4 min-[420px]:grid-cols-3 sm:gap-5">
-          {proofBadges.map((badge) => (
-            <article
-              key={badge.subtitle}
-              className="relative mx-auto flex aspect-[0.88] w-full max-w-[150px] bg-[#15110f] p-[2px] text-center text-[#111] shadow-[0_20px_48px_rgba(0,0,0,0.18)] sm:max-w-[170px]"
-              style={{ clipPath: "polygon(0 0, 100% 0, 100% 78%, 50% 100%, 0 78%)" }}
-              aria-label={`${badge.title} ${badge.subtitle}`}
-            >
-              <div
-                className="relative flex min-h-0 w-full flex-col overflow-hidden bg-white"
-                style={{ clipPath: "polygon(0 0, 100% 0, 100% 77%, 50% 98%, 0 77%)" }}
-              >
-                <div className="flex h-9 items-center justify-between border-b-2 border-[#15110f] pl-3">
-                  <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#15110f]">
-                    {badge.eyebrow}
-                  </span>
-                  <span className="flex h-full w-8 items-center justify-center bg-[#ff492f] text-white">
-                    <Award size={16} strokeWidth={2.5} />
-                  </span>
-                </div>
-                <div className="flex flex-1 flex-col items-center justify-center px-3 pb-8 pt-3">
-                  <strong className="text-[20px] font-black leading-[0.98] tracking-tight sm:text-[23px]">
-                    {badge.title}
-                  </strong>
-                  <span className="mt-2 text-[9px] font-black uppercase tracking-[0.22em] text-[#5d5148]">
-                    {badge.subtitle}
-                  </span>
-                </div>
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-x-0 bottom-0 h-10"
-                  style={{
-                    background: badge.accent,
-                    clipPath: "polygon(0 30%, 50% 72%, 100% 30%, 100% 52%, 50% 94%, 0 52%)",
-                  }}
-                />
-              </div>
-            </article>
-          ))}
-        </div>
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div>
-          <SectionLabel dark>The results speak</SectionLabel>
-          <h2 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl">The proof stack for career change.</h2>
+          <SectionLabel dark>Career changers</SectionLabel>
+          <h2 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl">Changing Careers into Data Analytics? Start Here</h2>
           <p className="mt-5 max-w-2xl text-sm leading-7 text-white/72 md:text-base">
-            Learners leave with certificates, practical work, mentor feedback, and a stronger story for UK data and AI interviews.
+            You do not need to collect disconnected certificates. Start with a role target, build the analyst skills that target requires, create project evidence and prepare a clear career-change story for UK employers.
           </p>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <Link href="/career-change-data-analyst-uk" className="btn-gold lg">Read the career-change guide</Link>
+            <Link href="/data-analyst-bootcamp-uk" className="btn-outline btn-outline-white">Compare programme formats</Link>
+          </div>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {["Role and skill-gap plan", "Mentor-led learning", "Portfolio project evidence", "CV and interview preparation"].map((item) => (
+            <div key={item} className="rounded-md border border-white/12 bg-white/8 p-5 text-sm font-black leading-6">
+              <CheckCircle2 className="mb-4 text-[#f5c242]" size={22} />
+              {item}
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -548,7 +348,10 @@ function FeatureSuite() {
       />
       <div className="relative z-10 mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">Brit Institute&apos;s stand-out suite of features</h2>
+          <h2 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">Excel, SQL, Power BI, Python and AI — One Career Programme</h2>
+          <p className="mt-5 text-sm leading-7 text-[#6f665c] md:text-base">
+            Learn the tools together in a connected analyst workflow, then turn that workflow into projects and interview evidence.
+          </p>
         </div>
 
         <div className="mt-16 space-y-20">
@@ -591,76 +394,80 @@ function CohortCTA() {
     <section className="relative overflow-hidden bg-[#24101f] px-5 py-20 text-center text-white md:px-8">
       <DarkPattern />
       <div className="relative z-10 mx-auto max-w-2xl">
-        <SectionLabel dark>Admissions open</SectionLabel>
-        <h2 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl">Launch in 30 days with zero setup stress.</h2>
+        <SectionLabel dark>Career journey</SectionLabel>
+        <h2 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl">From Training to Interviews and Placement Support</h2>
         <p className="mt-5 text-sm leading-7 text-white/72 md:text-base">
-          Speak with an advisor, pick your course, and join the next guided cohort with a clear study plan.
+          Follow a structured route through technical training, portfolio review, CV and LinkedIn preparation, mock interviews, job-search planning and continued placement support.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <Link href="/apply" className="btn-gold lg">Apply Now</Link>
-          <Link href="/contact" className="btn-outline btn-outline-white">Book Free Counselling</Link>
+          <Link href="/placement" className="btn-gold lg">How Placement Support Works</Link>
+          <Link href="/contact" className="btn-outline btn-outline-white">Book Free Career Consultation</Link>
         </div>
       </div>
     </section>
   );
 }
 
-function TestimonialStrip() {
+function ReviewEvidenceStrip() {
   return (
     <section className="bg-[#cfe0ff] px-5 py-12 md:px-8">
-      <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 text-center md:flex-row md:text-left">
-        <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-full border-4 border-white shadow-xl">
-          <Image src="/testimonials/benjamin-hughes.webp" alt="Brit Institute learner" fill className="object-cover" sizes="112px" />
+      <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.22em] text-[#4d617f]">Review the evidence</p>
+          <h2 className="mt-3 text-3xl font-semibold leading-tight text-[#24101f]">See learner stories and the projects completed during the programme</h2>
         </div>
-        <blockquote className="text-lg font-semibold leading-8 text-[#24101f] md:text-xl">
-          &quot;Brit Institute gave me structure, practical projects, and the confidence to explain my work clearly in interviews.&quot;
-          <footer className="mt-4 text-sm font-black uppercase tracking-[0.2em] text-[#4d617f]">William Foster, Financial Analyst</footer>
-        </blockquote>
+        <Link href="/reviews" className="shrink-0 rounded-full bg-[#24101f] px-6 py-3 text-sm font-black text-white">
+          View Success Stories
+        </Link>
       </div>
     </section>
   );
 }
 
-function SuccessGrid() {
+function PortfolioGrid() {
   return (
     <section className="bg-[#f7f3ea] px-5 py-20 md:px-8 lg:py-24">
       <div className="mx-auto max-w-6xl">
         <div className="max-w-2xl">
-          <h2 className="text-4xl font-semibold leading-tight md:text-5xl">Join the ranks of leading learning success stories</h2>
+          <SectionLabel>Portfolio-first learning</SectionLabel>
+          <h2 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl">Real Projects That Become Your Interview Portfolio</h2>
+          <p className="mt-5 text-sm leading-7 text-[#6f665c] md:text-base">
+            Each project is designed to help you explain the business question, the tools you used, the decisions you made and the result you produced.
+          </p>
         </div>
         <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {testimonials.map((story, index) => (
+          {[
+            ["Executive Power BI dashboard", "Clean and model a business dataset, define useful KPIs and present a clear decision-ready dashboard."],
+            ["SQL business case", "Query linked tables, test assumptions and turn analysis into concise recommendations for a stakeholder."],
+            ["Python and AI analyst workflow", "Use Python and applied AI responsibly to automate part of an analysis while documenting your checks."],
+          ].map(([title, text], index) => (
             <article
-              key={story.name}
+              key={title}
               className="rounded-md p-6 text-white shadow-[0_18px_45px_rgba(36,26,31,0.08)]"
               style={{ background: index === 0 ? "#3250b5" : index === 1 ? "#24101f" : "#d95700" }}
             >
-              <div className="flex items-center gap-4">
-                <div className="relative h-14 w-14 overflow-hidden rounded-full border-2 border-white/70">
-                  <Image src={story.image} alt={story.name} fill className="object-cover" sizes="56px" />
-                </div>
-                <div>
-                  <h3 className="font-black">{story.name}</h3>
-                  <p className="text-xs font-semibold text-white/70">{story.role}</p>
-                </div>
-              </div>
-              <p className="mt-6 text-sm leading-7 text-white/82">{story.quote}</p>
+              <BarChart3 size={26} className="text-[#f5c242]" />
+              <h3 className="mt-5 text-xl font-black">{title}</h3>
+              <p className="mt-4 text-sm leading-7 text-white/82">{text}</p>
             </article>
           ))}
         </div>
+        <Link href="/courses/data-analytics#projects" className="mt-8 inline-flex items-center gap-2 text-sm font-black text-[#c45118]">
+          Explore Data Analytics portfolio projects <ArrowRight size={16} />
+        </Link>
       </div>
     </section>
   );
 }
 
-function StatsBand() {
+function OutcomeProcessBand() {
   return (
     <section className="bg-[#d95700] px-5 py-10 text-white md:px-8">
       <div className="mx-auto grid max-w-6xl gap-6 text-center md:grid-cols-3 md:text-left">
         {[
-          ["The best businesses", "build on practical skill"],
-          [SITE_STATS.learnersTrained, "learners trained"],
-          [SITE_STATS.hiringPartners, "hiring partner network"],
+          ["Learn", "Live technical training and guided practice"],
+          ["Build", "Portfolio projects with mentor feedback"],
+          ["Apply", "Interview, job-search and placement support"],
         ].map(([value, label]) => (
           <div key={label} className="md:border-r md:border-white/25 md:last:border-r-0">
             <div className="text-3xl font-black md:text-4xl">{value}</div>
@@ -677,17 +484,17 @@ function FinalDarkCTA() {
     <section id="final-cta" className="relative overflow-hidden bg-[#24101f] px-5 py-20 text-center text-white md:px-8">
       <DarkPattern />
       <div className="relative z-10 mx-auto max-w-3xl">
-        <SectionLabel dark>Courses. Community. Career.</SectionLabel>
-        <h2 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl">We do practical learning better.</h2>
+        <SectionLabel dark>Career support after training</SectionLabel>
+        <h2 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl">How Brit Institute Placement Support Works</h2>
         <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/72 md:text-base">
-          Build the skills, proof, and confidence to pursue your next role in data, analytics, and AI.
+          Build the skills first, then work through portfolio review, CV and LinkedIn optimisation, interview preparation, job-search planning and continued placement support under the applicable programme terms.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Link href="/contact" className="btn-gold lg">
-            Book Free Consultation
+            Book Free Career Consultation
           </Link>
-          <Link href="/courses" className="btn-outline btn-outline-white">
-            Compare Courses
+          <Link href="/placement" className="btn-outline btn-outline-white">
+            Explore Placement Support
           </Link>
         </div>
         <div className="mt-10 flex flex-wrap justify-center gap-3">

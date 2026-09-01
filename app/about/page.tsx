@@ -1,5 +1,5 @@
 import AboutPageClient from "@/app/about/AboutPageClient";
-import { breadcrumbSchema, buildMetadata, organizationSchema } from "@/lib/seo";
+import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "About Brit Institute",
@@ -19,18 +19,18 @@ export default function AboutPage() {
     "@context": "https://schema.org",
     "@type": "AboutPage",
     name: "About Brit Institute",
-    mainEntity: organizationSchema(),
+    url: "https://britinstitute.uk/about",
   };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs).replace(/</g, "\\u003c") }}
       />
       <AboutPageClient />
     </>

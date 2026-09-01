@@ -1,10 +1,10 @@
 import PlacementPageClient from "@/app/placement/PlacementPageClient";
-import { breadcrumbSchema, buildMetadata, organizationSchema } from "@/lib/seo";
+import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Placement Support | Brit Institute",
+  title: "Data Analyst Placement Support UK",
   description:
-    "Explore Brit Institute's structured placement support including CV optimisation, LinkedIn improvement, portfolio projects, mock interviews and job-search guidance for UK Data, AI and Automation roles.",
+    "Build your portfolio, CV, LinkedIn profile, interview skills and UK job-search plan with structured Data Analyst placement support from Brit Institute.",
   path: "/placement",
   keywords: [
     "placement support UK",
@@ -24,21 +24,21 @@ export default function PlacementPage() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "Placement Support | Brit Institute",
+    name: "Data Analyst Placement Support in the UK",
+    url: "https://britinstitute.uk/placement",
     description:
-      "Structured placement and career-readiness support for UK Data, AI and Automation learners.",
-    mainEntity: organizationSchema(),
+      "Structured portfolio, CV, LinkedIn, interview, job-search and placement support for learners pursuing UK data analyst roles.",
   };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs).replace(/</g, "\\u003c") }}
       />
       <PlacementPageClient />
     </>

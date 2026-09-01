@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata = buildMetadata({
-  title: "Blog",
+  title: "Data Analytics & AI Career Blog UK",
   description:
     "Read practical UK-focused guides on data analytics, AI careers, salaries, and tools from Brit Institute.",
   path: "/blog",

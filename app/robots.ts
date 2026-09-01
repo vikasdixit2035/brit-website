@@ -11,7 +11,7 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/webinar"],
+        disallow: ["/api/"],
       },
     ],
     sitemap: `${siteConfig.siteUrl}/sitemap.xml`,

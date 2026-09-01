@@ -13,16 +13,15 @@ import {
 } from "@/lib/siteConfig";
 
 import GlobalUI from "@/components/layout/GlobalUI";
-import OrganizationSchema from "@/components/seo/OrganizationSchema";
 import {
   GoogleTagManagerHead,
   GoogleTagManagerNoScript,
 } from "@/components/analytics/GoogleTagManager";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import MetaPixel from "@/components/analytics/MetaPixel";
+import SiteMeasurement from "@/components/analytics/SiteMeasurement";
 import {
   educationalOrganizationSchema,
-  siteNavigationSchemaForSite,
   websiteSchemaForSite,
 } from "@/lib/seo";
 
@@ -119,29 +118,25 @@ export default async function RootLayout({
   const isStandalone = isStandaloneChatbotRequest(requestHeaders);
 
   return (
-    <html lang="en">
+    <html lang="en-GB">
       <head>
         <GoogleTagManagerHead />
         <GoogleAnalytics />
-        <OrganizationSchema siteConfig={siteConfig} />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchemaForSite(siteConfig)) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationSchemaForSite(siteConfig)) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchemaForSite(siteConfig)).replace(/</g, "\\u003c") }}
         />
         {!isStandalone && (
           <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(educationalOrganizationSchema()) }}
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(educationalOrganizationSchema()).replace(/</g, "\\u003c") }}
           />
         )}
       </head>
       <body>
         <GoogleTagManagerNoScript />
         <MetaPixel />
+        <SiteMeasurement />
         <GlobalUI />
         {isStandalone ? null : <SiteChrome />}
         {children}

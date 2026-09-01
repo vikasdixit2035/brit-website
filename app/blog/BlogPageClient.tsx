@@ -627,7 +627,7 @@ export default function BlogPage() {
 
           <section className="blog-recent-section" aria-labelledby="recent-articles-title">
             <h1 className="blog-section-title" id="recent-articles-title">
-              Recent Articles
+              UK Data Analytics &amp; AI Career Guides
             </h1>
 
             {shownArticles.length === 0 ? (

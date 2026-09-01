@@ -15,6 +15,8 @@ export async function generateMetadata(): Promise<Metadata> {
       description:
         "Chat with Brit Institute's digital career counsellor to get a personalised roadmap, role fit, and salary direction for AI and data careers.",
       path,
+      noindex: true,
+      follow: true,
       keywords: [
         "career chatbot",
         "AI career assessment",

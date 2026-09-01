@@ -40,7 +40,7 @@ interface NavLink {
   badge?: string;
 }
 
-const HOME_FAQ_HREF = "/#faq";
+const HOME_FAQ_HREF = "/faq";
 
 // Nav links for desktop right side
 const NAV_RIGHT_LINKS: NavLink[] = [

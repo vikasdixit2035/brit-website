@@ -52,14 +52,14 @@ export interface CourseSeoData {
 
 export const coursesData: Record<string, CourseSeoData> = {
   "data-analytics": {
-    h1: "Data Analytics and Gen AI Certification Program",
-    subheadline: "Master Excel, Power BI, SQL, Python, statistics, machine learning basics, and applied GenAI workflows through a practical programme built for UK data analyst roles.",
+    h1: "Data Analyst Course UK with AI & Placement Support",
+    subheadline: "Build job-ready skills in Excel, SQL, Power BI, Python, statistics and applied AI through live training, portfolio projects and structured UK career support.",
     cohort: "Starting Soon",
     duration: "6 months",
     canonicalPath: "/courses/data-analytics",
-    seoTitle: "Data Analytics and Gen AI Certification Program",
-    seoDescription: "Join Brit Institute's practical Data Analytics and Applied GenAI certification plan in the UK. Learn Excel, Power BI, SQL, Python, statistics, ML basics, GenAI workflows, portfolio projects, and career support.",
-    ogImage: "/hero-illustration.png",
+    seoTitle: "Data Analytics Course UK with AI",
+    seoDescription: "Build job-ready Excel, SQL, Power BI, Python and applied AI skills through live UK data analyst training, portfolio projects, interview preparation and placement support.",
+    ogImage: "/og.png",
     updatedAt: "2026-04-13",
     trustLayer: {
       learnersTrained: SITE_STATS.learnersTrained,

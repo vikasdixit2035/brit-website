@@ -60,6 +60,10 @@ function pushDataLayer(event: string, payload: DataLayerPayload = {}) {
   return eventId;
 }
 
+export function trackEvent(event: string, payload: DataLayerPayload = {}) {
+  return pushDataLayer(event, payload);
+}
+
 function trackMetaPixel(
   eventName: string,
   payload: DataLayerPayload = {},
@@ -88,6 +92,13 @@ export function trackLead({ formName, source, course, resource }: LeadEventInput
   };
 
   pushDataLayer("meta_lead", payload);
+  pushDataLayer("lead_form_submit", payload);
+  if (formName.includes("brochure")) {
+    pushDataLayer("curriculum_download", payload);
+  }
+  if (formName.includes("application") || source.toLowerCase().includes("application")) {
+    pushDataLayer("application_submit", payload);
+  }
   trackMetaPixel("Lead", payload);
 }
 
@@ -99,6 +110,7 @@ export function trackSubmitRequest({ formName, source, course }: LeadEventInput)
   };
 
   pushDataLayer("meta_submit_request", payload);
+  pushDataLayer("application_submit", payload);
   trackMetaPixel("SubmitApplication", payload);
 }
 

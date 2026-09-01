@@ -16,6 +16,7 @@ type MetaInput = {
   image?: string;
   keywords?: string[];
   noindex?: boolean;
+  follow?: boolean;
 };
 
 function absoluteUrl(path = "/") {
@@ -64,6 +65,7 @@ export function buildMetadata({
   image = DEFAULT_OG_IMAGE,
   keywords = [],
   noindex = false,
+  follow = !noindex,
 }: MetaInput, siteConfig?: SiteConfig): Metadata {
   const url = getAbsoluteUrl(path, siteConfig);
   const imageUrl = getAbsoluteUrl(image, siteConfig);
@@ -101,10 +103,10 @@ export function buildMetadata({
     robots: noindex
       ? {
           index: false,
-          follow: false,
+          follow,
           googleBot: {
             index: false,
-            follow: false,
+            follow,
           },
         }
       : {
@@ -175,14 +177,6 @@ export function websiteSchema() {
     "@type": "WebSite",
     name: SITE_NAME,
     url: SITE_URL,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${SITE_URL}/courses?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 
@@ -192,14 +186,6 @@ export function websiteSchemaForSite(siteConfig: SiteConfig) {
     "@type": "WebSite",
     name: siteConfig.siteName,
     url: siteConfig.siteUrl,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${siteConfig.siteUrl}/courses?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 
@@ -364,6 +350,33 @@ export function breadcrumbSchema(items: Array<{ name: string; path: string }>) {
   };
 }
 
+export function courseCatalogueSchema(
+  courses: Array<{ name: string; description: string; path: string }>,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Brit Institute data and AI career programmes",
+    numberOfItems: courses.length,
+    itemListElement: courses.map((course, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: absoluteUrl(course.path),
+      item: {
+        "@type": "Course",
+        name: course.name,
+        description: course.description,
+        url: absoluteUrl(course.path),
+        provider: {
+          "@type": "EducationalOrganization",
+          name: SITE_NAME,
+          url: SITE_URL,
+        },
+      },
+    })),
+  };
+}
+
 /**
  * EducationalOrganization schema – signals to Google that Brit Institute
  * is a training provider, improving eligibility for course-related rich
@@ -379,7 +392,7 @@ export function educationalOrganizationSchema() {
     email: SITE_EMAIL,
     telephone: SITE_PHONE_UK,
     description:
-      "Brit Institute offers practical AI and data career training in the UK including data analytics, data science, agentic AI, and generative AI programmes with career support.",
+      "Brit Institute provides live, project-led data and AI skills training with structured career and placement support for learners pursuing UK roles.",
     address: SITE_POSTAL_ADDRESS,
     contactPoint: [
       {
@@ -391,52 +404,6 @@ export function educationalOrganizationSchema() {
         availableLanguage: ["en"],
       },
     ],
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "UK Data & AI Career Programmes",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Course",
-            name: "Data Analytics and Gen AI Certification Program",
-            url: absoluteUrl("/courses/data-analytics"),
-            description:
-              "Master Excel, Power BI, SQL, Python, machine learning basics, and applied GenAI workflows to become a job-ready data analyst in the UK.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Course",
-            name: "Data Science, Machine Learning and Gen AI Certification Program",
-            url: absoluteUrl("/courses/data-science"),
-            description:
-              "Learn Python, statistics, SQL, machine learning, deep learning, GenAI workflows, MLOps, deployment, and capstone delivery in the UK.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Course",
-            name: "Agentic AI Certification Program",
-            url: absoluteUrl("/courses/ai-automation"),
-            description:
-              "Learn prompt engineering, Python AI APIs, RAG, vector search, function calling, agents, and workflow automation in the UK.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Course",
-            name: "Generative AI Certification Program",
-            url: absoluteUrl("/courses/gen-ai"),
-            description:
-              "Learn prompt engineering, GenAI tools, AI copilots, structured outputs, document Q&A, workflow automation, and responsible AI practices in the UK.",
-          },
-        },
-      ],
-    },
     sameAs: [
       "https://www.trustpilot.com/review/britinstitute.uk",
     ],

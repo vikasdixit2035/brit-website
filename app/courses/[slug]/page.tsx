@@ -7,7 +7,7 @@ import {
   Eye, ChevronRight, CheckCircle2, Briefcase,
   Clock, Layers, ArrowRight, Check, MonitorPlay, Zap,
   TrendingUp, Target, Users, BookOpen, Terminal, Sparkles, Quote, Database,
-  Shield, Award, MapPin, Star, ChevronDown, Play
+  Shield, Award, MapPin, ChevronDown
 } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 import BrochureDownloadButton from "./BrochureDownloadButton";
@@ -650,12 +650,6 @@ const dataAnalyticsIncludedFeatures = [
   "Certificate of completion",
 ];
 
-const dataAnalyticsStories = [
-  "I finally understood how Excel dashboards are built for real business use.",
-  "The Power BI project helped me explain analytics better in interviews.",
-  "The course gave me a proper roadmap instead of random YouTube learning.",
-];
-
 const dataAnalyticsPremiumFaqs = [
   ["Can beginners join this course?", "Yes. The roadmap starts with Excel and data foundations before moving into SQL, Power BI, Python and GenAI workflows."],
   ["Do I need coding experience?", "No. Python and SQL are introduced step by step for analyst use cases, with practical tasks and mentor support."],
@@ -753,9 +747,6 @@ function countLabel(count: number, singular: string, plural = `${singular}s`) {
 function buildPremiumCourseContent(course: CourseRecord, richData: RichCourseData) {
   const careerLabel = courseCareerLabel(course.slug, richData.h1);
   const projectCount = richData.projects.length;
-  const reviewRating = richData.reviews?.aggregate.ratingValue ?? 4.9;
-  const supportCount = richData.careerSupport.length;
-  const curriculumCount = richData.curriculum.length;
   const tools = richData.toolsCovered.slice(0, 8);
 
   const heroBadges = [
@@ -766,10 +757,10 @@ function buildPremiumCourseContent(course: CourseRecord, richData: RichCourseDat
   ];
 
   const metricCards = [
-    [`${reviewRating}/5`, "Learner Rating"],
-    [richData.programmeOverview.duration, "Structured Program"],
-    [`${projectCount}+`, "Portfolio Projects"],
-    ["Included", "Career Support"],
+    ["Live", "Mentor-Led Training"],
+    [richData.programmeOverview.duration, "Structured Programme"],
+    [String(projectCount), "Portfolio Projects"],
+    ["Included", "UK Career Support"],
   ];
 
   const investmentBadges = [
@@ -869,7 +860,6 @@ function buildPremiumCourseContent(course: CourseRecord, richData: RichCourseDat
     "Certificate of completion",
   ];
 
-  const stories = richData.reviews?.items.map((review) => review.body) ?? dataAnalyticsStories;
   const faqs = [
     ["Can beginners join this course?", richData.programmeOverview.level === "Beginner-friendly" ? "Yes. The roadmap is designed to start from foundations and move into practical projects step by step." : "Yes, if you are ready for a structured intermediate programme with regular practice and project work."],
     ["What will I learn?", `You will work through ${richData.curriculum.slice(0, 4).join(", ")} and related portfolio projects.`],
@@ -892,7 +882,6 @@ function buildPremiumCourseContent(course: CourseRecord, richData: RichCourseDat
     projects,
     featureSuite,
     includedFeatures,
-    stories,
     faqs,
   };
 }
@@ -911,16 +900,23 @@ function CoursePremiumLanding({
   const content = buildPremiumCourseContent(course, richData);
   const paymentAmount = course.price || Number(schemaPrice(richData.pricing.price)) || 0;
   const paymentCurrency = course.currency ?? "GBP";
+  const visibleFaqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: content.faqs.map(([question, answer]) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: { "@type": "Answer", text: answer },
+    })),
+  };
 
   return (
     <div className="min-h-screen bg-[#F8F1E7] font-sans text-[#231F20]">
       {courseSchema && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema).replace(/</g, "\\u003c") }} />
       )}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
-      {course.slug === "data-analytics" && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dataAnalyticsFaqPageSchema) }} />
-      )}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(visibleFaqSchema).replace(/</g, "\\u003c") }} />
 
       <header className="relative overflow-hidden bg-[linear-gradient(135deg,#180715_0%,#23091D_50%,#3A102C_100%)] pt-20 text-white">
 
@@ -934,10 +930,10 @@ function CoursePremiumLanding({
           </nav>
           <div className="max-w-5xl">
             <p className="mb-4 inline-flex rounded-full border border-[#F5B82E]/30 bg-white/10 px-4 py-2 text-sm font-black uppercase tracking-[0.16em] text-[#F5B82E]">
-              {richData.h1}
+              Live, portfolio-led UK career training
             </p>
             <h1 className="max-w-5xl text-[2.65rem] font-black leading-[1.03] tracking-tight md:text-[4.4rem]">
-              Powering your {content.careerLabel} career
+              {course.slug === "data-analytics" ? richData.h1 : `Build a career in ${content.careerLabel}`}
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-white/78 md:text-xl">
               {richData.subheadline}
@@ -964,7 +960,7 @@ function CoursePremiumLanding({
       <main>
         <section className="bg-[#F8F1E7] px-5 py-16 md:py-24 lg:px-8">
           <div className="mx-auto max-w-[1180px]">
-            <PremiumSectionHeader title="Trusted by learners building practical data and AI skills" />
+            <PremiumSectionHeader title={course.slug === "data-analytics" ? "Build the Skills UK Data Analyst Jobs Require" : `Build practical ${content.careerLabel.toLowerCase()} skills`} />
             <div className="mb-8 flex flex-wrap gap-3">
               {content.tools.map((skill) => (
                 <span key={skill} className="rounded-full border border-[#E8DCCB] bg-[#FFF9F1] px-4 py-2 text-base font-bold text-[#231F20] shadow-sm">
@@ -985,7 +981,7 @@ function CoursePremiumLanding({
 
         <section className="bg-[#F8F1E7] px-5 pb-16 md:pb-28 lg:px-8">
           <div className="mx-auto max-w-[1180px]">
-            <PremiumSectionHeader title="Learning experiences that convert ambition into career-ready skill." />
+            <PremiumSectionHeader title={course.slug === "data-analytics" ? "Data Analyst Training Built Around Real Work" : "Training built around practical work"} />
             <div className="grid gap-6 md:grid-cols-3">
               {content.outcomes.map(({ title, text, icon: Icon }) => (
                 <article key={title} className="course-accent-card course-accent-card--outcome rounded-3xl border p-8">
@@ -1087,7 +1083,7 @@ function CoursePremiumLanding({
 
         <section id="career-support" className="bg-[#F8F1E7] px-5 py-16 md:py-28 lg:px-8">
           <div className="mx-auto max-w-[1180px]">
-            <PremiumSectionHeader title="Brit Institute’s stand-out suite of features" />
+            <PremiumSectionHeader title="From Training to Interviews and Placement Support" />
             <div className="space-y-6">
               {content.featureSuite.map((feature, index) => (
                 <article key={feature.title} className={`grid gap-8 rounded-[2rem] border border-[#E8DCCB] bg-[#FFF9F1] p-8 shadow-[0_18px_40px_rgba(35,9,29,0.08)] md:grid-cols-2 md:p-10 ${index % 2 ? "md:[&>div:first-child]:order-2" : ""}`}>
@@ -1158,31 +1154,26 @@ function CoursePremiumLanding({
           </div>
         </section>
 
-        <section className="bg-[#D8E8FF] px-5 py-16 md:py-24 lg:px-8">
-          <div className="mx-auto max-w-[980px] text-center">
-            <Quote className="mx-auto mb-6 h-10 w-10 text-[#23091D]" />
-            <p className="text-3xl font-black leading-tight text-[#23091D] md:text-5xl">
-              “{content.stories[0] ?? "Brit Institute gave me structure, practical projects and the confidence to explain my work clearly in interviews."}”
-            </p>
-          </div>
-        </section>
-
-        <section className="bg-[#F8F1E7] px-5 py-16 md:py-28 lg:px-8">
-          <div className="mx-auto max-w-[1180px]">
-            <PremiumSectionHeader title="Join learners building practical career success stories" />
-            <div className="grid gap-5 md:grid-cols-3">
-              {content.stories.slice(0, 3).map((story, index) => (
-                <article key={story} className="rounded-3xl border border-[#E8DCCB] bg-[#FFF9F1] p-7 shadow-[0_18px_40px_rgba(35,9,29,0.08)]">
-                  <div className="mb-5 flex gap-1 text-[#F5B82E]">
-                    {[1, 2, 3, 4, 5].map((star) => <Star key={star} className="h-5 w-5 fill-current" />)}
-                  </div>
-                  <p className="text-xl font-bold leading-8 text-[#231F20]">“{story}”</p>
-                  <p className="mt-5 text-base font-bold text-[#6B6262]">Learner story {index + 1}</p>
-                </article>
-              ))}
+        {course.slug === "data-analytics" && (
+          <section className="bg-[#D8E8FF] px-5 py-16 md:py-24 lg:px-8">
+            <div className="mx-auto max-w-[1180px]">
+              <PremiumSectionHeader title="Plan Your Route into a UK Data Analyst Role" />
+              <div className="grid gap-4 md:grid-cols-3">
+                {[
+                  ["Power BI training", "/power-bi-course-uk", "See how Power BI fits into the wider analyst workflow."],
+                  ["Career-change guide", "/career-change-data-analyst-uk", "Map your existing experience to a practical transition plan."],
+                  ["Placement support", "/placement", "Understand CV, interview, job-search and placement support."],
+                ].map(([label, href, text]) => (
+                  <Link key={href} href={href} className="rounded-3xl border border-[#b8cee9] bg-white p-6 text-[#23091D] shadow-sm transition hover:-translate-y-1">
+                    <h3 className="text-xl font-black">{label}</h3>
+                    <p className="mt-3 text-sm leading-7 text-[#6B6262]">{text}</p>
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#E95B00]">Explore this guide <ArrowRight className="h-4 w-4" /></span>
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         <section className="bg-[#E95B00] px-5 py-14 text-white md:py-20 lg:px-8">
           <div className="mx-auto grid max-w-[1180px] gap-8 md:grid-cols-[0.8fr_1.2fr] md:items-center">
@@ -1330,7 +1321,6 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
       price: schemaPrice(richData.pricing.price),
       currency: "GBP",
       courseMode: richData.programmeOverview.format,
-      reviews: hasCourseReviews ? richData.reviews : null,
     })
     : null;
   const breadcrumbs = breadcrumbSchema([

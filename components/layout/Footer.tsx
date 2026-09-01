@@ -8,6 +8,7 @@ const footerGroups = [
     title: "Programs",
     links: [
       ["Data Analytics", "/courses/data-analytics"],
+      ["Power BI Training", "/power-bi-course-uk"],
       ["Data Science", "/courses/data-science"],
       ["Agentic AI", "/courses/ai-automation"],
       ["Generative AI", "/courses/gen-ai"],
@@ -18,7 +19,7 @@ const footerGroups = [
     title: "Company",
     links: [
       ["About Us", "/about"],
-      ["Success Stories", "/#proof"],
+      ["Success Stories", "/reviews"],
       ["Reviews", "/reviews"],
       ["Pricing", "/pricing"],
       ["Careers", "/careers"],
@@ -30,8 +31,10 @@ const footerGroups = [
       ["Blog", "/blog"],
       ["Resources", "/resources"],
       ["Placement", "/placement"],
+      ["Career Change Guide", "/career-change-data-analyst-uk"],
+      ["Bootcamp Comparison", "/data-analyst-bootcamp-uk"],
       ["Pay Fees", "/pay"],
-      ["FAQ", "/#faq"],
+      ["FAQ", "/faq"],
     ],
   },
 ] as const;
@@ -53,7 +56,7 @@ export default function Footer() {
               Brit <span className="text-[#d4af37]">Institute</span>
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-7 text-white/62">
-              Industry-led AI and Data Analytics programmes designed for the UK job market, practical portfolios, and career confidence.
+              Live, project-led Data Analytics and AI programmes with structured UK career and placement support.
             </p>
           </div>
 

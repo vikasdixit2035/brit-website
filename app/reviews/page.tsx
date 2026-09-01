@@ -1,5 +1,5 @@
 import ReviewsPageClient from "@/app/reviews/ReviewsPageClient";
-import { buildMetadata, organizationSchema } from "@/lib/seo";
+import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Recent Batch Reviews and Learner Video Testimonials",
@@ -16,13 +16,5 @@ export const metadata = buildMetadata({
 });
 
 export default function ReviewsPage() {
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
-      />
-      <ReviewsPageClient />
-    </>
-  );
+  return <ReviewsPageClient />;
 }

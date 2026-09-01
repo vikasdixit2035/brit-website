@@ -1,14 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowRight, Award, BookOpen, Briefcase, CheckCircle2, Lightbulb, Target, TrendingUp, Users } from "lucide-react";
+import { Award, BookOpen, Briefcase, CheckCircle2, Lightbulb, Target, TrendingUp, Users } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 import { ThemeCTA, ThemeHero, ThemeLabel, ThemeShell } from "@/components/layout/ThinkificTheme";
-import { SITE_STATS } from "@/lib/site";
 
 const aboutProofBadges = [
-  { title: SITE_STATS.learnersTrained, subtitle: "Learners Trained", accent: "#f26722" },
-  { title: SITE_STATS.careerTransitions, subtitle: "Career Transitions", accent: "#2563eb" },
+  { title: "Real Projects", subtitle: "Portfolio Building", accent: "#f26722" },
+  { title: "Career Support", subtitle: "UK Job Preparation", accent: "#2563eb" },
 ];
 
 export default function AboutPage() {
@@ -96,7 +94,7 @@ export default function AboutPage() {
                     </span>
                   </div>
                   <div className="flex flex-1 flex-col items-center justify-center px-3 pb-8 pt-3">
-                    <strong className="text-[22px] font-black leading-[0.98] tracking-tight sm:text-[24px]">
+                    <strong className="text-[19px] font-black leading-[1.05] tracking-tight sm:text-[21px]">
                       {badge.title}
                     </strong>
                     <span className="mt-2 text-[9px] font-black uppercase tracking-[0.22em] text-[#5d5148]">

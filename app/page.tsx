@@ -1,12 +1,12 @@
 import HomePageClient from "@/app/HomePageClient";
 import OpenOfferModalOnMount from "@/components/layout/OpenOfferModalOnMount";
-import { buildMetadata, organizationSchema } from "@/lib/seo";
+import { buildMetadata } from "@/lib/seo";
 import { faqPageSchema } from "@/lib/faqData";
 
 export const metadata = buildMetadata({
-  title: "Data Analytics Course UK | AI and Data Career Training",
+  title: "Data Analyst Course UK | Job-Ready Training | Brit Institute",
   description:
-    "Brit Institute offers a practical data analytics course in the UK plus AI and data career programmes with real projects, structured learning, and career support.",
+    "Become a job-ready Data Analyst with UK-focused training in Excel, SQL, Power BI, Python and AI. Build real projects and get interview, career and placement support.",
   path: "/",
   keywords: [
     "data analytics course UK",
@@ -43,11 +43,7 @@ export default async function Home({ searchParams }: HomeProps) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema).replace(/</g, "\\u003c") }}
       />
       {shouldOpenOfferModal && <OpenOfferModalOnMount />}
       <HomePageClient />

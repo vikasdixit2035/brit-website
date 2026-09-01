@@ -10,7 +10,10 @@ export default function SiteChrome() {
   const [banner, setBanner] = useState(false);
 
   useEffect(() => {
-    setBanner(window.localStorage.getItem(TOP_BANNER_STORAGE_KEY) !== "true");
+    const frame = window.requestAnimationFrame(() => {
+      setBanner(window.localStorage.getItem(TOP_BANNER_STORAGE_KEY) !== "true");
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   const closeBanner = () => {

@@ -61,9 +61,9 @@ export default function ContactPage() {
         <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.82fr_1.18fr]">
           <div>
             <ThemeLabel>Ways to connect</ThemeLabel>
-            <h1 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl">
+            <h2 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl">
               Get clear answers, then move with confidence.
-            </h1>
+            </h2>
             <p className="mt-5 text-sm leading-7 text-[#6f665c] md:text-base">
               Whether you are comparing programmes or planning a career transition, our team can help you understand the next practical step.
             </p>

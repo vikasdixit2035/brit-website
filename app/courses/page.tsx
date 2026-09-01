@@ -4,12 +4,12 @@ import { ArrowRight, Clock3, FileText, GraduationCap, MonitorPlay, Trophy } from
 import Footer from "@/components/layout/Footer";
 import { ThemeCTA, ThemeHero, ThemeLabel, ThemeShell } from "@/components/layout/ThinkificTheme";
 import { fetchCourses } from "@/lib/courses";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, courseCatalogueSchema } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Data Analytics Course UK and AI Career Courses",
+  title: "Data & AI Career Programmes UK",
   description:
-    "Compare Brit Institute's data analytics course in the UK with Gen AI, data science and machine learning, agentic AI, and generative AI programmes for UK career growth.",
+    "Compare Brit Institute's live, project-led programmes in data analytics, data science, agentic AI and generative AI, with structured UK career support.",
   path: "/courses",
   keywords: [
     "data analytics course UK",
@@ -33,12 +33,23 @@ const accents = ["#f5c242", "#d95700", "#7c9a4f", "#c45118"];
 
 export default async function CoursesPage() {
   const courseCards = await fetchCourses();
+  const catalogueSchema = courseCatalogueSchema(
+    courseCards.map((course) => ({
+      name: course.title,
+      description: course.desc,
+      path: `/courses/${course.slug}`,
+    })),
+  );
 
   return (
     <ThemeShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(catalogueSchema).replace(/</g, "\\u003c") }}
+      />
       <ThemeHero
         eyebrow="Programme Catalog"
-        title={<>Choose the right learning product for your outcome.</>}
+        title={<>Explore Data &amp; AI Career Programmes for UK Roles</>}
         text="Compare practical programmes built to help learners develop portfolio-ready skills, understand real tools, and prepare for UK career transitions."
       >
         <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -53,7 +64,7 @@ export default async function CoursesPage() {
       <section className="bg-[#746d5c] px-5 py-20 text-white md:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-3xl text-center">
-            <ThemeLabel dark>What's included?</ThemeLabel>
+            <ThemeLabel dark>What&apos;s included?</ThemeLabel>
             <h2 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl">
               Courses designed like complete career products.
             </h2>

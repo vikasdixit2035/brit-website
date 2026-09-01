@@ -42,7 +42,7 @@ export const faqItems: FaqItem[] = [
   {
     question: "Do you offer placement support?",
     answer:
-      "Yes. We provide end-to-end placement support, including job-ready training, resume and LinkedIn optimisation, interview preparation, mock interviews, and continuous job opportunities.\n\nA 100% Placement Guarantee is available to eligible learners in selected batches, subject to the applicable programme agreement.",
+      "Yes. We provide structured placement support, including job-ready training, CV and LinkedIn optimisation, interview preparation, mock interviews, job-search guidance, and application support.\n\nA 100% Placement Guarantee is available to eligible learners in selected batches, subject to the applicable programme agreement.",
   },
   {
     question: "What does 100% placement guarantee mean?",
@@ -60,9 +60,9 @@ export const faqItems: FaqItem[] = [
       "Classes are live instructor-led, and recordings are provided for revision.\n\nIf you miss a session, you can watch the recording and clarify doubts in upcoming classes.",
   },
   {
-    question: "What support will I receive, and what salary can I expect?",
+    question: "What mentor and career support will I receive?",
     answer:
-      "You will receive dedicated mentor and doubt support throughout the course.\n\nUK entry-level Data Analyst salary expectation: £28,000 to £55,000 per year, depending on skills, interview performance, and role.",
+      "You will receive mentor and doubt support during the course, followed by structured CV, LinkedIn, portfolio, interview and job-search preparation where included in your programme.",
   },
 ];
 
@@ -74,9 +74,9 @@ export const dataAnalyticsFaqItems: FaqItem[] = [
       "Yes. Brit Institute's data analytics course is designed specifically for learners in the UK. The programme is delivered online via live instructor-led sessions, so you can join from anywhere in the United Kingdom.",
   },
   {
-    question: "What is the best data analytics course in the UK for beginners?",
+    question: "What should a beginner look for in a data analytics course in the UK?",
     answer:
-      "Brit Institute offers a beginner-friendly Data Analytics and Gen AI certification program that covers Excel, Power BI, SQL, Python, statistics, machine learning basics, and applied GenAI workflows from scratch. It includes hands-on projects and end-to-end career support tailored for the UK job market.",
+      "Look for a structured programme that teaches Excel, Power BI, SQL, Python and statistics from the foundations, includes reviewed portfolio projects, provides live support, and explains how learning connects to UK analyst roles. Brit Institute's programme is designed around those elements and also includes applied AI workflows.",
   },
   {
     question: "How long is the data analytics course at Brit Institute?",
@@ -86,7 +86,7 @@ export const dataAnalyticsFaqItems: FaqItem[] = [
   {
     question: "What salary can I expect after completing a data analytics course in the UK?",
     answer:
-      "UK data analyst salaries typically range from £28,000 to £55,000+ depending on experience, location, and sector. Brit Institute graduates have transitioned into roles in finance, retail, SaaS, and consulting.",
+      "Data analyst salaries vary by experience, location, sector and the scope of the role. Review current vacancy data for your target location and treat broad salary ranges as guidance rather than a guaranteed outcome.",
   },
   {
     question: "What tools are taught in the data analytics course UK?",
@@ -101,12 +101,12 @@ export const dataAnalyticsFaqItems: FaqItem[] = [
   {
     question: "Does the data analytics course include job placement support?",
     answer:
-      "Yes. The programme includes CV preparation for UK data analyst roles, interview coaching, portfolio review, and ongoing placement support until you secure a relevant position.",
+      "Yes. The programme includes CV preparation for UK data analyst roles, interview coaching, portfolio review, job-search guidance and placement support under the applicable programme terms.",
   },
   {
     question: "How much does the data analytics course cost in the UK?",
     answer:
-      "The Data Analytics and Gen AI certification program is priced at £3,499. EMI payment options are available, and eligible learners may qualify for Pay After Placement arrangements.",
+      "The current programme fee and available payment options are shown on the course and pricing pages. Speak with admissions for the terms that apply to your intake before enrolling.",
   },
 ];
 

@@ -6,7 +6,9 @@ export const metadata = buildMetadata({
   title: "Apply for Brit Institute Programmes",
   description:
     "Apply for Brit Institute AI and data career programmes and speak with the admissions team.",
-  path: "/apply",
+  path: "/",
+  noindex: true,
+  follow: true,
   keywords: [
     "apply Brit Institute",
     "AI course application UK",

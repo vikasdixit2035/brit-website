@@ -33,4 +33,4 @@ export const SITE_STATS = {
   averageRating: "4.8",
 };
 
-export const DEFAULT_OG_IMAGE = "/hero-illustration.png";
+export const DEFAULT_OG_IMAGE = "/og.png";
