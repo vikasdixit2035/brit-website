@@ -129,7 +129,7 @@ export function organizationSchema() {
     "@type": "Organization",
     name: SITE_NAME,
     url: SITE_URL,
-    logo: absoluteUrl("/britinstitute_v1.png"),
+    logo: absoluteUrl("/brit-logo.png"),
     email: "info@britinstitute.uk",
     address: SITE_POSTAL_ADDRESS,
     contactPoint: [
@@ -154,7 +154,7 @@ export function organizationSchemaForSite(siteConfig: SiteConfig) {
     "@type": "Organization",
     name: siteConfig.siteName,
     url: siteConfig.siteUrl,
-    logo: getAbsoluteUrl("/britinstitute_v1.png", siteConfig),
+    logo: getAbsoluteUrl("/brit-logo.png", siteConfig),
     email: SITE_EMAIL,
     address: SITE_POSTAL_ADDRESS,
     contactPoint: [
@@ -388,7 +388,7 @@ export function educationalOrganizationSchema() {
     "@type": "EducationalOrganization",
     name: SITE_NAME,
     url: SITE_URL,
-    logo: absoluteUrl("/britinstitute_v1.png"),
+    logo: absoluteUrl("/brit-logo.png"),
     email: SITE_EMAIL,
     telephone: SITE_PHONE_UK,
     description:

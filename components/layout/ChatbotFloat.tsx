@@ -141,8 +141,8 @@ export default function ChatbotFloat() {
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
-              <div style={{ width: "32px", height: "32px", backgroundColor: "white", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <Image src="/britinstitute_v1.png" alt="Brit Institute logo" width={24} height={24} style={{ width: "24px", height: "24px" }} />
+              <div style={{ width: "48px", height: "34px", backgroundColor: "white", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <Image src="/brit-logo.png" alt="Brit Institute logo" width={1224} height={771} style={{ width: "44px", height: "auto" }} />
               </div>
               <h3 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 700 }}>Chat with Us</h3>
             </div>

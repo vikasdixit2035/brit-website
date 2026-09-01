@@ -78,7 +78,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       name: SITE_NAME,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/britinstitute_v1.png`,
+        url: `${SITE_URL}/brit-logo.png`,
       },
     },
     datePublished: article.publishedAt ?? article.date,

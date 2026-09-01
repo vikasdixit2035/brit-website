@@ -45,15 +45,14 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 border-b border-white/10 pb-12 lg:grid-cols-[1.25fr_2fr_1.2fr]">
           <div>
-            <Link href="/" className="inline-flex items-center gap-3 text-xl font-black text-white">
+            <Link href="/" className="inline-flex items-center text-xl font-black text-white">
               <Image
-                src="/britinstitute_v1.png"
+                src="/brit-logo.png"
                 alt="Brit Institute logo"
-                width={34}
-                height={34}
-                className="rounded-md"
+                width={1224}
+                height={771}
+                className="h-auto w-[132px]"
               />
-              Brit <span className="text-[#d4af37]">Institute</span>
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-7 text-white/62">
               Live, project-led Data Analytics and AI programmes with structured UK career and placement support.

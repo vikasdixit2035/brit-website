@@ -529,7 +529,6 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
             gap: 24px !important;
             margin-left: 36px;
           }
-          .alma-nav .logo-text span { font-size: 1.35rem !important; }
           .alma-nav .nav-signin-btn {
             padding: 10px 18px;
           }
@@ -540,12 +539,10 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
         }
         @media (max-width: 768px) {
           .alma-nav .nav-inner-container { padding: 0 16px !important; }
-          .alma-nav .logo-img { width: 32px !important; height: 32px !important; }
-          .alma-nav .logo-text span { font-size: 1.2rem !important; }
+          .alma-nav .logo-img { width: 78px !important; height: auto !important; }
         }
         @media (max-width: 480px) {
           .nav-mobile-right { display: none !important; }
-          .alma-nav .logo-text span { font-size: 1.1rem !important; }
         }
       `}</style>
 
@@ -601,11 +598,8 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
             </button>
 
             {/* Logo */}
-            <Link href="/" className="logo-text" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0, gap: "12px" }}>
-              <Image src="/britinstitute_v1.png" alt="Brit Institute logo" className="logo-img" width={45} height={45} style={{ width: "45px", height: "45px" }} />
-              <span style={{ fontSize: "1.5rem", fontWeight: 800, color: BRAND_BLUE, letterSpacing: "-0.02em" }}>
-                Brit <span style={{ color: BRAND_GOLD }}>Institute</span>
-              </span>
+            <Link href="/" className="logo-text" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
+              <Image src="/brit-logo.png" alt="Brit Institute logo" className="logo-img" width={1224} height={771} priority style={{ width: "96px", height: "auto" }} />
             </Link>
 
           </div>
@@ -752,11 +746,8 @@ export default function Navbar({ hasBanner }: { hasBanner: boolean }) {
           <div className="drawer-panel">
             {/* Header */}
             <div className="drawer-header">
-              <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", gap: "10px" }} onClick={closeMenu}>
-                <Image src="/britinstitute_v1.png" alt="Brit Institute logo" width={36} height={36} style={{ width: "36px", height: "36px" }} />
-                <span style={{ fontSize: "1.2rem", fontWeight: 800, color: BRAND_BLUE }}>
-                  Brit <span style={{ color: BRAND_GOLD }}>Institute</span>
-                </span>
+              <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }} onClick={closeMenu}>
+                <Image src="/brit-logo.png" alt="Brit Institute logo" width={1224} height={771} style={{ width: "88px", height: "auto" }} />
               </Link>
               <button className="drawer-close-btn" onClick={closeMenu} aria-label="Close menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
