@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 
 import { coursesData } from "@/app/courses/[slug]/courseData";
+import LogoStrip from "@/components/sections/LogoStrip";
 
 const courseImages: Record<string, string> = {
   "data-analytics": "/da-Photoroom.png",
@@ -111,6 +112,7 @@ export default function BritInspiredHome() {
     <main className="bg-[#f7f3ea] text-[#241a1f]">
       <HeroSection />
       <CareerJourneyStrip />
+      <LogoStrip />
       <IntroCardsSection />
       <ProductsSection />
       <CareerChangeBand />
