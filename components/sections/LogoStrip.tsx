@@ -337,7 +337,7 @@ export default function LogoStrip() {
             Recruiting Partners
           </p>
           <h2 className="text-2xl font-black tracking-tight text-slate-950 md:text-4xl">
-            Learners prepare for teams already hiring these skills.
+            Build the skills used by leading data and AI teams.
           </h2>
         </div>
 
