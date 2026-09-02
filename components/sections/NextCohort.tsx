@@ -133,7 +133,7 @@ export default function NextCohort() {
                 Application Deadline
               </div>
               <div style={{ fontWeight: 700, fontSize: "1.05rem" }}>
-                22 August 2026
+                19 September 2026
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@
 // --- Configuration & Helpers ---
 const BRAND_BLUE = "#24101F";
 const BRAND_GOLD = "#D4AF37";
-const UPCOMING_BATCH_DATE = " 22 August 2026";
+const UPCOMING_BATCH_DATE = " 19 September 2026";
 
 // --- Private Helper Icons for Top Banner ---
 // Paper plane / Send style icon from image
