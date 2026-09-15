@@ -55,7 +55,8 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-7 text-white/62">
-              Live, project-led Data Analytics and AI programmes with structured UK career and placement support.
+              Brit Institute is part of LearnifyOps, delivering live, project-led Data Analytics and AI programmes with
+              structured UK career and placement support.
             </p>
           </div>
 

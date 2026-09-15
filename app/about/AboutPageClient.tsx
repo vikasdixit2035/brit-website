@@ -15,7 +15,7 @@ export default function AboutPage() {
       <ThemeHero
         eyebrow="About Brit Institute"
         title={<>A practical approach to careers in data, AI, and emerging technology.</>}
-        text="We focus on building real-world skills that help learners transition into high-demand roles across the UK and beyond."
+        text="Brit Institute is part of LearnifyOps, a company building technology, automation, and learning ecosystems. We focus on building real-world skills that help learners transition into high-demand roles across the UK and beyond."
       />
 
       <section className="bg-[#f7f3ea] px-5 py-20 md:px-8 lg:py-24">
