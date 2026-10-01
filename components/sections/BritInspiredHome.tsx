@@ -20,6 +20,7 @@ import {
   Trophy,
   Users,
 } from "lucide-react";
+import { Open_Sans } from "next/font/google";
 
 import { coursesData } from "@/app/courses/[slug]/courseData";
 import LogoStrip from "@/components/sections/LogoStrip";
@@ -126,9 +127,14 @@ export default function BritInspiredHome() {
   );
 }
 
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  weight: ["300"],
+});
+
 function HeroSection() {
   return (
-    <section className="relative min-h-[640px] overflow-hidden bg-[#24101f] px-5 pb-10 pt-20 text-white md:min-h-[700px] md:px-8 md:pt-24 lg:min-h-[735px] lg:px-12 lg:pb-12 lg:pt-24">
+    <section className="{`${openSans.className} relative min-h-[640px] overflow-hidden bg-[#24101f] px-5 pb-10 pt-20 text-white md:min-h-[700px] md:px-8 md:pt-24 lg:min-h-[735px] lg:px-12 lg:pb-12 lg:pt-24">
       <DarkPattern />
       <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(36,16,31,0.98)_0%,rgba(36,16,31,0.92)_45%,rgba(36,16,31,0.58)_100%)]" />
 
